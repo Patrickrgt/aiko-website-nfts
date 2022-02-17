@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import WethSwap from "./WethSwap";
 
 const StyledHomePage = styled.div`
   width: 100%;
@@ -8,7 +7,6 @@ const StyledHomePage = styled.div`
   align-items: center;
   flex: 1;
   padding: 3rem;
-  border: solid 1px orange;
 `;
 
 const Header = styled.div`
@@ -20,7 +18,6 @@ const HomePage = () => {
   return (
     <StyledHomePage>
       <Header>pages/home-page/HomePage.tsx</Header>
-      <WethSwap />
     </StyledHomePage>
   );
 };

@@ -1,11 +1,8 @@
-import { useEffect } from "react";
 import styled from "styled-components";
 import { WalletConnectConnector } from "@web3-react/walletconnect-connector";
 import { useEthers } from "@usedapp/core";
 import { useDispatch, useSelector } from "react-redux";
 
-import metamask from "../assets/wallets/metamask.jpg";
-import walletConnect from "../assets/wallets/walletconnect.jpg";
 import Popup from "./Popup";
 import { INFURA_ID } from "../app/globals";
 import { selectConnectingWallet, walletConnected } from "../state/uiSlice";
@@ -46,10 +43,6 @@ const Name = styled.div`
   }
 `;
 
-const Icon = styled.img`
-  width: 3.2rem;
-`;
-
 const WalletSelector = (): JSX.Element => {
   const dispatch = useDispatch();
   const { account, activateBrowserWallet, activate } = useEthers();
@@ -64,11 +57,9 @@ const WalletSelector = (): JSX.Element => {
     >
       <Option onClick={() => activateBrowserWallet()}>
         <Name>Metamask</Name>
-        <Icon src={metamask} alt="Metamask logo" />
       </Option>
       <Option onClick={() => activate(walletConnectConnector)}>
         <Name>Walletconnect</Name>
-        <Icon src={walletConnect} alt="Walletconnect logo" />
       </Option>
     </Popup>
   );
