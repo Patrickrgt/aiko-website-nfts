@@ -8,6 +8,9 @@ import plus from "../assets/svgs/plus.svg";
 const StyledSection = styled.div`
   position: relative;
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   width: 100%;
   min-height: 100vh;
   padding: 7rem 0;
