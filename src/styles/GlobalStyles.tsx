@@ -6,6 +6,7 @@ const GlobalStyle = createGlobalStyle`
         --main: black;
         --sub: grey;
         --primary: #6E9CD7;
+        --secondary: #FFD158;
         --error: red;
     }
 
