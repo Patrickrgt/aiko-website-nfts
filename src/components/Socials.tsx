@@ -1,50 +1,52 @@
 import styled from "styled-components";
-import twitter from "../assets/socials/twitter.svg";
-import discord from "../assets/socials/discord.svg";
+import Social from "./Social";
+import twitter from "../assets/svgs/twitter.svg";
+import discord from "../assets/svgs/discord.svg";
+import opensea from "../assets/svgs/opensea.svg";
 
 interface SocialType {
-  image: string;
+  icon: string;
   link: string;
 }
 
 const socials: SocialType[] = [
   {
-    image: twitter,
-    link: "https://twitter.com/ChaseManning_NZ",
+    icon: opensea,
+    link: "https://discord.gg/CaR7RhfDZ6",
   },
   {
-    image: discord,
+    icon: discord,
     link: "https://discord.gg/CaR7RhfDZ6",
+  },
+  {
+    icon: twitter,
+    link: "https://twitter.com/ChaseManning_NZ",
   },
 ];
 
 const StyledSocials = styled.div`
-  display: flex;
-  align-items: center;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 0.5rem;
+  position: absolute;
+  top: 0;
+  left: 7rem;
 `;
 
-const SocialLink = styled.a`
-  margin: 0 0.6rem;
-`;
+interface Props {
+  index: number;
+}
 
-const SocialImage = styled.img`
-  height: 2.7rem;
-`;
-
-const Socials = () => {
+const Socials = ({ index }: Props) => {
   return (
-    <StyledSocials>
-      {socials.map((social: SocialType) => (
-        <SocialLink
-          key={social.link}
-          href={social.link}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <SocialImage src={social.image} />
-        </SocialLink>
-      ))}
-    </StyledSocials>
+    <div>
+      <StyledSocials>
+        {socials.map((social: SocialType) => (
+          <Social icon={social.icon} link={social.link} />
+        ))}
+        {index}
+      </StyledSocials>
+    </div>
   );
 };
 
