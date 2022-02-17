@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Logo from "../../components/Logo";
+import NavItems from "../../components/NavItems";
 import Section from "../../components/Section";
 
 const LogoContainer = styled.div`
@@ -15,6 +16,7 @@ const HeroSection = () => {
       <LogoContainer>
         <Logo />
       </LogoContainer>
+      <NavItems />
     </Section>
   );
 };
