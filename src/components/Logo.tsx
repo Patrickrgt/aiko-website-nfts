@@ -2,7 +2,7 @@ import styled from "styled-components";
 import logo from "../assets/svgs/aiko-logo.svg";
 
 const StyledLogo = styled.img`
-  width: 10rem;
+  width: 16rem;
 `;
 
 const Logo = () => {
