@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Section from "../../components/Section";
+import HeroSection from "./HeroSection";
 
 const StyledHomePage = styled.div`
   width: 100%;
@@ -12,11 +13,19 @@ const StyledHomePage = styled.div`
 const HomePage = () => {
   return (
     <StyledHomePage>
-      <Section socials index={1} bottomPlus />
-      <Section topPlus bottomPlus />
-      <Section socials index={2} />
-      <Section socials logo index={3} bottomPlus />
-      <Section socials logo index={4} bottomPlus />
+      <HeroSection />
+      <Section topPlus bottomPlus>
+        meow
+      </Section>
+      <Section socials index={2}>
+        meow
+      </Section>
+      <Section socials logo index={3} bottomPlus>
+        meow
+      </Section>
+      <Section socials logo index={4} bottomPlus>
+        meow
+      </Section>
     </StyledHomePage>
   );
 };

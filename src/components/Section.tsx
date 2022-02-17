@@ -1,4 +1,6 @@
+import { ReactNode } from "react";
 import styled from "styled-components";
+
 import Logo from "./Logo";
 import Socials from "./Socials";
 import plus from "../assets/svgs/plus.svg";
@@ -44,9 +46,17 @@ interface Props {
   logo?: boolean;
   topPlus?: boolean;
   bottomPlus?: boolean;
+  children: ReactNode;
 }
 
-const Section = ({ index, socials, logo, topPlus, bottomPlus }: Props) => {
+const Section = ({
+  index,
+  socials,
+  logo,
+  topPlus,
+  bottomPlus,
+  children,
+}: Props) => {
   return (
     <StyledSection>
       {socials && index && <Socials index={index} />}
@@ -68,6 +78,7 @@ const Section = ({ index, socials, logo, topPlus, bottomPlus }: Props) => {
           <Plus src={plus} alt="Decorative cross" />
         </BottomPlus>
       )}
+      {children}
     </StyledSection>
   );
 };
