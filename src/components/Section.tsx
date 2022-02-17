@@ -10,6 +10,12 @@ const StyledSection = styled.div`
   margin: 7rem 0;
 `;
 
+const LogoContainer = styled.div`
+  position: absolute;
+  top: 0;
+  right: 7rem;
+`;
+
 interface Props {
   index?: number;
   socials?: boolean;
@@ -20,7 +26,11 @@ const Section = ({ index, socials, logo }: Props) => {
   return (
     <StyledSection>
       {socials && index && <Socials index={index} />}
-      {logo && <Logo />}
+      {logo && (
+        <LogoContainer>
+          <Logo />
+        </LogoContainer>
+      )}
     </StyledSection>
   );
 };
