@@ -1,5 +1,7 @@
 import styled from "styled-components";
-import WethSwap from "./WethSwap";
+import Section from "../../components/Section";
+import GallerySection from "./GallerySection";
+import HeroSection from "./HeroSection";
 
 const StyledHomePage = styled.div`
   width: 100%;
@@ -7,20 +9,22 @@ const StyledHomePage = styled.div`
   flex-direction: column;
   align-items: center;
   flex: 1;
-  padding: 3rem;
-  border: solid 1px orange;
-`;
-
-const Header = styled.div`
-  width: 100%;
-  font-size: 2.3rem;
 `;
 
 const HomePage = () => {
   return (
     <StyledHomePage>
-      <Header>pages/home-page/HomePage.tsx</Header>
-      <WethSwap />
+      <HeroSection />
+      <GallerySection />
+      <Section socials index={2}>
+        meow
+      </Section>
+      <Section socials logo index={3} bottomPlus>
+        meow
+      </Section>
+      <Section socials logo index={4} bottomPlus>
+        meow
+      </Section>
     </StyledHomePage>
   );
 };

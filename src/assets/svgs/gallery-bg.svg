@@ -1,0 +1,12 @@
+<svg width="1130" height="169" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" version="1.1">
+ <defs>
+  <linearGradient y2="0" x2="1" y1="0" x1="0" id="svg_3">
+   <stop offset="0" stop-opacity="0.99609" stop-color="#fcefca"/>
+   <stop offset="1" stop-opacity="0.99609" stop-color="#ffc42c"/>
+  </linearGradient>
+ </defs>
+ <g>
+  <title>Layer 1</title>
+  <polygon stroke="null" id="svg_1" fill="url(#svg_3)" points="1101.8900146484375,0.19000273942947388 28.25,0.19000273942947388 0.28999996185302734,9.848191439569307 0.28999996185302734,158.74182120219857 28.25,168.40001891915844 1101.8900146484375,168.40001891915844 1129.8499755859375,158.74182120219857 1129.8499755859375,9.848191439569307 " class="st0"/>
+ </g>
+</svg>

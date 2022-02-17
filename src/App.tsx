@@ -3,7 +3,6 @@ import { Outlet } from "react-router-dom";
 import { ChainId, Config, DAppProvider } from "@usedapp/core";
 
 import Footer from "./components/Footer";
-import Header from "./components/Header";
 import Error from "./components/Error";
 import { INFURA_ID } from "./app/globals";
 import WalletSelector from "./components/WalletSelector";
@@ -26,7 +25,6 @@ const App = () => {
   return (
     <StyledApp>
       <DAppProvider config={config}>
-        <Header />
         <Outlet />
         <Footer />
         <Error />

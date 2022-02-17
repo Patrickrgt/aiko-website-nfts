@@ -1,13 +1,24 @@
 import styled from "styled-components";
-import Socials from "./Socials";
 
 const StyledFooter = styled.div`
+  position: relative;
   width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 2rem 3rem;
-  border: solid 1px green;
+  height: 10rem;
+  background: linear-gradient(to right, #43679b, #43679b);
+`;
+
+const Decal = styled.div`
+  width: 4rem;
+  aspect-ratio: 1;
+  background: white;
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translate(-50%, -50%) rotate(45deg);
 `;
 
 const Logo = styled.div`
@@ -17,8 +28,7 @@ const Logo = styled.div`
 const Footer = () => {
   return (
     <StyledFooter>
-      <Logo>components/Footer.tsx</Logo>
-      <Socials />
+      <Decal />
     </StyledFooter>
   );
 };

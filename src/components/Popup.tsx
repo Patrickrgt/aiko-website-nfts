@@ -1,6 +1,5 @@
 import { ReactNode } from "react";
 import styled from "styled-components";
-import exit from "../assets/ui/exit.svg";
 import Button from "./Button";
 
 const StyledPopup = styled.div`
@@ -33,17 +32,6 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-`;
-
-const ExitButton = styled.button`
-  position: absolute;
-  top: 2rem;
-  right: 2rem;
-  cursor: pointer;
-`;
-
-const Exit = styled.img`
-  height: 2rem;
 `;
 
 const Header = styled.div`
@@ -86,11 +74,8 @@ const Popup = ({
 
   return (
     <StyledPopup>
-      <Background />
+      <Background onClick={() => close()} />
       <Container>
-        <ExitButton onClick={() => close()}>
-          <Exit src={exit} />
-        </ExitButton>
         {header && <Header>{header}</Header>}
         {subHeader && <SubHeader>{subHeader}</SubHeader>}
         {children && <Content>{children}</Content>}

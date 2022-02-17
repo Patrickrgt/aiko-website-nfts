@@ -5,7 +5,8 @@ const GlobalStyle = createGlobalStyle`
         --bg: white;
         --main: black;
         --sub: grey;
-        --primary: #32B2E5;
+        --primary: #6E9CD7;
+        --secondary: #FFD158;
         --error: red;
     }
 
@@ -15,6 +16,7 @@ const GlobalStyle = createGlobalStyle`
         padding: 0;
         font-size: 10px;
         color: var(--main);
+        font-family: video, serif;
     }
 
     button {
