@@ -17,6 +17,7 @@ const GlobalStyle = createGlobalStyle`
         font-size: 10px;
         color: var(--main);
         font-family: video, serif;
+        letter-spacing: 1px;
     }
 
     button {

@@ -16,6 +16,12 @@ const StyledSection = styled.div`
   padding: 7rem 0;
 `;
 
+const SocialsContainer = styled.div`
+  position: absolute;
+  top: 7rem;
+  left: 7rem;
+`;
+
 const LogoContainer = styled.div`
   position: absolute;
   top: 7rem;
@@ -62,7 +68,11 @@ const Section = ({
 }: Props) => {
   return (
     <StyledSection>
-      {socials && index && <Socials index={index} />}
+      {socials && index && (
+        <SocialsContainer>
+          <Socials index={index} />
+        </SocialsContainer>
+      )}
       {logo && (
         <LogoContainer>
           <Logo />

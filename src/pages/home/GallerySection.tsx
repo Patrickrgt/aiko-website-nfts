@@ -1,15 +1,20 @@
 import styled from "styled-components";
 import Section from "../../components/Section";
 import background from "../../assets/svgs/gallery-bg.svg";
-import Title from "../../components/Title";
+import Header from "../../components/Header";
 
 const Container = styled.div`
   position: relative;
+  width: 100%;
 `;
 
 const Background = styled.img`
   width: 100%;
   height: calc(100vh - 27rem);
+`;
+
+const HeaderContainer = styled.div`
+  margin-top: 2rem;
 `;
 
 const Content = styled.div`
@@ -29,7 +34,9 @@ const GallerySection = () => {
       <Container>
         <Background src={background} alt="Gallery background" />
         <Content>
-          <Title>Be Part of our Universe</Title>
+          <HeaderContainer>
+            <Header>Be Part of our Universe</Header>
+          </HeaderContainer>
         </Content>
       </Container>
     </Section>

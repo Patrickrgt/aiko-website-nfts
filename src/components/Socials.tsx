@@ -16,11 +16,11 @@ const socials: SocialType[] = [
   },
   {
     icon: discord,
-    link: "https://discord.gg/CaR7RhfDZ6",
+    link: "https://discord.gg/g6V5SxQFV8",
   },
   {
     icon: twitter,
-    link: "https://twitter.com/ChaseManning_NZ",
+    link: "https://twitter.com/aikovirtual",
   },
 ];
 
@@ -28,9 +28,6 @@ const StyledSocials = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-gap: 0.5rem;
-  position: absolute;
-  top: 7rem;
-  left: 7rem;
 `;
 
 const Index = styled.div`
