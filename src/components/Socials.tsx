@@ -16,11 +16,11 @@ const socials: SocialType[] = [
   },
   {
     icon: discord,
-    link: "https://discord.gg/CaR7RhfDZ6",
+    link: "https://discord.gg/g6V5SxQFV8",
   },
   {
     icon: twitter,
-    link: "https://twitter.com/ChaseManning_NZ",
+    link: "https://twitter.com/aikovirtual",
   },
 ];
 
