@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 import styled from "styled-components";
-import leftEnd from "../assets/svgs/header-left.svg";
-import rightEnd from "../assets/svgs/header-right.svg";
+import leftEnd from "../assets/svgs/hex-left.svg";
+import rightEnd from "../assets/svgs/hex-right.svg";
 
 const Container = styled.div`
   position: relative;
