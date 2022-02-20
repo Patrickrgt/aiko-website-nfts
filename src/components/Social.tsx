@@ -6,13 +6,12 @@ const StyledSocial = styled.a`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 5rem;
+  width: 6rem;
   aspect-ratio: 1;
 `;
 
 const Icon = styled.img`
-  position: absolute;
-  height: 100%;
+  width: 62%;
 `;
 
 interface Props {
