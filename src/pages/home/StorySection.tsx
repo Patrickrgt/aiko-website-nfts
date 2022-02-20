@@ -4,15 +4,17 @@ import Header from "../../components/Header";
 import blueBg from "../../assets/svgs/blue-bg.svg";
 import Socials from "../../components/Socials";
 import Logo from "../../components/Logo";
+import girlFace from "../../assets/illustrations/girl-face.png";
 
 const Container = styled.div`
   position: relative;
   width: 100%;
+  height: calc(100vh - 10rem);
 `;
 
 const Background = styled.img`
   width: 100%;
-  height: calc(100vh - 27rem);
+  height: calc(100vh - 10rem);
 `;
 
 const Content = styled.div`
@@ -43,6 +45,13 @@ const Body = styled.p`
   line-height: 1.3;
 `;
 
+const GirlFace = styled.img`
+  position: absolute;
+  right: 0;
+  bottom: 2px;
+  height: 115%;
+`;
+
 const StorySection = () => {
   return (
     <Section>
@@ -63,6 +72,7 @@ const StorySection = () => {
             culpa qui officia deserunt mollit anim id est laborum.
           </Body>
           <Logo />
+          <GirlFace src={girlFace} alt="Girls face" />
         </Content>
       </Container>
     </Section>
