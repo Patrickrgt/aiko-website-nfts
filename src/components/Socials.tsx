@@ -28,9 +28,6 @@ const StyledSocials = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-gap: 0.5rem;
-  position: absolute;
-  top: 7rem;
-  left: 7rem;
 `;
 
 const Index = styled.div`
