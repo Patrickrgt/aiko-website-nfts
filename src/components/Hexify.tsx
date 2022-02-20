@@ -25,7 +25,7 @@ const BackgroundMiddle = styled.div`
   background: linear-gradient(to right, #748abd, #92a7c6);
 `;
 
-const Content = styled.h2`
+const Content = styled.div`
   position: relative;
   display: flex;
   align-items: center;
