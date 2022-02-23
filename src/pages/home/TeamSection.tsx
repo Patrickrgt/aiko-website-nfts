@@ -73,6 +73,7 @@ const TeamMembers = styled.div`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   width: 66%;
+  max-width: 120rem;
 `;
 
 const TeamMembersBackground = styled.div`
