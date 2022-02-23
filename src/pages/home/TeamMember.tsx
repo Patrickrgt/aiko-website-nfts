@@ -1,10 +1,15 @@
 import styled from "styled-components";
+import Hexify from "../../components/Hexify";
 
 export interface TeamMemberType {
   image: string;
   name: string;
   role: string;
 }
+
+const Container = styled.div`
+  position: relative;
+`;
 
 const StyledTeamMember = styled.div`
   position: relative;
@@ -58,6 +63,22 @@ const Image = styled.img`
   );
 `;
 
+const NumberContainer = styled.div`
+  position: absolute;
+  right: 7px;
+  bottom: 5%;
+`;
+
+const Number = styled.div`
+  font-size: 3rem;
+  color: white;
+  height: 4.2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 1.5rem;
+`;
+
 interface Props {
   index: number;
   teamMember: TeamMemberType;
@@ -65,14 +86,21 @@ interface Props {
 
 const TeamMember = ({ index, teamMember }: Props) => {
   return (
-    <StyledTeamMember>
-      <InnerBorder>
-        <Image
-          src={teamMember.image}
-          alt={`${teamMember.name} profile picture`}
-        />
-      </InnerBorder>
-    </StyledTeamMember>
+    <Container>
+      <StyledTeamMember>
+        <InnerBorder>
+          <Image
+            src={teamMember.image}
+            alt={`${teamMember.name} profile picture`}
+          />
+        </InnerBorder>
+      </StyledTeamMember>
+      <NumberContainer>
+        <Hexify>
+          <Number>{`#000${index}`}</Number>
+        </Hexify>
+      </NumberContainer>
+    </Container>
   );
 };
 
