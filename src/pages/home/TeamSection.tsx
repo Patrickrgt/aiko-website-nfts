@@ -70,11 +70,19 @@ const TeamContainer = styled.div`
 
 const TeamMembers = styled.div`
   position: relative;
-  background-color: pink;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   width: 66%;
-  /* max-width: 100rem; */
+`;
+
+const TeamMembersBackground = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  height: 100%;
+  width: 75%;
 `;
 
 const OrangeBanner = styled.div`
@@ -115,6 +123,7 @@ const TeamSection = () => {
           <LeftDecal src={teamDecal} alt="Orange decal" />
           <RightDecal src={teamDecal} alt="Orange decal" />
           <TeamMembers>
+            <TeamMembersBackground />
             {teamMembers.map((teamMember: TeamMemberType, index: number) => (
               <TeamMember
                 key={teamMember.name}
