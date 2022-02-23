@@ -3,6 +3,7 @@ import Section from "../../components/Section";
 import GallerySection from "./GallerySection";
 import HeroSection from "./HeroSection";
 import StorySection from "./StorySection";
+import TeamSection from "./TeamSection";
 
 const StyledHomePage = styled.div`
   width: 100%;
@@ -21,9 +22,7 @@ const HomePage = () => {
       <Section socials logo index={3} bottomPlus>
         meow
       </Section>
-      <Section socials logo index={4} bottomPlus>
-        meow
-      </Section>
+      <TeamSection />
     </StyledHomePage>
   );
 };
