@@ -10,15 +10,15 @@ const StyledRoadmapItem = styled.div`
   display: flex;
   align-items: center;
   width: 100%;
-  margin-bottom: 3rem;
+  margin-bottom: 4rem;
 `;
 
 const IconBorder = styled.div`
-  height: 10rem;
+  height: 12rem;
   aspect-ratio: 1;
   clip-path: var(--hex);
-  background: #c3d0e1;
-  padding: 1px;
+  background: #becae3;
+  padding: 2px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -35,19 +35,20 @@ const IconBackground = styled.div`
 `;
 
 const Icon = styled.img`
-  height: 70%;
+  height: 108%;
 `;
 
 const TextContainer = styled.div`
   margin-left: 2rem;
   font-size: 2.3rem;
-  font-weight: 400;
+  font-weight: 300;
   color: #456893;
+  line-height: 1.5;
 `;
 
 const Bold = styled.span`
   font-size: 2.3rem;
-  font-weight: 500;
+  font-weight: 600;
   color: #456893;
 `;
 
@@ -64,7 +65,7 @@ const RoadmapItem = ({ item }: Props) => {
         </IconBackground>
       </IconBorder>
       <TextContainer>
-        <Bold>{`<A:\\${item.header}:`}</Bold>
+        <Bold>{`<A:\\${item.header}: `}</Bold>
         {item.body}
       </TextContainer>
     </StyledRoadmapItem>

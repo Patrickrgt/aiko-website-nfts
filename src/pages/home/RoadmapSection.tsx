@@ -79,8 +79,8 @@ const Container = styled.div`
 const Background = styled.img`
   position: absolute;
   top: 0;
-  left: 0;
-  height: 100%;
+  left: 2vw;
+  height: 105%;
 `;
 
 const ContentContainer = styled.div`
@@ -91,7 +91,7 @@ const ContentContainer = styled.div`
 const RoadmapContainer = styled.div`
   position: relative;
   width: 80rem;
-  margin-left: 38vw;
+  margin-left: 42vw;
 `;
 
 const RoadmapSection = () => {

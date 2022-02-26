@@ -10,36 +10,38 @@ export interface RoadmapSeasonType {
 const StyledRoadmapSeason = styled.div`
   display: flex;
   flex-direction: column;
-  margin-top: 2rem;
+  margin-top: 4rem;
 `;
 
 const HeaderContainer = styled.div`
   display: flex;
   align-items: flex-end;
-  font-size: 2.8rem;
-  font-weight: 400;
+  font-size: 3rem;
+  font-weight: 300;
   color: #456893;
 `;
 
 const BoldHeader = styled.span`
-  font-size: 2.8rem;
-  font-weight: 500;
+  font-size: 3rem;
+  font-weight: 600;
   color: #456893;
+  margin-left: 0.3rem;
 `;
 
 const SubHeaderContainer = styled.div`
   display: flex;
   align-items: center;
-  font-size: 2.8rem;
+  font-size: 3rem;
   font-weight: 600;
   color: #ffab63;
-  margin-bottom: 2rem;
+  margin-bottom: 3rem;
 `;
 
 const SubHeaderLine = styled.div`
-  width: 3rem;
+  width: 8rem;
   height: 5px;
   background: #ffab63;
+  margin-right: 4px;
 `;
 
 interface Props {
@@ -50,7 +52,7 @@ const RoadmapSeason = ({ season }: Props) => {
   return (
     <StyledRoadmapSeason>
       <HeaderContainer>
-        Season <BoldHeader>{`${season.number}.0`}</BoldHeader>
+        Season<BoldHeader>{`${season.number}.0`}</BoldHeader>
       </HeaderContainer>
       <SubHeaderContainer>
         <SubHeaderLine />
