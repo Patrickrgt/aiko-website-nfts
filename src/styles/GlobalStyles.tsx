@@ -8,6 +8,16 @@ const GlobalStyle = createGlobalStyle`
         --primary: #6E9CD7;
         --secondary: #FFD158;
         --error: red;
+        --hex: polygon(
+            25% 0%,
+            75% 0%,
+            100% 25%,
+            100% 75%,
+            75% 100%,
+            25% 100%,
+            0% 75%,
+            0% 25%
+        );
     }
 
     * {

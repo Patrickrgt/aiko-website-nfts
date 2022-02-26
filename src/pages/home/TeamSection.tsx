@@ -3,42 +3,49 @@ import Header from "../../components/Header";
 import Section from "../../components/Section";
 import teamDecal from "../../assets/svgs/team-decal.svg";
 import TeamMember, { TeamMemberType } from "./TeamMember";
+
 import chase from "../../assets/team-members/chase.jpg";
+import crystal from "../../assets/team-members/crystal.jpg";
+import garrid from "../../assets/team-members/garrid.jpg";
+import kinoko from "../../assets/team-members/kinoko.jpg";
+import kyo from "../../assets/team-members/kyo.jpg";
+import matarelli from "../../assets/team-members/matarelli.jpg";
+import vinne from "../../assets/team-members/vinne.jpg";
 
 const teamMembers: TeamMemberType[] = [
   {
-    image: chase,
-    name: "Chase Manning",
+    image: vinne,
+    name: "Vinne",
+    role: "Artist & Co founder",
+  },
+  {
+    image: kyo,
+    name: "Kyo",
+    role: "Design & Co founder",
+  },
+  {
+    image: garrid,
+    name: "Garrid",
+    role: "Project Manager",
+  },
+  {
+    image: matarelli,
+    name: "Matarelli",
+    role: "Community Manager",
+  },
+  {
+    image: crystal,
+    name: "Crystal",
+    role: "Social Media Manager",
+  },
+  {
+    image: kinoko,
+    name: "Kinoko",
     role: "Developer",
   },
   {
     image: chase,
-    name: "Chase Manning",
-    role: "Developer",
-  },
-  {
-    image: chase,
-    name: "Chase Manning",
-    role: "Developer",
-  },
-  {
-    image: chase,
-    name: "Chase Manning",
-    role: "Developer",
-  },
-  {
-    image: chase,
-    name: "Chase Manning",
-    role: "Developer",
-  },
-  {
-    image: chase,
-    name: "Chase Manning",
-    role: "Developer",
-  },
-  {
-    image: chase,
-    name: "Chase Manning",
+    name: "Chase",
     role: "Developer",
   },
   {
