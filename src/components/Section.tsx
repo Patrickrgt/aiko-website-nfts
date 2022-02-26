@@ -68,6 +68,7 @@ const Section = ({
 }: Props) => {
   return (
     <StyledSection>
+      {children}
       {socials && index && (
         <SocialsContainer>
           <Socials index={index} />
@@ -91,7 +92,6 @@ const Section = ({
           <Plus src={plus} alt="Decorative cross" />
         </BottomPlus>
       )}
-      {children}
     </StyledSection>
   );
 };

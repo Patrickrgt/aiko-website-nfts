@@ -25,6 +25,7 @@ const socials: SocialType[] = [
 ];
 
 const StyledSocials = styled.div`
+  position: relative;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-gap: 0.5rem;
