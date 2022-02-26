@@ -1,11 +1,13 @@
+import { useState } from "react";
 import styled from "styled-components";
+
 import Section from "../../components/Section";
 import background from "../../assets/svgs/gallery-bg.svg";
 import Header from "../../components/Header";
 import AikoHex from "../../components/AikoHex";
-
-import chase from "../../assets/team-members/chase.jpg";
 import GallerySlide from "./GallerySlide";
+
+import vinne from "../../assets/team-members/vinne.jpg";
 
 const Container = styled.div`
   position: relative;
@@ -43,6 +45,8 @@ const MainAikoContainer = styled.div`
 `;
 
 const GallerySection = () => {
+  const [mainAiko, setMainAiko] = useState(vinne);
+
   return (
     <Section topPlus bottomPlus>
       <Container>
@@ -52,9 +56,9 @@ const GallerySection = () => {
         </HeaderContainer>
         <Content>
           <MainAikoContainer>
-            <AikoHex image={chase} mega />
+            <AikoHex image={mainAiko} mega />
           </MainAikoContainer>
-          <GallerySlide />
+          <GallerySlide setMainAiko={(aiko: string) => setMainAiko(aiko)} />
         </Content>
       </Container>
     </Section>

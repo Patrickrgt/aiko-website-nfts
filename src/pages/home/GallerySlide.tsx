@@ -1,25 +1,35 @@
 import { useState } from "react";
 import styled from "styled-components";
 
-import chase from "../../assets/team-members/chase.jpg";
 import AikoHex from "../../components/AikoHex";
 
+import chase from "../../assets/team-members/chase.jpg";
+import crystal from "../../assets/team-members/crystal.jpg";
+import garrid from "../../assets/team-members/garrid.jpg";
+import kinoko from "../../assets/team-members/kinoko.jpg";
+import kyo from "../../assets/team-members/kyo.jpg";
+import matarelli from "../../assets/team-members/matarelli.jpg";
+import vinne from "../../assets/team-members/vinne.jpg";
+
 const aikos: string[] = [
+  vinne,
+  crystal,
+  garrid,
+  kinoko,
+  kyo,
+  matarelli,
   chase,
+  vinne,
+  crystal,
+  garrid,
+  kinoko,
+  kyo,
+  matarelli,
   chase,
-  chase,
-  chase,
-  chase,
-  chase,
-  chase,
-  chase,
-  chase,
-  chase,
-  chase,
-  chase,
-  chase,
-  chase,
-  chase,
+  vinne,
+  crystal,
+  garrid,
+  kinoko,
 ];
 
 const StyledGallerySlide = styled.div`
@@ -28,7 +38,6 @@ const StyledGallerySlide = styled.div`
   flex-direction: column;
   height: 100%;
   position: relative;
-  /* overflow: hidden; */
 `;
 
 const Aiko = styled.div`
@@ -84,7 +93,11 @@ const AikoContainer = styled.div`
   }
 `;
 
-const GallerySlide = () => {
+interface Props {
+  setMainAiko: (aiko: string) => void;
+}
+
+const GallerySlide = ({ setMainAiko }: Props) => {
   const [active, setActive] = useState(6);
 
   return (
@@ -95,6 +108,7 @@ const GallerySlide = () => {
           active={index === active}
           onMouseEnter={() => setActive(index)}
           style={{ zIndex: index === active ? 20 : index }}
+          onClick={() => setMainAiko(aiko)}
         >
           <AikoShadow />
           <AikoContainer active={index === active} index={index}>
