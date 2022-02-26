@@ -10,7 +10,7 @@ const GlobalStyle = createGlobalStyle`
         --error: red;
         --hex: polygon(
             25% 0%,
-            70% 0%,
+            75% 0%,
             100% 25%,
             100% 75%,
             75% 100%,
