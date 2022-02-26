@@ -5,6 +5,7 @@ import Header from "../../components/Header";
 import AikoHex from "../../components/AikoHex";
 
 import chase from "../../assets/team-members/chase.jpg";
+import GallerySlide from "./GallerySlide";
 
 const Container = styled.div`
   position: relative;
@@ -47,6 +48,7 @@ const GallerySection = () => {
         </HeaderContainer>
         <Content>
           <AikoHex image={chase} mega />
+          <GallerySlide />
         </Content>
       </Container>
     </Section>
