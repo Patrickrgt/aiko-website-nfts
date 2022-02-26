@@ -7,7 +7,7 @@ interface AikoProps {
 const StyledAikoHex = styled.div`
   position: relative;
   display: flex;
-  height: ${(props: AikoProps) => (props.mega ? "100%" : "10rem")};
+  height: ${(props: AikoProps) => (props.mega ? "100%" : "100%")};
   aspect-ratio: 1;
   padding: 4px;
   background: #fcd04d;
