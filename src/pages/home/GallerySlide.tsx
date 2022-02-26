@@ -20,11 +20,6 @@ const aikos: string[] = [
   chase,
   chase,
   chase,
-  chase,
-  chase,
-  chase,
-  chase,
-  chase,
 ];
 
 const StyledGallerySlide = styled.div`
@@ -33,7 +28,7 @@ const StyledGallerySlide = styled.div`
   flex-direction: column;
   height: 100%;
   position: relative;
-  overflow: hidden;
+  /* overflow: hidden; */
 `;
 
 interface AikoProps {
@@ -43,8 +38,6 @@ interface AikoProps {
 
 const AikoContainer = styled.div`
   position: absolute;
-  z-index: ${(props: AikoProps) =>
-    props.active ? 101 : Math.round(Math.random() * 100)};
   top: ${(props: AikoProps) =>
     props.index % 3 === 0
       ? "0"
@@ -58,17 +51,41 @@ const AikoContainer = styled.div`
   height: calc((100vh - 18rem - 27rem) / 2);
   cursor: pointer;
 
-  transition: all 0.5s ease-in-out;
-  filter: ${(props: AikoProps) => (props.active ? "none" : "saturate(0)")};
+  transition: all 0.5s;
+  filter: ${(props: AikoProps) =>
+    props.active ? "none" : "saturate(0) contrast(0.2) brightness(1.8)"};
+
+  ::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    box-shadow: 5px 5px 1000px pink;
+  }
+
+  /* ::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top, white, transparent, transparent);
+    z-index: 300;
+    opacity: ${(props: AikoProps) => (props.active ? "0" : "1")};
+    clip-path: var(--hex);
+  } */
 `;
 
 const GallerySlide = () => {
-  const [active, setActive] = useState(Math.floor(Math.random() * 12));
+  const [active, setActive] = useState(6);
 
   return (
     <StyledGallerySlide>
       {aikos.map((aiko: string, index: number) => (
         <AikoContainer
+          style={{ zIndex: index === active ? 101 : index }}
           index={index}
           active={index === active}
           onMouseEnter={() => setActive(index)}

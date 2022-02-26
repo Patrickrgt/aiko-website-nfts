@@ -10,6 +10,7 @@ import GallerySlide from "./GallerySlide";
 const Container = styled.div`
   position: relative;
   width: 100%;
+  overflow: hidden;
 `;
 
 const Background = styled.img`
@@ -35,7 +36,10 @@ const Content = styled.div`
   width: 100%;
   height: calc(100% - 18rem);
   display: flex;
-  background: pink;
+`;
+
+const MainAikoContainer = styled.div`
+  z-index: 20;
 `;
 
 const GallerySection = () => {
@@ -47,7 +51,9 @@ const GallerySection = () => {
           <Header>Be Part of our Universe</Header>
         </HeaderContainer>
         <Content>
-          <AikoHex image={chase} mega />
+          <MainAikoContainer>
+            <AikoHex image={chase} mega />
+          </MainAikoContainer>
           <GallerySlide />
         </Content>
       </Container>
