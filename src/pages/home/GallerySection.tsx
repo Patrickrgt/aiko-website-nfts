@@ -39,7 +39,7 @@ const Content = styled.div`
 `;
 
 const MainAikoContainer = styled.div`
-  z-index: 20;
+  z-index: 25;
 `;
 
 const GallerySection = () => {
