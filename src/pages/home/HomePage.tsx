@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import Section from "../../components/Section";
 import GallerySection from "./GallerySection";
 import HeroSection from "./HeroSection";
+import RoadmapSection from "./RoadmapSection";
 import StorySection from "./StorySection";
 import TeamSection from "./TeamSection";
 
@@ -19,9 +19,7 @@ const HomePage = () => {
       <HeroSection />
       <GallerySection />
       <StorySection />
-      <Section socials logo index={3} bottomPlus>
-        meow
-      </Section>
+      <RoadmapSection />
       <TeamSection />
     </StyledHomePage>
   );
