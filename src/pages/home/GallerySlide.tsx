@@ -31,12 +31,7 @@ const StyledGallerySlide = styled.div`
   /* overflow: hidden; */
 `;
 
-interface AikoProps {
-  index: number;
-  active: boolean;
-}
-
-const AikoContainer = styled.div`
+const Aiko = styled.div`
   position: absolute;
   top: ${(props: AikoProps) =>
     props.index % 3 === 0
@@ -49,22 +44,33 @@ const AikoContainer = styled.div`
       (props.index + 2) % 3 === 0 ? "((100vh - 18rem - 27rem) / 4)" : "0px"
     })`};
   height: calc((100vh - 18rem - 27rem) / 2);
+  width: calc((100vh - 18rem - 27rem) / 2);
   cursor: pointer;
+`;
 
+const AikoShadow = styled.div`
+  position: absolute;
+  background: rgba(0, 0, 0, 0.2);
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  filter: blur(35px);
+`;
+
+interface AikoProps {
+  index: number;
+  active: boolean;
+}
+
+const AikoContainer = styled.div`
+  height: 100%;
   transition: all 0.5s;
   filter: ${(props: AikoProps) =>
     props.active ? "none" : "saturate(0) contrast(0.2) brightness(1.8)"};
 
-  ::before {
-    content: "";
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    box-shadow: 5px 5px 1000px pink;
-  }
-
-  /* ::after {
+  ::after {
     content: "";
     position: absolute;
     bottom: 0;
@@ -75,7 +81,7 @@ const AikoContainer = styled.div`
     z-index: 300;
     opacity: ${(props: AikoProps) => (props.active ? "0" : "1")};
     clip-path: var(--hex);
-  } */
+  }
 `;
 
 const GallerySlide = () => {
@@ -84,14 +90,17 @@ const GallerySlide = () => {
   return (
     <StyledGallerySlide>
       {aikos.map((aiko: string, index: number) => (
-        <AikoContainer
-          style={{ zIndex: index === active ? 101 : index }}
+        <Aiko
           index={index}
           active={index === active}
           onMouseEnter={() => setActive(index)}
+          style={{ zIndex: index === active ? 20 : index }}
         >
-          <AikoHex image={aiko} />
-        </AikoContainer>
+          <AikoShadow />
+          <AikoContainer active={index === active} index={index}>
+            <AikoHex image={aiko} />
+          </AikoContainer>
+        </Aiko>
       ))}
     </StyledGallerySlide>
   );
