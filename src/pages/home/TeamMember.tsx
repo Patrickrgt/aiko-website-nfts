@@ -10,6 +10,13 @@ export interface TeamMemberType {
 
 const Container = styled.div`
   position: relative;
+  cursor: pointer;
+
+  :hover {
+    div {
+      opacity: 1;
+    }
+  }
 `;
 
 const OrangeBorder = styled.div`
@@ -61,6 +68,45 @@ const Number = styled.div`
   padding: 0 1.5rem;
 `;
 
+const Overlay = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: pink;
+  opacity: 0;
+  transition: all 0.5s;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const OverlayContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const Name = styled.div`
+  font-size: 3.5rem;
+  color: white;
+  font-weight: 600;
+`;
+
+const Role = styled.div`
+  font-size: 1.6rem;
+  color: white;
+  font-weight: 600;
+`;
+
+const Description = styled.div`
+  font-size: 1.5rem;
+  color: white;
+  font-weight: 600;
+`;
+
 interface Props {
   index: number;
   teamMember: TeamMemberType;
@@ -77,6 +123,12 @@ const TeamMember = ({ index, teamMember }: Props) => {
               src={teamMember.image}
               alt={`${teamMember.name} profile picture`}
             />
+            <Overlay>
+              <OverlayContent>
+                <Name>{teamMember.name}</Name>
+                <Role>{teamMember.role}</Role>
+              </OverlayContent>
+            </Overlay>
           </InnerBorder>
         </StyledTeamMember>
         <NumberContainer>
