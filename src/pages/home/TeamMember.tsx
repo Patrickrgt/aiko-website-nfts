@@ -12,14 +12,22 @@ const Container = styled.div`
   position: relative;
 `;
 
+const OrangeBorder = styled.div`
+  background: #fcd04d;
+  clip-path: var(--hex);
+  width: calc(100% + 10px);
+  height: calc(100% + 10px);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+`;
+
 const StyledTeamMember = styled.div`
   position: relative;
   display: flex;
   width: 100%;
   aspect-ratio: 1;
-  padding: 5px;
-  background: #fcd04d;
-  clip-path: var(--hex);
 `;
 
 const InnerBorder = styled.div`
@@ -63,6 +71,7 @@ const TeamMember = ({ index, teamMember }: Props) => {
     <AikoFade>
       <Container>
         <StyledTeamMember>
+          <OrangeBorder />
           <InnerBorder>
             <Image
               src={teamMember.image}
