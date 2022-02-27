@@ -3,7 +3,7 @@ import AikoFade from "../../components/AikoFade";
 import Hexify from "../../components/Hexify";
 
 export interface TeamMemberType {
-  image: string;
+  image?: string;
   name: string;
   role: string;
 }
@@ -49,6 +49,13 @@ const InnerBorder = styled.div`
 const Image = styled.img`
   width: 100%;
   aspect-ratio: 1;
+  clip-path: var(--hex);
+`;
+
+const SecretMember = styled.div`
+  width: 100%;
+  aspect-ratio: 1;
+  background: linear-gradient(45deg, #799ece, #93aedb);
   clip-path: var(--hex);
 `;
 
@@ -101,12 +108,6 @@ const Role = styled.div`
   font-weight: 600;
 `;
 
-const Description = styled.div`
-  font-size: 1.5rem;
-  color: white;
-  font-weight: 600;
-`;
-
 interface Props {
   index: number;
   teamMember: TeamMemberType;
@@ -119,10 +120,13 @@ const TeamMember = ({ index, teamMember }: Props) => {
         <StyledTeamMember>
           <OrangeBorder />
           <InnerBorder>
-            <Image
-              src={teamMember.image}
-              alt={`${teamMember.name} profile picture`}
-            />
+            {teamMember.image && (
+              <Image
+                src={teamMember.image}
+                alt={`${teamMember.name} profile picture`}
+              />
+            )}
+            {!teamMember.image && <SecretMember />}
             <Overlay>
               <OverlayContent>
                 <Name>{teamMember.name}</Name>
@@ -133,7 +137,7 @@ const TeamMember = ({ index, teamMember }: Props) => {
         </StyledTeamMember>
         <NumberContainer>
           <Hexify>
-            <Number>{`#000${index}`}</Number>
+            <Number>{index === 7 ? "#????" : `#000${index}`}</Number>
           </Hexify>
         </NumberContainer>
       </Container>

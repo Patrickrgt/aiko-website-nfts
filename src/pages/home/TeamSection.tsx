@@ -49,9 +49,8 @@ const teamMembers: TeamMemberType[] = [
     role: "Developer",
   },
   {
-    image: chase,
-    name: "Chase Manning",
-    role: "Developer",
+    name: "????",
+    role: "????",
   },
 ];
 
