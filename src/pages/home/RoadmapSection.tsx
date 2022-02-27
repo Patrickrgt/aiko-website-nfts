@@ -20,12 +20,12 @@ const roadmap: RoadmapSeasonType[] = [
       {
         icon: charity,
         header: "Charity",
-        body: "Holders will decide between 3 charities to donate for amount of volume traded, charity auctions will continue every season.",
+        body: "Holders will decide between 3 charities to donate every month.",
       },
       {
         icon: airdrop,
         header: "Airdrop",
-        body: "Will be airdroping exclusing Aiko's for holders.",
+        body: "Airdrop exclusive genesis Aiko NFTs to holders, in addition to 1/1 merch such as high quality t-shirts and hoodies (see Season 2).",
       },
       {
         icon: headquarters,
