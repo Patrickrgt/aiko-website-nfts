@@ -1,31 +1,33 @@
 import styled from "styled-components";
+import { Link } from "react-scroll";
+
 import AikoFade from "./AikoFade";
 
 interface NavItem {
   name: string;
-  link: string;
+  component: string;
 }
 
 const navItems: NavItem[] = [
   {
     name: "home",
-    link: "",
+    component: "home-scroll",
   },
   {
     name: "gallery",
-    link: "",
+    component: "gallery-scroll",
   },
   {
     name: "story",
-    link: "",
+    component: "story-scroll",
   },
   {
-    name: "roadmap",
-    link: "",
+    name: "virtualmap",
+    component: "roadmap-scroll",
   },
   {
     name: "team",
-    link: "",
+    component: "team-scroll",
   },
 ];
 
@@ -40,37 +42,43 @@ const BookEnds = styled.div`
   font-weight: 500;
 `;
 
-interface ItemsProps {
-  items: number;
-}
-
 const ItemsContainer = styled.div`
-  display: grid;
-  grid-gap: 1.7rem;
-  grid-template-columns: repeat(${(props: ItemsProps) => props.items}, 1fr);
+  display: flex;
+  z-index: 1;
+
+  a {
+    cursor: pointer;
+  }
 `;
 
-const NavItem = styled.button`
+const NavItem = styled.div`
   color: var(--primary);
   font-size: 2.4rem;
   font-weight: 500;
   line-height: 1;
-  cursor: pointer;
+  margin: 0 1.7rem;
 `;
 
 const NavItems = () => {
   return (
-    <AikoFade>
-      <StyledNavItems>
-        <BookEnds>{"<"}</BookEnds>
-        <ItemsContainer items={navItems.length}>
-          {navItems.map((item: NavItem) => (
+    <StyledNavItems>
+      <BookEnds>{"<"}</BookEnds>
+      <ItemsContainer>
+        {navItems.map((item: NavItem) => (
+          <Link
+            spy
+            smooth
+            key={item.component}
+            to={item.component}
+            offset={0}
+            duration={1000}
+          >
             <NavItem>{item.name}</NavItem>
-          ))}
-        </ItemsContainer>
-        <BookEnds>{">"}</BookEnds>
-      </StyledNavItems>
-    </AikoFade>
+          </Link>
+        ))}
+      </ItemsContainer>
+      <BookEnds>{">"}</BookEnds>
+    </StyledNavItems>
   );
 };
 

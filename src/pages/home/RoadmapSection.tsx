@@ -96,7 +96,7 @@ const RoadmapContainer = styled.div`
 
 const RoadmapSection = () => {
   return (
-    <Section socials logo index={3} bottomPlus>
+    <Section id="roadmap-scroll" socials logo index={3} bottomPlus>
       <Container>
         <Background src={girl} alt="Roadmap Aiko" />
         <Header>A:\Virtualmap</Header>

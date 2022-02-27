@@ -64,7 +64,7 @@ const InfoText = styled.div`
 
 const HeroSection = () => {
   return (
-    <Section socials index={1} bottomPlus>
+    <Section id="home-scroll" socials index={1} bottomPlus>
       <HeroContainer>
         <OrangeBlock>
           <LeftDecal src={decal} alt="Decorative element" />

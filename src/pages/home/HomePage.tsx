@@ -6,13 +6,6 @@ import StorySection from "./StorySection";
 import TeamSection from "./TeamSection";
 
 // Sticky socials
-// Fade in elements
-// Text update :Charity: A:\Charity -> Holders will decide between 3 charities to donate every month.
-// :Airdrop:  A:\Airdrop  ->  airdrop exclusive genesis Aiko NFTs to holders, in addition to 1/1 merch such as high quality t-shirts and hoodies (see Season 2)
-// Just change our roadmap name to Virtualmap on the site
-// Horazontal scroll
-// Gap between team members
-// Text not aligned on hero and team numbers
 // Implement navigation
 // Wide screen support
 // Small screen support

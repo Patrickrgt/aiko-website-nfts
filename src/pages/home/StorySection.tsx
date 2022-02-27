@@ -56,7 +56,7 @@ const GirlFace = styled.img`
 
 const StorySection = () => {
   return (
-    <Section>
+    <Section id="story-scroll">
       <Container>
         <Background src={blueBg} alt="Gallery background" />
         <Content>

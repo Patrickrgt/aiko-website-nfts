@@ -50,6 +50,7 @@ const Plus = styled.img`
 `;
 
 interface Props {
+  id: string;
   index?: number;
   socials?: boolean;
   logo?: boolean;
@@ -59,6 +60,7 @@ interface Props {
 }
 
 const Section = ({
+  id,
   index,
   socials,
   logo,
@@ -67,7 +69,7 @@ const Section = ({
   children,
 }: Props) => {
   return (
-    <StyledSection>
+    <StyledSection id={id}>
       {children}
       {socials && index && (
         <SocialsContainer>
