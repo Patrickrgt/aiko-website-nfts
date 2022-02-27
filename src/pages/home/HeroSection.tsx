@@ -57,14 +57,18 @@ const InfoText = styled.div`
   display: flex;
   align-items: center;
   color: #6b9bd0;
-  font-size: 2.5rem;
   font-weight: 400;
   letter-spacing: 5px;
+
+  font-size: 2.5rem;
+  @media only screen and (max-width: 1400px) {
+    font-size: 2rem;
+  }
 `;
 
 const HeroSection = () => {
   return (
-    <Section id="home-scroll" socials index={1} bottomPlus>
+    <Section id="home-scroll" socials bottomPlus>
       <HeroContainer>
         <OrangeBlock>
           <LeftDecal src={decal} alt="Decorative element" />

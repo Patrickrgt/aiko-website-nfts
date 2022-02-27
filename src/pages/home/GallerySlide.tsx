@@ -37,6 +37,10 @@ const aikos: string[] = [
   crystal,
   kinoko,
   chase,
+  vinne,
+  kyo,
+  garrid,
+  matarelli,
 ];
 
 const StyledGallerySlide = styled.div`
@@ -49,6 +53,8 @@ const StyledGallerySlide = styled.div`
 
 const Aiko = styled.div`
   position: absolute;
+  cursor: pointer;
+
   top: ${(props: AikoProps) =>
     props.index % 3 === 0
       ? "0"
@@ -61,7 +67,20 @@ const Aiko = styled.div`
     })`};
   height: calc((100vh - 18rem - 27rem) / 2);
   width: calc((100vh - 18rem - 27rem) / 2);
-  cursor: pointer;
+  @media only screen and (max-width: 1400px) {
+    top: ${(props: AikoProps) =>
+      props.index % 3 === 0
+        ? "0"
+        : (props.index + 2) % 3 === 0
+        ? "calc((100vh - 16rem - 20rem) / 4)"
+        : "calc((100vh - 16rem - 20rem) / 2)"};
+    left: ${(props: AikoProps) =>
+      `calc(((100vh - 16rem - 20rem) / 2) * ${Math.floor(props.index / 3)} - ${
+        (props.index + 2) % 3 === 0 ? "((100vh - 16rem - 20rem) / 4)" : "0px"
+      })`};
+    height: calc((100vh - 16rem - 20rem) / 2);
+    width: calc((100vh - 16rem - 20rem) / 2);
+  }
 `;
 
 const AikoShadow = styled.div`

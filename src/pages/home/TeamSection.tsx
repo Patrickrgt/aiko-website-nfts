@@ -121,7 +121,7 @@ const RightDecal = styled(OrangeDecal)`
 
 const TeamSection = () => {
   return (
-    <Section id="team-scroll" socials logo index={4} bottomPlus>
+    <Section id="team-scroll" socials logo bottomPlus>
       <Content>
         <HeaderContainer>
           <Header>A:\Team</Header>

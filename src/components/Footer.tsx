@@ -7,8 +7,12 @@ const StyledFooter = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 2rem 3rem;
-  height: 10rem;
   background: linear-gradient(to right, #43679b, #43679b);
+
+  height: 10rem;
+  @media only screen and (max-width: 1400px) {
+    height: 8rem;
+  }
 `;
 
 const Decal = styled.div`

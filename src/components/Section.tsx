@@ -14,18 +14,32 @@ const StyledSection = styled.div`
   width: 100%;
   min-height: 100vh;
   padding: 7rem 0;
+
+  @media only screen and (max-width: 1400px) {
+    padding: 3rem 0;
+  }
 `;
 
 const SocialsContainer = styled.div`
   position: absolute;
   top: 7rem;
   left: 7rem;
+
+  @media only screen and (max-width: 1400px) {
+    top: 3rem;
+    left: 3rem;
+  }
 `;
 
 const LogoContainer = styled.div`
   position: absolute;
   top: 7rem;
   right: 7rem;
+
+  @media only screen and (max-width: 1400px) {
+    top: 3rem;
+    right: 3rem;
+  }
 `;
 
 const PlusSection = styled.div`
@@ -34,15 +48,27 @@ const PlusSection = styled.div`
   width: 100%;
   padding: 0 7rem;
   display: flex;
-  justify-content: space-between; ;
+  justify-content: space-between;
+
+  @media only screen and (max-width: 1400px) {
+    padding: 0 3rem;
+  }
 `;
 
 const TopPlus = styled(PlusSection)`
   top: 7rem;
+
+  @media only screen and (max-width: 1400px) {
+    top: 3rem;
+  }
 `;
 
 const BottomPlus = styled(PlusSection)`
   bottom: 7rem;
+
+  @media only screen and (max-width: 1400px) {
+    bottom: 3rem;
+  }
 `;
 
 const Plus = styled.img`
@@ -51,7 +77,6 @@ const Plus = styled.img`
 
 interface Props {
   id: string;
-  index?: number;
   socials?: boolean;
   logo?: boolean;
   topPlus?: boolean;
@@ -61,7 +86,6 @@ interface Props {
 
 const Section = ({
   id,
-  index,
   socials,
   logo,
   topPlus,
@@ -71,9 +95,9 @@ const Section = ({
   return (
     <StyledSection id={id}>
       {children}
-      {socials && index && (
+      {socials && (
         <SocialsContainer>
-          <Socials index={index} />
+          <Socials />
         </SocialsContainer>
       )}
       {logo && (

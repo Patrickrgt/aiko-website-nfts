@@ -53,10 +53,15 @@ const ItemsContainer = styled.div`
 
 const NavItem = styled.div`
   color: var(--primary);
-  font-size: 2.4rem;
   font-weight: 500;
   line-height: 1;
+
+  font-size: 2.4rem;
   margin: 0 1.7rem;
+  @media only screen and (max-width: 1400px) {
+    font-size: 2.1rem;
+    margin: 0 1.3rem;
+  }
 `;
 
 const NavItems = () => {

@@ -32,22 +32,7 @@ const StyledSocials = styled.div`
   grid-gap: 0.5rem;
 `;
 
-const Index = styled.div`
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  font-size: 2rem;
-  color: var(--primary);
-  font-weight: 500;
-  padding: 0.5rem;
-`;
-
-interface Props {
-  index: number;
-}
-
-const Socials = ({ index }: Props) => {
+const Socials = () => {
   return (
     <AikoFade>
       <div>
@@ -55,7 +40,6 @@ const Socials = ({ index }: Props) => {
           {socials.map((social: SocialType) => (
             <Social icon={social.icon} link={social.link} />
           ))}
-          <Index>{`(0${index})`}</Index>
         </StyledSocials>
       </div>
     </AikoFade>

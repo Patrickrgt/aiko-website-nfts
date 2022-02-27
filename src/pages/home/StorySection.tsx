@@ -40,11 +40,15 @@ const Body = styled.p`
   width: 60%;
   opacity: 0.9;
   color: #4d6a8f;
-  font-size: 2.6rem;
   font-weight: 400;
   text-align: center;
   line-height: 1.3;
   margin: 0 auto;
+
+  font-size: 2.6rem;
+  @media only screen and (max-width: 1400px) {
+    font-size: 2.2rem;
+  }
 `;
 
 const GirlFace = styled.img`
@@ -61,7 +65,7 @@ const StorySection = () => {
         <Background src={blueBg} alt="Gallery background" />
         <Content>
           <SocialsContainer>
-            <Socials index={2} />
+            <Socials />
           </SocialsContainer>
           <Header>A:\Story</Header>
           <AikoFade>

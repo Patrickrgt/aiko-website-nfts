@@ -1,13 +1,18 @@
 import styled from "styled-components";
-import Hexify from "./Hexify";
 
 const StyledSocial = styled.a`
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 6rem;
   aspect-ratio: 1;
+  background: #799ecf;
+  clip-path: var(--hex);
+
+  width: 5.5rem;
+  @media only screen and (max-width: 1400px) {
+    width: 5rem;
+  }
 `;
 
 const Icon = styled.img`
@@ -21,11 +26,9 @@ interface Props {
 
 const Social = ({ link, icon }: Props) => {
   return (
-    <Hexify>
-      <StyledSocial href={link} target="_blank" rel="noopener noreferrer">
-        <Icon src={icon} alt="Social Icon" />
-      </StyledSocial>
-    </Hexify>
+    <StyledSocial href={link} target="_blank" rel="noopener noreferrer">
+      <Icon src={icon} alt="Social Icon" />
+    </StyledSocial>
   );
 };
 

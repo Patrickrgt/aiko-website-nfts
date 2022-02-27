@@ -79,8 +79,12 @@ const Container = styled.div`
 const Background = styled.img`
   position: absolute;
   top: 0;
-  left: 2vw;
   height: 105%;
+
+  left: 2vw;
+  @media only screen and (max-width: 1400px) {
+    left: -3vw;
+  }
 `;
 
 const ContentContainer = styled.div`
@@ -90,13 +94,17 @@ const ContentContainer = styled.div`
 
 const RoadmapContainer = styled.div`
   position: relative;
-  width: 80rem;
   margin-left: 42vw;
+
+  max-width: 80rem;
+  @media only screen and (max-width: 1400px) {
+    max-width: calc(58vw - 3rem);
+  }
 `;
 
 const RoadmapSection = () => {
   return (
-    <Section id="roadmap-scroll" socials logo index={3} bottomPlus>
+    <Section id="roadmap-scroll" socials logo bottomPlus>
       <Container>
         <Background src={girl} alt="Roadmap Aiko" />
         <Header>A:\Virtualmap</Header>

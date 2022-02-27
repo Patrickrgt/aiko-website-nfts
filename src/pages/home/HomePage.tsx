@@ -6,12 +6,9 @@ import StorySection from "./StorySection";
 import TeamSection from "./TeamSection";
 
 // Sticky socials
-// Implement navigation
-// Wide screen support
-// Small screen support
-// Story logo add white background
-// Add team member info
-// Add secret team member
+// Favicon
+// Name and description
+// Preview image
 
 const StyledHomePage = styled.div`
   width: 100%;
@@ -19,6 +16,7 @@ const StyledHomePage = styled.div`
   flex-direction: column;
   align-items: center;
   flex: 1;
+  overflow: hidden;
 `;
 
 const HomePage = () => {
