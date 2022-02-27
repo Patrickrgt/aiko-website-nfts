@@ -52,7 +52,7 @@ const InfoText = styled.div`
   position: absolute;
   bottom: 10.4%;
   left: 38.5%;
-  height: 6.6%;
+  height: 6.4%;
   width: 40%;
   display: flex;
   align-items: center;
