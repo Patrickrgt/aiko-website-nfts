@@ -3,6 +3,7 @@ import Social from "./Social";
 import twitter from "../assets/svgs/twitter.svg";
 import discord from "../assets/svgs/discord.svg";
 import opensea from "../assets/svgs/opensea.svg";
+import AikoFade from "./AikoFade";
 
 interface SocialType {
   icon: string;
@@ -48,14 +49,16 @@ interface Props {
 
 const Socials = ({ index }: Props) => {
   return (
-    <div>
-      <StyledSocials>
-        {socials.map((social: SocialType) => (
-          <Social icon={social.icon} link={social.link} />
-        ))}
-        <Index>{`(0${index})`}</Index>
-      </StyledSocials>
-    </div>
+    <AikoFade>
+      <div>
+        <StyledSocials>
+          {socials.map((social: SocialType) => (
+            <Social icon={social.icon} link={social.link} />
+          ))}
+          <Index>{`(0${index})`}</Index>
+        </StyledSocials>
+      </div>
+    </AikoFade>
   );
 };
 

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import AikoFade from "../../components/AikoFade";
 import RoadmapItem, { RoadmapItemType } from "./RoadmapItem";
 
 export interface RoadmapSeasonType {
@@ -51,13 +52,15 @@ interface Props {
 const RoadmapSeason = ({ season }: Props) => {
   return (
     <StyledRoadmapSeason>
-      <HeaderContainer>
-        Season<BoldHeader>{`${season.number}.0`}</BoldHeader>
-      </HeaderContainer>
-      <SubHeaderContainer>
-        <SubHeaderLine />
-        {season.name}
-      </SubHeaderContainer>
+      <AikoFade>
+        <HeaderContainer>
+          Season<BoldHeader>{`${season.number}.0`}</BoldHeader>
+        </HeaderContainer>
+        <SubHeaderContainer>
+          <SubHeaderLine />
+          {season.name}
+        </SubHeaderContainer>
+      </AikoFade>
       {season.items.map((item) => (
         <RoadmapItem key={item.header} item={item} />
       ))}

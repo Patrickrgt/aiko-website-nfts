@@ -5,6 +5,7 @@ import blueBg from "../../assets/svgs/blue-bg.svg";
 import Socials from "../../components/Socials";
 import Logo from "../../components/Logo";
 import girlFace from "../../assets/illustrations/girl-face.png";
+import AikoFade from "../../components/AikoFade";
 
 const Container = styled.div`
   position: relative;
@@ -43,6 +44,7 @@ const Body = styled.p`
   font-weight: 400;
   text-align: center;
   line-height: 1.3;
+  margin: 0 auto;
 `;
 
 const GirlFace = styled.img`
@@ -62,15 +64,17 @@ const StorySection = () => {
             <Socials index={2} />
           </SocialsContainer>
           <Header>A:\Story</Header>
-          <Body>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
-          </Body>
+          <AikoFade>
+            <Body>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+              enim ad minim veniam, quis nostrud exercitation ullamco laboris
+              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+              reprehenderit in voluptate velit esse cillum dolore eu fugiat
+              nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+              sunt in culpa qui officia deserunt mollit anim id est laborum.
+            </Body>
+          </AikoFade>
           <Logo />
           <GirlFace src={girlFace} alt="Girls face" />
         </Content>

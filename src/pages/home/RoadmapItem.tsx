@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import AikoFade from "../../components/AikoFade";
 
 export interface RoadmapItemType {
   icon: string;
@@ -58,17 +59,19 @@ interface Props {
 
 const RoadmapItem = ({ item }: Props) => {
   return (
-    <StyledRoadmapItem>
-      <IconBorder>
-        <IconBackground>
-          <Icon src={item.icon} alt="Roadmap icon" />
-        </IconBackground>
-      </IconBorder>
-      <TextContainer>
-        <Bold>{`<A:\\${item.header}: `}</Bold>
-        {item.body}
-      </TextContainer>
-    </StyledRoadmapItem>
+    <AikoFade>
+      <StyledRoadmapItem>
+        <IconBorder>
+          <IconBackground>
+            <Icon src={item.icon} alt="Roadmap icon" />
+          </IconBackground>
+        </IconBorder>
+        <TextContainer>
+          <Bold>{`<A:\\${item.header}: `}</Bold>
+          {item.body}
+        </TextContainer>
+      </StyledRoadmapItem>
+    </AikoFade>
   );
 };
 

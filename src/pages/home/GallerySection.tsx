@@ -42,6 +42,9 @@ const Content = styled.div`
 
 const MainAikoContainer = styled.div`
   z-index: 25;
+  > div {
+    height: 100%;
+  }
 `;
 
 const GallerySection = () => {

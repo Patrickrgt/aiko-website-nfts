@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import AikoFade from "../../components/AikoFade";
 import Hexify from "../../components/Hexify";
 
 export interface TeamMemberType {
@@ -59,21 +60,23 @@ interface Props {
 
 const TeamMember = ({ index, teamMember }: Props) => {
   return (
-    <Container>
-      <StyledTeamMember>
-        <InnerBorder>
-          <Image
-            src={teamMember.image}
-            alt={`${teamMember.name} profile picture`}
-          />
-        </InnerBorder>
-      </StyledTeamMember>
-      <NumberContainer>
-        <Hexify>
-          <Number>{`#000${index}`}</Number>
-        </Hexify>
-      </NumberContainer>
-    </Container>
+    <AikoFade>
+      <Container>
+        <StyledTeamMember>
+          <InnerBorder>
+            <Image
+              src={teamMember.image}
+              alt={`${teamMember.name} profile picture`}
+            />
+          </InnerBorder>
+        </StyledTeamMember>
+        <NumberContainer>
+          <Hexify>
+            <Number>{`#000${index}`}</Number>
+          </Hexify>
+        </NumberContainer>
+      </Container>
+    </AikoFade>
   );
 };
 

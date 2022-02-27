@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
 import styled from "styled-components";
+import AikoFade from "./AikoFade";
 import Hexify from "./Hexify";
 
 const Text = styled.h2`
@@ -21,9 +22,11 @@ interface Props {
 
 const Header = ({ children }: Props) => {
   return (
-    <Hexify>
-      <Text>{children}</Text>
-    </Hexify>
+    <AikoFade>
+      <Hexify>
+        <Text>{children}</Text>
+      </Hexify>
+    </AikoFade>
   );
 };
 

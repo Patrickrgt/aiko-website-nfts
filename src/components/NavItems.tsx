@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import AikoFade from "./AikoFade";
 
 interface NavItem {
   name: string;
@@ -59,15 +60,17 @@ const NavItem = styled.button`
 
 const NavItems = () => {
   return (
-    <StyledNavItems>
-      <BookEnds>{"<"}</BookEnds>
-      <ItemsContainer items={navItems.length}>
-        {navItems.map((item: NavItem) => (
-          <NavItem>{item.name}</NavItem>
-        ))}
-      </ItemsContainer>
-      <BookEnds>{">"}</BookEnds>
-    </StyledNavItems>
+    <AikoFade>
+      <StyledNavItems>
+        <BookEnds>{"<"}</BookEnds>
+        <ItemsContainer items={navItems.length}>
+          {navItems.map((item: NavItem) => (
+            <NavItem>{item.name}</NavItem>
+          ))}
+        </ItemsContainer>
+        <BookEnds>{">"}</BookEnds>
+      </StyledNavItems>
+    </AikoFade>
   );
 };
 
