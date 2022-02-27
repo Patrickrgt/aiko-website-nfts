@@ -5,11 +5,6 @@ import RoadmapSection from "./RoadmapSection";
 import StorySection from "./StorySection";
 import TeamSection from "./TeamSection";
 
-// Sticky socials
-// Favicon
-// Name and description
-// Preview image
-
 const StyledHomePage = styled.div`
   width: 100%;
   display: flex;
