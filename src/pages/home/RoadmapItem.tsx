@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import AikoFade from "../../components/AikoFade";
 
 export interface RoadmapItemType {
   icon: string;
@@ -10,11 +11,14 @@ const StyledRoadmapItem = styled.div`
   display: flex;
   align-items: center;
   width: 100%;
+
   margin-bottom: 4rem;
+  @media only screen and (max-width: 1400px) {
+    margin-bottom: 3rem;
+  }
 `;
 
 const IconBorder = styled.div`
-  height: 12rem;
   aspect-ratio: 1;
   clip-path: var(--hex);
   background: #becae3;
@@ -22,6 +26,11 @@ const IconBorder = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+
+  height: 12rem;
+  @media only screen and (max-width: 1400px) {
+    height: 10.5rem;
+  }
 `;
 
 const IconBackground = styled.div`
@@ -40,16 +49,25 @@ const Icon = styled.img`
 
 const TextContainer = styled.div`
   margin-left: 2rem;
-  font-size: 2.3rem;
   font-weight: 300;
   color: #456893;
+
+  font-size: 2.3rem;
   line-height: 1.5;
+  @media only screen and (max-width: 1400px) {
+    font-size: 2rem;
+    line-height: 1.3;
+  }
 `;
 
 const Bold = styled.span`
-  font-size: 2.3rem;
   font-weight: 600;
   color: #456893;
+
+  font-size: 2.3rem;
+  @media only screen and (max-width: 1400px) {
+    font-size: 2rem;
+  }
 `;
 
 interface Props {
@@ -58,17 +76,19 @@ interface Props {
 
 const RoadmapItem = ({ item }: Props) => {
   return (
-    <StyledRoadmapItem>
-      <IconBorder>
-        <IconBackground>
-          <Icon src={item.icon} alt="Roadmap icon" />
-        </IconBackground>
-      </IconBorder>
-      <TextContainer>
-        <Bold>{`<A:\\${item.header}: `}</Bold>
-        {item.body}
-      </TextContainer>
-    </StyledRoadmapItem>
+    <AikoFade>
+      <StyledRoadmapItem>
+        <IconBorder>
+          <IconBackground>
+            <Icon src={item.icon} alt="Roadmap icon" />
+          </IconBackground>
+        </IconBorder>
+        <TextContainer>
+          <Bold>{`<A:\\${item.header}: `}</Bold>
+          {item.body}
+        </TextContainer>
+      </StyledRoadmapItem>
+    </AikoFade>
   );
 };
 

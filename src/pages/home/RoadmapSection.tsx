@@ -20,12 +20,12 @@ const roadmap: RoadmapSeasonType[] = [
       {
         icon: charity,
         header: "Charity",
-        body: "Holders will decide between 3 charities to donate for amount of volume traded, charity auctions will continue every season.",
+        body: "Holders will decide between 3 charities to donate every month.",
       },
       {
         icon: airdrop,
         header: "Airdrop",
-        body: "Will be airdroping exclusing Aiko's for holders.",
+        body: "Airdrop exclusive genesis Aiko NFTs to holders, in addition to 1/1 merch such as high quality t-shirts and hoodies (see Season 2).",
       },
       {
         icon: headquarters,
@@ -79,8 +79,12 @@ const Container = styled.div`
 const Background = styled.img`
   position: absolute;
   top: 0;
-  left: 2vw;
   height: 105%;
+
+  left: 2vw;
+  @media only screen and (max-width: 1400px) {
+    left: -3vw;
+  }
 `;
 
 const ContentContainer = styled.div`
@@ -90,16 +94,20 @@ const ContentContainer = styled.div`
 
 const RoadmapContainer = styled.div`
   position: relative;
-  width: 80rem;
   margin-left: 42vw;
+
+  max-width: 80rem;
+  @media only screen and (max-width: 1400px) {
+    max-width: calc(58vw - 3rem);
+  }
 `;
 
 const RoadmapSection = () => {
   return (
-    <Section socials logo index={3} bottomPlus>
+    <Section id="roadmap-scroll" socials logo bottomPlus>
       <Container>
         <Background src={girl} alt="Roadmap Aiko" />
-        <Header>A:\Roadmap</Header>
+        <Header>A:\Virtualmap</Header>
         <ContentContainer>
           <RoadmapContainer>
             {roadmap.map((season) => (

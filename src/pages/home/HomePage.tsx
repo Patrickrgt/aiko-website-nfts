@@ -11,6 +11,7 @@ const StyledHomePage = styled.div`
   flex-direction: column;
   align-items: center;
   flex: 1;
+  overflow: hidden;
 `;
 
 const HomePage = () => {

@@ -49,9 +49,8 @@ const teamMembers: TeamMemberType[] = [
     role: "Developer",
   },
   {
-    image: chase,
-    name: "Chase Manning",
-    role: "Developer",
+    name: "????",
+    role: "????",
   },
 ];
 
@@ -81,6 +80,7 @@ const TeamMembers = styled.div`
   grid-template-columns: repeat(4, 1fr);
   width: 66%;
   max-width: 120rem;
+  grid-gap: 5px;
 `;
 
 const TeamMembersBackground = styled.div`
@@ -121,7 +121,7 @@ const RightDecal = styled(OrangeDecal)`
 
 const TeamSection = () => {
   return (
-    <Section socials logo index={4} bottomPlus>
+    <Section id="team-scroll" socials logo bottomPlus>
       <Content>
         <HeaderContainer>
           <Header>A:\Team</Header>

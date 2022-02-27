@@ -7,7 +7,7 @@ import Header from "../../components/Header";
 import AikoHex from "../../components/AikoHex";
 import GallerySlide from "./GallerySlide";
 
-import vinne from "../../assets/team-members/vinne.jpg";
+import main from "../../assets/gallery/8.jpg";
 
 const Container = styled.div`
   position: relative;
@@ -18,6 +18,10 @@ const Container = styled.div`
 const Background = styled.img`
   width: 100%;
   height: calc(100vh - 27rem);
+
+  @media only screen and (max-width: 1400px) {
+    height: calc(100vh - 20rem);
+  }
 `;
 
 const HeaderContainer = styled.div`
@@ -27,7 +31,11 @@ const HeaderContainer = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
+
   margin-top: 2.7rem;
+  @media only screen and (max-width: 1400px) {
+    margin-top: 2.3rem;
+  }
 `;
 
 const Content = styled.div`
@@ -36,19 +44,26 @@ const Content = styled.div`
   transform: translateY(-50%);
   left: 0;
   width: 100%;
-  height: calc(100% - 18rem);
   display: flex;
+
+  height: calc(100% - 18rem);
+  @media only screen and (max-width: 1400px) {
+    height: calc(100% - 16rem);
+  }
 `;
 
 const MainAikoContainer = styled.div`
   z-index: 25;
+  > div {
+    height: 100%;
+  }
 `;
 
 const GallerySection = () => {
-  const [mainAiko, setMainAiko] = useState(vinne);
+  const [mainAiko, setMainAiko] = useState(main);
 
   return (
-    <Section topPlus bottomPlus>
+    <Section id="gallery-scroll" topPlus bottomPlus>
       <Container>
         <Background src={background} alt="Gallery background" />
         <HeaderContainer>

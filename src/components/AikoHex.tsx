@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import AikoFade from "./AikoFade";
 
 interface AikoProps {
   mega?: boolean;
@@ -26,9 +27,11 @@ interface Props {
 
 const AikoHex = ({ image, mega }: Props) => {
   return (
-    <StyledAikoHex mega={mega}>
-      <Image src={image} alt="Aiko image" />
-    </StyledAikoHex>
+    <AikoFade>
+      <StyledAikoHex mega={mega}>
+        <Image src={image} alt="Aiko image" />
+      </StyledAikoHex>
+    </AikoFade>
   );
 };
 
