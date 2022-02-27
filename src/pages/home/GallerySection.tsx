@@ -7,7 +7,7 @@ import Header from "../../components/Header";
 import AikoHex from "../../components/AikoHex";
 import GallerySlide from "./GallerySlide";
 
-import vinne from "../../assets/team-members/vinne.jpg";
+import main from "../../assets/gallery/8.jpg";
 
 const Container = styled.div`
   position: relative;
@@ -45,7 +45,7 @@ const MainAikoContainer = styled.div`
 `;
 
 const GallerySection = () => {
-  const [mainAiko, setMainAiko] = useState(vinne);
+  const [mainAiko, setMainAiko] = useState(main);
 
   return (
     <Section topPlus bottomPlus>
