@@ -17,40 +17,49 @@ const teamMembers: TeamMemberType[] = [
     image: vinne,
     name: "Vinne",
     role: "Artist & Co founder",
+    twitter: "https://twitter.com/vinneart",
   },
   {
     image: kyo,
     name: "Kyo",
     role: "Design & Co founder",
+    twitter: "https://twitter.com/dyinginkyoto",
   },
   {
     image: garrid,
     name: "Garrid",
     role: "Project Manager",
+    twitter: "https://twitter.com/garridspen",
   },
   {
     image: matarelli,
     name: "Matarelli",
     role: "Community Manager",
+    twitter: "https://twitter.com/yourboyez",
   },
   {
     image: crystal,
     name: "Crystal",
     role: "Social Media Manager",
+    twitter: "https://twitter.com/chromedcrystals",
   },
   {
     image: kinoko,
     name: "Kinoko",
     role: "Technical Advisory",
+    twitter: "https://twitter.com/shroom_chan",
   },
+
   {
     image: chase,
     name: "Chase",
     role: "Developer",
+    twitter: "https://twitter.com/chase_manning_",
   },
   {
     name: "????",
     role: "????",
+    twitter: "",
   },
 ];
 
@@ -132,12 +141,8 @@ const TeamSection = () => {
           <RightDecal src={teamDecal} alt="Orange decal" />
           <TeamMembers>
             <TeamMembersBackground />
-            {teamMembers.map((teamMember: TeamMemberType, index: number) => (
-              <TeamMember
-                key={teamMember.name}
-                index={index}
-                teamMember={teamMember}
-              />
+            {teamMembers.map((teamMember: TeamMemberType) => (
+              <TeamMember key={teamMember.name} teamMember={teamMember} />
             ))}
           </TeamMembers>
         </TeamContainer>

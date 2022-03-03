@@ -1,16 +1,18 @@
 import styled from "styled-components";
 import AikoFade from "../../components/AikoFade";
-import Hexify from "../../components/Hexify";
+import Social from "../../components/Social";
+
+import twitter from "../../assets/svgs/twitter.svg";
 
 export interface TeamMemberType {
   image?: string;
   name: string;
   role: string;
+  twitter: string;
 }
 
 const Container = styled.div`
   position: relative;
-  cursor: pointer;
 
   :hover {
     div {
@@ -64,7 +66,7 @@ const SecretMember = styled.div`
   clip-path: var(--hex);
 `;
 
-const NumberContainer = styled.div`
+const SocialsContainer = styled.div`
   position: absolute;
 
   right: 7px;
@@ -72,22 +74,6 @@ const NumberContainer = styled.div`
   @media only screen and (max-width: 1400px) {
     right: 3px;
     bottom: 5%;
-  }
-`;
-
-const Number = styled.div`
-  color: white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  font-size: 3rem;
-  height: 4.2rem;
-  padding: 0 1.5rem;
-  @media only screen and (max-width: 1400px) {
-    font-size: 2.4rem;
-    height: 3.5rem;
-    padding: 0 1rem;
   }
 `;
 
@@ -133,11 +119,10 @@ const Role = styled.div`
 `;
 
 interface Props {
-  index: number;
   teamMember: TeamMemberType;
 }
 
-const TeamMember = ({ index, teamMember }: Props) => {
+const TeamMember = ({ teamMember }: Props) => {
   return (
     <AikoFade>
       <Container>
@@ -159,11 +144,11 @@ const TeamMember = ({ index, teamMember }: Props) => {
             </Overlay>
           </InnerBorder>
         </StyledTeamMember>
-        <NumberContainer>
-          <Hexify>
-            <Number>{index === 7 ? "#????" : `#000${index}`}</Number>
-          </Hexify>
-        </NumberContainer>
+        {teamMember.image && (
+          <SocialsContainer>
+            <Social icon={twitter} link={teamMember.twitter} />
+          </SocialsContainer>
+        )}
       </Container>
     </AikoFade>
   );
