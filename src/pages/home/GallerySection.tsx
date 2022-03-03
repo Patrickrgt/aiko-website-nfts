@@ -63,9 +63,18 @@ const Content = styled.div`
 `;
 
 const MainAikoContainer = styled.div`
+  position: absolute;
+  left: 0;
+  top: 0;
   z-index: 25;
   > div {
     height: 100%;
+  }
+  height: calc(100vh - 18rem - 27rem);
+  width: calc(100vh - 18rem - 27rem);
+  @media only screen and (max-width: 1400px) {
+    height: calc(100vh - 16rem - 20rem);
+    width: calc(100vh - 16rem - 20rem);
   }
 `;
 
