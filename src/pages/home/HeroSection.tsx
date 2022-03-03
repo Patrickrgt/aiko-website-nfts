@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 import NavItems from "../../components/NavItems";
 import Section from "../../components/Section";
+import Logo from "../../components/Logo";
 
 import heroImage from "../../assets/illustrations/hero.png";
 import decal from "../../assets/svgs/hero-decal.svg";
@@ -60,23 +61,43 @@ const InfoText = styled.div`
   font-weight: 400;
   letter-spacing: 5px;
 
-  font-size: 2.5rem;
+  font-size: 2.3rem;
   @media only screen and (max-width: 1400px) {
     font-size: 2rem;
   }
 `;
 
+const Video = styled.video`
+  position: absolute;
+  top: 23%;
+  left: 25%;
+  width: 24%;
+`;
+
+const LogoContainer = styled.div`
+  position: absolute;
+  left: 50%;
+  top: -2.2rem;
+  transform: translateX(-50%);
+`;
+
 const HeroSection = () => {
   return (
-    <Section id="home-scroll" socials bottomPlus>
+    <Section id="home-scroll" socials>
       <HeroContainer>
         <OrangeBlock>
           <LeftDecal src={decal} alt="Decorative element" />
           <RightDecal src={decal} alt="Decorative element" />
         </OrangeBlock>
         <ImageContainer>
+          <LogoContainer>
+            <Logo primary />
+          </LogoContainer>
           <HeroImage src={heroImage} alt="Hero image" />
           <InfoText>(A:\MintDate\TBA)</InfoText>
+          <Video autoPlay muted loop>
+            <source src="/assets/flying.webm" type="video/webm" />
+          </Video>
         </ImageContainer>
       </HeroContainer>
       <NavItems />

@@ -3,7 +3,6 @@ import styled from "styled-components";
 
 import Logo from "./Logo";
 import Socials from "./Socials";
-import plus from "../assets/svgs/plus.svg";
 
 const StyledSection = styled.div`
   position: relative;
@@ -42,56 +41,14 @@ const LogoContainer = styled.div`
   }
 `;
 
-const PlusSection = styled.div`
-  position: absolute;
-  left: 0;
-  width: 100%;
-  padding: 0 7rem;
-  display: flex;
-  justify-content: space-between;
-
-  @media only screen and (max-width: 1400px) {
-    padding: 0 3rem;
-  }
-`;
-
-const TopPlus = styled(PlusSection)`
-  top: 7rem;
-
-  @media only screen and (max-width: 1400px) {
-    top: 3rem;
-  }
-`;
-
-const BottomPlus = styled(PlusSection)`
-  bottom: 7rem;
-
-  @media only screen and (max-width: 1400px) {
-    bottom: 3rem;
-  }
-`;
-
-const Plus = styled.img`
-  width: 4.5rem;
-`;
-
 interface Props {
   id: string;
   socials?: boolean;
   logo?: boolean;
-  topPlus?: boolean;
-  bottomPlus?: boolean;
   children: ReactNode;
 }
 
-const Section = ({
-  id,
-  socials,
-  logo,
-  topPlus,
-  bottomPlus,
-  children,
-}: Props) => {
+const Section = ({ id, socials, logo, children }: Props) => {
   return (
     <StyledSection id={id}>
       {children}
@@ -104,19 +61,6 @@ const Section = ({
         <LogoContainer>
           <Logo />
         </LogoContainer>
-      )}
-
-      {topPlus && (
-        <TopPlus>
-          <Plus src={plus} alt="Decorative cross" />
-          <Plus src={plus} alt="Decorative cross" />
-        </TopPlus>
-      )}
-      {bottomPlus && (
-        <BottomPlus>
-          <Plus src={plus} alt="Decorative cross" />
-          <Plus src={plus} alt="Decorative cross" />
-        </BottomPlus>
       )}
     </StyledSection>
   );

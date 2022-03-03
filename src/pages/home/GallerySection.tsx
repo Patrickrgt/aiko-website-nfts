@@ -2,7 +2,6 @@ import { useState } from "react";
 import styled from "styled-components";
 
 import Section from "../../components/Section";
-import background from "../../assets/svgs/gallery-bg.svg";
 import Header from "../../components/Header";
 import AikoHex from "../../components/AikoHex";
 import GallerySlide from "./GallerySlide";
@@ -15,9 +14,20 @@ const Container = styled.div`
   overflow: hidden;
 `;
 
-const Background = styled.img`
+const Background = styled.div`
   width: 100%;
   height: calc(100vh - 27rem);
+  background: linear-gradient(45deg, #ffffff, #ffc32c);
+  clip-path: polygon(
+    2.5% 0%,
+    97.5% 0%,
+    100% 5%,
+    100% 95%,
+    97.5% 100%,
+    2.5% 100%,
+    0% 95%,
+    0% 5%
+  );
 
   @media only screen and (max-width: 1400px) {
     height: calc(100vh - 20rem);
@@ -53,9 +63,18 @@ const Content = styled.div`
 `;
 
 const MainAikoContainer = styled.div`
+  position: absolute;
+  left: 0;
+  top: 0;
   z-index: 25;
   > div {
     height: 100%;
+  }
+  height: calc(100vh - 18rem - 27rem);
+  width: calc(100vh - 18rem - 27rem);
+  @media only screen and (max-width: 1400px) {
+    height: calc(100vh - 16rem - 20rem);
+    width: calc(100vh - 16rem - 20rem);
   }
 `;
 
@@ -63,9 +82,9 @@ const GallerySection = () => {
   const [mainAiko, setMainAiko] = useState(main);
 
   return (
-    <Section id="gallery-scroll" topPlus bottomPlus>
+    <Section id="gallery-scroll">
       <Container>
-        <Background src={background} alt="Gallery background" />
+        <Background />
         <HeaderContainer>
           <Header>Be Part of our Universe</Header>
         </HeaderContainer>

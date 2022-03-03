@@ -21,6 +21,12 @@ import matarelli from "../../assets/team-members/matarelli.jpg";
 import vinne from "../../assets/team-members/vinne.jpg";
 
 const aikos: string[] = [
+  a8,
+  kyo,
+  garrid,
+  garrid,
+  matarelli,
+  crystal,
   a1,
   a2,
   a3,
@@ -124,7 +130,7 @@ interface Props {
 }
 
 const GallerySlide = ({ setMainAiko }: Props) => {
-  const [active, setActive] = useState(3);
+  const [active, setActive] = useState(9);
 
   return (
     <StyledGallerySlide>
