@@ -91,7 +91,7 @@ const HeroSection = () => {
         </OrangeBlock>
         <ImageContainer>
           <LogoContainer>
-            <Logo />
+            <Logo primary />
           </LogoContainer>
           <HeroImage src={heroImage} alt="Hero image" />
           <InfoText>(A:\MintDate\TBA)</InfoText>
