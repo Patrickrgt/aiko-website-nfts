@@ -3,7 +3,6 @@ import Section from "../../components/Section";
 import Header from "../../components/Header";
 import storyDecal from "../../assets/svgs/story-decal.svg";
 import Socials from "../../components/Socials";
-import Logo from "../../components/Logo";
 import girlFace from "../../assets/illustrations/girl-face.png";
 import AikoFade from "../../components/AikoFade";
 
@@ -106,7 +105,7 @@ const StorySection = () => {
               sunt in culpa qui officia deserunt mollit anim id est laborum.
             </Body>
           </AikoFade>
-          <Logo />
+          <div />
           <GirlFace src={girlFace} alt="Girls face" />
         </Content>
       </Container>
