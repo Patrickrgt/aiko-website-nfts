@@ -61,7 +61,7 @@ const InfoText = styled.div`
   font-weight: 400;
   letter-spacing: 5px;
 
-  font-size: 2.5rem;
+  font-size: 2.3rem;
   @media only screen and (max-width: 1400px) {
     font-size: 2rem;
   }
