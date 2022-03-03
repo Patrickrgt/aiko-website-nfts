@@ -11,6 +11,7 @@ import headquarters from "../../assets/svgs/headquarters.svg";
 import merch from "../../assets/svgs/merch.svg";
 import artists from "../../assets/svgs/artists.svg";
 import events from "../../assets/svgs/events.svg";
+import question from "../../assets/svgs/question.svg";
 
 const roadmap: RoadmapSeasonType[] = [
   {
@@ -60,7 +61,7 @@ const roadmap: RoadmapSeasonType[] = [
     name: "Exodus",
     items: [
       {
-        icon: events,
+        icon: question,
         header: "????",
         body: "??????????",
       },
