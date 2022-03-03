@@ -66,6 +66,13 @@ const InfoText = styled.div`
   }
 `;
 
+const Video = styled.video`
+  position: absolute;
+  top: 23%;
+  left: 25%;
+  width: 24%;
+`;
+
 const HeroSection = () => {
   return (
     <Section id="home-scroll" socials bottomPlus>
@@ -77,6 +84,9 @@ const HeroSection = () => {
         <ImageContainer>
           <HeroImage src={heroImage} alt="Hero image" />
           <InfoText>(A:\MintDate\TBA)</InfoText>
+          <Video autoPlay muted loop>
+            <source src="/assets/flying.webm" type="video/webm" />
+          </Video>
         </ImageContainer>
       </HeroContainer>
       <NavItems />
