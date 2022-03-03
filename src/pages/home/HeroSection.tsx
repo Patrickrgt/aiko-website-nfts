@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 import NavItems from "../../components/NavItems";
 import Section from "../../components/Section";
+import Logo from "../../components/Logo";
 
 import heroImage from "../../assets/illustrations/hero.png";
 import decal from "../../assets/svgs/hero-decal.svg";
@@ -73,6 +74,13 @@ const Video = styled.video`
   width: 24%;
 `;
 
+const LogoContainer = styled.div`
+  position: absolute;
+  left: 50%;
+  top: -2.2rem;
+  transform: translateX(-50%);
+`;
+
 const HeroSection = () => {
   return (
     <Section id="home-scroll" socials bottomPlus>
@@ -82,6 +90,9 @@ const HeroSection = () => {
           <RightDecal src={decal} alt="Decorative element" />
         </OrangeBlock>
         <ImageContainer>
+          <LogoContainer>
+            <Logo />
+          </LogoContainer>
           <HeroImage src={heroImage} alt="Hero image" />
           <InfoText>(A:\MintDate\TBA)</InfoText>
           <Video autoPlay muted loop>
