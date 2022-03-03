@@ -63,7 +63,7 @@ const GallerySection = () => {
   const [mainAiko, setMainAiko] = useState(main);
 
   return (
-    <Section id="gallery-scroll" topPlus bottomPlus>
+    <Section id="gallery-scroll">
       <Container>
         <Background src={background} alt="Gallery background" />
         <HeaderContainer>

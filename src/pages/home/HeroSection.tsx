@@ -83,7 +83,7 @@ const LogoContainer = styled.div`
 
 const HeroSection = () => {
   return (
-    <Section id="home-scroll" socials bottomPlus>
+    <Section id="home-scroll" socials>
       <HeroContainer>
         <OrangeBlock>
           <LeftDecal src={decal} alt="Decorative element" />
