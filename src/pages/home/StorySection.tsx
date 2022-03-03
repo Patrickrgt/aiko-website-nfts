@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import Section from "../../components/Section";
 import Header from "../../components/Header";
-import blueBg from "../../assets/svgs/blue-bg.svg";
+import storyDecal from "../../assets/svgs/story-decal.svg";
 import Socials from "../../components/Socials";
 import Logo from "../../components/Logo";
 import girlFace from "../../assets/illustrations/girl-face.png";
@@ -13,9 +13,29 @@ const Container = styled.div`
   height: calc(100vh - 10rem);
 `;
 
-const Background = styled.img`
+const BackgroundContainer = styled.div`
+  position: relative;
   width: 100%;
-  height: calc(100vh - 10rem);
+  height: 100%;
+`;
+
+const Background = styled.div`
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to right, #e8f2fe, #b9cfea);
+
+  margin-left: 7rem;
+  @media only screen and (max-width: 1400px) {
+    margin-left: 3rem;
+  }
+`;
+
+const Decal = styled.img`
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 60%;
 `;
 
 const Content = styled.div`
@@ -33,7 +53,11 @@ const Content = styled.div`
 const SocialsContainer = styled.div`
   position: absolute;
   top: 1rem;
+
   left: 8rem;
+  @media only screen and (max-width: 1400px) {
+    left: 4rem;
+  }
 `;
 
 const Body = styled.p`
@@ -62,7 +86,10 @@ const StorySection = () => {
   return (
     <Section id="story-scroll">
       <Container>
-        <Background src={blueBg} alt="Gallery background" />
+        <BackgroundContainer>
+          <Background />
+          <Decal src={storyDecal} alt="Decorative asset" />
+        </BackgroundContainer>
         <Content>
           <SocialsContainer>
             <Socials />
