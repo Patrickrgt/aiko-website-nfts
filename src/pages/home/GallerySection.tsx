@@ -32,6 +32,10 @@ const Background = styled.div`
   @media only screen and (max-width: 1400px) {
     height: calc(100vh - 20rem);
   }
+  @media only screen and (max-width: 600px) {
+    height: calc(100vw + 12rem);
+    clip-path: none;
+  }
 `;
 
 const HeaderContainer = styled.div`
@@ -75,6 +79,10 @@ const MainAikoContainer = styled.div`
   @media only screen and (max-width: 1400px) {
     height: calc(100vh - 16rem - 20rem);
     width: calc(100vh - 16rem - 20rem);
+  }
+  @media only screen and (max-width: 600px) {
+    height: 100vw;
+    width: 100vw;
   }
 `;
 
