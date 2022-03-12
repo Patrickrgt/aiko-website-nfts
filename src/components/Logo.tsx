@@ -11,6 +11,9 @@ const StyledLogo = styled.img`
   @media only screen and (max-width: 1400px) {
     width: ${(props: LogoProps) => (props.primary ? "8.5rem" : "7.7rem")};
   }
+  @media only screen and (max-width: 600px) {
+    width: ${(props: LogoProps) => (props.primary ? "7.5rem" : "7rem")};
+  }
 `;
 
 interface Props {
