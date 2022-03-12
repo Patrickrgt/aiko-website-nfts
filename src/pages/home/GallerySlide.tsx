@@ -87,6 +87,20 @@ const Aiko = styled.div`
     height: calc((100vh - 16rem - 20rem) / 2);
     width: calc((100vh - 16rem - 20rem) / 2);
   }
+  @media only screen and (max-width: 600px) {
+    top: ${(props: AikoProps) =>
+      props.index % 3 === 0
+        ? "0"
+        : (props.index + 2) % 3 === 0
+        ? "calc(100vw / 4)"
+        : "calc(100vw / 2)"};
+    left: ${(props: AikoProps) =>
+      `calc((100vw / 2) * ${Math.floor(props.index / 3)} - ${
+        (props.index + 2) % 3 === 0 ? "(100vw / 4)" : "0px"
+      })`};
+    height: calc(100vw / 2);
+    width: calc(100vw / 2);
+  }
 `;
 
 const AikoShadow = styled.div`
