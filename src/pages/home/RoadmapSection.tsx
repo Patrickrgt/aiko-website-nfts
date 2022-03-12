@@ -86,6 +86,16 @@ const Background = styled.img`
   @media only screen and (max-width: 1400px) {
     left: -3vw;
   }
+  @media only screen and (max-width: 600px) {
+    left: -5vw;
+    opacity: 0.8;
+  }
+`;
+
+const HeaderContainer = styled.div`
+  @media only screen and (max-width: 600px) {
+    margin-top: 4rem;
+  }
 `;
 
 const ContentContainer = styled.div`
@@ -95,11 +105,16 @@ const ContentContainer = styled.div`
 
 const RoadmapContainer = styled.div`
   position: relative;
-  margin-left: 42vw;
 
   max-width: 80rem;
+  margin-left: 42vw;
   @media only screen and (max-width: 1400px) {
     max-width: calc(58vw - 3rem);
+  }
+  @media only screen and (max-width: 600px) {
+    max-width: none;
+    margin-left: 0;
+    padding: 0 2rem;
   }
 `;
 
@@ -108,7 +123,9 @@ const RoadmapSection = () => {
     <Section id="roadmap-scroll" socials logo>
       <Container>
         <Background src={girl} alt="Roadmap Aiko" />
-        <Header>A:\Virtualmap</Header>
+        <HeaderContainer>
+          <Header>A:\Virtualmap</Header>
+        </HeaderContainer>
         <ContentContainer>
           <RoadmapContainer>
             {roadmap.map((season) => (
