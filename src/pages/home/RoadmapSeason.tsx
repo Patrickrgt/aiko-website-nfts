@@ -11,7 +11,11 @@ export interface RoadmapSeasonType {
 const StyledRoadmapSeason = styled.div`
   display: flex;
   flex-direction: column;
+
   margin-top: 4rem;
+  @media only screen and (max-width: 600px) {
+    margin-top: 3rem;
+  }
 `;
 
 const HeaderContainer = styled.div`
@@ -24,6 +28,9 @@ const HeaderContainer = styled.div`
   @media only screen and (max-width: 1400px) {
     font-size: 2.8rem;
   }
+  @media only screen and (max-width: 600px) {
+    font-size: 2.4rem;
+  }
 `;
 
 const BoldHeader = styled.span`
@@ -34,6 +41,9 @@ const BoldHeader = styled.span`
   font-size: 3rem;
   @media only screen and (max-width: 1400px) {
     font-size: 2.8rem;
+  }
+  @media only screen and (max-width: 600px) {
+    font-size: 2.4rem;
   }
 `;
 
@@ -49,6 +59,10 @@ const SubHeaderContainer = styled.div`
     font-size: 2.8rem;
     margin-bottom: 2.5rem;
   }
+  @media only screen and (max-width: 600px) {
+    font-size: 2.1rem;
+    margin-bottom: 1.9rem;
+  }
 `;
 
 const SubHeaderLine = styled.div`
@@ -60,6 +74,10 @@ const SubHeaderLine = styled.div`
   @media only screen and (max-width: 1400px) {
     height: 4px;
     width: 6rem;
+  }
+  @media only screen and (max-width: 600px) {
+    height: 3px;
+    width: 4rem;
   }
 `;
 

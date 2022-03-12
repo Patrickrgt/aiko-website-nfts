@@ -13,6 +13,9 @@ const StyledSocial = styled.a`
   @media only screen and (max-width: 1400px) {
     width: 5rem;
   }
+  @media only screen and (max-width: 600px) {
+    width: 4.5rem;
+  }
 `;
 
 const Icon = styled.img`

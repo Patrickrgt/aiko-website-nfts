@@ -9,16 +9,22 @@ const Text = styled.h2`
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: 400;
   white-space: nowrap;
 
   height: 4.5rem;
   font-size: 2.5rem;
   padding: 0 3rem;
+  font-weight: 400;
   @media only screen and (max-width: 1400px) {
     height: 4rem;
     font-size: 2.2rem;
     padding: 0 2.5rem;
+  }
+  @media only screen and (max-width: 600px) {
+    height: 3rem;
+    font-size: 1.8rem;
+    padding: 0 2rem;
+    font-weight: 500;
   }
 `;
 

@@ -13,6 +13,9 @@ const StyledFooter = styled.div`
   @media only screen and (max-width: 1400px) {
     height: 8rem;
   }
+  @media only screen and (max-width: 1400px) {
+    height: 6rem;
+  }
 `;
 
 const Decal = styled.div`

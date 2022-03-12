@@ -11,11 +11,19 @@ const StyledSection = styled.div`
   align-items: center;
   justify-content: center;
   width: 100%;
-  min-height: 100vh;
   padding: 7rem 0;
 
+  min-height: 100vh;
   @media only screen and (max-width: 1400px) {
     padding: 3rem 0;
+  }
+  @media only screen and (max-width: 600px) {
+    padding: 1rem 0;
+    min-height: 0;
+  }
+  @media only screen and (max-width: 600px) {
+    padding: 3rem 0;
+    min-height: 0;
   }
 `;
 
@@ -28,6 +36,11 @@ const SocialsContainer = styled.div`
     top: 3rem;
     left: 3rem;
   }
+
+  @media only screen and (max-width: 600px) {
+    top: 1.5rem;
+    left: 1.5rem;
+  }
 `;
 
 const LogoContainer = styled.div`
@@ -38,6 +51,11 @@ const LogoContainer = styled.div`
   @media only screen and (max-width: 1400px) {
     top: 3rem;
     right: 3rem;
+  }
+
+  @media only screen and (max-width: 600px) {
+    top: 1.5rem;
+    right: 1.5rem;
   }
 `;
 

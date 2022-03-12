@@ -35,6 +35,10 @@ const OrangeBorder = styled.div`
     width: calc(100% + 8px);
     height: calc(100% + 8px);
   }
+  @media only screen and (max-width: 600px) {
+    width: calc(100% + 6px);
+    height: calc(100% + 6px);
+  }
 `;
 
 const StyledTeamMember = styled.div`
@@ -106,6 +110,9 @@ const Name = styled.div`
   @media only screen and (max-width: 1400px) {
     font-size: 3rem;
   }
+  @media only screen and (max-width: 1400px) {
+    font-size: 2.2rem;
+  }
 `;
 
 const Role = styled.div`
@@ -115,6 +122,9 @@ const Role = styled.div`
   font-size: 1.6rem;
   @media only screen and (max-width: 1400px) {
     font-size: 1.4rem;
+  }
+  @media only screen and (max-width: 1400px) {
+    font-size: 1.2rem;
   }
 `;
 
