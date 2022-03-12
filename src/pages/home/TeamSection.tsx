@@ -72,7 +72,11 @@ const Content = styled.div`
 
 const HeaderContainer = styled.div`
   position: relative;
+
   margin-bottom: 5rem;
+  @media only screen and (max-width: 600px) {
+    margin-top: 4rem;
+  }
 `;
 
 const TeamContainer = styled.div`
@@ -86,10 +90,16 @@ const TeamContainer = styled.div`
 const TeamMembers = styled.div`
   position: relative;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 5px;
+
   width: 66%;
   max-width: 120rem;
-  grid-gap: 5px;
+  grid-template-columns: repeat(4, 1fr);
+  @media only screen and (max-width: 600px) {
+    width: calc(100vw - 6rem);
+    max-width: none;
+    grid-template-columns: repeat(2, 1fr);
+  }
 `;
 
 const TeamMembersBackground = styled.div`
@@ -113,10 +123,14 @@ const OrangeBanner = styled.div`
 `;
 
 const OrangeDecal = styled.img`
-  height: 57%;
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
+
+  height: 57%;
+  @media only screen and (max-width: 600px) {
+    height: 30%;
+  }
 `;
 
 const LeftDecal = styled(OrangeDecal)`
