@@ -38,8 +38,13 @@ const StyledNavItems = styled.div`
 
 const BookEnds = styled.div`
   color: var(--primary);
+
   font-size: 2.4rem;
   font-weight: 500;
+  @media only screen and (max-width: 600px) {
+    font-size: 1.7rem;
+    transform: translateY(-0.1rem);
+  }
 `;
 
 const ItemsContainer = styled.div`
@@ -61,6 +66,10 @@ const NavItem = styled.div`
   @media only screen and (max-width: 1400px) {
     font-size: 2.1rem;
     margin: 0 1.3rem;
+  }
+  @media only screen and (max-width: 600px) {
+    font-size: 1.3rem;
+    margin: 0 0.5rem;
   }
 `;
 
