@@ -12,6 +12,33 @@ const HeroContainer = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
+
+  @media only screen and (max-width: 600px) {
+    margin-top: 6rem;
+    margin-bottom: 2rem;
+  }
+`;
+
+const LogoContainer = styled.div`
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: -2.2rem;
+
+  @media only screen and (max-width: 600px) {
+    display: none;
+  }
+`;
+
+const MobileLogoContainer = styled.div`
+  display: none;
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+
+  @media only screen and (max-width: 600px) {
+    display: flex;
+  }
 `;
 
 const OrangeBlock = styled.div`
@@ -42,48 +69,66 @@ const RightDecal = styled(OrangeDecal)`
 
 const ImageContainer = styled.div`
   position: relative;
+  @media only screen and (max-width: 600px) {
+    right: 0;
+    top: 0;
+  }
 `;
 
 const HeroImage = styled.img`
-  height: 78vh;
   transform: translateX(1.8%);
+  height: 78vh;
+  @media only screen and (max-width: 600px) {
+    height: auto;
+    width: 135vw;
+    transform: translateX(-18%);
+  }
 `;
 
 const InfoText = styled.div`
   position: absolute;
+  display: flex;
+  align-items: center;
+  color: #6b9bd0;
+
+  font-size: 2.3rem;
+  letter-spacing: 5px;
+  font-weight: 400;
   bottom: 10.4%;
   left: 38.5%;
   height: 6.4%;
   width: 40%;
-  display: flex;
-  align-items: center;
-  color: #6b9bd0;
-  font-weight: 400;
-  letter-spacing: 5px;
-
-  font-size: 2.3rem;
   @media only screen and (max-width: 1400px) {
     font-size: 2rem;
+  }
+  @media only screen and (max-width: 600px) {
+    bottom: 11.2%;
+    left: 18.8%;
+    height: 6%;
+    width: 40%;
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+    font-weight: 500;
   }
 `;
 
 const Video = styled.video`
   position: absolute;
+
   top: 23%;
   left: 25%;
   width: 24%;
-`;
-
-const LogoContainer = styled.div`
-  position: absolute;
-  left: 50%;
-  top: -2.2rem;
-  transform: translateX(-50%);
+  @media only screen and (max-width: 600px) {
+    left: 10%;
+  }
 `;
 
 const HeroSection = () => {
   return (
     <Section id="home-scroll" socials>
+      <MobileLogoContainer>
+        <Logo primary />
+      </MobileLogoContainer>
       <HeroContainer>
         <OrangeBlock>
           <LeftDecal src={decal} alt="Decorative element" />
