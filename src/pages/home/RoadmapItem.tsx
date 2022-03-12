@@ -16,6 +16,9 @@ const StyledRoadmapItem = styled.div`
   @media only screen and (max-width: 1400px) {
     margin-bottom: 3rem;
   }
+  @media only screen and (max-width: 600px) {
+    margin-bottom: 2rem;
+  }
 `;
 
 const IconBorder = styled.div`
@@ -30,6 +33,9 @@ const IconBorder = styled.div`
   height: 12rem;
   @media only screen and (max-width: 1400px) {
     height: 10.5rem;
+  }
+  @media only screen and (max-width: 600px) {
+    height: 7rem;
   }
 `;
 
@@ -58,6 +64,10 @@ const TextContainer = styled.div`
     font-size: 2rem;
     line-height: 1.3;
   }
+  @media only screen and (max-width: 600px) {
+    font-size: 1.4rem;
+    line-height: 1.2;
+  }
 `;
 
 const Bold = styled.span`
@@ -67,6 +77,10 @@ const Bold = styled.span`
   font-size: 2.3rem;
   @media only screen and (max-width: 1400px) {
     font-size: 2rem;
+  }
+  @media only screen and (max-width: 600px) {
+    font-size: 1.4rem;
+    line-height: 1.2;
   }
 `;
 
