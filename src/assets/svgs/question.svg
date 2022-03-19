@@ -8,14 +8,14 @@
 </style>
 <g>
 	<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="157.7086" y1="261.7393" x2="194.2895" y2="261.7393">
-		<stop  offset="0" style="stop-color:#6B8DBB"/>
-		<stop  offset="1" style="stop-color:#92A9C6"/>
+		<stop  offset="0" style="stop-color:#55779E"/>
+		<stop  offset="1" style="stop-color:#55779E"/>
 	</linearGradient>
 	<rect x="157.7" y="243.6" class="st0" width="36.6" height="36.3"/>
 	
 		<linearGradient id="SVGID_00000057838809190111177240000004859548056760272026_" gradientUnits="userSpaceOnUse" x1="102.9317" y1="157.0461" x2="266.0683" y2="157.0461">
-		<stop  offset="0" style="stop-color:#6B8DBB"/>
-		<stop  offset="1" style="stop-color:#92A9C6"/>
+		<stop  offset="0" style="stop-color:#55779E"/>
+		<stop  offset="1" style="stop-color:#55779E"/>
 	</linearGradient>
 	<path style="fill:url(#SVGID_00000057838809190111177240000004859548056760272026_);" d="M225.2,86h-81.5
 		c-27.5,0-40.8,13.4-40.8,40.8v20.3h37.4v-13.6c0-11.6,3.8-15.3,15.6-15.3H212c11.8,0,15.6,3.7,15.6,15.3v9.2
