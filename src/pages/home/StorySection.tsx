@@ -113,7 +113,7 @@ const StorySection = () => {
         </BackgroundContainer>
         <Content>
           <GirlFace src={girlFace} alt="Girls face" />
-          <Header>A:\Story</Header>
+          <Header>A:\About us</Header>
           <AikoFade>
             <Body>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
