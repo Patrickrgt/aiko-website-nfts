@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import styled from "styled-components";
 import { Outlet } from "react-router-dom";
 import { ChainId, Config, DAppProvider } from "@usedapp/core";
@@ -6,6 +7,7 @@ import Footer from "./components/Footer";
 import Error from "./components/Error";
 import { INFURA_ID } from "./app/globals";
 import WalletSelector from "./components/WalletSelector";
+import LoadingScreen from "./components/LoadingScreen";
 
 const StyledApp = styled.div`
   display: flex;
@@ -23,14 +25,16 @@ const config: Config = {
 
 const App = () => {
   return (
-    <StyledApp>
-      <DAppProvider config={config}>
-        <Outlet />
-        <Footer />
-        <Error />
-        <WalletSelector />
-      </DAppProvider>
-    </StyledApp>
+    <Suspense fallback={<LoadingScreen />}>
+      <StyledApp>
+        <DAppProvider config={config}>
+          <Outlet />
+          <Footer />
+          <Error />
+          <WalletSelector />
+        </DAppProvider>
+      </StyledApp>
+    </Suspense>
   );
 };
 
