@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 
 import Section from "../../components/Section";
@@ -7,6 +7,8 @@ import AikoHex from "../../components/AikoHex";
 import GallerySlide from "./GallerySlide";
 
 import main from "../../assets/gallery/8.jpg";
+import { randomAikos } from "./randomAikos";
+import { useDevice } from "../../app/hooks/use-device";
 
 const Container = styled.div`
   position: relative;
@@ -95,6 +97,15 @@ const MainAikoContainer = styled.div`
 
 const GallerySection = () => {
   const [mainAiko, setMainAiko] = useState(main);
+  const { isMobile } = useDevice();
+
+  useEffect(() => {
+    if (!isMobile) return;
+    const interval = setInterval(() => {
+      setMainAiko(randomAikos[Math.floor(Math.random() * randomAikos.length)]);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, [isMobile]);
 
   return (
     <Section id="gallery-scroll">
