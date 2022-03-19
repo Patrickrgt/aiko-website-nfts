@@ -1,8 +1,6 @@
 import styled from "styled-components";
 import { Link } from "react-scroll";
 
-import AikoFade from "./AikoFade";
-
 interface NavItem {
   name: string;
   component: string;
