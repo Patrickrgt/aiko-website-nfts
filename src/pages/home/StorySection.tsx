@@ -116,13 +116,15 @@ const StorySection = () => {
           <Header>A:\About us</Header>
           <AikoFade>
             <Body>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-              reprehenderit in voluptate velit esse cillum dolore eu fugiat
-              nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-              sunt in culpa qui officia deserunt mollit anim id est laborum.
+              Aiko Virtual is all about "Cyber Cute", which combines future tech
+              with anime vibes to create a unique aesthetic with broad appeal
+              and an even broader vision. Vinne is the artistic mastermind
+              behind our visual direction while Kyo is our resident fashion and
+              design ronin. Our goal is simple: create a premium concept
+              straddling the line between art and fashion , the digital and
+              physical, and East and West. Aikos represents a never-before-seen
+              concept rich in lore and personalization. Join us on our journey
+              into the virtual unknown.
             </Body>
           </AikoFade>
           <div />
