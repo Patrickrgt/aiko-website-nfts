@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Music from "../../components/Music";
 import Socials from "../../components/Socials";
 import GallerySection from "./GallerySection";
 import HeroSection from "./HeroSection";
@@ -24,6 +25,7 @@ const HomePage = () => {
       <StorySection />
       <RoadmapSection />
       <TeamSection />
+      <Music />
     </StyledHomePage>
   );
 };
