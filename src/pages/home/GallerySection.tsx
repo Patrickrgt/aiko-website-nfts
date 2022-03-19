@@ -33,7 +33,7 @@ const Background = styled.div`
     height: calc(100vh - 20rem);
   }
   @media only screen and (max-width: 600px) {
-    height: calc(100vw + 12rem);
+    height: calc(100vw + 3rem);
     clip-path: none;
   }
 `;
@@ -45,10 +45,14 @@ const HeaderContainer = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
+  z-index: 1;
 
   margin-top: 2.7rem;
   @media only screen and (max-width: 1400px) {
     margin-top: 2.3rem;
+  }
+  @media only screen and (max-width: 600px) {
+    margin-top: 0.5rem;
   }
 `;
 
@@ -63,6 +67,9 @@ const Content = styled.div`
   height: calc(100% - 18rem);
   @media only screen and (max-width: 1400px) {
     height: calc(100% - 16rem);
+  }
+  @media only screen and (max-width: 600px) {
+    height: calc(100% - 4rem);
   }
 `;
 
