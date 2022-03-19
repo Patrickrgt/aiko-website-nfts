@@ -18,7 +18,7 @@ const navItems: NavItem[] = [
     component: "gallery-scroll",
   },
   {
-    name: "story",
+    name: "about us",
     component: "story-scroll",
   },
   {
