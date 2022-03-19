@@ -27,22 +27,6 @@ const StyledSection = styled.div`
   }
 `;
 
-const SocialsContainer = styled.div`
-  position: absolute;
-  top: 7rem;
-  left: 7rem;
-
-  @media only screen and (max-width: 1400px) {
-    top: 3rem;
-    left: 3rem;
-  }
-
-  @media only screen and (max-width: 600px) {
-    top: 1.5rem;
-    left: 1.5rem;
-  }
-`;
-
 const LogoContainer = styled.div`
   position: absolute;
   top: 7rem;
@@ -61,20 +45,14 @@ const LogoContainer = styled.div`
 
 interface Props {
   id: string;
-  socials?: boolean;
   logo?: boolean;
   children: ReactNode;
 }
 
-const Section = ({ id, socials, logo, children }: Props) => {
+const Section = ({ id, logo, children }: Props) => {
   return (
     <StyledSection id={id}>
       {children}
-      {socials && (
-        <SocialsContainer>
-          <Socials />
-        </SocialsContainer>
-      )}
       {logo && (
         <LogoContainer>
           <Logo />

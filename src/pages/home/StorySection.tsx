@@ -2,7 +2,6 @@ import styled from "styled-components";
 import Section from "../../components/Section";
 import Header from "../../components/Header";
 import storyDecal from "../../assets/svgs/story-decal.svg";
-import Socials from "../../components/Socials";
 import girlFace from "../../assets/illustrations/girl-face.png";
 import AikoFade from "../../components/AikoFade";
 
@@ -71,19 +70,6 @@ const Content = styled.div`
   }
 `;
 
-const SocialsContainer = styled.div`
-  position: absolute;
-  top: 1rem;
-
-  left: 8rem;
-  @media only screen and (max-width: 1400px) {
-    left: 4rem;
-  }
-  @media only screen and (max-width: 600px) {
-    left: 2.5rem;
-  }
-`;
-
 const Body = styled.p`
   position: relative;
   opacity: 0.9;
@@ -126,9 +112,6 @@ const StorySection = () => {
           <Decal src={storyDecal} alt="Decorative asset" />
         </BackgroundContainer>
         <Content>
-          <SocialsContainer>
-            <Socials />
-          </SocialsContainer>
           <GirlFace src={girlFace} alt="Girls face" />
           <Header>A:\Story</Header>
           <AikoFade>

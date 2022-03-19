@@ -125,7 +125,7 @@ const Video = styled.video`
 
 const HeroSection = () => {
   return (
-    <Section id="home-scroll" socials>
+    <Section id="home-scroll">
       <MobileLogoContainer>
         <Logo primary />
       </MobileLogoContainer>

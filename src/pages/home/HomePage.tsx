@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Socials from "../../components/Socials";
 import GallerySection from "./GallerySection";
 import HeroSection from "./HeroSection";
 import RoadmapSection from "./RoadmapSection";
@@ -17,6 +18,7 @@ const StyledHomePage = styled.div`
 const HomePage = () => {
   return (
     <StyledHomePage>
+      <Socials />
       <HeroSection />
       <GallerySection />
       <StorySection />
