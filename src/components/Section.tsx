@@ -38,8 +38,7 @@ const LogoContainer = styled.div`
   }
 
   @media only screen and (max-width: 600px) {
-    top: 1.5rem;
-    right: 1.5rem;
+    display: none;
   }
 `;
 
