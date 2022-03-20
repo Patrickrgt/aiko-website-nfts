@@ -1,23 +1,27 @@
 import styled from "styled-components";
 import play from "../assets/svgs/play.svg";
+import pause from "../assets/svgs/question.svg";
 import frog from "../assets/illustrations/frog.svg";
+import { useTick } from "../app/hooks/use-tick";
 
 const StyledMusic = styled.div`
   display: flex;
   position: fixed;
-  height: 7rem;
   transform: translate(0, 0);
   z-index: 3;
 
   bottom: 7rem;
   left: 7rem;
+  height: 7rem;
   @media only screen and (max-width: 1400px) {
     bottom: 3rem;
     left: 3rem;
+    height: 6rem;
   }
   @media only screen and (max-width: 600px) {
     bottom: 1.5rem;
     left: 1.5rem;
+    height: 4.5rem;
   }
 `;
 
@@ -70,9 +74,16 @@ const Details = styled.div`
 
 const DetailsText = styled.div`
   font-weight: 600;
-  font-size: 1.6rem;
   color: #2a3441;
   line-height: 1;
+
+  font-size: 1.6rem;
+  @media only screen and (max-width: 1400px) {
+    font-size: 1.5rem;
+  }
+  @media only screen and (max-width: 600px) {
+    font-size: 1.3rem;
+  }
 `;
 
 const ImageContainer = styled.div`
@@ -88,15 +99,36 @@ const Frog = styled.img`
   height: 160%;
 `;
 
+const audio = new Audio("/assets/aiko-theme.mp3");
+
 const Music = () => {
+  const tick = useTick();
+
+  const seconds = Math.round(audio.currentTime % 60);
+  const minutes = Math.floor(audio.currentTime / 60);
+
+  const padWithLeadingZeros = (number: number, length = 2) => {
+    let string = number.toString();
+    while (string.length < length) {
+      string = `0${string}`;
+    }
+    return string;
+  };
+
   return (
     <StyledMusic>
-      <PlayButton>
-        <PlayIcon src={play} alt="Play Icon" />
+      <PlayButton
+        onClick={() => {
+          audio.paused ? audio.play() : audio.pause();
+        }}
+      >
+        <PlayIcon src={audio.paused ? play : pause} alt="Play Icon" />
       </PlayButton>
       <Details>
         <DetailsText>{"A:\\01.>"}</DetailsText>
-        <DetailsText>02:14</DetailsText>
+        <DetailsText>{`${padWithLeadingZeros(minutes)}:${padWithLeadingZeros(
+          seconds
+        )}`}</DetailsText>
       </Details>
       <ImageContainer>
         <Frog src={frog} alt="Frog" />
