@@ -55,7 +55,7 @@ const PlayIcon = styled.img`
 
 const Details = styled.div`
   height: 100%;
-  aspect-ratio: 3;
+  aspect-ratio: 1.7;
   background: linear-gradient(45deg, #b5cde9, white);
   clip-path: polygon(
     5% 0%,
@@ -92,11 +92,19 @@ const ImageContainer = styled.div`
   aspect-ratio: 1;
 `;
 
+interface FrogProps {
+  playing: boolean;
+}
+
 const Frog = styled.img`
   position: absolute;
   right: 0;
   bottom: 0;
   height: 172%;
+  transition: 1s all;
+  z-index: 2;
+  transform: ${(props: FrogProps) =>
+    props.playing ? "translateX(50%)" : "translateX(-7%)"};
 `;
 
 const audio = new Audio("/assets/aiko-theme.mp3");
@@ -133,7 +141,7 @@ const Music = () => {
         )}`}</DetailsText>
       </Details>
       <ImageContainer>
-        <Frog src={frog} alt="Frog" />
+        <Frog playing={!audio.paused} src={frog} alt="Frog" />
       </ImageContainer>
     </StyledMusic>
   );
