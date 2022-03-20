@@ -72,9 +72,11 @@ const NavItem = styled.div`
   }
 
   filter: brightness(1);
+  transform: translateY(0);
   transition: filter 0.3s;
   :hover {
     filter: brightness(0.75);
+    transform: translateY(2px);
   }
 `;
 
