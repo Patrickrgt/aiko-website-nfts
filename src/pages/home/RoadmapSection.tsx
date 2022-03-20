@@ -87,7 +87,7 @@ const Background = styled.img`
     left: -3vw;
   }
   @media only screen and (max-width: 600px) {
-    left: -5vw;
+    left: -10vw;
     opacity: 0.8;
   }
 `;
