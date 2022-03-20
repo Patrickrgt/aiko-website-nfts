@@ -6,6 +6,7 @@ import Logo from "../../components/Logo";
 
 import heroImage from "../../assets/illustrations/hero.png";
 import decal from "../../assets/svgs/hero-decal.svg";
+import AikoFade from "../../components/AikoFade";
 
 const HeroContainer = styled.div`
   position: relative;
@@ -134,16 +135,18 @@ const HeroSection = () => {
           <LeftDecal src={decal} alt="Decorative element" />
           <RightDecal src={decal} alt="Decorative element" />
         </OrangeBlock>
-        <ImageContainer>
-          <LogoContainer>
-            <Logo primary />
-          </LogoContainer>
-          <HeroImage src={heroImage} alt="Hero image" />
-          <InfoText>A:\MintDate\TBA</InfoText>
-          <Video autoPlay muted loop>
-            <source src="/assets/flying.webm" type="video/webm" />
-          </Video>
-        </ImageContainer>
+        <AikoFade>
+          <ImageContainer>
+            <LogoContainer>
+              <Logo primary />
+            </LogoContainer>
+            <HeroImage src={heroImage} alt="Hero image" />
+            <InfoText>A:\MintDate\TBA</InfoText>
+            <Video autoPlay muted loop>
+              <source src="/assets/flying.webm" type="video/webm" />
+            </Video>
+          </ImageContainer>
+        </AikoFade>
       </HeroContainer>
       <NavItems />
     </Section>
