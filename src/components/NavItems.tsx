@@ -1,8 +1,6 @@
 import styled from "styled-components";
 import { Link } from "react-scroll";
 
-import AikoFade from "./AikoFade";
-
 interface NavItem {
   name: string;
   component: string;
@@ -18,7 +16,7 @@ const navItems: NavItem[] = [
     component: "gallery-scroll",
   },
   {
-    name: "story",
+    name: "about us",
     component: "story-scroll",
   },
   {
@@ -57,9 +55,9 @@ const ItemsContainer = styled.div`
 `;
 
 const NavItem = styled.div`
-  color: var(--primary);
   font-weight: 500;
   line-height: 1;
+  color: var(--primary);
 
   font-size: 2.4rem;
   margin: 0 1.7rem;
@@ -70,6 +68,12 @@ const NavItem = styled.div`
   @media only screen and (max-width: 600px) {
     font-size: 1.3rem;
     margin: 0 0.5rem;
+  }
+
+  filter: brightness(1);
+  transition: filter 0.3s;
+  :hover {
+    filter: brightness(0.75);
   }
 `;
 

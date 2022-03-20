@@ -11,6 +11,7 @@ import kinoko from "../../assets/team-members/kinoko.jpg";
 import kyo from "../../assets/team-members/kyo.jpg";
 import matarelli from "../../assets/team-members/matarelli.jpg";
 import vinne from "../../assets/team-members/vinne.jpg";
+import kiwi from "../../assets/team-members/kiwi.jpg";
 
 const teamMembers: TeamMemberType[] = [
   {
@@ -57,9 +58,10 @@ const teamMembers: TeamMemberType[] = [
     twitter: "https://twitter.com/chase_manning_",
   },
   {
-    name: "????",
-    role: "????",
-    twitter: "",
+    image: kiwi,
+    name: "Kiwi",
+    role: "Developer",
+    twitter: "https://twitter.com/0xKiwi_",
   },
 ];
 
@@ -144,7 +146,7 @@ const RightDecal = styled(OrangeDecal)`
 
 const TeamSection = () => {
   return (
-    <Section id="team-scroll" socials logo>
+    <Section id="team-scroll" logo>
       <Content>
         <HeaderContainer>
           <Header>A:\Team</Header>
