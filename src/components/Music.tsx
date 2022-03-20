@@ -104,6 +104,8 @@ const audio = new Audio("/assets/aiko-theme.mp3");
 const Music = () => {
   const tick = useTick();
 
+  audio.volume = 0.65;
+
   const seconds = Math.round(audio.currentTime % 60);
   const minutes = Math.floor(audio.currentTime / 60);
 
