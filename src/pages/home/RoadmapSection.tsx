@@ -42,7 +42,7 @@ const roadmap: RoadmapSeasonType[] = [
       {
         icon: merch,
         header: "Official Merch",
-        body: "We gonna be launching our ecommerce for Public and Holders buy our merch and more. Merch will be unique and exclusive such an Aiko is / Holders gonna be receiving exclusive pieces and unique collections.",
+        body: "Launch our official store website, where NFT holders and the public are able to purchase quality merch (some merch will be unique and exclusive for our holders).",
       },
       {
         icon: artists,
@@ -87,7 +87,7 @@ const Background = styled.img`
     left: -3vw;
   }
   @media only screen and (max-width: 600px) {
-    left: -5vw;
+    left: -10vw;
     opacity: 0.8;
   }
 `;

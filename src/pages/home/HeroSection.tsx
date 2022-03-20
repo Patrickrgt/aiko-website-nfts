@@ -139,7 +139,7 @@ const HeroSection = () => {
             <Logo primary />
           </LogoContainer>
           <HeroImage src={heroImage} alt="Hero image" />
-          <InfoText>(A:\MintDate\TBA)</InfoText>
+          <InfoText>A:\MintDate\TBA</InfoText>
           <Video autoPlay muted loop>
             <source src="/assets/flying.webm" type="video/webm" />
           </Video>

@@ -96,7 +96,7 @@ const Frog = styled.img`
   position: absolute;
   right: 0;
   bottom: 0;
-  height: 160%;
+  height: 172%;
 `;
 
 const audio = new Audio("/assets/aiko-theme.mp3");
