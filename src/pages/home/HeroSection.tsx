@@ -92,22 +92,22 @@ const InfoText = styled.div`
   align-items: center;
   color: #6b9bd0;
 
-  font-size: 2.3rem;
-  letter-spacing: 5px;
+  font-size: 2.6rem;
+  letter-spacing: 10px;
   font-weight: 400;
   bottom: 10.4%;
   left: 38.5%;
   height: 6.4%;
   width: 40%;
   @media only screen and (max-width: 1400px) {
-    font-size: 2rem;
+    font-size: 2.3rem;
   }
   @media only screen and (max-width: 600px) {
     bottom: 11.2%;
     left: 18.8%;
     height: 6%;
     width: 40%;
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     letter-spacing: 2px;
     font-weight: 500;
   }
