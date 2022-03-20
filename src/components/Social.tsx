@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import AikoFade from "./AikoFade";
 
 const StyledSocial = styled.a`
   position: relative;
@@ -29,9 +30,11 @@ interface Props {
 
 const Social = ({ link, icon }: Props) => {
   return (
-    <StyledSocial href={link} target="_blank" rel="noopener noreferrer">
-      <Icon src={icon} alt="Social Icon" />
-    </StyledSocial>
+    <AikoFade>
+      <StyledSocial href={link} target="_blank" rel="noopener noreferrer">
+        <Icon src={icon} alt="Social Icon" />
+      </StyledSocial>
+    </AikoFade>
   );
 };
 

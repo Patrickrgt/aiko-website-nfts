@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { Link } from "react-scroll";
+import AikoFade from "./AikoFade";
 
 interface NavItem {
   name: string;
@@ -79,24 +80,26 @@ const NavItem = styled.div`
 
 const NavItems = () => {
   return (
-    <StyledNavItems>
-      <BookEnds>{"<"}</BookEnds>
-      <ItemsContainer>
-        {navItems.map((item: NavItem) => (
-          <Link
-            spy
-            smooth
-            key={item.component}
-            to={item.component}
-            offset={0}
-            duration={1000}
-          >
-            <NavItem>{item.name}</NavItem>
-          </Link>
-        ))}
-      </ItemsContainer>
-      <BookEnds>{">"}</BookEnds>
-    </StyledNavItems>
+    <AikoFade>
+      <StyledNavItems>
+        <BookEnds>{"<"}</BookEnds>
+        <ItemsContainer>
+          {navItems.map((item: NavItem) => (
+            <Link
+              spy
+              smooth
+              key={item.component}
+              to={item.component}
+              offset={0}
+              duration={1000}
+            >
+              <NavItem>{item.name}</NavItem>
+            </Link>
+          ))}
+        </ItemsContainer>
+        <BookEnds>{">"}</BookEnds>
+      </StyledNavItems>
+    </AikoFade>
   );
 };
 
