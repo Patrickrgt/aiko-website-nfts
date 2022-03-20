@@ -1,14 +1,23 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import styled from "styled-components";
 
 import Section from "../../components/Section";
 import Header from "../../components/Header";
 import AikoHex from "../../components/AikoHex";
 import GallerySlide from "./GallerySlide";
+import play from "../../assets/svgs/play.svg";
 
-import main from "../../assets/gallery/8.jpg";
-import { randomAikos } from "./randomAikos";
-import { useDevice } from "../../app/hooks/use-device";
+import a1 from "../../assets/gallery/8.jpg";
+import a2 from "../../assets/gallery/2.jpg";
+import a3 from "../../assets/gallery/3.jpg";
+import a4 from "../../assets/gallery/4.jpg";
+import a5 from "../../assets/gallery/5.jpg";
+import a6 from "../../assets/gallery/6.jpg";
+import a7 from "../../assets/gallery/7.jpg";
+import a8 from "../../assets/gallery/1.jpg";
+import a9 from "../../assets/gallery/9.jpg";
+
+const aikoList = [a1, a2, a3, a4, a5, a6, a7, a8, a9];
 
 const Container = styled.div`
   position: relative;
@@ -95,17 +104,32 @@ const MainAikoContainer = styled.div`
   }
 `;
 
-const GallerySection = () => {
-  const [mainAiko, setMainAiko] = useState(main);
-  const { isMobile } = useDevice();
+interface ButtonProps {
+  left?: boolean;
+}
 
-  useEffect(() => {
-    if (!isMobile) return;
-    const interval = setInterval(() => {
-      setMainAiko(randomAikos[Math.floor(Math.random() * randomAikos.length)]);
-    }, 3000);
-    return () => clearInterval(interval);
-  }, [isMobile]);
+const Button = styled.button`
+  position: absolute;
+  left: ${(props: ButtonProps) => (props.left ? "1rem" : "auto")};
+  right: ${(props: ButtonProps) => (!props.left ? "1rem" : "auto")};
+  top: 50%;
+  transform: translateY(-50%);
+
+  display: none;
+  @media only screen and (max-width: 600px) {
+    display: flex;
+  }
+`;
+
+const ButtonIcon = styled.img`
+  height: 3rem;
+  transform: ${(props: ButtonProps) =>
+    props.left ? "rotate(180deg)" : "none"};
+`;
+
+const GallerySection = () => {
+  const [index, setIndex] = useState(0);
+  const [mainAiko, setMainAiko] = useState(aikoList[index]);
 
   return (
     <Section id="gallery-scroll">
@@ -117,6 +141,33 @@ const GallerySection = () => {
         <Content>
           <MainAikoContainer>
             <AikoHex image={mainAiko} mega />
+            <Button
+              left
+              onClick={() => {
+                if (index === 0) {
+                  setMainAiko(aikoList[aikoList.length - 1]);
+                  setIndex(aikoList.length - 1);
+                  return;
+                }
+                setMainAiko(aikoList[index - 1]);
+                setIndex(index - 1);
+              }}
+            >
+              <ButtonIcon left src={play} alt="Left button" />
+            </Button>
+            <Button
+              onClick={() => {
+                if (index === aikoList.length - 1) {
+                  setMainAiko(aikoList[0]);
+                  setIndex(0);
+                  return;
+                }
+                setMainAiko(aikoList[index + 1]);
+                setIndex(index + 1);
+              }}
+            >
+              <ButtonIcon src={play} alt="Right button" />
+            </Button>
           </MainAikoContainer>
           <GallerySlide setMainAiko={(aiko: string) => setMainAiko(aiko)} />
         </Content>
