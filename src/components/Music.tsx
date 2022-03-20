@@ -24,6 +24,7 @@ const StyledMusic = styled.div`
 const PlayButton = styled.button`
   height: 100%;
   aspect-ratio: 1;
+  cursor: pointer;
   background: linear-gradient(45deg, #ffd062, #ffebbd);
   clip-path: polygon(
     10% 0%,
@@ -35,6 +36,13 @@ const PlayButton = styled.button`
     0% 90%,
     0% 10%
   );
+  z-index: 1;
+
+  transform: scale(1);
+  transition: 0.3s all;
+  :hover {
+    transform: scale(1.05);
+  }
 `;
 
 const PlayIcon = styled.img`
