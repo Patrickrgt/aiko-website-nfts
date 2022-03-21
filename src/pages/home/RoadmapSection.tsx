@@ -47,7 +47,7 @@ const roadmap: RoadmapSeasonType[] = [
       {
         icon: artists,
         header: "Supporting artists",
-        body: "We gonna be showing new artists for our community and every single artist we going support will be airdropped for holders.",
+        body: "We will start support NFT artists, and aikommunity will help us to choose what artists we will support! How you will do that? Buying their NFTs and airdropping for holders.",
       },
       {
         icon: events,
