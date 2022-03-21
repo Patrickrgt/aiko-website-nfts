@@ -102,7 +102,7 @@ const Frog = styled.img`
   right: 0;
   bottom: 0;
   height: 172%;
-  transition: 1s all;
+  transition: 0.75s all;
   z-index: 2;
   transform: ${(props: FrogProps) =>
     props.playing ? "translateX(50%)" : "translateX(-7%)"};
