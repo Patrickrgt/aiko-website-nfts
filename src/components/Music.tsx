@@ -1,3 +1,4 @@
+import { useState } from "react";
 import styled from "styled-components";
 import play from "../assets/svgs/play.svg";
 import pause from "../assets/svgs/question.svg";
@@ -111,6 +112,7 @@ const audio = new Audio("/assets/aiko-theme.mp3");
 
 const Music = () => {
   const tick = useTick();
+  const [active, setActive] = useState(false);
 
   audio.volume = 0.65;
 
@@ -129,7 +131,13 @@ const Music = () => {
     <StyledMusic>
       <PlayButton
         onClick={() => {
-          audio.paused ? audio.play() : audio.pause();
+          if (audio.paused) {
+            setActive(true);
+            audio.play();
+          } else {
+            setActive(false);
+            audio.pause();
+          }
         }}
       >
         <PlayIcon src={audio.paused ? play : pause} alt="Play Icon" />
@@ -141,7 +149,7 @@ const Music = () => {
         )}`}</DetailsText>
       </Details>
       <ImageContainer>
-        <Frog playing={!audio.paused} src={frog} alt="Frog" />
+        <Frog playing={active} src={frog} alt="Frog" />
       </ImageContainer>
     </StyledMusic>
   );
