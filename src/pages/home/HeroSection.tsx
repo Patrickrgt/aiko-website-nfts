@@ -118,11 +118,11 @@ const InfoText = styled.div`
 const Video = styled.video`
   position: absolute;
 
-  top: 35%;
-  left: 23%;
-  width: 36%;
+  top: 24%;
+  left: 17%;
+  width: 46.8%;
   @media only screen and (max-width: 600px) {
-    left: 7%;
+    left: 0%;
   }
 `;
 
