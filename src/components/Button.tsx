@@ -3,27 +3,44 @@ import { ReactNode, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { selectError } from "../state/errorSlice";
+import Hexify from "./Hexify";
+
+interface ContainerProps {
+  disabled?: boolean;
+}
+
+const Container = styled.div`
+  filter: ${(props: ContainerProps) =>
+    props.disabled
+      ? "saturate(0) brightness(1.2)"
+      : "saturate(1) brightness(1)"};
+  transition: 0.3s all;
+  :hover {
+        props.disabled
+      ? "saturate(0) brightness(1.1)"
+      : "saturate(1) brightness(0.9)"};
+  }
+`;
 
 interface ButtonProps {
   primary?: boolean;
 }
 
 const StyledButton = styled.button`
-  padding: 1rem 2rem;
+  height: 6.5rem;
+  padding: 0 2.2rem;
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  border: ${(props: ButtonProps) => (props.primary ? "0" : "1px")} solid
-    var(--main);
-  background-color: ${(props: ButtonProps) =>
-    props.primary ? "var(--primary)" : "var(--bg)"};
+  color: ${(props: ButtonProps) => (props.primary ? "#FFCF61" : "white")};
 
-  font-size: 1.6rem;
+  font-size: 2.7rem;
+  letter-spacing: 2px;
+  font-weight: 300;
 
   :disabled {
-    cursor: auto;
-    background-color: var(--sub);
+    cursor: not-allowed;
   }
 `;
 
@@ -47,22 +64,26 @@ const Button = ({ children, click, primary, disabled, loading }: Props) => {
   }, [error, loading]);
 
   return (
-    <StyledButton
-      onClick={() => {
-        if (loading || disabled || pending) return;
-        if (isWeb3) setPending(true);
-        if (isWeb3 && !account) activateBrowserWallet();
-        else click();
-      }}
-      disabled={disabled || loading || pending}
-      primary={primary}
-    >
-      {isWeb3 && !account
-        ? "Connect Wallet"
-        : loading
-        ? "Loading..."
-        : children}
-    </StyledButton>
+    <Container disabled={disabled}>
+      <Hexify dark>
+        <StyledButton
+          onClick={() => {
+            if (loading || disabled || pending) return;
+            if (isWeb3) setPending(true);
+            if (isWeb3 && !account) activateBrowserWallet();
+            else click();
+          }}
+          disabled={disabled || loading || pending}
+          primary={primary}
+        >
+          {isWeb3 && !account
+            ? "Connect Wallet"
+            : loading
+            ? "Loading..."
+            : children}
+        </StyledButton>
+      </Hexify>
+    </Container>
   );
 };
 
