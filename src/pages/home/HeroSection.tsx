@@ -8,6 +8,7 @@ import heroImage from "../../assets/illustrations/hero.png";
 import decal from "../../assets/svgs/hero-decal.svg";
 import AikoFade from "../../components/AikoFade";
 import Button from "../../components/Button";
+import Connector from "../../components/Connector";
 
 const HeroContainer = styled.div`
   position: relative;
@@ -164,6 +165,7 @@ const HeroSection = () => {
           </ImageContainer>
         </AikoFade>
       </HeroContainer>
+      <Connector />
       <NavItems />
     </Section>
   );
