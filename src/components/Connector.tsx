@@ -13,6 +13,9 @@ const StyledConnector = styled.div`
     top: 3rem;
     right: 3rem;
   }
+  @media only screen and (max-width: 600px) {
+    display: none;
+  }
 `;
 
 const Connector = () => {
