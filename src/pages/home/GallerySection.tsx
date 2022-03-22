@@ -67,6 +67,36 @@ const HeaderContainer = styled.div`
   }
 `;
 
+const HeaderText = styled.h2`
+  color: white;
+  white-space: nowrap;
+
+  font-size: 2.5rem;
+  font-weight: 400;
+  @media only screen and (max-width: 1400px) {
+    font-size: 2.2rem;
+  }
+  @media only screen and (max-width: 600px) {
+    font-size: 1.8rem;
+    font-weight: 500;
+  }
+`;
+
+const Bold = styled.span`
+  color: white;
+  white-space: nowrap;
+
+  font-size: 2.5rem;
+  font-weight: 600;
+  @media only screen and (max-width: 1400px) {
+    font-size: 2.2rem;
+  }
+  @media only screen and (max-width: 600px) {
+    font-size: 1.8rem;
+    font-weight: 700;
+  }
+`;
+
 const Content = styled.div`
   position: absolute;
   top: 50%;
@@ -136,7 +166,11 @@ const GallerySection = () => {
       <Container>
         <Background />
         <HeaderContainer>
-          <Header>Be Part of our Universe</Header>
+          <Header>
+            <HeaderText>
+              Be Part of our <Bold>Universe</Bold>
+            </HeaderText>
+          </Header>
         </HeaderContainer>
         <Content>
           <MainAikoContainer>
