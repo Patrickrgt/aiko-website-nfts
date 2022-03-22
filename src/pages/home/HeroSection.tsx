@@ -131,7 +131,7 @@ const ButtonContainer = styled.div`
   top: 49%;
   left: 4%;
   @media only screen and (max-width: 600px) {
-    left: 7%;
+    display: none;
   }
 `;
 
