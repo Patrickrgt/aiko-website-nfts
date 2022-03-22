@@ -2,7 +2,6 @@ import { ReactNode } from "react";
 import styled from "styled-components";
 
 import Logo from "./Logo";
-import Socials from "./Socials";
 
 const StyledSection = styled.div`
   position: relative;
@@ -16,10 +15,6 @@ const StyledSection = styled.div`
   min-height: 100vh;
   @media only screen and (max-width: 1400px) {
     padding: 3rem 0;
-  }
-  @media only screen and (max-width: 600px) {
-    padding: 1rem 0;
-    min-height: 0;
   }
   @media only screen and (max-width: 600px) {
     padding: 3rem 0;
