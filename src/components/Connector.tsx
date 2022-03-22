@@ -22,7 +22,7 @@ const Connector = () => {
   return (
     <StyledConnector>
       {/* <Button click={() => dispatch(connectWallet())}> */}
-      <Button primary click={() => console.log("meow")}>
+      <Button disabled primary click={() => console.log("meow")}>
         {account ? shortenAddress(account) : "<A:\\Connect Wallet>"}
       </Button>
     </StyledConnector>
