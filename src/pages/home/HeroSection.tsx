@@ -7,6 +7,7 @@ import Logo from "../../components/Logo";
 import heroImage from "../../assets/illustrations/hero.png";
 import decal from "../../assets/svgs/hero-decal.svg";
 import AikoFade from "../../components/AikoFade";
+import Button from "../../components/Button";
 
 const HeroContainer = styled.div`
   position: relative;
@@ -124,6 +125,16 @@ const Video = styled.video`
   }
 `;
 
+const ButtonContainer = styled.div`
+  position: absolute;
+
+  top: 49%;
+  left: 4%;
+  @media only screen and (max-width: 600px) {
+    left: 7%;
+  }
+`;
+
 const HeroSection = () => {
   return (
     <Section id="home-scroll">
@@ -145,6 +156,11 @@ const HeroSection = () => {
             <Video autoPlay muted loop>
               <source src="/assets/flying.webm" type="video/webm" />
             </Video>
+            <ButtonContainer>
+              <Button disabled click={() => console.log("meow")}>
+                {"<mint.exe>"}
+              </Button>
+            </ButtonContainer>
           </ImageContainer>
         </AikoFade>
       </HeroContainer>
