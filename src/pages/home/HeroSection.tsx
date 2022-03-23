@@ -117,9 +117,14 @@ const Video = styled.video`
 
 const ButtonContainer = styled.div`
   position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-  top: 49%;
-  left: 4%;
+  top: 38.6%;
+  left: 3.15%;
+  width: 13%;
+  height: 30%;
   @media only screen and (max-width: 600px) {
     display: none;
   }
