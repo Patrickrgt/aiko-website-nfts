@@ -12,12 +12,12 @@ interface ContainerProps {
 const Container = styled.div`
   filter: ${(props: ContainerProps) =>
     props.disabled
-      ? "saturate(0) brightness(1.2)"
+      ? "saturate(0) brightness(1.55)"
       : "saturate(1) brightness(1)"};
   transition: 0.3s all;
   :hover {
         props.disabled
-      ? "saturate(0) brightness(1.1)"
+      ? "saturate(0) brightness(1.55)"
       : "saturate(1) brightness(0.9)"};
   }
 `;
