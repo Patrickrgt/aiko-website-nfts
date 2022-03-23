@@ -34,20 +34,21 @@ const StyledFooter = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 2rem 3rem;
   background: linear-gradient(to right, #43679b, #43679b);
 
   height: 10rem;
+  padding: 2rem 3rem;
   @media only screen and (max-width: 1400px) {
     height: 8rem;
+    padding: 1.5rem 2.5rem;
   }
-  @media only screen and (max-width: 1400px) {
+  @media only screen and (max-width: 600px) {
     height: 6rem;
+    padding: 1rem 2rem;
   }
 `;
 
 const DecalOuter = styled.div`
-  width: 9rem;
   aspect-ratio: 1;
   background: var(--secondary);
   position: absolute;
@@ -57,6 +58,14 @@ const DecalOuter = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  width: 9rem;
+  @media only screen and (max-width: 1400px) {
+    width: 8rem;
+  }
+  @media only screen and (max-width: 600px) {
+    width: 7rem;
+  }
 `;
 
 const DecalMiddle = styled.div`
