@@ -18,24 +18,55 @@ const StyledFooter = styled.div`
   }
 `;
 
-const Decal = styled.div`
-  width: 4rem;
+const DecalOuter = styled.div`
+  width: 9rem;
   aspect-ratio: 1;
-  background: white;
+  background: var(--secondary);
   position: absolute;
   left: 50%;
   top: 0;
   transform: translate(-50%, -50%) rotate(45deg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
-const Logo = styled.div`
-  font-size: 2.3rem;
+const DecalMiddle = styled.div`
+  width: 45%;
+  aspect-ratio: 1;
+  background: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const DecalInner = styled.div`
+  width: 68%;
+  aspect-ratio: 1;
+  background: var(--secondary);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const WhiteOverlay = styled.div`
+  width: 100%;
+  height: 8rem;
+  background: white;
+  position: absolute;
+  bottom: 100%;
+  left: 0;
 `;
 
 const Footer = () => {
   return (
     <StyledFooter>
-      <Decal />
+      <DecalOuter>
+        <DecalMiddle>
+          <DecalInner />
+        </DecalMiddle>
+      </DecalOuter>
+      <WhiteOverlay />
     </StyledFooter>
   );
 };
