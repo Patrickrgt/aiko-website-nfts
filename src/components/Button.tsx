@@ -27,17 +27,23 @@ interface ButtonProps {
 }
 
 const StyledButton = styled.button`
-  height: ${(props: ButtonProps) => (props.primary ? "5.4rem" : "5.9rem")};
-  padding: ${(props: ButtonProps) => (props.primary ? "0 1.6rem" : "0 2rem")};
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
   color: ${(props: ButtonProps) => (props.primary ? "#FFCF61" : "white")};
 
+  height: ${(props: ButtonProps) => (props.primary ? "5.4rem" : "5.9rem")};
+  padding: ${(props: ButtonProps) => (props.primary ? "0 1.6rem" : "0 2rem")};
   font-size: ${(props: ButtonProps) => (props.primary ? "1.8rem" : "2.4rem")};
   letter-spacing: ${(props: ButtonProps) => (props.primary ? "1px" : "2px")};
   font-weight: ${(props: ButtonProps) => (props.primary ? "400" : "300")};
+
+  @media only screen and (max-width: 600px) {
+    height: 4.8rem;
+    padding: 0 1.2rem;
+    font-size: 1.6rem;
+  }
 
   :disabled {
     cursor: not-allowed;
