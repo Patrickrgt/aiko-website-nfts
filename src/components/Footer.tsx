@@ -1,9 +1,12 @@
+import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
+import useWindowPosition from "../app/hooks/use-window-position";
 
 import certified from "../assets/svgs/certified.svg";
 import etherscan from "../assets/svgs/etherscan.svg";
 import meepo from "../assets/svgs/meepo.svg";
 import mirror from "../assets/svgs/mirror.svg";
+import Music from "./Music";
 
 interface LinkType {
   icon: string;
@@ -102,23 +105,44 @@ const Icon = styled.img`
 `;
 
 const Footer = () => {
+  const windowPosition = useWindowPosition();
+  const footerRef = useRef<HTMLDivElement>(null);
+
+  const [atBottom, setAtBottom] = useState(false);
+
+  useEffect(() => {
+    if (footerRef.current) {
+      if (
+        windowPosition + window.outerHeight >=
+        footerRef.current.offsetTop + footerRef.current.offsetHeight
+      ) {
+        setAtBottom(true);
+      } else {
+        setAtBottom(false);
+      }
+    }
+  }, [windowPosition]);
+
   return (
-    <StyledFooter>
-      <Certified src={certified} alt="Aiko Certified" />
-      <Links>
-        {links.map((link: LinkType) => (
-          <Link href={link.url} target="_blank" rel="noopener noreferrer">
-            <Icon src={link.icon} alt="Aiko Certified" />
-          </Link>
-        ))}
-      </Links>
-      <DecalOuter>
-        <DecalMiddle>
-          <DecalInner />
-        </DecalMiddle>
-      </DecalOuter>
-      <WhiteOverlay />
-    </StyledFooter>
+    <>
+      <StyledFooter ref={footerRef}>
+        <Certified src={certified} alt="Aiko Certified" />
+        <Links>
+          {links.map((link: LinkType) => (
+            <Link href={link.url} target="_blank" rel="noopener noreferrer">
+              <Icon src={link.icon} alt="Aiko Certified" />
+            </Link>
+          ))}
+        </Links>
+        <DecalOuter>
+          <DecalMiddle>
+            <DecalInner />
+          </DecalMiddle>
+        </DecalOuter>
+        <WhiteOverlay />
+      </StyledFooter>
+      <Music atBottom={atBottom} />
+    </>
   );
 };
 

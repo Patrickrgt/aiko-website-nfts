@@ -12,16 +12,17 @@ const StyledMusic = styled.div`
   transform: translate(0, 0);
   z-index: 3;
 
-  bottom: 7rem;
+  transition: 0.3s all;
+  bottom: ${(props: Props) => (props.atBottom ? "12rem" : "7rem")};
   left: 7rem;
   height: 7rem;
   @media only screen and (max-width: 1400px) {
-    bottom: 3rem;
+    bottom: ${(props: Props) => (props.atBottom ? "10rem" : "3rem")};
     left: 3rem;
     height: 6rem;
   }
   @media only screen and (max-width: 600px) {
-    bottom: 1.5rem;
+    bottom: ${(props: Props) => (props.atBottom ? "8rem" : "1.5rem")};
     left: 1.5rem;
     height: 4.5rem;
   }
@@ -111,7 +112,11 @@ const Frog = styled.img`
 
 const audio = new Audio("/assets/aiko-theme.mp3");
 
-const Music = () => {
+interface Props {
+  atBottom: boolean;
+}
+
+const Music = ({ atBottom }: Props) => {
   const tick = useTick();
   const [active, setActive] = useState(false);
 
@@ -129,7 +134,7 @@ const Music = () => {
   };
 
   return (
-    <StyledMusic>
+    <StyledMusic atBottom={atBottom}>
       <AikoFade>
         <PlayButton
           onClick={() => {
