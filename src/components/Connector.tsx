@@ -5,7 +5,7 @@ import { shortenAddress, useEthers } from "@usedapp/core";
 import Button from "./Button";
 
 const StyledConnector = styled.div`
-  position: absolute;
+  position: fixed;
 
   top: 7rem;
   right: 7rem;
