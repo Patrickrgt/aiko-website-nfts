@@ -4,6 +4,7 @@ import play from "../assets/svgs/play.svg";
 import pause from "../assets/svgs/question.svg";
 import frog from "../assets/illustrations/frog.svg";
 import { useTick } from "../app/hooks/use-tick";
+import AikoFade from "./AikoFade";
 
 const StyledMusic = styled.div`
   display: flex;
@@ -129,28 +130,32 @@ const Music = () => {
 
   return (
     <StyledMusic>
-      <PlayButton
-        onClick={() => {
-          if (audio.paused) {
-            setActive(true);
-            audio.play();
-          } else {
-            setActive(false);
-            audio.pause();
-          }
-        }}
-      >
-        <PlayIcon src={audio.paused ? play : pause} alt="Play Icon" />
-      </PlayButton>
-      <Details>
-        <DetailsText>{"A:\\01.>"}</DetailsText>
-        <DetailsText>{`${padWithLeadingZeros(minutes)}:${padWithLeadingZeros(
-          seconds
-        )}`}</DetailsText>
-      </Details>
-      <ImageContainer>
-        <Frog playing={active} src={frog} alt="Frog" />
-      </ImageContainer>
+      <AikoFade>
+        <PlayButton
+          onClick={() => {
+            if (audio.paused) {
+              setActive(true);
+              audio.play();
+            } else {
+              setActive(false);
+              audio.pause();
+            }
+          }}
+        >
+          <PlayIcon src={audio.paused ? play : pause} alt="Play Icon" />
+        </PlayButton>
+      </AikoFade>
+      <AikoFade>
+        <Details>
+          <DetailsText>{"A:\\01.>"}</DetailsText>
+          <DetailsText>{`${padWithLeadingZeros(minutes)}:${padWithLeadingZeros(
+            seconds
+          )}`}</DetailsText>
+        </Details>
+        <ImageContainer>
+          <Frog playing={active} src={frog} alt="Frog" />
+        </ImageContainer>
+      </AikoFade>
     </StyledMusic>
   );
 };
