@@ -44,7 +44,7 @@ const StyledFooter = styled.div`
   }
   @media only screen and (max-width: 600px) {
     height: 6rem;
-    padding: 1rem 2rem;
+    padding: 1.3rem;
   }
 `;
 
@@ -64,7 +64,7 @@ const DecalOuter = styled.div`
     width: 8rem;
   }
   @media only screen and (max-width: 600px) {
-    width: 7rem;
+    display: none;
   }
 `;
 
@@ -93,6 +93,10 @@ const WhiteOverlay = styled.div`
   position: absolute;
   bottom: 100%;
   left: 0;
+
+  @media only screen and (max-width: 600px) {
+    display: none;
+  }
 `;
 
 const Certified = styled.img`
@@ -102,6 +106,10 @@ const Certified = styled.img`
 const Links = styled.div`
   display: flex;
   height: 100%;
+
+  @media only screen and (max-width: 600px) {
+    padding: 0.2rem 0;
+  }
 `;
 
 const Link = styled.a`
@@ -110,7 +118,11 @@ const Link = styled.a`
 
 const Icon = styled.img`
   height: 100%;
+
   margin-left: 2.3rem;
+  @media only screen and (max-width: 600px) {
+    margin-left: 1rem;
+  }
 `;
 
 const Footer = () => {
