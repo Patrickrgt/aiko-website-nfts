@@ -29,18 +29,7 @@ const LogoContainer = styled.div`
   top: -2.2rem;
 
   @media only screen and (max-width: 600px) {
-    display: none;
-  }
-`;
-
-const MobileLogoContainer = styled.div`
-  display: none;
-  position: absolute;
-  top: 1.5rem;
-  right: 1.5rem;
-
-  @media only screen and (max-width: 600px) {
-    display: flex;
+    top: -7.6rem;
   }
 `;
 
@@ -139,9 +128,6 @@ const ButtonContainer = styled.div`
 const HeroSection = () => {
   return (
     <Section id="home-scroll">
-      <MobileLogoContainer>
-        <Logo primary />
-      </MobileLogoContainer>
       <HeroContainer>
         <OrangeBlock>
           <LeftDecal src={decal} alt="Decorative element" />
