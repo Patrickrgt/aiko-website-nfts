@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styled from "styled-components";
 import play from "../assets/svgs/play.svg";
-import pause from "../assets/svgs/question.svg";
+import pause from "../assets/svgs/pause.svg";
 import frog from "../assets/illustrations/frog.svg";
 import { useTick } from "../app/hooks/use-tick";
 import AikoFade from "./AikoFade";
