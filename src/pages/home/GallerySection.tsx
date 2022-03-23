@@ -7,17 +7,39 @@ import AikoHex from "../../components/AikoHex";
 import GallerySlide from "./GallerySlide";
 import play from "../../assets/svgs/play.svg";
 
-import a1 from "../../assets/gallery/8.jpg";
-import a2 from "../../assets/gallery/2.jpg";
-import a3 from "../../assets/gallery/3.jpg";
-import a4 from "../../assets/gallery/4.jpg";
-import a5 from "../../assets/gallery/5.jpg";
-import a6 from "../../assets/gallery/6.jpg";
-import a7 from "../../assets/gallery/7.jpg";
-import a8 from "../../assets/gallery/1.jpg";
-import a9 from "../../assets/gallery/9.jpg";
+import a1 from "../../assets/gallery/01.jpg";
+import a2 from "../../assets/gallery/02.jpg";
+import a3 from "../../assets/gallery/03.jpg";
+import a4 from "../../assets/gallery/04.jpg";
+import a5 from "../../assets/gallery/05.jpg";
+import a6 from "../../assets/gallery/06.jpg";
+import a7 from "../../assets/gallery/07.jpg";
+import a8 from "../../assets/gallery/08.jpg";
+import a9 from "../../assets/gallery/09.jpg";
+import a10 from "../../assets/gallery/10.jpg";
+import a11 from "../../assets/gallery/11.jpg";
+import a12 from "../../assets/gallery/12.jpg";
+import a13 from "../../assets/gallery/13.jpg";
+import a14 from "../../assets/gallery/14.jpg";
+import a15 from "../../assets/gallery/15.jpg";
 
-const aikoList = [a1, a2, a3, a4, a5, a6, a7, a8, a9];
+const aikoList = [
+  a1,
+  a2,
+  a3,
+  a4,
+  a5,
+  a6,
+  a7,
+  a8,
+  a9,
+  a10,
+  a11,
+  a12,
+  a13,
+  a14,
+  a15,
+];
 
 const Container = styled.div`
   position: relative;
@@ -158,7 +180,7 @@ const ButtonIcon = styled.img`
 `;
 
 const GallerySection = () => {
-  const [index, setIndex] = useState(0);
+  const [index, setIndex] = useState(7);
   const [mainAiko, setMainAiko] = useState(aikoList[index]);
 
   return (
