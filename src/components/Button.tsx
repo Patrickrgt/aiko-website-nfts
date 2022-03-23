@@ -27,15 +27,15 @@ interface ButtonProps {
 }
 
 const StyledButton = styled.button`
-  height: ${(props: ButtonProps) => (props.primary ? "5.7rem" : "6.5rem")};
-  padding: ${(props: ButtonProps) => (props.primary ? "0 1.8rem" : "0 2.2rem")};
+  height: ${(props: ButtonProps) => (props.primary ? "5.4rem" : "5.9rem")};
+  padding: ${(props: ButtonProps) => (props.primary ? "0 1.6rem" : "0 2rem")};
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
   color: ${(props: ButtonProps) => (props.primary ? "#FFCF61" : "white")};
 
-  font-size: ${(props: ButtonProps) => (props.primary ? "2rem" : "2.7rem")};
+  font-size: ${(props: ButtonProps) => (props.primary ? "1.8rem" : "2.4rem")};
   letter-spacing: ${(props: ButtonProps) => (props.primary ? "1px" : "2px")};
   font-weight: ${(props: ButtonProps) => (props.primary ? "400" : "300")};
 
