@@ -22,6 +22,10 @@ import a12 from "../../assets/gallery/12.jpg";
 import a13 from "../../assets/gallery/13.jpg";
 import a14 from "../../assets/gallery/14.jpg";
 import a15 from "../../assets/gallery/15.jpg";
+import a16 from "../../assets/gallery/16.jpg";
+import a17 from "../../assets/gallery/17.jpg";
+import a18 from "../../assets/gallery/18.jpg";
+import a19 from "../../assets/gallery/19.jpg";
 
 const aikoList = [
   a1,
@@ -39,6 +43,10 @@ const aikoList = [
   a13,
   a14,
   a15,
+  a16,
+  a17,
+  a18,
+  a19,
 ];
 
 const Container = styled.div`

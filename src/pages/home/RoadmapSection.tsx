@@ -26,12 +26,12 @@ const roadmap: RoadmapSeasonType[] = [
       {
         icon: airdrop,
         header: "Airdrop",
-        body: "Airdrop exclusive genesis Aiko NFTs to holders, in addition to 1/1 merch such as high quality t-shirts and hoodies (see Season 2).",
+        body: "We will airdrop exclusive genesis Aiko NFTs on Foundation to holders, in addition to 1/1 physical merch such as high quality t-shirts, hoodies, etc.",
       },
       {
         icon: headquarters,
         header: "Headquarters",
-        body: "We gonna be creating a space for our team work together full time in Aiko, and preparing the deliveres for Season 2.",
+        body: "Creation of a physical shared space for the Aiko team work together.",
       },
     ],
   },

@@ -7,23 +7,25 @@ import a1 from "../../assets/gallery/01.jpg";
 import a2 from "../../assets/gallery/02.jpg";
 import a3 from "../../assets/gallery/03.jpg";
 import a4 from "../../assets/gallery/04.jpg";
-import a5 from "../../assets/gallery/05.jpg";
-import a6 from "../../assets/gallery/06.jpg";
-import a7 from "../../assets/gallery/07.jpg";
+import a5 from "../../assets/gallery/16.jpg";
+import a6 from "../../assets/gallery/18.jpg";
+import a7 from "../../assets/gallery/17.jpg";
 import a8 from "../../assets/gallery/08.jpg";
 import a9 from "../../assets/gallery/09.jpg";
-import a10 from "../../assets/gallery/10.jpg";
+import a10 from "../../assets/gallery/19.jpg";
 import a11 from "../../assets/gallery/11.jpg";
 import a12 from "../../assets/gallery/12.jpg";
 import a13 from "../../assets/gallery/13.jpg";
 import a14 from "../../assets/gallery/14.jpg";
 import a15 from "../../assets/gallery/15.jpg";
-import chase from "../../assets/team-members/chase.jpg";
+import a16 from "../../assets/gallery/05.jpg";
+import a17 from "../../assets/gallery/07.jpg";
+import a18 from "../../assets/gallery/06.jpg";
+import a19 from "../../assets/gallery/10.jpg";
 import crystal from "../../assets/team-members/crystal.jpg";
 import garrid from "../../assets/team-members/garrid.jpg";
 import kyo from "../../assets/team-members/kyo.jpg";
 import matarelli from "../../assets/team-members/matarelli.jpg";
-import vinne from "../../assets/team-members/vinne.jpg";
 
 const aikos: string[] = [
   a8,
@@ -47,10 +49,10 @@ const aikos: string[] = [
   a13,
   a14,
   a15,
-  chase,
-  vinne,
-  kyo,
-  garrid,
+  a16,
+  a17,
+  a18,
+  a19,
   matarelli,
 ];
 
