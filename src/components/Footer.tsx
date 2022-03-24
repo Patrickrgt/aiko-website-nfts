@@ -22,10 +22,6 @@ const links: LinkType[] = [
     icon: etherscan,
     url: "",
   },
-  {
-    icon: meepo,
-    url: "",
-  },
 ];
 
 const StyledFooter = styled.div`
@@ -149,11 +145,19 @@ const Footer = () => {
       <StyledFooter ref={footerRef}>
         <Certified src={certified} alt="Aiko Certified" />
         <Links>
-          {links.map((link: LinkType) => (
-            <Link href={link.url} target="_blank" rel="noopener noreferrer">
-              <Icon src={link.icon} alt="Aiko Certified" />
-            </Link>
-          ))}
+          {links
+            .filter((link: LinkType) => link.url)
+            .map((link: LinkType, index: number) => (
+              <Link
+                key={index}
+                href={link.url}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Icon src={link.icon} alt="Link" />
+              </Link>
+            ))}
+          <Icon src={meepo} alt="Meepo" />
         </Links>
         <DecalOuter>
           <DecalMiddle>
