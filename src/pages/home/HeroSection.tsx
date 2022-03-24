@@ -5,10 +5,12 @@ import Section from "../../components/Section";
 import Logo from "../../components/Logo";
 
 import heroImage from "../../assets/illustrations/hero.png";
+import heroImageMobile from "../../assets/illustrations/hero-mobile.png";
 import decal from "../../assets/svgs/hero-decal.svg";
 import AikoFade from "../../components/AikoFade";
 import Button from "../../components/Button";
 import Connector from "../../components/Connector";
+import { useDevice } from "../../app/hooks/use-device";
 
 const HeroContainer = styled.div`
   position: relative;
@@ -48,6 +50,10 @@ const OrangeDecal = styled.img`
   top: 50%;
   transform: translateY(-50%);
   height: 73%;
+
+  @media only screen and (max-width: 600px) {
+    display: none;
+  }
 `;
 
 const LeftDecal = styled(OrangeDecal)`
@@ -61,6 +67,9 @@ const RightDecal = styled(OrangeDecal)`
 
 const ImageContainer = styled.div`
   position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   @media only screen and (max-width: 600px) {
     right: 0;
     top: 0;
@@ -71,9 +80,9 @@ const HeroImage = styled.img`
   transform: translateX(1.8%);
   height: 78vh;
   @media only screen and (max-width: 600px) {
+    transform: translateY(7.4%);
     height: auto;
-    width: 135vw;
-    transform: translateX(-18%);
+    width: calc(100% - 4rem);
   }
 `;
 
@@ -94,13 +103,13 @@ const InfoText = styled.div`
     font-size: 2.3rem;
   }
   @media only screen and (max-width: 600px) {
-    bottom: 11.2%;
-    left: 18.8%;
-    height: 6%;
+    bottom: 10.85%;
+    left: 21.5%;
+    height: 5.6%;
     width: 40%;
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     letter-spacing: 2px;
-    font-weight: 500;
+    font-weight: 400;
   }
 `;
 
@@ -131,6 +140,8 @@ const ButtonContainer = styled.div`
 `;
 
 const HeroSection = () => {
+  const { isMobile } = useDevice();
+
   return (
     <Section id="home-scroll">
       <HeroContainer>
@@ -143,7 +154,10 @@ const HeroSection = () => {
             <LogoContainer>
               <Logo primary />
             </LogoContainer>
-            <HeroImage src={heroImage} alt="Hero image" />
+            <HeroImage
+              src={isMobile ? heroImageMobile : heroImage}
+              alt="Hero image"
+            />
             <InfoText>A:\MintDate\TBA</InfoText>
             <Video autoPlay muted loop>
               <source src="/assets/flying.webm" type="video/webm" />
