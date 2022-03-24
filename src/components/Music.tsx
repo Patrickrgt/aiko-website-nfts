@@ -1,9 +1,10 @@
 import { useState } from "react";
 import styled from "styled-components";
 import play from "../assets/svgs/play.svg";
-import pause from "../assets/svgs/question.svg";
+import pause from "../assets/svgs/pause.svg";
 import frog from "../assets/illustrations/frog.svg";
 import { useTick } from "../app/hooks/use-tick";
+import AikoFade from "./AikoFade";
 
 const StyledMusic = styled.div`
   display: flex;
@@ -11,16 +12,17 @@ const StyledMusic = styled.div`
   transform: translate(0, 0);
   z-index: 3;
 
-  bottom: 7rem;
+  transition: 0.3s all;
+  bottom: ${(props: Props) => (props.atBottom ? "12rem" : "7rem")};
   left: 7rem;
   height: 7rem;
   @media only screen and (max-width: 1400px) {
-    bottom: 3rem;
+    bottom: ${(props: Props) => (props.atBottom ? "10rem" : "3rem")};
     left: 3rem;
     height: 6rem;
   }
   @media only screen and (max-width: 600px) {
-    bottom: 1.5rem;
+    bottom: ${(props: Props) => (props.atBottom ? "8rem" : "1.5rem")};
     left: 1.5rem;
     height: 4.5rem;
   }
@@ -110,7 +112,11 @@ const Frog = styled.img`
 
 const audio = new Audio("/assets/aiko-theme.mp3");
 
-const Music = () => {
+interface Props {
+  atBottom: boolean;
+}
+
+const Music = ({ atBottom }: Props) => {
   const tick = useTick();
   const [active, setActive] = useState(false);
 
@@ -128,29 +134,33 @@ const Music = () => {
   };
 
   return (
-    <StyledMusic>
-      <PlayButton
-        onClick={() => {
-          if (audio.paused) {
-            setActive(true);
-            audio.play();
-          } else {
-            setActive(false);
-            audio.pause();
-          }
-        }}
-      >
-        <PlayIcon src={audio.paused ? play : pause} alt="Play Icon" />
-      </PlayButton>
-      <Details>
-        <DetailsText>{"A:\\01.>"}</DetailsText>
-        <DetailsText>{`${padWithLeadingZeros(minutes)}:${padWithLeadingZeros(
-          seconds
-        )}`}</DetailsText>
-      </Details>
-      <ImageContainer>
-        <Frog playing={active} src={frog} alt="Frog" />
-      </ImageContainer>
+    <StyledMusic atBottom={atBottom}>
+      <AikoFade>
+        <PlayButton
+          onClick={() => {
+            if (audio.paused) {
+              setActive(true);
+              audio.play();
+            } else {
+              setActive(false);
+              audio.pause();
+            }
+          }}
+        >
+          <PlayIcon src={audio.paused ? play : pause} alt="Play Icon" />
+        </PlayButton>
+      </AikoFade>
+      <AikoFade>
+        <Details>
+          <DetailsText>{"A:\\01.>"}</DetailsText>
+          <DetailsText>{`${padWithLeadingZeros(minutes)}:${padWithLeadingZeros(
+            seconds
+          )}`}</DetailsText>
+        </Details>
+        <ImageContainer>
+          <Frog playing={active} src={frog} alt="Frog" />
+        </ImageContainer>
+      </AikoFade>
     </StyledMusic>
   );
 };

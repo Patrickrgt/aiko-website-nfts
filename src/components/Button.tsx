@@ -12,12 +12,12 @@ interface ContainerProps {
 const Container = styled.div`
   filter: ${(props: ContainerProps) =>
     props.disabled
-      ? "saturate(0) brightness(1.2)"
+      ? "saturate(0) brightness(1.55)"
       : "saturate(1) brightness(1)"};
   transition: 0.3s all;
   :hover {
         props.disabled
-      ? "saturate(0) brightness(1.1)"
+      ? "saturate(0) brightness(1.55)"
       : "saturate(1) brightness(0.9)"};
   }
 `;
@@ -27,17 +27,23 @@ interface ButtonProps {
 }
 
 const StyledButton = styled.button`
-  height: ${(props: ButtonProps) => (props.primary ? "5.7rem" : "6.5rem")};
-  padding: ${(props: ButtonProps) => (props.primary ? "0 1.8rem" : "0 2.2rem")};
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
   color: ${(props: ButtonProps) => (props.primary ? "#FFCF61" : "white")};
 
-  font-size: ${(props: ButtonProps) => (props.primary ? "2rem" : "2.7rem")};
+  height: ${(props: ButtonProps) => (props.primary ? "5.4rem" : "5.9rem")};
+  padding: ${(props: ButtonProps) => (props.primary ? "0 1.6rem" : "0 2rem")};
+  font-size: ${(props: ButtonProps) => (props.primary ? "1.8rem" : "2.4rem")};
   letter-spacing: ${(props: ButtonProps) => (props.primary ? "1px" : "2px")};
   font-weight: ${(props: ButtonProps) => (props.primary ? "400" : "300")};
+
+  @media only screen and (max-width: 600px) {
+    height: 4.8rem;
+    padding: 0 1.2rem;
+    font-size: 1.6rem;
+  }
 
   :disabled {
     cursor: not-allowed;

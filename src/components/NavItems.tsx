@@ -33,6 +33,10 @@ const navItems: NavItem[] = [
 const StyledNavItems = styled.div`
   display: flex;
   align-items: center;
+
+  @media only screen and (max-width: 600px) {
+    margin-top: 2rem;
+  }
 `;
 
 const BookEnds = styled.div`
