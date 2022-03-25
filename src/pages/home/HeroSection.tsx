@@ -71,6 +71,7 @@ const ImageContainer = styled.div`
   justify-content: center;
   align-items: center;
   @media only screen and (max-width: 600px) {
+    transform: translateY(7.4%);
     right: 0;
     top: 0;
   }
@@ -80,9 +81,9 @@ const HeroImage = styled.img`
   transform: translateX(1.8%);
   height: 78vh;
   @media only screen and (max-width: 600px) {
-    transform: translateY(7.4%);
-    height: auto;
+    transform: none;
     width: calc(100% - 4rem);
+    height: auto;
   }
 `;
 
@@ -103,8 +104,8 @@ const InfoText = styled.div`
     font-size: 2.3rem;
   }
   @media only screen and (max-width: 600px) {
-    bottom: 10.85%;
-    left: 21.5%;
+    bottom: 10%;
+    left: 24.3%;
     height: 5.6%;
     width: 40%;
     font-size: 1.2rem;
@@ -120,7 +121,9 @@ const Video = styled.video`
   left: 17%;
   width: 46.8%;
   @media only screen and (max-width: 600px) {
-    left: 0%;
+    left: -2%;
+    top: 32%;
+    width: 52%;
   }
 `;
 
