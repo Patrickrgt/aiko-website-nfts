@@ -129,10 +129,7 @@ const Footer = () => {
 
   useEffect(() => {
     if (footerRef.current) {
-      if (
-        windowPosition + window.outerHeight >=
-        footerRef.current.offsetTop + footerRef.current.offsetHeight
-      ) {
+      if (windowPosition + window.outerHeight >= footerRef.current.offsetTop) {
         setAtBottom(true);
       } else {
         setAtBottom(false);
