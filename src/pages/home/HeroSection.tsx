@@ -96,9 +96,9 @@ const InfoText = styled.div`
   font-size: 2.6rem;
   letter-spacing: 10px;
   font-weight: 400;
-  bottom: 10.4%;
+  bottom: 10.3%;
   left: 38.5%;
-  height: 6.4%;
+  height: 6.1%;
   width: 40%;
   @media only screen and (max-width: 1400px) {
     font-size: 2.3rem;
