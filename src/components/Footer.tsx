@@ -6,6 +6,7 @@ import certified from "../assets/svgs/certified.svg";
 import etherscan from "../assets/svgs/etherscan.svg";
 import meepo from "../assets/svgs/meepo.svg";
 import mirror from "../assets/svgs/mirror.svg";
+import lock from "../assets/svgs/lock.svg";
 import Music from "./Music";
 
 interface LinkType {
@@ -16,11 +17,11 @@ interface LinkType {
 const links: LinkType[] = [
   {
     icon: mirror,
-    url: "",
+    url: "wer",
   },
   {
     icon: etherscan,
-    url: "",
+    url: "wer",
   },
 ];
 
@@ -102,23 +103,51 @@ const Certified = styled.img`
 const Links = styled.div`
   display: flex;
   height: 100%;
-
-  @media only screen and (max-width: 600px) {
-    padding: 0.2rem 0;
-  }
+  padding: 0.2rem 0;
 `;
 
 const Link = styled.a`
-  height: 100%;
-`;
-
-const Icon = styled.img`
   height: 100%;
 
   margin-left: 2.3rem;
   @media only screen and (max-width: 600px) {
     margin-left: 1rem;
   }
+`;
+
+const Icon = styled.img`
+  position: relative;
+  transform: translate(0, 0);
+  height: 100%;
+  z-index: 2;
+`;
+
+const MeepoContainer = styled.div`
+  height: 100%;
+  position: relative;
+  cursor: not-allowed;
+
+  :hover {
+    img:first-child {
+      transform: translate(-50%, -40%);
+    }
+  }
+
+  margin-left: 2.3rem;
+  @media only screen and (max-width: 600px) {
+    margin-left: 1rem;
+  }
+`;
+
+const Lock = styled.img`
+  height: 60%;
+  position: absolute;
+  bottom: 95%;
+  left: 50%;
+  z-index: 1;
+
+  transition: 0.3s all;
+  transform: translate(-50%, 100%);
 `;
 
 const Footer = () => {
@@ -154,7 +183,10 @@ const Footer = () => {
                 <Icon src={link.icon} alt="Link" />
               </Link>
             ))}
-          <Icon src={meepo} alt="Meepo" />
+          <MeepoContainer>
+            <Lock src={lock} alt="Lock" />
+            <Icon src={meepo} alt="Meepo" />
+          </MeepoContainer>
         </Links>
         <DecalOuter>
           <DecalMiddle>
