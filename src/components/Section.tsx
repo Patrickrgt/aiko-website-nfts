@@ -1,8 +1,6 @@
 import { ReactNode } from "react";
 import styled from "styled-components";
 
-import Logo from "./Logo";
-
 const StyledSection = styled.div`
   position: relative;
   display: flex;
@@ -22,38 +20,13 @@ const StyledSection = styled.div`
   }
 `;
 
-const LogoContainer = styled.div`
-  position: absolute;
-  top: 7rem;
-  right: 7rem;
-
-  @media only screen and (max-width: 1400px) {
-    top: 3rem;
-    right: 3rem;
-  }
-
-  @media only screen and (max-width: 600px) {
-    display: none;
-  }
-`;
-
 interface Props {
   id: string;
-  logo?: boolean;
   children: ReactNode;
 }
 
-const Section = ({ id, logo, children }: Props) => {
-  return (
-    <StyledSection id={id}>
-      {children}
-      {logo && (
-        <LogoContainer>
-          <Logo />
-        </LogoContainer>
-      )}
-    </StyledSection>
-  );
+const Section = ({ id, children }: Props) => {
+  return <StyledSection id={id}>{children}</StyledSection>;
 };
 
 export default Section;

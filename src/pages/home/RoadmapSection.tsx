@@ -120,7 +120,7 @@ const RoadmapContainer = styled.div`
 
 const RoadmapSection = () => {
   return (
-    <Section id="roadmap-scroll" logo>
+    <Section id="roadmap-scroll">
       <Container>
         <Background src={girl} alt="Roadmap Aiko" />
         <HeaderContainer>
