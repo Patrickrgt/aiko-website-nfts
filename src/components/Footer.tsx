@@ -22,12 +22,12 @@ const links: LinkType[] = [
   {
     icon: mirror,
     whiteIcon: mirrorWhite,
-    url: "wer",
+    url: "",
   },
   {
     icon: etherscan,
     whiteIcon: etherscanWhite,
-    url: "wer",
+    url: "",
   },
 ];
 
