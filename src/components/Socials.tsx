@@ -12,7 +12,7 @@ interface SocialType {
 const socials: SocialType[] = [
   {
     icon: opensea,
-    link: "https://discord.gg/CaR7RhfDZ6",
+    link: "/",
   },
   {
     icon: discord,
