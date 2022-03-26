@@ -1,6 +1,6 @@
 <svg width="1901.84897" height="1274.57962" xmlns="http://www.w3.org/2000/svg" data-name="Layer 1">
  <defs>
-  <linearGradient y2="0%" x2="100%" y1="0%" x1="0%" id="grad1">
+  <linearGradient y2="0%" x2="0%" y1="100%" x1="0%" id="grad1">
    <stop stop-color="#FFD158" offset="0%"/>
    <stop stop-color="white" offset="100%"/>
   </linearGradient>

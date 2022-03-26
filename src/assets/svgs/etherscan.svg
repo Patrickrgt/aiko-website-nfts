@@ -1,7 +1,7 @@
 <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" width="1587.98093" height="1587.90586" viewBox="0 0 1587.98093 1587.90586">
   <defs>
       <defs>
-      <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%">
+      <linearGradient id="grad1" x1="0%" y1="100%" x2="0%" y2="0%">
         <stop offset="0%" style="stop-color:#FFD158;stop-opacity:1" />
         <stop offset="100%" style="stop-color:white;stop-opacity:1" />
       </linearGradient>
