@@ -118,12 +118,10 @@ const StorySection = () => {
             <Body>
               Aiko Virtual is a 8,888 collection on Ethereum Blockchain about "Cyber Cute", 
               a term used by them to designate the mix of future tech with anime vibes to
-              create a unique aesthetic with broad appeal and an even broader vision.
-             
+              create a unique aesthetic with broad appeal and an even broader vision.          
               Vinne is the artistic mastermind behind our visual direction while Kyo is our resident fashion and design
               ronin. Our goal is simple: create a premium concept straddling the line between art
               and fashion , the digital and physical, and East and West. 
-              
               Aikos represents a never-before-seen concept rich in lore and personalization. 
               Join us on our journey into the virtual unknown. Use "A:\" be virtual.
             </Body>
