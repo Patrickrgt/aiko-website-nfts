@@ -5,6 +5,7 @@ import storyDecal from "../../assets/svgs/story-decal.svg";
 import girlFace from "../../assets/illustrations/girl-face.png";
 import AikoFade from "../../components/AikoFade";
 
+const BODY = `Aiko Virtual is a 8,888 collection on Ethereum Blockchain about "Cyber Cute", a term used by them to designate the mix of future tech with anime vibes to create a unique aesthetic with broad appeal and an even broader vision. Vinne is the artistic mastermind behind our visual direction while Kyo is our resident fashion and design ronin. Our goal is simple: create a premium concept straddling the line between art and fashion , the digital and physical, and East and West. Aikos represents a never-before-seen concept rich in lore and personalization. Join us on our journey into the virtual unknown. Use "A:\\" be virtual.`;
 const Container = styled.div`
   position: relative;
   width: 100%;
@@ -115,16 +116,7 @@ const StorySection = () => {
           <GirlFace src={girlFace} alt="Girls face" />
           <Header>A:\About us</Header>
           <AikoFade>
-            <Body>
-              Aiko Virtual is a 8,888 collection on Ethereum Blockchain about "Cyber Cute", 
-              a term used by them to designate the mix of future tech with anime vibes to
-              create a unique aesthetic with broad appeal and an even broader vision.          
-              Vinne is the artistic mastermind behind our visual direction while Kyo is our resident fashion and design
-              ronin. Our goal is simple: create a premium concept straddling the line between art
-              and fashion , the digital and physical, and East and West. 
-              Aikos represents a never-before-seen concept rich in lore and personalization. 
-              Join us on our journey into the virtual unknown. Use "A:\" be virtual.
-            </Body>
+            <Body>{BODY}</Body>
           </AikoFade>
           <div />
         </Content>
