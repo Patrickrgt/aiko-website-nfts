@@ -30,7 +30,13 @@ const StyledMusic = styled.div`
 
 const PlayButton = styled.button`
   height: 100%;
-  aspect-ratio: 1;
+  width: 7rem;
+  @media only screen and (max-width: 1400px) {
+    width: 6rem;
+  }
+  @media only screen and (max-width: 600px) {
+    width: 4.5rem;
+  }
   cursor: pointer;
   background: linear-gradient(45deg, #ffd062, #ffebbd);
   clip-path: polygon(
@@ -58,7 +64,13 @@ const PlayIcon = styled.img`
 
 const Details = styled.div`
   height: 100%;
-  aspect-ratio: 1.7;
+  width: 11.9rem;
+  @media only screen and (max-width: 1400px) {
+    width: 10.2rem;
+  }
+  @media only screen and (max-width: 600px) {
+    width: 7.65rem;
+  }
   background: linear-gradient(45deg, #b5cde9, white);
   clip-path: polygon(
     5% 0%,
@@ -92,7 +104,14 @@ const DetailsText = styled.div`
 const ImageContainer = styled.div`
   position: relative;
   height: 100%;
-  aspect-ratio: 1;
+
+  width: 7rem;
+  @media only screen and (max-width: 1400px) {
+    width: 6rem;
+  }
+  @media only screen and (max-width: 600px) {
+    width: 4.5rem;
+  }
 `;
 
 interface FrogProps {
