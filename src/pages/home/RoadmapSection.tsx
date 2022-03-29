@@ -42,17 +42,17 @@ const roadmap: RoadmapSeasonType[] = [
       {
         icon: merch,
         header: "Official Merch",
-        body: "Launch our official store website, where NFT holders and the public are able to purchase quality merch (some merch will be unique and exclusive for our holders).",
+        body: "Launch of our official store website, where NFT holders and the public are able to purchase quality merch (some merch will be unique and exclusive for our holders).",
       },
       {
         icon: artists,
         header: "Supporting artists",
-        body: "We will start support NFT artists, and aikommunity will help us to choose what artists we will support! How you will do that? Buying their NFTs and airdropping for holders.",
+        body: "We will start to support NFT artists, and aikommunity will help us to choose what artists we will support! How you will do that? Buying their NFTs and airdropping for holders.",
       },
       {
         icon: events,
         header: "Events",
-        body: "The Aiko brand will be propagated around the world and our community will be a part of this.",
+        body: "Aiko will take the world by storm and we want you to join us on our plans for world domination! (Translation: Aiko brand will spread across the world)",
       },
     ],
   },
