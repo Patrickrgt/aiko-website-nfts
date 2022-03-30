@@ -50,18 +50,17 @@ const teamMembers: TeamMemberType[] = [
     role: "Technical Advisory",
     twitter: "https://twitter.com/shroom_chan",
   },
-
+  {
+    image: kiwi,
+    name: "Kiwi",
+    role: "Technical Advisory",
+    twitter: "https://twitter.com/0xKiwi_",
+  },
   {
     image: chase,
     name: "Chase",
     role: "Developer",
     twitter: "https://twitter.com/chase_manning_",
-  },
-  {
-    image: kiwi,
-    name: "Kiwi",
-    role: "Advisor",
-    twitter: "https://twitter.com/0xKiwi_",
   },
 ];
 
