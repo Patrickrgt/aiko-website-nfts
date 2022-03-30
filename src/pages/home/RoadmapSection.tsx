@@ -42,12 +42,12 @@ const roadmap: RoadmapSeasonType[] = [
       {
         icon: merch,
         header: "Official Merch",
-        body: "Launch of our official store website, where NFT holders and the public are able to purchase quality merch (some merch will be unique and exclusive for our holders).",
+        body: "Launch of our official store website, where NFT holders and the public are able to purchase quality merch (Some merch will be unique and exclusive for our holders).",
       },
       {
         icon: artists,
         header: "Supporting artists",
-        body: "We will start to support NFT artists, and aikommunity will help us to choose what artists we will support! How you will do that? Buying their NFTs and airdropping for holders.",
+        body: "We will start to support NFT artists, and aikommunity are going to help us to choose what artists we will support! How? Buying their NFTs and Airdropping to holders.",
       },
       {
         icon: events,
