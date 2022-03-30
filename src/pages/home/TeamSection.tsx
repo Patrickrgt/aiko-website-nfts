@@ -60,7 +60,7 @@ const teamMembers: TeamMemberType[] = [
   {
     image: kiwi,
     name: "Kiwi",
-    role: "Developer",
+    role: "Advisor",
     twitter: "https://twitter.com/0xKiwi_",
   },
 ];
