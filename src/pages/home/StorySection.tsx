@@ -5,7 +5,6 @@ import storyDecal from "../../assets/svgs/story-decal.svg";
 import girlFace from "../../assets/illustrations/girl-face.png";
 import AikoFade from "../../components/AikoFade";
 
-const BODY = `Aiko Virtual is a collection of 8.888 NFTs that are all about "Cyber Cute", an aesthetic that blends future tech with anime vibes to create a unique look with broad appeal and an even broader vision. Vinne is the artistic mastermind behind our visual direction while Kyo is our resident fashion and design ronin. Our goal is simple: create a premium concept straddling the line between art and fashion , the digital and physical, and East and West. Aikos represents a never-before-seen concept rich in lore and personalization. Join us on our journey into the virtual unknown. Simply accept "A:\" and become virtual.`;
 const Container = styled.div`
   position: relative;
   width: 100%;
@@ -71,6 +70,12 @@ const Content = styled.div`
   }
 `;
 
+const BodyContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
 const Body = styled.p`
   position: relative;
   opacity: 0.9;
@@ -78,7 +83,7 @@ const Body = styled.p`
   font-weight: 400;
   text-align: center;
   line-height: 1.3;
-  margin: 0 auto;
+  margin: 1.3rem auto;
 
   font-size: 2.6rem;
   width: 60%;
@@ -116,7 +121,26 @@ const StorySection = () => {
           <GirlFace src={girlFace} alt="Girls face" />
           <Header>A:\About us</Header>
           <AikoFade>
-            <Body>{BODY}</Body>
+            <BodyContainer>
+              <Body>
+                Aiko Virtual is a collection of 8.888 NFTs that are all about
+                "Cyber Cute", an aesthetic that blends future tech with anime
+                vibes to create a unique look with broad appeal and an even
+                broader vision. Vinne is the artistic mastermind behind our
+                visual direction while Kyo is our resident fashion and design
+                ronin.
+              </Body>
+              <Body>
+                Our goal is simple: create a premium concept straddling the line
+                between art and fashion , the digital and physical, and East and
+                West. Aikos represents a never-before-seen concept rich in lore
+                and personalization.
+              </Body>
+              <Body>
+                Join us on our journey into the virtual unknown. Simply accept
+                "A:\" and become virtual.
+              </Body>
+            </BodyContainer>
           </AikoFade>
           <div />
         </Content>
