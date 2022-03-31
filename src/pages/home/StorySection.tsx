@@ -132,7 +132,7 @@ const StorySection = () => {
               </Body>
               <Body>
                 Our goal is simple: create a premium concept straddling the line
-                between art and fashion , the digital and physical, and East and
+                between art and fashion, the digital and physical, and East and
                 West. Aikos represents a never-before-seen concept rich in lore
                 and personalization.
               </Body>
