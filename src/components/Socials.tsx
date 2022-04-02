@@ -6,13 +6,12 @@ import opensea from "../assets/svgs/opensea.svg";
 
 interface SocialType {
   icon: string;
-  link: string;
+  link?: string;
 }
 
 const socials: SocialType[] = [
   {
     icon: opensea,
-    link: "/",
   },
   {
     icon: discord,

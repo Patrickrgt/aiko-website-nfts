@@ -1,5 +1,18 @@
 import styled from "styled-components";
+
 import AikoFade from "./AikoFade";
+import lock from "../assets/svgs/lock.svg";
+
+const SocialContainer = styled.div`
+  position: relative;
+  cursor: not-allowed;
+
+  :hover {
+    > img:first-child {
+      transform: translate(-50%, -20%);
+    }
+  }
+`;
 
 const StyledSocial = styled.a`
   position: relative;
@@ -9,6 +22,7 @@ const StyledSocial = styled.a`
   aspect-ratio: 1;
   background: #799ecf;
   clip-path: var(--hex);
+  z-index: 2;
 
   width: 5.5rem;
   @media only screen and (max-width: 1400px) {
@@ -19,21 +33,44 @@ const StyledSocial = styled.a`
   }
 `;
 
+const Lock = styled.img`
+  height: 50%;
+  position: absolute;
+  bottom: 95%;
+  left: 50%;
+  z-index: 1;
+
+  transition: 0.3s all;
+  transform: translate(-50%, 100%);
+`;
+
 const Icon = styled.img`
   width: 62%;
 `;
 
 interface Props {
-  link: string;
+  link?: string;
   icon: string;
 }
 
 const Social = ({ link, icon }: Props) => {
   return (
     <AikoFade>
-      <StyledSocial href={link} target="_blank" rel="noopener noreferrer">
-        <Icon src={icon} alt="Social Icon" />
-      </StyledSocial>
+      <>
+        {link && (
+          <StyledSocial href={link} target="_blank" rel="noopener noreferrer">
+            <Icon src={icon} alt="Social Icon" />
+          </StyledSocial>
+        )}
+        {!link && (
+          <SocialContainer>
+            <Lock src={lock} alt="Lock" />
+            <StyledSocial href={link} target="_blank" rel="noopener noreferrer">
+              <Icon src={icon} alt="Social Icon" />
+            </StyledSocial>
+          </SocialContainer>
+        )}
+      </>
     </AikoFade>
   );
 };
