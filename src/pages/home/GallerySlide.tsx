@@ -160,7 +160,7 @@ const GallerySlide = ({ setMainAiko }: Props) => {
           index={index}
           active={index === active}
           onMouseEnter={() => setActive(index)}
-          style={{ zIndex: index === active ? 20 : index }}
+          style={{ zIndex: index === active ? 40 : index }}
           onClick={() => setMainAiko(aiko)}
         >
           <AikoShadow />
