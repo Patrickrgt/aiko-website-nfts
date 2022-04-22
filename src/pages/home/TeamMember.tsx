@@ -92,11 +92,19 @@ const DecalIcon = styled.img`
 const Details = styled.div`
   width: 100%;
   display: flex;
-  height: 5.6rem;
   align-items: center;
-  padding: 1rem 0.7rem;
   background: #42689a;
   transform: translateY(-1px);
+
+  height: 5.6rem;
+  padding: 1rem 0.7rem;
+  @media only screen and (max-width: 1360px) {
+    height: 5rem;
+  }
+  @media only screen and (max-width: 600px) {
+    height: 4.5rem;
+    padding: 0.8rem 0.7rem;
+  }
 `;
 
 interface LineProps {
@@ -120,24 +128,42 @@ const Bio = styled.div`
 `;
 
 const Name = styled.div`
-  font-size: 2.2rem;
   font-weight: 600;
   line-height: 1;
   color: var(--bg);
+
+  font-size: 2.2rem;
+  @media only screen and (max-width: 1360px) {
+    font-size: 2rem;
+  }
+  @media only screen and (max-width: 600px) {
+    font-size: 1.6rem;
+  }
 `;
 
 const Role = styled.div`
-  font-size: 1.2rem;
   font-weight: 600;
   color: var(--bg);
   line-height: 1;
   opacity: 0.9;
+
+  font-size: 1.2rem;
+  @media only screen and (max-width: 1360px) {
+    font-size: 1.1rem;
+  }
+  @media only screen and (max-width: 600px) {
+    font-size: 0.9rem;
+  }
 `;
 
 const TwitterLink = styled.a`
   opacity: 0.5;
   cursor: pointer;
+
   height: 80%;
+  @media only screen and (max-width: 600px) {
+    height: 70%;
+  }
 `;
 
 const TwitterImage = styled.img`

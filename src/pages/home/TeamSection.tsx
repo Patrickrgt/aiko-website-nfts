@@ -90,16 +90,19 @@ const TeamContainer = styled.div`
 const TeamMembers = styled.div`
   position: relative;
   display: grid;
-  grid-row-gap: 1.5rem;
-  grid-column-gap: 2.5rem;
 
   width: 66%;
   max-width: 125rem;
   grid-template-columns: repeat(4, 1fr);
+  grid-row-gap: 1.5rem;
+  grid-column-gap: 2.5rem;
   @media only screen and (max-width: 600px) {
-    width: calc(100vw - 6rem);
+    width: calc(100vw - 3rem);
+    margin-bottom: 7rem;
     max-width: none;
     grid-template-columns: repeat(2, 1fr);
+    grid-row-gap: 0.7rem;
+    grid-column-gap: 1.5rem;
   }
 `;
 
