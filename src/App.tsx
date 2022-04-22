@@ -9,6 +9,8 @@ import { INFURA_ID } from "./app/globals";
 import WalletSelector from "./components/WalletSelector";
 import LoadingScreen from "./components/LoadingScreen";
 
+// Remove redundant assets
+
 const StyledApp = styled.div`
   display: flex;
   flex-direction: column;
