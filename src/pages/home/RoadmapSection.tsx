@@ -97,19 +97,20 @@ const ContentContainer = styled.div`
 const RoadmapContainer = styled.div`
   position: relative;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
   max-width: 182rem;
   margin: auto;
 
   padding: 0 14rem;
   grid-column-gap: 10rem;
+  grid-template-columns: repeat(2, 1fr);
   @media only screen and (max-width: 1400px) {
     padding: 0 6rem;
     grid-column-gap: 6rem;
   }
   @media only screen and (max-width: 600px) {
-    padding: 0 3rem;
+    padding: 0 2rem;
     grid-column-gap: 3rem;
+    grid-template-columns: repeat(1, 1fr);
   }
 `;
 

@@ -23,6 +23,9 @@ const Container = styled.div`
   }
   @media only screen and (max-width: 600px) {
     margin-bottom: 1rem;
+    height: 18rem;
+    padding: 1rem;
+  }
   }
 `;
 
@@ -35,6 +38,9 @@ const BackgroundContainer = styled.div`
   height: 80%;
   @media only screen and (max-width: 1400px) {
     height: 75%;
+  }
+  @media only screen and (max-width: 600px) {
+    height: 80%;
   }
 `;
 
@@ -81,6 +87,18 @@ const Background = styled.div`
       0% 26%
     );
   }
+  @media only screen and (max-width: 600px) {
+    clip-path: polygon(
+      9% 0%,
+      91% 0%,
+      100% 26%,
+      100% 74%,
+      91% 100%,
+      9% 100%,
+      0% 74%,
+      0% 26%
+    );
+  }
 `;
 
 const DecalContainer = styled.div`
@@ -108,15 +126,23 @@ const DecalSection = styled.div`
   @media only screen and (max-width: 1400px) {
     width: 13.5rem;
   }
+  @media only screen and (max-width: 600px) {
+    width: 10.5rem;
+  }
 `;
 
 const ConnectingLine = styled.div`
   background: #5475a1;
-  height: 4rem;
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
+
+  height: 4rem;
   width: 6px;
+  @media only screen and (max-width: 600px) {
+    height: 2rem;
+    width: 5px;
+  }
 `;
 
 const ConnectingLineBottom = styled(ConnectingLine)`
@@ -162,10 +188,14 @@ const Percent = styled.div`
   display: flex;
   justify-content: center;
   align-items: flex-end;
-  font-size: 2rem;
   color: #4f729e;
   font-weight: 700;
   padding-bottom: 0.5rem;
+
+  font-size: 2rem;
+  @media only screen and (max-width: 600px) {
+    font-size: 1.8rem;
+  }
 `;
 
 const Icon = styled.img`
@@ -184,10 +214,10 @@ const TextContainer = styled.div`
 const Text = styled.div`
   font-weight: 300;
   color: #456893;
-  width: 80%;
 
   font-size: 1.6rem;
   line-height: 1.4;
+  width: 80%;
   @media only screen and (max-width: 1400px) {
     font-size: 1.4rem;
     line-height: 1;
@@ -195,6 +225,7 @@ const Text = styled.div`
   @media only screen and (max-width: 600px) {
     font-size: 1.2rem;
     line-height: 1;
+    width: 85%;
   }
 `;
 
