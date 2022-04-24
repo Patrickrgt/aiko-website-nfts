@@ -124,7 +124,7 @@ const RoadmapSection = () => {
         <ContentContainer>
           <RoadmapContainer>
             {roadmap.map((season) => (
-              <RoadmapSeason season={season} />
+              <RoadmapSeason key={season.name} season={season} />
             ))}
           </RoadmapContainer>
         </ContentContainer>
