@@ -12,12 +12,14 @@ const Container = styled.div`
   position: relative;
   display: flex;
   width: 100%;
-  height: 25rem;
-  padding: 1.8rem;
 
   margin-bottom: 1rem;
+  height: 25rem;
+  padding: 1.8rem;
   @media only screen and (max-width: 1400px) {
     margin-bottom: 1rem;
+    height: 22rem;
+    padding: 1.4rem;
   }
   @media only screen and (max-width: 600px) {
     margin-bottom: 1rem;
@@ -29,17 +31,26 @@ const BackgroundContainer = styled.div`
   top: 0;
   left: 0;
   width: 100%;
+
   height: 80%;
+  @media only screen and (max-width: 1400px) {
+    height: 75%;
+  }
 `;
 
 const BackgroundCorner = styled.div`
   position: absolute;
-  top: 0.7rem;
-  left: 0.7rem;
   width: 50%;
   height: 50%;
   background: #50739e;
   border-radius: 1.3rem;
+
+  top: 0.7rem;
+  left: 0.7rem;
+  @media only screen and (max-width: 1400px) {
+    top: 0.5rem;
+    left: 0.5rem;
+  }
 `;
 
 const Background = styled.div`
@@ -47,6 +58,7 @@ const Background = styled.div`
   width: 100%;
   height: 100%;
   background: linear-gradient(45deg, #a2bee6, #e6f0fd);
+
   clip-path: polygon(
     6.5% 0%,
     93.5% 0%,
@@ -57,6 +69,18 @@ const Background = styled.div`
     0% 74%,
     0% 26%
   );
+  @media only screen and (max-width: 1400px) {
+    clip-path: polygon(
+      7.2% 0%,
+      92.8% 0%,
+      100% 26%,
+      100% 74%,
+      92.8% 100%,
+      7.2% 100%,
+      0% 74%,
+      0% 26%
+    );
+  }
 `;
 
 const DecalContainer = styled.div`
@@ -65,7 +89,6 @@ const DecalContainer = styled.div`
 
 const DecalSection = styled.div`
   position: relative;
-  width: 15rem;
   background: #5475a1;
   height: 100%;
   padding: 2px;
@@ -80,15 +103,20 @@ const DecalSection = styled.div`
     0% 82%,
     0% 18%
   );
+
+  width: 15rem;
+  @media only screen and (max-width: 1400px) {
+    width: 13.5rem;
+  }
 `;
 
 const ConnectingLine = styled.div`
-  width: 8px;
   background: #5475a1;
   height: 4rem;
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
+  width: 6px;
 `;
 
 const ConnectingLineBottom = styled(ConnectingLine)`
