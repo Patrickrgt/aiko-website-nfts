@@ -10,7 +10,6 @@ const Container = styled.div`
   height: calc(100vh - 10rem);
   display: flex;
   align-items: center;
-  background: pink;
 
   @media only screen and (max-width: 600px) {
     flex-direction: column;
