@@ -54,6 +54,24 @@ const aikoList = [
 const Wrapper = styled.div`
   position: relative;
   width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  height: calc(100vh - 10rem);
+  @media only screen and (max-width: 600px) {
+    height: auto;
+  }
+`;
+
+const SectionBackground = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to right, #fff8ed, #ffc15e);
+  z-index: -2;
 `;
 
 const Container = styled.div`
@@ -84,7 +102,7 @@ const BackgroundImage = styled.img`
 const Background = styled.div`
   width: 100%;
   height: calc(100vh - 27rem);
-  background: linear-gradient(45deg, #ffffff, #ffc32c);
+  background: linear-gradient(to right, #fed475, #fefaf0);
   clip-path: polygon(
     2.5% 0%,
     97.5% 0%,
@@ -107,19 +125,19 @@ const Background = styled.div`
 
 const HeaderContainer = styled.div`
   position: absolute;
-  top: 0;
   left: 0;
   width: 100%;
   display: flex;
   justify-content: center;
   z-index: 1;
+  transform: translateY(-50%);
 
-  margin-top: 2.7rem;
+  top: 9rem;
   @media only screen and (max-width: 1400px) {
-    margin-top: 2.3rem;
+    top: 5rem;
   }
   @media only screen and (max-width: 600px) {
-    margin-top: 0.5rem;
+    top: 0;
   }
 `;
 
@@ -224,16 +242,17 @@ const GallerySection = () => {
         <BackgroundImage src={background} alt="Background" />
       </MainBackground>
       <Wrapper>
+        <SectionBackground />
         <GalleryDecal />
+        <HeaderContainer>
+          <Header>
+            <HeaderText>
+              Be Part of our <Bold>Universe</Bold>
+            </HeaderText>
+          </Header>
+        </HeaderContainer>
         <Container>
           <Background />
-          <HeaderContainer>
-            <Header>
-              <HeaderText>
-                Be Part of our <Bold>Universe</Bold>
-              </HeaderText>
-            </Header>
-          </HeaderContainer>
           <Content>
             <MainAikoContainer>
               <AikoHex image={mainAiko} mega />
