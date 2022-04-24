@@ -157,6 +157,7 @@ const GallerySlide = ({ setMainAiko }: Props) => {
     <StyledGallerySlide>
       {aikos.map((aiko: string, index: number) => (
         <Aiko
+          key={index}
           index={index}
           active={index === active}
           onMouseEnter={() => setActive(index)}
