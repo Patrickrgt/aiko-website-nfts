@@ -27,6 +27,7 @@ import a16 from "../../assets/gallery/16.jpg";
 import a17 from "../../assets/gallery/17.jpg";
 import a18 from "../../assets/gallery/18.jpg";
 import a19 from "../../assets/gallery/19.jpg";
+import GalleryDecal from "../../components/Decal";
 
 const aikoList = [
   a1,
@@ -173,7 +174,7 @@ const MainAikoContainer = styled.div`
   position: absolute;
   left: 0;
   top: 0;
-  z-index: 25;
+  z-index: 50;
   > div {
     height: 100%;
   }
@@ -223,6 +224,7 @@ const GallerySection = () => {
         <BackgroundImage src={background} alt="Background" />
       </MainBackground>
       <Wrapper>
+        <GalleryDecal />
         <Container>
           <Background />
           <HeaderContainer>
