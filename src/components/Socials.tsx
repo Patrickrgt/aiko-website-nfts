@@ -48,8 +48,8 @@ const StyledSocials = styled.div`
 const Socials = () => {
   return (
     <StyledSocials>
-      {socials.map((social: SocialType) => (
-        <Social icon={social.icon} link={social.link} />
+      {socials.map((social: SocialType, index) => (
+        <Social key={index} icon={social.icon} link={social.link} />
       ))}
     </StyledSocials>
   );
