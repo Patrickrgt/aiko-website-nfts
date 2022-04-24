@@ -6,6 +6,7 @@ import Header from "../../components/Header";
 import AikoHex from "../../components/AikoHex";
 import GallerySlide from "./GallerySlide";
 import play from "../../assets/svgs/play.svg";
+import background from "../../assets/svgs/background.svg";
 
 import a1 from "../../assets/gallery/01.jpg";
 import a2 from "../../assets/gallery/02.jpg";
@@ -49,10 +50,34 @@ const aikoList = [
   a19,
 ];
 
+const Wrapper = styled.div`
+  position: relative;
+  width: 100%;
+`;
+
 const Container = styled.div`
   position: relative;
   width: 100%;
   overflow: hidden;
+`;
+
+const MainBackground = styled.div`
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  left: 50%;
+  width: 150vh;
+  z-index: -1;
+  transform: translate(-50%, -50%) rotate(45deg);
+
+  top: 200%;
+  @media only screen and (max-width: 600px) {
+    top: 470%;
+  }
+`;
+
+const BackgroundImage = styled.img`
+  width: 100%;
 `;
 
 const Background = styled.div`
@@ -193,49 +218,55 @@ const GallerySection = () => {
 
   return (
     <Section id="gallery-scroll">
-      <Container>
-        <Background />
-        <HeaderContainer>
-          <Header>
-            <HeaderText>
-              Be Part of our <Bold>Universe</Bold>
-            </HeaderText>
-          </Header>
-        </HeaderContainer>
-        <Content>
-          <MainAikoContainer>
-            <AikoHex image={mainAiko} mega />
-            <Button
-              left
-              onClick={() => {
-                if (index === 0) {
-                  setMainAiko(aikoList[aikoList.length - 1]);
-                  setIndex(aikoList.length - 1);
-                  return;
-                }
-                setMainAiko(aikoList[index - 1]);
-                setIndex(index - 1);
-              }}
-            >
-              <ButtonIcon left src={play} alt="Left button" />
-            </Button>
-            <Button
-              onClick={() => {
-                if (index === aikoList.length - 1) {
-                  setMainAiko(aikoList[0]);
-                  setIndex(0);
-                  return;
-                }
-                setMainAiko(aikoList[index + 1]);
-                setIndex(index + 1);
-              }}
-            >
-              <ButtonIcon src={play} alt="Right button" />
-            </Button>
-          </MainAikoContainer>
-          <GallerySlide setMainAiko={(aiko: string) => setMainAiko(aiko)} />
-        </Content>
-      </Container>
+      <MainBackground>
+        <BackgroundImage src={background} alt="Background" />
+        <BackgroundImage src={background} alt="Background" />
+      </MainBackground>
+      <Wrapper>
+        <Container>
+          <Background />
+          <HeaderContainer>
+            <Header>
+              <HeaderText>
+                Be Part of our <Bold>Universe</Bold>
+              </HeaderText>
+            </Header>
+          </HeaderContainer>
+          <Content>
+            <MainAikoContainer>
+              <AikoHex image={mainAiko} mega />
+              <Button
+                left
+                onClick={() => {
+                  if (index === 0) {
+                    setMainAiko(aikoList[aikoList.length - 1]);
+                    setIndex(aikoList.length - 1);
+                    return;
+                  }
+                  setMainAiko(aikoList[index - 1]);
+                  setIndex(index - 1);
+                }}
+              >
+                <ButtonIcon left src={play} alt="Left button" />
+              </Button>
+              <Button
+                onClick={() => {
+                  if (index === aikoList.length - 1) {
+                    setMainAiko(aikoList[0]);
+                    setIndex(0);
+                    return;
+                  }
+                  setMainAiko(aikoList[index + 1]);
+                  setIndex(index + 1);
+                }}
+              >
+                <ButtonIcon src={play} alt="Right button" />
+              </Button>
+            </MainAikoContainer>
+            <GallerySlide setMainAiko={(aiko: string) => setMainAiko(aiko)} />
+          </Content>
+        </Container>
+      </Wrapper>
     </Section>
   );
 };
