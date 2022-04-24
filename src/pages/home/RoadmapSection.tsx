@@ -4,7 +4,6 @@ import Header from "../../components/Header";
 import Section from "../../components/Section";
 import RoadmapSeason, { RoadmapSeasonType } from "./RoadmapSeason";
 
-import girl from "../../assets/illustrations/roadmap-girl.png";
 import charity from "../../assets/svgs/charity.svg";
 import airdrop from "../../assets/svgs/airdrop.svg";
 import headquarters from "../../assets/svgs/headquarters.svg";
@@ -22,16 +21,19 @@ const roadmap: RoadmapSeasonType[] = [
         icon: charity,
         header: "Charity",
         body: "Holders will decide between 3 charities to donate every month.",
+        percent: 0,
       },
       {
         icon: airdrop,
         header: "Airdrop",
         body: "Exclusive genesis Aiko NFTs on Foundation will be airdropped to holders, in addition to 1/1 physical merch such as high quality t-shirts, hoodies, etc.",
+        percent: 0,
       },
       {
         icon: headquarters,
         header: "Headquarters",
         body: "Creation of a physical shared space for the Aiko team work together.",
+        percent: 0,
       },
     ],
   },
@@ -43,16 +45,19 @@ const roadmap: RoadmapSeasonType[] = [
         icon: merch,
         header: "Official Merch",
         body: "Launch of our official store website, where NFT holders and the public are able to purchase quality merch (Some merch will be unique and exclusive for our holders).",
+        percent: 0,
       },
       {
         icon: artists,
         header: "Supporting artists",
         body: "We will start to support NFT artists, and aikommunity are going to help us to choose what artists we will support! How? Buying their NFTs and Airdropping to holders.",
+        percent: 0,
       },
       {
         icon: events,
         header: "Events",
         body: "Aiko will take the world by storm and we want you to join us on our plans for world domination! (Translation: Aiko brand will spread across the world)",
+        percent: 0,
       },
     ],
   },
@@ -64,6 +69,7 @@ const roadmap: RoadmapSeasonType[] = [
         icon: question,
         header: "????",
         body: "??????????",
+        percent: 0,
       },
     ],
   },
@@ -75,21 +81,6 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-`;
-
-const Background = styled.img`
-  position: absolute;
-  top: 0;
-  height: 105%;
-
-  left: 2vw;
-  @media only screen and (max-width: 1400px) {
-    left: -3vw;
-  }
-  @media only screen and (max-width: 600px) {
-    left: -10vw;
-    opacity: 0.8;
-  }
 `;
 
 const HeaderContainer = styled.div`
@@ -105,16 +96,20 @@ const ContentContainer = styled.div`
 
 const RoadmapContainer = styled.div`
   position: relative;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  max-width: 182rem;
+  margin: auto;
 
-  max-width: 80rem;
-  margin-left: 42vw;
+  padding: 0 14rem;
+  grid-column-gap: 10rem;
   @media only screen and (max-width: 1400px) {
-    max-width: calc(58vw - 3rem);
+    padding: 0 6rem;
+    grid-column-gap: 6rem;
   }
   @media only screen and (max-width: 600px) {
-    max-width: none;
-    margin-left: 0;
-    padding: 0 2rem;
+    padding: 0 3rem;
+    grid-column-gap: 3rem;
   }
 `;
 
@@ -122,7 +117,6 @@ const RoadmapSection = () => {
   return (
     <Section id="roadmap-scroll">
       <Container>
-        <Background src={girl} alt="Roadmap Aiko" />
         <HeaderContainer>
           <Header>A:\Virtualmap</Header>
         </HeaderContainer>
