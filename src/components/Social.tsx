@@ -20,7 +20,7 @@ const StyledSocial = styled.a`
   justify-content: center;
   align-items: center;
   aspect-ratio: 1;
-  background: #799ecf;
+  background: #a0c0ed;
   clip-path: var(--hex);
   z-index: 2;
 
