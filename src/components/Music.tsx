@@ -1,7 +1,8 @@
 import { useState } from "react";
 import styled from "styled-components";
-import play from "../assets/svgs/play.svg";
-import pause from "../assets/svgs/pause.svg";
+import play from "../assets/svgs/music-play.svg";
+import pause from "../assets/svgs/music-pause.svg";
+import next from "../assets/svgs/music-next.svg";
 import frog from "../assets/illustrations/frog.svg";
 import { useTick } from "../app/hooks/use-tick";
 import AikoFade from "./AikoFade";
@@ -28,7 +29,7 @@ const StyledMusic = styled.div`
   }
 `;
 
-const PlayButton = styled.button`
+const LeftSection = styled.div`
   height: 100%;
   width: 7rem;
   @media only screen and (max-width: 1400px) {
@@ -37,17 +38,16 @@ const PlayButton = styled.button`
   @media only screen and (max-width: 600px) {
     width: 4.5rem;
   }
-  cursor: pointer;
-  background: linear-gradient(45deg, #ffd062, #ffebbd);
+  background: #ffd46c;
   clip-path: polygon(
-    10% 0%,
-    90% 0%,
-    100% 10%,
-    100% 90%,
-    90% 100%,
-    10% 100%,
-    0% 90%,
-    0% 10%
+    30% 0%,
+    100% 0%,
+    100% 0%,
+    100% 100%,
+    100% 100%,
+    30% 100%,
+    0% 70%,
+    0% 30%
   );
   z-index: 1;
 
@@ -58,8 +58,41 @@ const PlayButton = styled.button`
   }
 `;
 
-const PlayIcon = styled.img`
-  height: 45%;
+const ButtonContainer = styled.div`
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  height: calc(100% - 12px);
+  background: #b8913f;
+  display: flex;
+  align-items: center;
+  padding-left: 2px;
+
+  clip-path: polygon(
+    22% 0%,
+    78% 0%,
+    100% 30%,
+    100% 70%,
+    78% 100%,
+    22% 100%,
+    0% 70%,
+    0% 30%
+  );
+`;
+
+const Button = styled.button`
+  height: 40%;
+  margin-right: 2px;
+  cursor: pointer;
+`;
+
+interface ButtonIconProps {
+  rotate?: boolean;
+}
+
+const ButtonIcon = styled.img`
+  height: 100%;
+  transform: ${(props: ButtonIconProps) => props.rotate && "rotate(180deg)"};
 `;
 
 const Details = styled.div`
@@ -71,18 +104,8 @@ const Details = styled.div`
   @media only screen and (max-width: 600px) {
     width: 7.65rem;
   }
-  background: linear-gradient(45deg, #b5cde9, white);
-  clip-path: polygon(
-    5% 0%,
-    95% 0%,
-    100% 10%,
-    100% 90%,
-    90% 100%,
-    5% 100%,
-    0% 90%,
-    0% 10%
-  );
-  padding: 0.8rem 0.9rem;
+  background: #ffd46c;
+  padding: 0.8rem 2.4rem;
   display: flex;
   flex-direction: column;
 `;
@@ -126,7 +149,7 @@ const Frog = styled.img`
   transition: 0.75s all;
   z-index: 2;
   transform: ${(props: FrogProps) =>
-    props.playing ? "translateX(50%)" : "translateX(-7%)"};
+    props.playing ? "translateX(50%)" : "translateX(3%)"};
 `;
 
 const audio = new Audio("/assets/aiko-theme.mp3");
@@ -155,19 +178,7 @@ const Music = ({ atBottom }: Props) => {
   return (
     <StyledMusic atBottom={atBottom}>
       <AikoFade>
-        <PlayButton
-          onClick={() => {
-            if (audio.paused) {
-              setActive(true);
-              audio.play();
-            } else {
-              setActive(false);
-              audio.pause();
-            }
-          }}
-        >
-          <PlayIcon src={audio.paused ? play : pause} alt="Play Icon" />
-        </PlayButton>
+        <LeftSection />
       </AikoFade>
       <AikoFade>
         <Details>
@@ -180,6 +191,30 @@ const Music = ({ atBottom }: Props) => {
           <Frog playing={active} src={frog} alt="Frog" />
         </ImageContainer>
       </AikoFade>
+      <ButtonContainer>
+        <Button>
+          <ButtonIcon rotate src={next} alt="Previous Icon" />
+        </Button>
+        <Button
+          onClick={() => {
+            if (audio.paused) {
+              setActive(true);
+              audio.play();
+            } else {
+              setActive(false);
+              audio.pause();
+            }
+          }}
+        >
+          <ButtonIcon
+            src={audio.paused ? play : pause}
+            alt={`${audio.paused ? "Play" : "Pause"} Icon`}
+          />
+        </Button>
+        <Button>
+          <ButtonIcon src={next} alt="Next Icon" />
+        </Button>
+      </ButtonContainer>
     </StyledMusic>
   );
 };
