@@ -1,14 +1,18 @@
 import styled from "styled-components";
-import { shortenAddress, useEthers } from "@usedapp/core";
-// import { useDispatch } from "react-redux";
-// import { connectWallet } from "../state/uiSlice";
-import Button from "./Button";
+import { shortenAddress, useEtherBalance, useEthers } from "@usedapp/core";
 import { useDevice } from "../app/hooks/use-device";
+import Hexify from "./Hexify";
 
 const StyledConnector = styled.div`
   position: fixed;
   transform: translate(0, 0);
   z-index: 3;
+
+  filter: brightness(1);
+  :hover {
+    transition: 0.3s filter;
+    filter: brightness(0.9);
+  }
 
   top: 7rem;
   right: 7rem;
@@ -22,21 +26,86 @@ const StyledConnector = styled.div`
   }
 `;
 
+interface ButtonProps {
+  active: boolean;
+}
+
+const Button = styled.button`
+  cursor: pointer;
+  position: relative;
+  height: 4.6rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: ${(props: ButtonProps) =>
+    props.active ? "0.7rem 0.9rem" : "0 2.8rem"};
+`;
+
+const Text = styled.span`
+  font-size: 2rem;
+  font-weight: 700;
+`;
+
+const WhiteText = styled(Text)`
+  color: white;
+`;
+
+const BlueText = styled(Text)`
+  color: #4e73a4;
+`;
+
+const Balance = styled.div`
+  background: #4e73a4;
+  height: 100%;
+  padding: 0.5rem;
+  clip-path: polygon(
+    10% 0%,
+    90% 0%,
+    100% 25%,
+    100% 75%,
+    90% 100%,
+    10% 100%,
+    0% 75%,
+    0% 25%
+  );
+  color: #f5d06e;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.7rem;
+  letter-spacing: 0px;
+  margin-left: 0.9rem;
+  font-weight: 600;
+  line-height: 1;
+`;
+
 const Connector = () => {
-  // const dispatch = useDispatch();
-  const { account } = useEthers();
+  const { account, activateBrowserWallet } = useEthers();
   const { isMobile } = useDevice();
+  const ethBalance = useEtherBalance(account);
 
   return (
     <StyledConnector>
-      {/* <Button click={() => dispatch(connectWallet())}> */}
-      <Button disabled primary click={() => console.log("meow")}>
-        {account
-          ? shortenAddress(account)
-          : isMobile
-          ? "<A:\\Connect>"
-          : "<A:\\Connect Wallet>"}
-      </Button>
+      <Hexify>
+        <Button active={!!account} onClick={() => activateBrowserWallet()}>
+          {account && (
+            <>
+              <WhiteText>{"<A:\\"}</WhiteText>
+              <BlueText>{shortenAddress(account)}</BlueText>
+              <Balance>{`${(Number(ethBalance ?? 0) / 10 ** 18).toPrecision(
+                2
+              )} ETH`}</Balance>
+            </>
+          )}
+          {!account && (
+            <>
+              <WhiteText>{"<A:\\"}</WhiteText>
+              <BlueText>{isMobile ? "Connect" : "Connect Wallet"}</BlueText>
+              <WhiteText>{">"}</WhiteText>
+            </>
+          )}
+        </Button>
+      </Hexify>
     </StyledConnector>
   );
 };
