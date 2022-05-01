@@ -221,7 +221,7 @@ const Popup = ({ show, tabs, close }: Props) => {
             <TextArea>meow</TextArea>
           </TextAreaContainer>
         </DetailsContainer>
-        <ExitButton>
+        <ExitButton onClick={() => close()}>
           <ExitImage src={exit} alt="Exit button" />
         </ExitButton>
         <Tabs>
