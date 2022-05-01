@@ -70,7 +70,7 @@ const SectionBackground = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(to right, #fff8ed, #ffc15e);
+  background: linear-gradient(to right, #eff6ff, #90b5e8);
   z-index: -2;
 `;
 
