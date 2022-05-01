@@ -11,6 +11,7 @@ import AikoFade from "../../components/AikoFade";
 import Button from "../../components/Button";
 import Connector from "../../components/Connector";
 import { useDevice } from "../../app/hooks/use-device";
+import Tabs from "../../components/Tabs";
 
 const HeroContainer = styled.div`
   position: relative;
@@ -170,6 +171,7 @@ const HeroSection = () => {
                 {"<mint.exe>"}
               </Button>
             </ButtonContainer>
+            <Tabs />
           </ImageContainer>
         </AikoFade>
       </HeroContainer>
