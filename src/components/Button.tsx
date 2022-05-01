@@ -71,7 +71,7 @@ const Button = ({ children, click, primary, disabled, loading }: Props) => {
 
   return (
     <Container disabled={disabled}>
-      <Hexify dark>
+      <Hexify dark={!primary}>
         <StyledButton
           onClick={() => {
             if (loading || disabled || pending) return;
