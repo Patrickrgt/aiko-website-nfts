@@ -1,4 +1,6 @@
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
+import { setShowingArchives } from "../state/uiSlice";
 
 interface TabType {
   label: string;
@@ -67,10 +69,16 @@ const Dot = styled.div`
 `;
 
 const Tabs = () => {
+  const dispatch = useDispatch();
+
   return (
     <StyledTabs>
       {tabs.map((tab, index) => (
-        <Tab key={tab.label} color={index % 2 === 0 ? "#FFDF6C" : "#FFED90"}>
+        <Tab
+          key={tab.label}
+          color={index % 2 === 0 ? "#FFDF6C" : "#FFED90"}
+          onClick={() => dispatch(setShowingArchives(true))}
+        >
           {tab.label}
           <Dot />
         </Tab>

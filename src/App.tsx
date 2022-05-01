@@ -8,6 +8,7 @@ import Error from "./components/Error";
 import { INFURA_ID } from "./app/globals";
 import WalletSelector from "./components/WalletSelector";
 import LoadingScreen from "./components/LoadingScreen";
+import ArchivesPopup from "./components/ArchivesPopup";
 
 // Remove redundant assets
 
@@ -35,6 +36,7 @@ const App = () => {
           <Footer />
           <Error />
           <WalletSelector />
+          <ArchivesPopup />
         </DAppProvider>
       </StyledApp>
     </Suspense>
