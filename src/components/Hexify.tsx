@@ -28,10 +28,7 @@ interface HexifyProps {
 const BackgroundMiddle = styled.div`
   height: 100%;
   flex: 1;
-  background: ${(props: HexifyProps) =>
-    props.dark
-      ? "linear-gradient(to right, #42689A, #5B7BA3)"
-      : "linear-gradient(to right, #748abd, #92a7c6)"};
+  background: ${(props: HexifyProps) => (props.dark ? "#42689A" : "#8AAAD7")};
 `;
 
 const Content = styled.div`
