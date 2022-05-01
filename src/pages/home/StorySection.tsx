@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import Section from "../../components/Section";
-import storyDecal from "../../assets/svgs/story-decal.png";
+import storyDecal from "../../assets/svgs/about.svg";
 import AikoFade from "../../components/AikoFade";
 import aboutAsset from "../../assets/illustrations/about.png";
 
