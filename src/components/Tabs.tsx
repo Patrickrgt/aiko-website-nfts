@@ -56,6 +56,12 @@ const Tab = styled.button`
   color: #b0a17b;
   font-size: 1.8rem;
   font-weight: 700;
+
+  filter: brightness(1);
+  :hover {
+    transition: filter 0.3s;
+    filter: brightness(0.95);
+  }
 `;
 
 const Dot = styled.div`
