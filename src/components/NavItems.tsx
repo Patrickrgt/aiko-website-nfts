@@ -31,22 +31,70 @@ const navItems: NavItem[] = [
 ];
 
 const StyledNavItems = styled.div`
+  position: relative;
   display: flex;
   align-items: center;
+  padding: 1.5rem 2.3rem;
 
   @media only screen and (max-width: 600px) {
+    padding: 1.1rem 1.3rem;
     margin-top: 2rem;
   }
 `;
 
-const BookEnds = styled.div`
-  color: var(--primary);
+const Background = styled.div`
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
 
-  font-size: 2.4rem;
-  font-weight: 500;
+  background: #a1c1ed;
+  clip-path: polygon(
+    3% 0%,
+    97% 0%,
+    100% 25%,
+    100% 75%,
+    97% 100%,
+    3% 100%,
+    0% 75%,
+    0% 25%
+  );
+`;
+
+const Selection = styled.div`
+  position: absolute;
+  left: 0;
+  background: #4e73a4;
+  clip-path: polygon(
+    17% 0%,
+    83% 0%,
+    100% 25%,
+    100% 75%,
+    83% 100%,
+    17% 100%,
+    0% 75%,
+    0% 25%
+  );
+
+  top: -0.5rem;
+  height: calc(100% + 1rem);
+  width: 12rem;
   @media only screen and (max-width: 600px) {
-    font-size: 1.7rem;
-    transform: translateY(-0.1rem);
+    top: -0.2rem;
+    height: calc(100% + 0.4rem);
+    width: 7.6rem;
+  }
+`;
+
+const BookEnds = styled.div`
+  position: relative;
+  color: white;
+
+  font-size: 1.9rem;
+  font-weight: 700;
+  @media only screen and (max-width: 600px) {
+    font-size: 1.5rem;
   }
 `;
 
@@ -59,20 +107,24 @@ const ItemsContainer = styled.div`
   }
 `;
 
-const NavItem = styled.div`
-  font-weight: 500;
-  line-height: 1;
-  color: var(--primary);
+interface NavItemProps {
+  active: boolean;
+}
 
-  font-size: 2.4rem;
-  margin: 0 1.7rem;
-  @media only screen and (max-width: 1400px) {
-    font-size: 2.1rem;
-    margin: 0 1.3rem;
-  }
+const NavItem = styled.div`
+  line-height: 1;
+  color: ${(props: NavItemProps) => (props.active ? "#F3CE70" : "#557aab")};
+
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin: 0 1.2rem;
+  margin-right: ${(props: NavItemProps) =>
+    props.active ? "2.4rem" : "1.2rem"};
   @media only screen and (max-width: 600px) {
-    font-size: 1.3rem;
-    margin: 0 0.5rem;
+    font-size: 1.2rem;
+    margin: 0 0.6rem;
+    margin-right: ${(props: NavItemProps) =>
+      props.active ? "1.2rem" : "0.6rem"};
   }
 
   filter: brightness(1);
@@ -88,9 +140,11 @@ const NavItems = () => {
   return (
     <AikoFade>
       <StyledNavItems>
+        <Background />
+        <Selection />
         <BookEnds>{"<"}</BookEnds>
         <ItemsContainer>
-          {navItems.map((item: NavItem) => (
+          {navItems.map((item: NavItem, index: number) => (
             <Link
               spy
               smooth
@@ -99,7 +153,7 @@ const NavItems = () => {
               offset={0}
               duration={1000}
             >
-              <NavItem>{item.name}</NavItem>
+              <NavItem active={index === 0}>{item.name}</NavItem>
             </Link>
           ))}
         </ItemsContainer>
