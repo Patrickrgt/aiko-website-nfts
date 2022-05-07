@@ -26,7 +26,7 @@ const StyledSocial = styled.a`
 
   width: 5.5rem;
   @media only screen and (max-width: 1400px) {
-    width: 5rem;
+    width: 4.5rem;
   }
   @media only screen and (max-width: 600px) {
     width: 4.5rem;

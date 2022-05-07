@@ -20,7 +20,7 @@ const StyledMusic = styled.div`
   @media only screen and (max-width: 1400px) {
     bottom: ${(props: Props) => (props.atBottom ? "10rem" : "3rem")};
     left: 3rem;
-    height: 6rem;
+    height: 5.5rem;
   }
   @media only screen and (max-width: 600px) {
     bottom: ${(props: Props) => (props.atBottom ? "8rem" : "1.5rem")};
@@ -33,7 +33,7 @@ const LeftSection = styled.div`
   height: 100%;
   width: 7rem;
   @media only screen and (max-width: 1400px) {
-    width: 6rem;
+    width: 5.5rem;
   }
   @media only screen and (max-width: 600px) {
     width: 4.5rem;
@@ -99,7 +99,7 @@ const Details = styled.div`
   height: 100%;
   width: 11.9rem;
   @media only screen and (max-width: 1400px) {
-    width: 10.2rem;
+    width: 9rem;
   }
   @media only screen and (max-width: 600px) {
     width: 7.65rem;

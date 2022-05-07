@@ -33,17 +33,27 @@ interface ButtonProps {
 const Button = styled.button`
   cursor: pointer;
   position: relative;
-  height: 4.6rem;
   display: flex;
   justify-content: center;
   align-items: center;
+
+  height: 4.6rem;
   padding: ${(props: ButtonProps) =>
     props.active ? "0.7rem 0.9rem" : "0 2.8rem"};
+  @media only screen and (max-width: 1400px) {
+    height: 3.9rem;
+    padding: ${(props: ButtonProps) =>
+      props.active ? "0.6rem 0.8rem" : "0 2.4rem"};
+  }
 `;
 
 const Text = styled.span`
-  font-size: 2rem;
   font-weight: 700;
+
+  font-size: 2rem;
+  @media only screen and (max-width: 1400px) {
+    font-size: 1.7rem;
+  }
 `;
 
 const WhiteText = styled(Text)`
@@ -72,11 +82,15 @@ const Balance = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 1.7rem;
   letter-spacing: 0px;
   margin-left: 0.9rem;
   font-weight: 600;
   line-height: 1;
+
+  font-size: 1.7rem;
+  @media only screen and (max-width: 1400px) {
+    font-size: 1.5rem;
+  }
 `;
 
 const Connector = () => {
