@@ -94,8 +94,8 @@ const TeamMembers = styled.div`
   width: 66%;
   max-width: 125rem;
   grid-template-columns: repeat(4, 1fr);
-  grid-row-gap: 1.5rem;
-  grid-column-gap: 2.5rem;
+  grid-row-gap: 1.1rem;
+  grid-column-gap: 2.1rem;
   @media only screen and (max-width: 600px) {
     width: calc(100vw - 3rem);
     margin-bottom: 7rem;

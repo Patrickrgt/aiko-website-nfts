@@ -15,6 +15,23 @@ const Container = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
+  background: transparent;
+  padding: 3px;
+  clip-path: polygon(
+    6.5% 0%,
+    93.5% 0%,
+    100% 5.5%,
+    100% 100%,
+    100% 100%,
+    0% 100%,
+    0% 100%,
+    0% 5.5%
+  );
+
+  transition: all 0.3s;
+  :hover {
+    background: #ffce62;
+  }
 `;
 
 const ImageBorder = styled.div`
