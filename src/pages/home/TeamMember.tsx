@@ -174,12 +174,17 @@ const Role = styled.div`
 `;
 
 const TwitterLink = styled.a`
-  opacity: 0.5;
   cursor: pointer;
 
   height: 80%;
   @media only screen and (max-width: 600px) {
     height: 70%;
+  }
+
+  opacity: 0.5;
+  transition: opacity 0.3s;
+  :hover {
+    opacity: 1;
   }
 `;
 
