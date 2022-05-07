@@ -38,6 +38,7 @@ const StyledFooter = styled.div`
   justify-content: space-between;
   align-items: center;
   background: linear-gradient(to right, #43679b, #43679b);
+  overflow: hidden;
 
   height: 10rem;
   padding: 2rem 3rem;
@@ -87,19 +88,6 @@ const DecalInner = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-`;
-
-const WhiteOverlay = styled.div`
-  width: 100%;
-  height: 8rem;
-  background: white;
-  position: absolute;
-  bottom: 100%;
-  left: 0;
-
-  @media only screen and (max-width: 600px) {
-    display: none;
-  }
 `;
 
 const Certified = styled.img`
@@ -221,7 +209,6 @@ const Footer = () => {
             <DecalInner />
           </DecalMiddle>
         </DecalOuter>
-        <WhiteOverlay />
       </StyledFooter>
       <Music atBottom={atBottom} />
     </>
