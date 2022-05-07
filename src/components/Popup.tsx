@@ -1,17 +1,22 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import exit from "../assets/svgs/exit.png";
 
+interface PopupProps {
+  show: boolean;
+}
+
 const StyledPopup = styled.div`
   position: fixed;
+  display: flex;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  display: flex;
   justify-content: center;
   align-items: center;
   z-index: 100;
+  transform: scale(${(props: PopupProps) => (props.show ? 1 : 0)});
 `;
 
 const Background = styled.button`
@@ -22,6 +27,9 @@ const Background = styled.button`
   height: 100%;
   background-color: rgba(0, 0, 0, 0.625);
   backdrop-filter: blur(7px);
+
+  transition: opacity 0.3s;
+  opacity: ${(props: PopupProps) => (props.show ? 1 : 0)};
 `;
 
 const Container = styled.div`
@@ -33,6 +41,10 @@ const Container = styled.div`
   border-top-left-radius: 0;
   padding: 3.4rem;
   display: flex;
+
+  transition: all 0.3s;
+  transform: scale(${(props: PopupProps) => (props.show ? 1 : 0)});
+  opacity: ${(props: PopupProps) => (props.show ? 1 : 0)};
 `;
 
 const ImageContainer = styled.div`
@@ -200,16 +212,29 @@ interface Props {
 }
 
 const Popup = ({ show, tabs, close }: Props) => {
+  const [closed, setClosed] = useState(true);
   const [activeTab, setActiveTab] = useState(0);
 
-  if (!show) return null;
+  useEffect(() => {
+    if (show) {
+      console.log("Setting closed", false);
+      setClosed(false);
+    } else {
+      console.log("Setting closed", true);
+      setTimeout(() => {
+        setClosed(true);
+      }, 300);
+    }
+  }, [show]);
+
+  // if (closed) return null;
 
   const tab = tabs[activeTab];
 
   return (
-    <StyledPopup>
-      <Background onClick={() => close()} />
-      <Container>
+    <StyledPopup show={!closed}>
+      <Background show={show} onClick={() => close()} />
+      <Container show={show}>
         <ImageContainer>
           <Image src={tab.image} alt="Decorative illustration" />
         </ImageContainer>
