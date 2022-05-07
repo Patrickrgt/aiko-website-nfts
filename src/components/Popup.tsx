@@ -217,10 +217,10 @@ const Popup = ({ show, tabs, close }: Props) => {
 
   useEffect(() => {
     if (show) {
-      console.log("Setting closed", false);
+      document.body.style.overflowY = "hidden";
       setClosed(false);
     } else {
-      console.log("Setting closed", true);
+      document.body.style.overflowY = "auto";
       setTimeout(() => {
         setClosed(true);
       }, 300);
