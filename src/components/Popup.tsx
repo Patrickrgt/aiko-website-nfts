@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import exit from "../assets/svgs/exit.png";
+import exit from "../assets/svgs/exit.svg";
 
 interface PopupProps {
   show: boolean;
