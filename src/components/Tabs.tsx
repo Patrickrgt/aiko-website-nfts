@@ -25,8 +25,8 @@ const tabs: TabType[] = [
 const StyledTabs = styled.div`
   display: flex;
   position: absolute;
-  top: 22.2%;
-  left: 22.4%;
+  top: 19.5%;
+  left: 22%;
 `;
 
 interface TabProps {
