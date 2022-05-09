@@ -25,8 +25,8 @@ const tabs: TabType[] = [
 const StyledTabs = styled.div`
   display: flex;
   position: absolute;
-  top: 15rem;
-  left: 20rem;
+  top: 22.2%;
+  left: 22.4%;
 `;
 
 interface TabProps {
@@ -36,8 +36,8 @@ interface TabProps {
 const Tab = styled.button`
   position: relative;
   cursor: pointer;
-  width: 16rem;
-  height: 3rem;
+  width: 18rem;
+  height: 3.3rem;
   background: ${(props: TabProps) => props.color};
   margin-right: -1.2rem;
   clip-path: polygon(
@@ -54,7 +54,7 @@ const Tab = styled.button`
   justify-content: center;
   align-items: center;
   color: #b0a17b;
-  font-size: 1.8rem;
+  font-size: 2.1rem;
   font-weight: 700;
 
   filter: brightness(1);
@@ -65,8 +65,8 @@ const Tab = styled.button`
 `;
 
 const Dot = styled.div`
-  width: 6px;
-  height: 6px;
+  width: 7px;
+  height: 7px;
   position: absolute;
   top: 2px;
   right: 3px;
