@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import { Link } from "react-scroll";
+import { useState } from "react";
+
 import AikoFade from "./AikoFade";
 
 interface NavItem {
@@ -34,7 +36,7 @@ const StyledNavItems = styled.div`
   position: relative;
   display: flex;
   align-items: center;
-  padding: 1.5rem 2.3rem;
+  padding: 1.5rem 0;
 
   @media only screen and (max-width: 600px) {
     padding: 1.1rem 1.3rem;
@@ -77,13 +79,14 @@ const Selection = styled.div`
     0% 25%
   );
 
+  transform: translateX(0);
+  transition: transform 0.3s;
+
   top: -0.5rem;
   height: calc(100% + 1rem);
   width: 12rem;
   @media only screen and (max-width: 600px) {
-    top: -0.2rem;
-    height: calc(100% + 0.4rem);
-    width: 7.6rem;
+    display: none;
   }
 `;
 
@@ -94,7 +97,7 @@ const BookEnds = styled.div`
   font-size: 1.9rem;
   font-weight: 700;
   @media only screen and (max-width: 600px) {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
   }
 `;
 
@@ -114,38 +117,35 @@ interface NavItemProps {
 const NavItem = styled.div`
   line-height: 1;
   color: ${(props: NavItemProps) => (props.active ? "#F3CE70" : "#557aab")};
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
   font-size: 1.8rem;
   font-weight: 700;
-  margin: 0 1.2rem;
-  margin-right: ${(props: NavItemProps) =>
-    props.active ? "2.4rem" : "1.2rem"};
+  width: 12rem;
   @media only screen and (max-width: 600px) {
     font-size: 1.2rem;
+    width: auto;
     margin: 0 0.6rem;
-    margin-right: ${(props: NavItemProps) =>
-      props.active ? "1.2rem" : "0.6rem"};
+    color: #557aab;
   }
 
-  filter: brightness(1);
-  transform: translateY(0);
-  transition: filter 0.3s;
-  :hover {
-    filter: brightness(0.75);
-    transform: translateY(2px);
-  }
+  transition: all 0.3s;
 `;
 
 const NavItems = () => {
+  const [active, setActive] = useState(0);
+
   return (
     <AikoFade>
       <StyledNavItems>
         <Background />
-        <Selection />
-        <BookEnds>{"<"}</BookEnds>
+        <Selection style={{ transform: `translateX(${active * 12}rem)` }} />
         <ItemsContainer>
           {navItems.map((item: NavItem, index: number) => (
             <Link
+              onMouseEnter={() => setActive(index)}
               spy
               smooth
               key={item.component}
@@ -153,11 +153,18 @@ const NavItems = () => {
               offset={0}
               duration={1000}
             >
-              <NavItem active={index === 0}>{item.name}</NavItem>
+              <NavItem active={index === active}>
+                {index === 0 && (
+                  <BookEnds style={{ marginRight: "1rem" }}>{"<"}</BookEnds>
+                )}
+                {item.name}
+                {index === navItems.length - 1 && (
+                  <BookEnds style={{ marginLeft: "1rem" }}>{">"}</BookEnds>
+                )}
+              </NavItem>
             </Link>
           ))}
         </ItemsContainer>
-        <BookEnds>{">"}</BookEnds>
       </StyledNavItems>
     </AikoFade>
   );
