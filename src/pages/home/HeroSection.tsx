@@ -41,19 +41,6 @@ const HeroImage = styled.img`
   }
 `;
 
-const Video = styled.video`
-  position: absolute;
-
-  top: 24%;
-  left: 17%;
-  width: 46.8%;
-  @media only screen and (max-width: 600px) {
-    left: -2%;
-    top: 32%;
-    width: 52%;
-  }
-`;
-
 const ButtonContainer = styled.div`
   position: absolute;
   display: flex;
@@ -80,9 +67,6 @@ const HeroSection = () => {
           src={isMobile ? heroImageMobile : heroImage}
           alt="Hero image"
         />
-        <Video autoPlay muted loop>
-          <source src="/assets/flying.webm" type="video/webm" />
-        </Video>
         <ButtonContainer>
           <Button disabled click={() => console.log("meow")}>
             {"<mint.exe>"}
