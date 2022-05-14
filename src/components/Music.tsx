@@ -16,7 +16,7 @@ const StyledMusic = styled.div`
   transition: 0.3s all;
   bottom: ${(props: Props) => (props.atBottom ? "12rem" : "7rem")};
   left: 7rem;
-  height: 7rem;
+  height: 6.5rem;
   @media only screen and (max-width: 1400px) {
     bottom: ${(props: Props) => (props.atBottom ? "10rem" : "3rem")};
     left: 3rem;
@@ -97,7 +97,7 @@ const ButtonIcon = styled.img`
 
 const Details = styled.div`
   height: 100%;
-  width: 11.9rem;
+  width: 10.7rem;
   @media only screen and (max-width: 1400px) {
     width: 9rem;
   }

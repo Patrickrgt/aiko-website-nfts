@@ -24,7 +24,7 @@ const StyledSocial = styled.a`
   clip-path: var(--hex);
   z-index: 2;
 
-  width: 5.5rem;
+  width: 5rem;
   @media only screen and (max-width: 1400px) {
     width: 4.5rem;
   }

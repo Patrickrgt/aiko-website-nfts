@@ -37,9 +37,9 @@ const Button = styled.button`
   justify-content: center;
   align-items: center;
 
-  height: 4.6rem;
+  height: 4.4rem;
   padding: ${(props: ButtonProps) =>
-    props.active ? "0.7rem 0.9rem" : "0 2.8rem"};
+    props.active ? "0.7rem 0.9rem" : "0 2.4rem"};
   @media only screen and (max-width: 1400px) {
     height: 3.9rem;
     padding: ${(props: ButtonProps) =>
