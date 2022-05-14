@@ -16,11 +16,6 @@ const ArchivesPopup = () => {
       close={() => dispatch(setShowingArchives(false))}
       tabs={[
         {
-          label: "Ronin",
-          image: roninImage,
-          icon: roninIcon,
-        },
-        {
           label: "Human",
           image: roninImage,
           icon: humanIcon,
@@ -29,6 +24,11 @@ const ArchivesPopup = () => {
           label: "Droid",
           image: roninImage,
           icon: droidIcon,
+        },
+        {
+          label: "Ronin",
+          image: roninImage,
+          icon: roninIcon,
         },
       ]}
     />
