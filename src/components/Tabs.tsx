@@ -27,6 +27,11 @@ const StyledTabs = styled.div`
   position: absolute;
   top: 19.45%;
   left: 17.4%;
+
+  @media only screen and (max-width: 600px) {
+    top: 21%;
+    left: 10%;
+  }
 `;
 
 interface TabProps {
@@ -36,8 +41,6 @@ interface TabProps {
 const Tab = styled.button`
   position: relative;
   cursor: pointer;
-  width: 18rem;
-  height: 3.3rem;
   background: ${(props: TabProps) => props.color};
   margin-right: -1.2rem;
   clip-path: polygon(
@@ -54,7 +57,6 @@ const Tab = styled.button`
   justify-content: center;
   align-items: center;
   color: #b0a17b;
-  font-size: 2.1rem;
   font-weight: 700;
 
   filter: brightness(1);
@@ -62,16 +64,32 @@ const Tab = styled.button`
     transition: filter 0.3s;
     filter: brightness(0.95);
   }
+
+  width: 18rem;
+  height: 3.3rem;
+  font-size: 2.1rem;
+  @media only screen and (max-width: 600px) {
+    width: 9rem;
+    height: 1.8rem;
+    font-size: 1.2rem;
+  }
 `;
 
 const Dot = styled.div`
-  width: 7px;
-  height: 7px;
   position: absolute;
-  top: 2px;
-  right: 3px;
   background: #b0a17b;
   border-radius: 50%;
+
+  width: 7px;
+  height: 7px;
+  top: 2px;
+  right: 3px;
+  @media only screen and (max-width: 600px) {
+    width: 4px;
+    height: 4px;
+    top: 2px;
+    right: 3px;
+  }
 `;
 
 const Tabs = () => {

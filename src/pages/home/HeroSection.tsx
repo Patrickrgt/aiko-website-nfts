@@ -5,10 +5,8 @@ import Section from "../../components/Section";
 
 import heroImage from "../../assets/illustrations/hero.png";
 import bg from "../../assets/illustrations/bg.svg";
-import heroImageMobile from "../../assets/illustrations/hero-mobile.png";
 import Button from "../../components/Button";
 import Connector from "../../components/Connector";
-import { useDevice } from "../../app/hooks/use-device";
 import Tabs from "../../components/Tabs";
 
 const Background = styled.img`
@@ -26,9 +24,12 @@ const ImageContainer = styled.div`
   align-items: flex-start;
   height: 78vh;
   @media only screen and (max-width: 600px) {
-    transform: translateY(7.4%);
+    transform: translate(6%, 7.4%);
     right: 0;
     top: 0;
+    height: auto;
+    width: 135%;
+    margin: 4rem 0;
   }
 `;
 
@@ -38,6 +39,7 @@ const HeroImage = styled.img`
   @media only screen and (max-width: 600px) {
     transform: none;
     height: auto;
+    width: 100%;
   }
 `;
 
@@ -57,16 +59,11 @@ const ButtonContainer = styled.div`
 `;
 
 const HeroSection = () => {
-  const { isMobile } = useDevice();
-
   return (
     <Section id="home-scroll">
       <Background src={bg} alt="Background" />
       <ImageContainer>
-        <HeroImage
-          src={isMobile ? heroImageMobile : heroImage}
-          alt="Hero image"
-        />
+        <HeroImage src={heroImage} alt="Hero image" />
         <ButtonContainer>
           <Button disabled click={() => console.log("meow")}>
             {"<mint.exe>"}
