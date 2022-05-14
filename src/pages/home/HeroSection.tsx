@@ -25,7 +25,6 @@ const ImageContainer = styled.div`
   justify-content: center;
   align-items: flex-start;
   height: 78vh;
-  width: 100%;
   @media only screen and (max-width: 600px) {
     transform: translateY(7.4%);
     right: 0;
@@ -62,8 +61,8 @@ const ButtonContainer = styled.div`
   align-items: center;
 
   top: 39%;
-  left: 13%;
-  width: 10.8%;
+  left: 5.7%;
+  width: 13.1%;
   height: 27%;
   @media only screen and (max-width: 600px) {
     display: none;
