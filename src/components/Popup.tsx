@@ -253,6 +253,7 @@ const Popup = ({ show, tabs, close }: Props) => {
         <Tabs>
           {tabs.map((tab, index) => (
             <Tab
+              key={index}
               active={index === activeTab}
               index={index}
               onClick={() => setActiveTab(index)}
