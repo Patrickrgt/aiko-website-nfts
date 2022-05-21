@@ -37,10 +37,12 @@ const StyledNavItems = styled.div`
   display: flex;
   align-items: center;
   padding: 1.5rem 0;
+  transform: translateY(-3.7rem);
 
   @media only screen and (max-width: 600px) {
     padding: 1.1rem 1.3rem;
     margin-top: 2rem;
+    transform: translateY(0);
   }
 `;
 
@@ -136,16 +138,27 @@ const NavItem = styled.div`
 
 const NavItems = () => {
   const [active, setActive] = useState(0);
+  const [selection, setSelection] = useState<number | null>(null);
 
   return (
     <AikoFade>
-      <StyledNavItems>
+      <StyledNavItems
+        onMouseLeave={() => {
+          if (!selection) setActive(0);
+          else
+            setTimeout(() => {
+              setActive(0);
+              setSelection(null);
+            }, 1000);
+        }}
+      >
         <Background />
         <Selection style={{ transform: `translateX(${active * 12}rem)` }} />
         <ItemsContainer>
           {navItems.map((item: NavItem, index: number) => (
             <Link
               onMouseEnter={() => setActive(index)}
+              onClick={() => setSelection(index)}
               spy
               smooth
               key={item.component}
