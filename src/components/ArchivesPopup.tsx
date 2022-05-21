@@ -4,6 +4,7 @@ import Popup from "./Popup";
 import roninImage from "../assets/illustrations/ronin.png";
 import roninImageColor from "../assets/illustrations/ronin-color.png";
 import droidImage from "../assets/illustrations/droid.png";
+import droidImageColor from "../assets/illustrations/droid-color.png";
 import humanImage from "../assets/illustrations/human.png";
 import humanImageColor from "../assets/illustrations/human-color.png";
 import roninIcon from "../assets/illustrations/ronin-icon.svg";
@@ -28,7 +29,7 @@ const ArchivesPopup = () => {
         {
           label: "Droid",
           image: droidImage,
-          coloredImage: droidImage,
+          coloredImage: droidImageColor,
           icon: droidIcon,
         },
         {
