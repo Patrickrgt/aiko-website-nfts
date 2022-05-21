@@ -5,9 +5,9 @@ import Section from "../../components/Section";
 
 import heroImage from "../../assets/illustrations/hero.png";
 import bg from "../../assets/illustrations/bg.svg";
-import Button from "../../components/Button";
 import Connector from "../../components/Connector";
 import Tabs from "../../components/Tabs";
+import MintButton from "../../components/MintButton";
 
 const Background = styled.img`
   position: absolute;
@@ -43,33 +43,14 @@ const HeroImage = styled.img`
   }
 `;
 
-const ButtonContainer = styled.div`
-  position: absolute;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  top: 39%;
-  left: 5.7%;
-  width: 13.1%;
-  height: 27%;
-  @media only screen and (max-width: 600px) {
-    display: none;
-  }
-`;
-
 const HeroSection = () => {
   return (
     <Section id="home-scroll">
       <Background src={bg} alt="Background" />
       <ImageContainer>
         <HeroImage src={heroImage} alt="Hero image" />
-        <ButtonContainer>
-          <Button disabled click={() => console.log("meow")}>
-            {"<mint.exe>"}
-          </Button>
-        </ButtonContainer>
         <Tabs />
+        <MintButton />
       </ImageContainer>
       <Connector />
       <NavItems />
