@@ -68,13 +68,14 @@ const ImageContainer = styled.div`
   );
 `;
 
-const Image = styled.img`
-  width: calc(100% - 2.4rem);
-`;
-
-interface ImageOverlayProps {
+interface ImageProps {
   opacity: number;
 }
+
+const Image = styled.img`
+  width: calc(100% - 2.4rem);
+  opacity: ${(props: ImageProps) => props.opacity};
+`;
 
 const ImageOverlay = styled.img`
   width: calc(100% - 2.4rem);
@@ -82,7 +83,7 @@ const ImageOverlay = styled.img`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  opacity: ${(props: ImageOverlayProps) => props.opacity};
+  opacity: ${(props: ImageProps) => props.opacity};
 `;
 
 const DetailsContainer = styled.div`
@@ -252,7 +253,11 @@ const Popup = ({ show, tabs, close }: Props) => {
       <Background show={show} onClick={() => close()} />
       <Container show={show}>
         <ImageContainer>
-          <Image src={tab.image} alt="Decorative illustration" />
+          <Image
+            opacity={1 - opacity}
+            src={tab.image}
+            alt="Decorative illustration"
+          />
           <ImageOverlay
             opacity={opacity}
             src={tab.coloredImage}
