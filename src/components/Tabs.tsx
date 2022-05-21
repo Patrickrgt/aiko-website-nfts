@@ -25,12 +25,16 @@ const tabs: TabType[] = [
 const StyledTabs = styled.div`
   display: flex;
   position: absolute;
+
   bottom: 76.9%;
   left: 17.4%;
-
   @media only screen and (max-width: 600px) {
     top: 21%;
     left: 10%;
+  }
+  @media only screen and (max-width: 1300px) {
+    bottom: 76.9%;
+    left: 15.7%;
   }
 `;
 
@@ -72,6 +76,11 @@ const Tab = styled.button`
     width: 9rem;
     height: 1.8rem;
     font-size: 1.2rem;
+  }
+  @media only screen and (max-width: 1300px) {
+    width: 16rem;
+    height: 3rem;
+    font-size: 1.9rem;
   }
 `;
 
