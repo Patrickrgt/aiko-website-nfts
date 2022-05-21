@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import exit from "../assets/svgs/exit.svg";
 
@@ -48,11 +48,12 @@ const Container = styled.div`
 `;
 
 const ImageContainer = styled.div`
+  position: relative;
   height: 100%;
+  width: 41.5%;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 3.8rem 1.2rem;
   background: #d4aa48;
   border-radius: 1rem;
   clip-path: polygon(
@@ -68,7 +69,20 @@ const ImageContainer = styled.div`
 `;
 
 const Image = styled.img`
-  height: 100%;
+  width: calc(100% - 2.4rem);
+`;
+
+interface ImageOverlayProps {
+  opacity: number;
+}
+
+const ImageOverlay = styled.img`
+  width: calc(100% - 2.4rem);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: ${(props: ImageOverlayProps) => props.opacity};
 `;
 
 const DetailsContainer = styled.div`
@@ -202,6 +216,7 @@ const Tab = styled.button`
 interface TabType {
   label: string;
   image: string;
+  coloredImage: string;
   icon: string;
 }
 
@@ -214,6 +229,9 @@ interface Props {
 const Popup = ({ show, tabs, close }: Props) => {
   const [closed, setClosed] = useState(true);
   const [activeTab, setActiveTab] = useState(0);
+  const scrollAreaRef = useRef<HTMLDivElement>(null);
+  const scrollContentRef = useRef<HTMLDivElement>(null);
+  const [opacity, setOpacity] = useState(0);
 
   useEffect(() => {
     if (show) {
@@ -227,8 +245,6 @@ const Popup = ({ show, tabs, close }: Props) => {
     }
   }, [show]);
 
-  // if (closed) return null;
-
   const tab = tabs[activeTab];
 
   return (
@@ -237,14 +253,29 @@ const Popup = ({ show, tabs, close }: Props) => {
       <Container show={show}>
         <ImageContainer>
           <Image src={tab.image} alt="Decorative illustration" />
+          <ImageOverlay
+            opacity={opacity}
+            src={tab.coloredImage}
+            alt="Decorative illustration colored"
+          />
         </ImageContainer>
         <DetailsContainer>
           <HeaderContainer>
             <Icon src={tab.icon} alt="Decorative icon" />
             <Header>meow</Header>
           </HeaderContainer>
-          <TextAreaContainer>
-            <TextArea>meow</TextArea>
+          <TextAreaContainer
+            ref={scrollAreaRef}
+            onScroll={() => {
+              if (!scrollAreaRef.current || !scrollContentRef.current) return;
+              const scroll = scrollAreaRef.current.scrollTop;
+              const contentHeight = scrollContentRef.current.offsetHeight;
+              const areaHeight = scrollAreaRef.current.offsetHeight;
+              const maxScroll = contentHeight - areaHeight;
+              setOpacity(scroll / maxScroll);
+            }}
+          >
+            <TextArea ref={scrollContentRef}>meow</TextArea>
           </TextAreaContainer>
         </DetailsContainer>
         <ExitButton onClick={() => close()}>
