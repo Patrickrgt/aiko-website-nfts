@@ -25,7 +25,7 @@ const tabs: TabType[] = [
 const StyledTabs = styled.div`
   display: flex;
   position: absolute;
-  top: 19.45%;
+  bottom: 76.9%;
   left: 17.4%;
 
   @media only screen and (max-width: 600px) {
