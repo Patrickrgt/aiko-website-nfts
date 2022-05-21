@@ -88,11 +88,16 @@ const Button = styled.button`
 
 interface ButtonIconProps {
   rotate?: boolean;
+  hide?: boolean;
+  grow?: boolean;
 }
 
 const ButtonIcon = styled.img`
   height: 100%;
-  transform: ${(props: ButtonIconProps) => props.rotate && "rotate(180deg)"};
+  transform: ${(props: ButtonIconProps) => props.rotate && "rotate(180deg)"}
+    scale(${(props: ButtonIconProps) => (props.grow ? "1.7" : "1")})
+    translateX(${(props: ButtonIconProps) => (props.hide ? "120%" : "0")});
+  transition: all 0.75s;
 `;
 
 const Details = styled.div`
@@ -193,7 +198,12 @@ const Music = ({ atBottom }: Props) => {
       </AikoFade>
       <ButtonContainer>
         <Button>
-          <ButtonIcon rotate src={next} alt="Previous Icon" />
+          <ButtonIcon
+            hide={audio.paused}
+            rotate
+            src={next}
+            alt="Previous Icon"
+          />
         </Button>
         <Button
           onClick={() => {
@@ -207,12 +217,13 @@ const Music = ({ atBottom }: Props) => {
           }}
         >
           <ButtonIcon
+            grow={audio.paused}
             src={audio.paused ? play : pause}
             alt={`${audio.paused ? "Play" : "Pause"} Icon`}
           />
         </Button>
         <Button>
-          <ButtonIcon src={next} alt="Next Icon" />
+          <ButtonIcon hide={audio.paused} src={next} alt="Next Icon" />
         </Button>
       </ButtonContainer>
     </StyledMusic>
