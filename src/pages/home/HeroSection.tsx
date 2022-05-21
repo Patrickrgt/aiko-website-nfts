@@ -48,8 +48,8 @@ const HeroSection = () => {
     <Section id="home-scroll">
       <Background src={bg} alt="Background" />
       <ImageContainer>
-        <Tabs />
         <HeroImage src={heroImage} alt="Hero image" />
+        <Tabs />
         <MintButton />
       </ImageContainer>
       <Connector />
