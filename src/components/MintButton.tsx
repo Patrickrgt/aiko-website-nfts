@@ -22,14 +22,10 @@ const ButtonArea = styled.div`
   padding: 0.7rem;
 `;
 
-interface ButtonProps {
-  disabled: boolean;
-}
-
 const StyledMintButton = styled.button`
   position: relative;
-  height: 5.6rem;
-  padding: 0rem 1.2rem;
+  height: 4.9vh;
+  padding: 0 1vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -60,6 +56,7 @@ const ButtonContent = styled.div`
 
 const Text = styled.div`
   font-size: 2.4rem;
+  font-size: 2.13vh;
   font-weight: 400;
 `;
 
@@ -72,9 +69,9 @@ const YellowText = styled(Text)`
 `;
 
 const Countdown = styled.div`
-  font-size: 4rem;
+  font-size: 3.55vh;
   color: white;
-  margin: 0 1.4rem;
+  margin: 0 1.2425vh;
 `;
 
 const MintButton = () => {
