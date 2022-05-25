@@ -126,6 +126,9 @@ const Header = styled.div`
     0% 25%
   );
   padding: 3rem;
+  color: rgb(62, 53, 29);
+  font-size: 1.4rem;
+  font-weight: 500;
 `;
 
 const ExitButton = styled.button`
@@ -176,6 +179,9 @@ const TextAreaContainer = styled.div`
 const TextArea = styled.div`
   width: 100%;
   height: 200%;
+  color: rgb(62, 53, 29);
+  font-size: 1.4rem;
+  font-weight: 500;
 `;
 
 const Tabs = styled.div`
