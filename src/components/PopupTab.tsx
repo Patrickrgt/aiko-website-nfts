@@ -1,3 +1,4 @@
+import { copyFile } from "fs";
 import { useRef, useState } from "react";
 import styled from "styled-components";
 
@@ -91,7 +92,7 @@ const TextAreaContainer = styled.div`
   overflow-y: auto;
   background: #d4aa49;
   border-radius: 1rem;
-  padding: 1rem;
+  padding: 1.5rem 2rem;
 
   /* width */
   ::-webkit-scrollbar {
@@ -120,9 +121,13 @@ const TextAreaContainer = styled.div`
 
 const TextArea = styled.div`
   width: 100%;
-  height: 200%;
+`;
+
+const TextSection = styled.p`
+  width: 100%;
+  margin-bottom: 1.5rem;
   color: rgb(62, 53, 29);
-  font-size: 1.4rem;
+  font-size: 1.9rem;
   font-weight: 500;
 `;
 
@@ -131,6 +136,7 @@ export interface TabType {
   image: string;
   coloredImage: string;
   icon: string;
+  copy: string[];
 }
 
 interface Props {
@@ -173,7 +179,11 @@ const PopupTab = ({ tab }: Props) => {
             setOpacity(scroll / maxScroll);
           }}
         >
-          <TextArea ref={scrollContentRef}>meow</TextArea>
+          <TextArea ref={scrollContentRef}>
+            {tab.copy.map((text: string) => (
+              <TextSection>{text}</TextSection>
+            ))}
+          </TextArea>
         </TextAreaContainer>
       </DetailsContainer>
     </>

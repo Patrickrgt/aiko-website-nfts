@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import exit from "../assets/svgs/exit.svg";
-import PopupTab from "./PopupTab";
+import PopupTab, { TabType } from "./PopupTab";
 
 interface PopupProps {
   show: boolean;
@@ -97,13 +97,6 @@ const Tab = styled.button`
   text-align: left;
   padding: 0 1rem;
 `;
-
-interface TabType {
-  label: string;
-  image: string;
-  coloredImage: string;
-  icon: string;
-}
 
 interface Props {
   show: boolean;
