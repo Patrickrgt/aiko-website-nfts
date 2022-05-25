@@ -132,6 +132,7 @@ const TextSection = styled.p`
 
   :first-letter {
     font-weight: 900;
+    font-size: 2.1rem;
   }
 `;
 
