@@ -28,13 +28,13 @@ const StyledTabs = styled.div`
 
   bottom: 76.9%;
   left: 17.4%;
+  @media only screen and (max-height: 940px) {
+    bottom: 76.9%;
+    left: 15.7%;
+  }
   @media only screen and (max-width: 600px) {
     top: 21%;
     left: 10%;
-  }
-  @media only screen and (max-width: 1300px) {
-    bottom: 76.9%;
-    left: 15.7%;
   }
 `;
 
