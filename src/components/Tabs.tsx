@@ -17,7 +17,7 @@ const tabs: TabType[] = [
     content: <div>info</div>,
   },
   {
-    label: "history",
+    label: "lore",
     content: <div>history</div>,
   },
 ];
@@ -27,10 +27,11 @@ const StyledTabs = styled.div`
   position: absolute;
 
   bottom: 76.9%;
-  left: 17.4%;
-  @media only screen and (max-height: 940px) {
+  left: 17%;
+
+  @media only screen and (min-height: 1100px) {
     bottom: 76.9%;
-    left: 15.7%;
+    left: 17.4%;
   }
   @media only screen and (max-width: 600px) {
     top: 21%;
@@ -69,18 +70,19 @@ const Tab = styled.button`
     filter: brightness(0.95);
   }
 
-  width: 18rem;
-  height: 3.3rem;
-  font-size: 2.1rem;
+  width: 15.95vh;
+  height: 2.66vh;
+  font-size: 1.68vh;
+
+  @media only screen and (min-height: 1100px) {
+    width: 18rem;
+    height: 3.3rem;
+    font-size: 2.1rem;
+  }
   @media only screen and (max-width: 600px) {
     width: 9rem;
     height: 1.8rem;
     font-size: 1.2rem;
-  }
-  @media only screen and (max-width: 1300px) {
-    width: 16rem;
-    height: 3rem;
-    font-size: 1.9rem;
   }
 `;
 
@@ -89,10 +91,16 @@ const Dot = styled.div`
   background: #b0a17b;
   border-radius: 50%;
 
-  width: 7px;
-  height: 7px;
+  width: 0.7vh;
+  height: 0.7vh;
   top: 2px;
   right: 3px;
+  @media only screen and (min-height: 1100px) {
+    width: 7px;
+    height: 7px;
+    top: 2px;
+    right: 3px;
+  }
   @media only screen and (max-width: 600px) {
     width: 4px;
     height: 4px;
