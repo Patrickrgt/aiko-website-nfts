@@ -128,7 +128,11 @@ const TextSection = styled.p`
   margin-bottom: 1.5rem;
   color: #7c693a;
   font-size: 1.9rem;
-  font-weight: 500;
+  font-weight: 400;
+
+  :first-letter {
+    font-weight: 900;
+  }
 `;
 
 export interface TabType {
