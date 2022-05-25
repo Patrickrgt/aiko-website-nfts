@@ -81,7 +81,7 @@ const Header = styled.div`
     0% 25%
   );
   padding: 3rem;
-  color: rgb(62, 53, 29);
+  color: #7c693a;
   font-size: 1.4rem;
   font-weight: 500;
 `;
@@ -126,7 +126,7 @@ const TextArea = styled.div`
 const TextSection = styled.p`
   width: 100%;
   margin-bottom: 1.5rem;
-  color: rgb(62, 53, 29);
+  color: #7c693a;
   font-size: 1.9rem;
   font-weight: 500;
 `;
