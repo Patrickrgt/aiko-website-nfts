@@ -70,11 +70,13 @@ const ImageContainer = styled.div`
 
 interface ImageProps {
   opacity: number;
+  blur?: number;
 }
 
 const Image = styled.img`
   width: calc(100% - 2.4rem);
   opacity: ${(props: ImageProps) => props.opacity};
+  filter: blur(${(props: ImageProps) => (props.blur ? props.blur : 0)}px);
 `;
 
 const ImageOverlay = styled.img`
@@ -254,7 +256,8 @@ const Popup = ({ show, tabs, close }: Props) => {
       <Container show={show}>
         <ImageContainer>
           <Image
-            opacity={1 - opacity}
+            opacity={1 - opacity * 2}
+            blur={opacity * 10}
             src={tab.image}
             alt="Decorative illustration"
           />
