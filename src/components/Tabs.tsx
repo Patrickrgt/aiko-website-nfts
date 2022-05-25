@@ -27,7 +27,7 @@ const StyledTabs = styled.div`
   position: absolute;
 
   bottom: 76.9%;
-  left: 17%;
+  left: 16%;
 
   @media only screen and (min-height: 1100px) {
     bottom: 76.9%;
@@ -70,9 +70,9 @@ const Tab = styled.button`
     filter: brightness(0.95);
   }
 
-  width: 15.95vh;
-  height: 2.66vh;
-  font-size: 1.68vh;
+  width: 17.54vh;
+  height: 2.92vh;
+  font-size: 1.84vh;
 
   @media only screen and (min-height: 1100px) {
     width: 18rem;
@@ -91,8 +91,8 @@ const Dot = styled.div`
   background: #b0a17b;
   border-radius: 50%;
 
-  width: 0.7vh;
-  height: 0.7vh;
+  width: 0.77vh;
+  height: 0.77vh;
   top: 2px;
   right: 3px;
   @media only screen and (min-height: 1100px) {
