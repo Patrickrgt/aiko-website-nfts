@@ -7,6 +7,7 @@ import Footer from "./components/Footer";
 import Error from "./components/Error";
 import { INFURA_ID } from "./app/globals";
 import LoadingScreen from "./components/LoadingScreen";
+import StoryPopup from "./components/StoryPopup";
 import ArchivesPopup from "./components/ArchivesPopup";
 
 const StyledApp = styled.div`
@@ -32,6 +33,7 @@ const App = () => {
           <Outlet />
           <Footer />
           <Error />
+          <StoryPopup />
           <ArchivesPopup />
         </DAppProvider>
       </StyledApp>

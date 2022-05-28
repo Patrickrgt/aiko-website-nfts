@@ -1,11 +1,14 @@
-import { copyFile } from "fs";
 import { useRef, useState } from "react";
 import styled from "styled-components";
+
+const Container = styled.div`
+  position: relative;
+  width: 41.5%;
+`;
 
 const ImageContainer = styled.div`
   position: relative;
   height: 100%;
-  width: 41.5%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -49,48 +52,15 @@ const DetailsContainer = styled.div`
   flex: 1;
   background: #e8bb52;
   border-radius: 1rem;
-  padding: 1rem;
+  padding: 0.7rem;
   display: flex;
   flex-direction: column;
-`;
-
-const HeaderContainer = styled.div`
-  width: 100%;
-  display: flex;
-  height: 12.8rem;
-  margin-bottom: 1rem;
-`;
-
-const Icon = styled.img`
-  height: 100%;
-`;
-
-const Header = styled.div`
-  width: 100%;
-  height: 100%;
-  background: #d4ab48;
-  margin-left: 1rem;
-  clip-path: polygon(
-    7% 0%,
-    93% 0%,
-    100% 25%,
-    100% 75%,
-    93% 100%,
-    7% 100%,
-    0% 75%,
-    0% 25%
-  );
-  padding: 3rem;
-  color: #7c693a;
-  font-size: 1.4rem;
-  font-weight: 500;
 `;
 
 const TextAreaContainer = styled.div`
   width: 100%;
   flex: 1;
   overflow-y: auto;
-  background: #d4aa49;
   border-radius: 1rem;
   padding: 1.5rem 2rem;
 
@@ -136,12 +106,19 @@ const TextSection = styled.p`
   }
 `;
 
+const Badge = styled.img`
+  position: absolute;
+  top: -1rem;
+  left: -1rem;
+  width: 26%;
+`;
+
 export interface TabType {
   label: string;
   image: string;
   coloredImage: string;
-  icon: string;
   copy: string[];
+  badge?: string;
 }
 
 interface Props {
@@ -155,24 +132,23 @@ const PopupTab = ({ tab }: Props) => {
 
   return (
     <>
-      <ImageContainer>
-        <Image
-          opacity={1 - opacity * 2}
-          blur={opacity * 10}
-          src={tab.image}
-          alt="Decorative illustration"
-        />
-        <ImageOverlay
-          opacity={opacity}
-          src={tab.coloredImage}
-          alt="Decorative illustration colored"
-        />
-      </ImageContainer>
+      <Container>
+        <ImageContainer>
+          <Image
+            opacity={1 - opacity * 2}
+            blur={opacity * 10}
+            src={tab.image}
+            alt="Decorative illustration"
+          />
+          <ImageOverlay
+            opacity={opacity}
+            src={tab.coloredImage}
+            alt="Decorative illustration colored"
+          />
+        </ImageContainer>
+        {tab.badge && <Badge src={tab.badge} alt="Badge" />}
+      </Container>
       <DetailsContainer>
-        <HeaderContainer>
-          <Icon src={tab.icon} alt="Decorative icon" />
-          <Header>meow</Header>
-        </HeaderContainer>
         <TextAreaContainer
           ref={scrollAreaRef}
           onScroll={() => {

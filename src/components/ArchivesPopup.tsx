@@ -7,24 +7,20 @@ import droidImage from "../assets/illustrations/droid.png";
 import droidImageColor from "../assets/illustrations/droid-color.png";
 import humanImage from "../assets/illustrations/human.png";
 import humanImageColor from "../assets/illustrations/human-color.png";
-import roninIcon from "../assets/illustrations/ronin-icon.svg";
-import droidIcon from "../assets/illustrations/droid-icon.svg";
-import humanIcon from "../assets/illustrations/human-icon.svg";
 
 const ArchivesPopup = () => {
   const dispatch = useDispatch();
-  const showingArchives = useSelector(selectShowingArchives);
+  const showing = useSelector(selectShowingArchives);
 
   return (
     <Popup
-      show={showingArchives}
+      show={showing}
       close={() => dispatch(setShowingArchives(false))}
       tabs={[
         {
-          label: "Human",
+          label: "Neuroprix",
           image: humanImage,
           coloredImage: humanImageColor,
-          icon: humanIcon,
           copy: [
             "I was there. It was an autumn afternoon, it was cold but there were a lot of people around town. The brown of the leaves covered the whole ground and the clouds made the sky overcast, although it was a nice day, we were apprehensive, nervous, and afraid.",
             "What would my life be like? It was what was going through the minds of each one present, the distress they observed in the sky. Some were skeptical, others had already accepted its demise.",
@@ -33,10 +29,9 @@ const ArchivesPopup = () => {
           ],
         },
         {
-          label: "Droid",
+          label: "Lithium",
           image: droidImage,
           coloredImage: droidImageColor,
-          icon: droidIcon,
           copy: [
             "The world has changed and with it humanity. Lithium has given us extraordinary advances, from the blue glow that surrounds our technology to the most advanced techniques in biomechanics.",
             "The fields were millimetrically monitored; the harvests, perfectly sequenced; the soil, fertile as never seen. The star cities, extremely planned, are crossed by agile, ingenious vehicles, subtly illuminated by the blue light emitted from their interior.",
@@ -46,10 +41,9 @@ const ArchivesPopup = () => {
           ],
         },
         {
-          label: "Ronin",
+          label: "Races",
           image: roninImage,
           coloredImage: roninImageColor,
-          icon: roninIcon,
           copy: [
             "The leaves calmly fly over the great temples of Benkei. There walk sages, young people, women, and children who learn about the wisdom of the ancients, of mountains, waters, and forests. But there are those who, hidden in plain sight or hidden by the shadows of the night, observe the best time to act.",
             "In this beautiful world, we find architectural wonders, spectacular landscapes, and simple people. Peace can be enjoyed, art cultivated, and happiness found as forces secretly clash temples battle, and ancient bloodlines guard their secrets.",

@@ -1,26 +1,11 @@
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
-import { setShowingArchives } from "../state/uiSlice";
+import { setShowingArchives, setShowingStory } from "../state/uiSlice";
 
 interface TabType {
   label: string;
   content: JSX.Element;
 }
-
-const tabs: TabType[] = [
-  {
-    label: "archives",
-    content: <div>archives</div>,
-  },
-  {
-    label: "info",
-    content: <div>info</div>,
-  },
-  {
-    label: "lore",
-    content: <div>history</div>,
-  },
-];
 
 const StyledTabs = styled.div`
   display: flex;
@@ -114,16 +99,18 @@ const Tabs = () => {
 
   return (
     <StyledTabs>
-      {tabs.map((tab, index) => (
-        <Tab
-          key={tab.label}
-          color={index % 2 === 0 ? "#FFDF6C" : "#FFED90"}
-          onClick={() => dispatch(setShowingArchives(true))}
-        >
-          {tab.label}
-          <Dot />
-        </Tab>
-      ))}
+      <Tab color="#FFDF6C" onClick={() => dispatch(setShowingArchives(true))}>
+        archives
+        <Dot />
+      </Tab>
+      <Tab color="#FFED90" onClick={() => console.log("meow")}>
+        info
+        <Dot />
+      </Tab>
+      <Tab color="#FFDF6C" onClick={() => dispatch(setShowingStory(true))}>
+        story
+        <Dot />
+      </Tab>
     </StyledTabs>
   );
 };

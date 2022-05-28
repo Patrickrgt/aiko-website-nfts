@@ -4,11 +4,13 @@ import { RootState } from "./store";
 interface UiState {
   connectingWallet: boolean;
   showingArchives: boolean;
+  showingStory: boolean;
 }
 
 const initialState: UiState = {
   connectingWallet: false,
   showingArchives: false,
+  showingStory: false,
 };
 
 export const uiSlice = createSlice({
@@ -24,16 +26,25 @@ export const uiSlice = createSlice({
     setShowingArchives: (state, action: PayloadAction<boolean>) => {
       state.showingArchives = action.payload;
     },
+    setShowingStory: (state, action: PayloadAction<boolean>) => {
+      state.showingStory = action.payload;
+    },
   },
 });
 
-export const { connectWallet, walletConnected, setShowingArchives } =
-  uiSlice.actions;
+export const {
+  connectWallet,
+  walletConnected,
+  setShowingArchives,
+  setShowingStory,
+} = uiSlice.actions;
 
 export const selectConnectingWallet = (state: RootState) =>
   state.ui.connectingWallet;
 
 export const selectShowingArchives = (state: RootState) =>
   state.ui.showingArchives;
+
+export const selectShowingStory = (state: RootState) => state.ui.showingStory;
 
 export default uiSlice.reducer;
