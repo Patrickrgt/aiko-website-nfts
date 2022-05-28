@@ -17,8 +17,14 @@ const BackgroundContainer = styled.div`
   display: flex;
 `;
 
+interface BackgroundProps {
+  right?: boolean;
+}
+
 const BackgroundEnd = styled.img`
   height: 100%;
+  transform: ${(props: BackgroundProps) =>
+    props.right ? "translateX(-0.5px)" : "translateX(0.5px)"};
 `;
 
 interface HexifyProps {
@@ -53,6 +59,7 @@ const Hexify = ({ children, dark }: Props) => {
         />
         <BackgroundMiddle dark={dark} />
         <BackgroundEnd
+          right
           src={dark ? rightEndDark : rightEnd}
           alt="Background asset"
         />
