@@ -50,6 +50,7 @@ const StoryPopup = () => {
           image: roninImage,
           coloredImage: roninImageColor,
           badge: roninBadge,
+          largerBadge: true,
           copy: [
             "The leaves calmly fly over the great temples of Benkei. There walk sages, young people, women, and children who learn about the wisdom of the ancients, of mountains, waters, and forests. But there are those who, hidden in plain sight or hidden by the shadows of the night, observe the best time to act.",
             "In this beautiful world, we find architectural wonders, spectacular landscapes, and simple people. Peace can be enjoyed, art cultivated, and happiness found as forces secretly clash temples battle, and ancient bloodlines guard their secrets.",

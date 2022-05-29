@@ -106,11 +106,15 @@ const TextSection = styled.p`
   }
 `;
 
+interface BadgeProps {
+  larger?: boolean;
+}
+
 const Badge = styled.img`
   position: absolute;
   top: -1rem;
   left: -1rem;
-  width: 26%;
+  width: ${(props: BadgeProps) => (props.larger ? "26.6%" : "26%")};
 `;
 
 export interface TabType {
@@ -119,6 +123,7 @@ export interface TabType {
   coloredImage: string;
   copy: string[];
   badge?: string;
+  largerBadge?: boolean;
 }
 
 interface Props {
@@ -146,7 +151,9 @@ const PopupTab = ({ tab }: Props) => {
             alt="Decorative illustration colored"
           />
         </ImageContainer>
-        {tab.badge && <Badge src={tab.badge} alt="Badge" />}
+        {tab.badge && (
+          <Badge larger={tab.largerBadge} src={tab.badge} alt="Badge" />
+        )}
       </Container>
       <DetailsContainer>
         <TextAreaContainer
