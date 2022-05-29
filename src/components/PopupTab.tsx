@@ -114,7 +114,7 @@ const Badge = styled.img`
   position: absolute;
   top: -1rem;
   left: -1rem;
-  width: ${(props: BadgeProps) => (props.larger ? "26.6%" : "26%")};
+  width: ${(props: BadgeProps) => (props.larger ? "20%" : "19.5%")};
 `;
 
 export interface TabType {
