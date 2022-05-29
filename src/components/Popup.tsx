@@ -5,6 +5,7 @@ import PopupTab, { TabType } from "./PopupTab";
 
 interface PopupProps {
   show: boolean;
+  small?: boolean;
 }
 
 const StyledPopup = styled.div`
@@ -35,7 +36,7 @@ const Background = styled.button`
 
 const Container = styled.div`
   position: relative;
-  width: 120rem;
+  width: ${(props: PopupProps) => (props.small ? "60rem" : "120rem")};
   height: 65rem;
   background-color: #ffcf61;
   border-radius: 1rem;
@@ -102,9 +103,10 @@ interface Props {
   show: boolean;
   tabs: TabType[];
   close: () => void;
+  small?: boolean;
 }
 
-const Popup = ({ show, tabs, close }: Props) => {
+const Popup = ({ show, tabs, close, small }: Props) => {
   const [closed, setClosed] = useState(true);
   const [activeTab, setActiveTab] = useState(0);
 
@@ -123,7 +125,7 @@ const Popup = ({ show, tabs, close }: Props) => {
   return (
     <StyledPopup show={!closed}>
       <Background show={show} onClick={() => close()} />
-      <Container show={show}>
+      <Container show={show} small={small}>
         {tabs.map((tab: TabType, index: number) => (
           <>
             {index === activeTab && <PopupTab tab={tab} />}
