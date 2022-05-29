@@ -1,6 +1,10 @@
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
-import { setShowingArchives, setShowingStory } from "../state/uiSlice";
+import {
+  // setShowingArchives,
+  setShowingInfo,
+  setShowingStory,
+} from "../state/uiSlice";
 
 interface TabType {
   label: string;
@@ -99,11 +103,11 @@ const Tabs = () => {
 
   return (
     <StyledTabs>
-      <Tab color="#FFDF6C" onClick={() => dispatch(setShowingArchives(true))}>
+      {/* <Tab color="#FFDF6C" onClick={() => dispatch(setShowingArchives(true))}>
         archives
         <Dot />
-      </Tab>
-      <Tab color="#FFED90" onClick={() => console.log("meow")}>
+      </Tab> */}
+      <Tab color="#FFED90" onClick={() => dispatch(setShowingInfo(true))}>
         info
         <Dot />
       </Tab>
