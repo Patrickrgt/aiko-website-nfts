@@ -4,6 +4,7 @@ import styled from "styled-components";
 const Container = styled.div`
   position: relative;
   width: 41.5%;
+  margin-right: 3.4rem;
 `;
 
 const ImageContainer = styled.div`
@@ -47,7 +48,6 @@ const ImageOverlay = styled.img`
 `;
 
 const DetailsContainer = styled.div`
-  margin-left: 3.4rem;
   height: 100%;
   flex: 1;
   background: #e8bb52;
@@ -119,8 +119,8 @@ const Badge = styled.img`
 
 export interface TabType {
   label: string;
-  image: string;
-  coloredImage: string;
+  image?: string;
+  coloredImage?: string;
   copy: string[];
   badge?: string;
   largerBadge?: boolean;
@@ -137,24 +137,26 @@ const PopupTab = ({ tab }: Props) => {
 
   return (
     <>
-      <Container>
-        <ImageContainer>
-          <Image
-            opacity={1 - opacity * 2}
-            blur={opacity * 10}
-            src={tab.image}
-            alt="Decorative illustration"
-          />
-          <ImageOverlay
-            opacity={opacity}
-            src={tab.coloredImage}
-            alt="Decorative illustration colored"
-          />
-        </ImageContainer>
-        {tab.badge && (
-          <Badge larger={tab.largerBadge} src={tab.badge} alt="Badge" />
-        )}
-      </Container>
+      {tab.image && tab.coloredImage && (
+        <Container>
+          <ImageContainer>
+            <Image
+              opacity={1 - opacity * 2}
+              blur={opacity * 10}
+              src={tab.image}
+              alt="Decorative illustration"
+            />
+            <ImageOverlay
+              opacity={opacity}
+              src={tab.coloredImage}
+              alt="Decorative illustration colored"
+            />
+          </ImageContainer>
+          {tab.badge && (
+            <Badge larger={tab.largerBadge} src={tab.badge} alt="Badge" />
+          )}
+        </Container>
+      )}
       <DetailsContainer>
         <TextAreaContainer
           ref={scrollAreaRef}
