@@ -69,6 +69,26 @@ const Image = styled.img`
   width: 100%;
 `;
 
+const ImageOverlay = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: pink;
+  background: linear-gradient(
+    to bottom,
+    rgba(66, 105, 154, 0),
+    rgba(66, 105, 154, 0),
+    rgba(66, 105, 154, 0.75)
+  );
+
+  transition: opacity 0.3s;
+  :hover {
+    opacity: 0;
+  }
+`;
+
 const DecalContainer = styled.div`
   position: absolute;
   display: flex;
@@ -206,6 +226,7 @@ const TeamMember = ({ teamMember }: Props) => {
               src={teamMember.image}
               alt={`${teamMember.name} profile picture`}
             />
+            <ImageOverlay />
             <DecalContainer>
               <DecalBlue>
                 <DecalWhite>

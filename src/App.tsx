@@ -1,5 +1,3 @@
-// TODO Team gradient
-
 import { Suspense } from "react";
 import styled from "styled-components";
 import { Outlet } from "react-router-dom";
