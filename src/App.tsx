@@ -1,3 +1,5 @@
+// TODO Team gradient
+
 import { Suspense } from "react";
 import styled from "styled-components";
 import { Outlet } from "react-router-dom";
@@ -9,6 +11,7 @@ import { INFURA_ID } from "./app/globals";
 import LoadingScreen from "./components/LoadingScreen";
 import StoryPopup from "./components/StoryPopup";
 import ArchivesPopup from "./components/ArchivesPopup";
+import InfoPopup from "./components/InfoPopup";
 
 const StyledApp = styled.div`
   display: flex;
@@ -35,6 +38,7 @@ const App = () => {
           <Error />
           <StoryPopup />
           <ArchivesPopup />
+          <InfoPopup />
         </DAppProvider>
       </StyledApp>
     </Suspense>
