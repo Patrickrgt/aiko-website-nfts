@@ -47,7 +47,12 @@ const ImageOverlay = styled.img`
   opacity: ${(props: ImageProps) => props.opacity};
 `;
 
+interface DetailsProps {
+  hasCorner: boolean;
+}
+
 const DetailsContainer = styled.div`
+  position: relative;
   height: 100%;
   flex: 1;
   background: #e8bb52;
@@ -57,12 +62,34 @@ const DetailsContainer = styled.div`
   flex-direction: column;
 `;
 
+const Corner = styled.img`
+  position: absolute;
+  width: 8.5rem;
+  background: #ffcf61;
+  padding-right: 1.75rem;
+  padding-bottom: 1.75rem;
+  top: 0;
+  left: 0;
+
+  clip-path: polygon(
+    0% 0%,
+    100% 0%,
+    100% 0%,
+    100% 0%,
+    0% 100%,
+    0% 100%,
+    0% 100%,
+    0% 0%
+  );
+`;
+
 const TextAreaContainer = styled.div`
   width: 100%;
   flex: 1;
   overflow-y: auto;
   border-radius: 1rem;
-  padding: 1.5rem 2rem;
+  padding: ${(props: DetailsProps) =>
+    props.hasCorner ? "5rem 4rem" : "1.5rem 2rem"};
 
   /* width */
   ::-webkit-scrollbar {
@@ -106,6 +133,22 @@ const TextSection = styled.p`
   }
 `;
 
+const InfoSection = styled.p`
+  width: 100%;
+  margin-bottom: 1.5rem;
+  color: #7c693a;
+  font-size: 2.3rem;
+  font-weight: 400;
+`;
+
+const Bold = styled.span`
+  width: 100%;
+  margin-bottom: 1.5rem;
+  color: #7c693a;
+  font-weight: 900;
+  font-size: 2.5rem;
+`;
+
 interface BadgeProps {
   larger?: boolean;
 }
@@ -117,13 +160,20 @@ const Badge = styled.img`
   width: ${(props: BadgeProps) => (props.larger ? "20%" : "19.5%")};
 `;
 
+interface InfoType {
+  bold?: string;
+  normal?: string;
+}
+
 export interface TabType {
   label: string;
   image?: string;
   coloredImage?: string;
-  copy: string[];
+  copy?: string[];
+  info?: InfoType[];
   badge?: string;
   largerBadge?: boolean;
+  corner?: string;
 }
 
 interface Props {
@@ -158,7 +208,9 @@ const PopupTab = ({ tab }: Props) => {
         </Container>
       )}
       <DetailsContainer>
+        {tab.corner && <Corner src={tab.corner} alt="Decorative corner" />}
         <TextAreaContainer
+          hasCorner={!!tab.corner}
           ref={scrollAreaRef}
           onScroll={() => {
             if (!scrollAreaRef.current || !scrollContentRef.current) return;
@@ -170,9 +222,15 @@ const PopupTab = ({ tab }: Props) => {
           }}
         >
           <TextArea ref={scrollContentRef}>
-            {tab.copy.map((text: string) => (
-              <TextSection>{text}</TextSection>
-            ))}
+            {tab.copy &&
+              tab.copy.map((text: string) => <TextSection>{text}</TextSection>)}
+            {tab.info &&
+              tab.info.map((info: InfoType) => (
+                <InfoSection>
+                  <Bold>{info.bold}</Bold>
+                  {info.normal}
+                </InfoSection>
+              ))}
           </TextArea>
         </TextAreaContainer>
       </DetailsContainer>
