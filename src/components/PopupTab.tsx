@@ -89,7 +89,7 @@ const TextAreaContainer = styled.div`
   overflow-y: auto;
   border-radius: 1rem;
   padding: ${(props: DetailsProps) =>
-    props.hasCorner ? "5rem 4rem" : "1.5rem 2rem"};
+    props.hasCorner ? "4rem 4rem 0 4rem" : "1.5rem 2rem"};
 
   /* width */
   ::-webkit-scrollbar {
@@ -135,18 +135,34 @@ const TextSection = styled.p`
 
 const InfoSection = styled.p`
   width: 100%;
-  margin-bottom: 1.5rem;
+  margin-bottom: 0.3rem;
+  margin-top: 0.7rem;
   color: #7c693a;
-  font-size: 2.3rem;
+  font-size: 2rem;
   font-weight: 400;
 `;
 
 const Bold = styled.span`
   width: 100%;
-  margin-bottom: 1.5rem;
   color: #7c693a;
   font-weight: 900;
-  font-size: 2.5rem;
+  font-size: 2.2rem;
+`;
+
+const SubInfoSection = styled.p`
+  width: 100%;
+  margin-left: 3rem;
+  margin-bottom: 0.5rem;
+  color: #7c693a;
+  font-size: 1.7rem;
+  font-weight: 400;
+`;
+
+const SubBold = styled.span`
+  width: 100%;
+  color: #7c693a;
+  font-weight: 900;
+  font-size: 1.9rem;
 `;
 
 interface BadgeProps {
@@ -163,6 +179,7 @@ const Badge = styled.img`
 interface InfoType {
   bold?: string;
   normal?: string;
+  subInfo?: InfoType[];
 }
 
 export interface TabType {
@@ -228,10 +245,19 @@ const PopupTab = ({ tab }: Props) => {
               ))}
             {tab.info &&
               tab.info.map((info: InfoType) => (
-                <InfoSection>
-                  <Bold>{info.bold}</Bold>
-                  {info.normal}
-                </InfoSection>
+                <>
+                  <InfoSection>
+                    <Bold>{info.bold}</Bold>
+                    {info.normal}
+                  </InfoSection>
+                  {info.subInfo &&
+                    info.subInfo.map((subInfo: InfoType) => (
+                      <SubInfoSection>
+                        <SubBold>{subInfo.bold}</SubBold>
+                        {subInfo.normal}
+                      </SubInfoSection>
+                    ))}
+                </>
               ))}
           </TextArea>
         </TextAreaContainer>
