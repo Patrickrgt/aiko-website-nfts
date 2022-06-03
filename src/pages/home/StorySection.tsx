@@ -65,7 +65,7 @@ const TextSection = styled.div`
 `;
 
 const TextContent = styled.div`
-  max-width: 90rem;
+  /* max-width: 90rem; */
   display: flex;
   flex-direction: column;
 `;
