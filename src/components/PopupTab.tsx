@@ -223,7 +223,9 @@ const PopupTab = ({ tab }: Props) => {
         >
           <TextArea ref={scrollContentRef}>
             {tab.copy &&
-              tab.copy.map((text: string) => <TextSection>{text}</TextSection>)}
+              tab.copy.map((text: string, index: number) => (
+                <TextSection key={index}>{text}</TextSection>
+              ))}
             {tab.info &&
               tab.info.map((info: InfoType) => (
                 <InfoSection>

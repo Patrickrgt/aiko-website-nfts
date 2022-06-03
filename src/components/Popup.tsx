@@ -128,7 +128,7 @@ const Popup = ({ show, tabs, close, small }: Props) => {
       <Container show={show} small={small}>
         {tabs.map((tab: TabType, index: number) => (
           <>
-            {index === activeTab && <PopupTab tab={tab} />}
+            {index === activeTab && <PopupTab key={index} tab={tab} />}
             <div />
           </>
         ))}
