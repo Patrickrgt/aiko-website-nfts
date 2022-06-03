@@ -43,6 +43,18 @@ const HeroImage = styled.img`
   }
 `;
 
+const Wing = styled.video`
+  position: absolute;
+  top: 25%;
+  left: 18%;
+  width: 45%;
+
+  @media only screen and (max-width: 600px) {
+    left: 12%;
+    width: 41.5%;
+  }
+`;
+
 const HeroSection = () => {
   return (
     <Section id="home-scroll">
@@ -51,6 +63,9 @@ const HeroSection = () => {
         <HeroImage src={heroImage} alt="Hero image" />
         <Tabs />
         <MintButton />
+        <Wing autoPlay muted loop>
+          <source src="/assets/wing.webm" type="video/webm" />
+        </Wing>
       </ImageContainer>
       <Connector />
       <NavItems />
