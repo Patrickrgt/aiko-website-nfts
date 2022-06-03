@@ -7,6 +7,7 @@ import AikoHex from "../../components/AikoHex";
 import GallerySlide from "./GallerySlide";
 import play from "../../assets/svgs/play.svg";
 import background from "../../assets/svgs/background.svg";
+import bubbles from "../../assets/svgs/bubbles.svg";
 
 import a1 from "../../assets/gallery/01.jpg";
 import a2 from "../../assets/gallery/02.jpg";
@@ -83,11 +84,11 @@ const Container = styled.div`
 const MainBackground = styled.div`
   position: absolute;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   left: 50%;
+  transform: translate(-50%, -50%) rotate(45deg);
   width: 150vh;
   z-index: -1;
-  transform: translate(-50%, -50%) rotate(45deg);
 
   top: 200%;
   @media only screen and (max-width: 600px) {
@@ -95,7 +96,28 @@ const MainBackground = styled.div`
   }
 `;
 
+const BackgroundMainContainer = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+`;
+
+const BackgroundBubbleContainer = styled.div`
+  width: 18%;
+  position: absolute;
+  top: 0;
+  left: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+`;
+
 const BackgroundImage = styled.img`
+  width: 100%;
+`;
+
+const BubbleImage = styled.img`
   width: 100%;
 `;
 
@@ -238,8 +260,14 @@ const GallerySection = () => {
   return (
     <Section id="gallery-scroll">
       <MainBackground>
-        <BackgroundImage src={background} alt="Background" />
-        <BackgroundImage src={background} alt="Background" />
+        <BackgroundMainContainer>
+          <BackgroundImage src={background} alt="Background" />
+          <BackgroundImage src={background} alt="Background" />
+        </BackgroundMainContainer>
+        <BackgroundBubbleContainer>
+          <BubbleImage src={bubbles} alt="Background" />
+          <BubbleImage src={bubbles} alt="Background" />
+        </BackgroundBubbleContainer>
       </MainBackground>
       <Wrapper>
         <SectionBackground />
