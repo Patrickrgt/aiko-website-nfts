@@ -1,15 +1,32 @@
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
-import {
-  // setShowingArchives,
-  setShowingInfo,
-  setShowingStory,
-} from "../state/uiSlice";
 
-interface TabType {
-  label: string;
-  content: JSX.Element;
-}
+import { setShowingInfo, setShowingStory } from "../state/uiSlice";
+import lock from "../assets/svgs/lock.svg";
+
+const LockedContainer = styled.div`
+  position: relative;
+
+  :hover {
+    img:first-child {
+      transform: translate(-50%, -40%);
+    }
+    img:nth-child(3) {
+      opacity: 0;
+    }
+  }
+`;
+
+const Lock = styled.img`
+  height: 60%;
+  position: absolute;
+  bottom: 95%;
+  left: 50%;
+  z-index: 1;
+
+  transition: 0.3s all;
+  transform: translate(-50%, 100%);
+`;
 
 const StyledTabs = styled.div`
   display: flex;
@@ -30,11 +47,12 @@ const StyledTabs = styled.div`
 
 interface TabProps {
   color: string;
+  locked?: boolean;
 }
 
 const Tab = styled.button`
   position: relative;
-  cursor: pointer;
+  cursor: ${(props: TabProps) => (props.locked ? "not-allowed" : "pointer")};
   background: ${(props: TabProps) => props.color};
   margin-right: -1.2rem;
   clip-path: polygon(
@@ -73,6 +91,10 @@ const Tab = styled.button`
     height: 1.8rem;
     font-size: 1.2rem;
   }
+
+  z-index: 2;
+  /* transition: 0.3s all; */
+  transform: translateX(0);
 `;
 
 const Dot = styled.div`
@@ -103,18 +125,21 @@ const Tabs = () => {
 
   return (
     <StyledTabs>
-      {/* <Tab color="#FFDF6C" onClick={() => dispatch(setShowingArchives(true))}>
-        archives
-        <Dot />
-      </Tab> */}
-      <Tab color="#FFED90" onClick={() => dispatch(setShowingInfo(true))}>
+      <Tab color="#FFDF6C" onClick={() => dispatch(setShowingInfo(true))}>
         info
         <Dot />
       </Tab>
-      <Tab color="#FFDF6C" onClick={() => dispatch(setShowingStory(true))}>
+      <Tab color="#FFED90" onClick={() => dispatch(setShowingStory(true))}>
         story
         <Dot />
       </Tab>
+      <LockedContainer>
+        <Lock src={lock} alt="Lock" />
+        <Tab locked color="#FFDF6C" onClick={() => console.log("Disabled")}>
+          archives
+          <Dot />
+        </Tab>
+      </LockedContainer>
     </StyledTabs>
   );
 };
