@@ -18,27 +18,27 @@ const InfoPopup = () => {
           label: "Info",
           info: [
             {
-              bold: "A\\:Token >",
+              bold: "A\\:Token > ",
               normal: "ERC721-A",
             },
             {
-              bold: "A:\\Total Supply >",
+              bold: "A:\\Total Supply > ",
               normal: "8,888 AIKOs",
             },
             {
-              bold: "A:\\Blockchain >",
+              bold: "A:\\Blockchain > ",
               normal: "Ethereum",
             },
             {
-              bold: "A:\\Traits >",
+              bold: "A:\\Traits > ",
               normal: "XXX",
             },
             {
-              bold: "A:\\Mint Date >",
+              bold: "A:\\Mint Date > ",
               normal: "TBA",
             },
             {
-              bold: "A:\\Mint Price >",
+              bold: "A:\\Mint Price > ",
               normal: "TBA",
             },
           ],
