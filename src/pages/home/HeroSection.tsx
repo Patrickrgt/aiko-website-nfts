@@ -45,13 +45,13 @@ const HeroImage = styled.img`
 
 const Wing = styled.video`
   position: absolute;
-  top: 25%;
-  left: 18%;
-  width: 45%;
+  top: 27%;
+  left: 24.5%;
+  width: 38.25%;
 
   @media only screen and (max-width: 600px) {
-    left: 12%;
-    width: 41.5%;
+    left: 20.5%;
+    width: 36%;
   }
 `;
 
