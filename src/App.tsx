@@ -3,7 +3,6 @@ import styled from "styled-components";
 import { Outlet } from "react-router-dom";
 import { ChainId, Config, DAppProvider } from "@usedapp/core";
 
-import Footer from "./components/Footer";
 import Error from "./components/Error";
 import { INFURA_ID } from "./app/globals";
 import LoadingScreen from "./components/LoadingScreen";
