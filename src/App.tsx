@@ -32,7 +32,6 @@ const App = () => {
       <StyledApp>
         <DAppProvider config={config}>
           <Outlet />
-          <Footer />
           <Error />
           <StoryPopup />
           <ArchivesPopup />
