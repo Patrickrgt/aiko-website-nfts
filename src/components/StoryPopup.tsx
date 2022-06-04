@@ -26,10 +26,11 @@ const StoryPopup = () => {
           coloredImage: humanImageColor,
           badge: humanBadge,
           copy: [
-            "I was there. It was an autumn afternoon, it was cold but there were a lot of people around town. The brown of the leaves covered the whole ground and the clouds made the sky overcast, although it was a nice day, we were apprehensive, nervous, and afraid.",
-            "What would my life be like? It was what was going through the minds of each one present, the distress they observed in the sky. Some were skeptical, others had already accepted its demise.",
-            "A few hours later, it started. The clouds parted, the sky transmuted to fiery orange, and that's when we saw it. That gigantic rock covered the sun, chased away the clouds, and ignited in flames, screams filled my ears and tears ran down the faces of that crowd. Some knelt, overcome with despair or faith in a miracle.",
-            "From a moment on, thousands, maybe millions of fragments began to disperse. That meteor had broken up, hitting every part of the planet, without exception. We had been warned about his fall, we knew there was no escape, but in fact, a miracle happened. Many died, it is true, but the world and much of humanity was alive. I thought it was my end, but actually, it was the beginning. Lithium was among us.",
+            "I was there on that fateful autumn afternoon. It was cold, but there were droves of people around town. The brown leaves matted the ground and the clouds gave the sky a subtle overcast tone. A nice day by all measures, yet we were all apprehensive, nervous, and most of all, afraid.",
+            "“Is there an afterlife?” was our shared thought as each person observed the distress taking form in the sky. Some were still skeptical, while others had already accepted their dismal fate.",
+            "It started a few minutes later. The clouds parted, the sky transmuted to a fiery orange cacophony, and that's when we saw it. A titanic rocky mass eclipsed the sun, vaporized the clouds, and ignited the stratosphere. Screams filled the air and a river of tears ran down the crowd’s face. Some knelt, either in despair or in hopes of a miracle.",
+            "From that moment on, countless fragments began to disperse. The meteor had crumbled, mercilessly striking the planet over and over again. We had been warned about the fall and knew, were it to happen, that there would be no escape. Yet, when we opened our eyes, a miracle was at hand.",
+            "Lithium was among us.",
           ],
         },
         {
@@ -38,11 +39,10 @@ const StoryPopup = () => {
           coloredImage: droidImageColor,
           badge: droidBadge,
           copy: [
-            "The world has changed and with it humanity. Lithium has given us extraordinary advances, from the blue glow that surrounds our technology to the most advanced techniques in biomechanics.",
-            "The fields were millimetrically monitored; the harvests, perfectly sequenced; the soil, fertile as never seen. The star cities, extremely planned, are crossed by agile, ingenious vehicles, subtly illuminated by the blue light emitted from their interior.",
-            "Humanity is no longer alone, droids designed and manufactured by it walk among us in this new world. Efficient, intelligent, fast, and practical, they command aircraft, lead patrols, assist civilians or explore space.",
-            "All energy that powers each machine, each droid, each production process, and each city, is powered by a lithium star. This technological miracle is responsible for everything you see, eat and use.",
-            "Illnesses? This world no longer knows this word. Medicine, like humanity, has reached its peak. No more pests, no more deficiencies, no more limits.",
+            "The world has changed with the advent of Lithium and with it, humanity. The substance had granted us extraordinary advances in technology, prevalent in everything from the faint blue glow of our biomecha to our superhuman strength and resilience.",
+            "The production fields were meticulously monitored, the harvests perfectly sequenced, the soil, supercharged. Our star cities basked in their own blue splendor as agile vehicles zipped between ports and docks throughout its exterior.",
+            "No longer can humanity call itself the sole purveyor of intelligence. Droids now walk among us in this brave new world. Efficient, intelligent, fast, and practical, they command aircraft, police the city, and even explore the dark celestial unknown.",
+            "Where does the raw energy for all this come from? My dear friend, “In Lithium omnia responsa” - all answers lie in Lithium. Each joule of energy that powers each machine, droid, and city is sourced from Lithium stars. A true technological miracle.",
           ],
         },
         {
@@ -52,11 +52,11 @@ const StoryPopup = () => {
           badge: roninBadge,
           largerBadge: true,
           copy: [
-            "The leaves calmly fly over the great temples of Benkei. There walk sages, young people, women, and children who learn about the wisdom of the ancients, of mountains, waters, and forests. But there are those who, hidden in plain sight or hidden by the shadows of the night, observe the best time to act.",
-            "In this beautiful world, we find architectural wonders, spectacular landscapes, and simple people. Peace can be enjoyed, art cultivated, and happiness found as forces secretly clash temples battle, and ancient bloodlines guard their secrets.",
-            "Ronin, masters in the art of war, are the warriors specialized in infiltrating, guarding, and protecting the lords of these lands. They are experts in disguise, deterrence, and discretion, using every means at their disposal for their purpose, even at the cost of their honorable life.",
-            "More sacred than any temple, Benkei could not stand without its Inochi no ki, the great tree that spreads its roots and fruits over long distances, bringing balance to the unbalanced and peace to the desperate. But what would happen if she was in her last fruits? If her roots no longer supported her? If its existence, which symbolizes life in Benkei, was ending?",
-            "That great tree sacred to all, which once symbolized balance, which once brought peace, which once brought hope with its fruits and its roots, is now dry, twisted, withdrawing its roots and bearing its last fruits. Misfortune, torment, scarcity. The end is inevitable.",
+            "Leaves flutter in zen spirals over the great temples of Benkei. There walk sages and men who yearn for the wisdom of ancients. But there are also those who, whether hidden in plain sight or by deep shadows of the night, carefully keep watch.",
+            "In this beautiful world lie architectural wonders, spectacular landscapes, and humble souls. Peace is enjoyed, art cultivated, and happiness found even as larger forces clash, rival temples battle, and ancient bloodlines guard their secrets.",
+            "Ronin, masters in the art of war, are warriors that specialize in infiltration, guarding, and monitoring the lords of these lands. They are experts in disguise and discretion, using every means at their disposal to achieve their purpose. Even at the cost of their honorable lives.",
+            "More sacred than any temple, Benkei would be nothing without Inochi no ki, the great tree that spreads its roots and canopy as far as the eye can see, bringing balance to the unsettled and peace to the desperate. But what would happen if her branches were to wilt, if her roots no longer supported her? What would happen to Benkei and its concept of life?",
+            "That great sacred tree, which once symbolized balance, which once brought peace, which once brought hope in its generous harvests, is now dry and twisted. Nothing more than a mere shadow of its former self. The end is nigh.",
           ],
         },
       ]}
