@@ -124,12 +124,12 @@ const TextSection = styled.p`
   width: 100%;
   margin-bottom: 1.5rem;
   color: #7c693a;
-  font-size: 2.1rem;
+  font-size: 2.4rem;
   font-weight: 400;
 
   :first-letter {
     font-weight: 900;
-    font-size: 2.3rem;
+    font-size: 2.6rem;
   }
 `;
 
