@@ -124,12 +124,12 @@ const TextSection = styled.p`
   width: 100%;
   margin-bottom: 1.5rem;
   color: #7c693a;
-  font-size: 1.9rem;
+  font-size: 2.1rem;
   font-weight: 400;
 
   :first-letter {
     font-weight: 900;
-    font-size: 2.1rem;
+    font-size: 2.3rem;
   }
 `;
 
@@ -138,7 +138,7 @@ const InfoSection = styled.p`
   margin-bottom: 0.3rem;
   margin-top: 0.7rem;
   color: #7c693a;
-  font-size: 2rem;
+  font-size: 2.2rem;
   font-weight: 400;
 `;
 
@@ -146,7 +146,7 @@ const Bold = styled.span`
   width: 100%;
   color: #7c693a;
   font-weight: 900;
-  font-size: 2.2rem;
+  font-size: 2.4rem;
 `;
 
 const SubInfoSection = styled.p`
@@ -154,7 +154,7 @@ const SubInfoSection = styled.p`
   margin-left: 3rem;
   margin-bottom: 0.5rem;
   color: #7c693a;
-  font-size: 1.7rem;
+  font-size: 1.9rem;
   font-weight: 400;
 `;
 
@@ -162,7 +162,7 @@ const SubBold = styled.span`
   width: 100%;
   color: #7c693a;
   font-weight: 900;
-  font-size: 1.9rem;
+  font-size: 2.1rem;
 `;
 
 interface BadgeProps {
