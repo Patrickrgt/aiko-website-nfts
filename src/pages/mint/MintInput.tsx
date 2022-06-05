@@ -1,6 +1,13 @@
 import { useState } from "react";
 import styled from "styled-components";
 
+const Container = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
 const StyledMintInput = styled.div`
   display: flex;
 `;
@@ -8,6 +15,12 @@ const StyledMintInput = styled.div`
 const TextContainer = styled.div`
   display: flex;
   flex-direction: column;
+`;
+
+const Intro = styled.div`
+  color: white;
+  font-size: 3rem;
+  font-weight: 400;
 `;
 
 const Header = styled.div`
@@ -18,6 +31,13 @@ const Header = styled.div`
 
 const SubHeader = styled.div`
   color: #56729e;
+  font-size: 1.6rem;
+  font-weight: 800;
+  text-transform: uppercase;
+`;
+
+const Error = styled.div`
+  color: red;
   font-size: 1.6rem;
   font-weight: 800;
   text-transform: uppercase;
@@ -49,24 +69,36 @@ const Input = styled.input`
   }
 `;
 
-const MintInput = () => {
-  const [amount, setAmount] = useState("");
+interface Props {
+  setAmount: (v: number | null) => void;
+  amount: number | null;
+  error: string;
+}
+
+const MintInput = ({ setAmount, amount, error }: Props) => {
   const max = 2;
 
   return (
-    <StyledMintInput>
-      <TextContainer>
-        <Header>Insert the Number Here</Header>
-        <SubHeader>{`You have ${max} spots left`}</SubHeader>
-      </TextContainer>
-      <Input
-        type="number"
-        maxLength={max}
-        placeholder={max.toString()}
-        value={amount}
-        onChange={(e) => setAmount(e.target.value)}
-      />
-    </StyledMintInput>
+    <Container>
+      <Intro>{"A:\\How many Aiko's do you want to mint?"}</Intro>
+      <StyledMintInput>
+        <TextContainer>
+          <Header>Insert the Number Here</Header>
+          {error && <Error>{error}</Error>}
+          {!error && <SubHeader>{`You have ${max} spots left`}</SubHeader>}
+        </TextContainer>
+        <Input
+          type="number"
+          maxLength={max}
+          placeholder={max.toString()}
+          value={amount ? amount.toString() : ""}
+          onChange={(e) => {
+            if (e.target.value === "") setAmount(null);
+            setAmount(Number(e.target.value));
+          }}
+        />
+      </StyledMintInput>
+    </Container>
   );
 };
 

@@ -1,3 +1,4 @@
+import { useState } from "react";
 import styled from "styled-components";
 import Connector from "../../components/Connector";
 import Hexify from "../../components/Hexify";
@@ -81,12 +82,6 @@ const Image = styled.div`
   background: pink;
 `;
 
-const Header = styled.h1`
-  color: white;
-  font-size: 3rem;
-  font-weight: 400;
-`;
-
 const Icon = styled.div`
   height: 6rem;
   aspect-ratio: 1;
@@ -113,6 +108,16 @@ const Barcode = styled.div`
 `;
 
 const MintPage = () => {
+  const [amount, setAmount] = useState<number | null>(null);
+  const max = 2;
+
+  const error = () => {
+    if (!amount) return "";
+    if (amount <= 0) return "Amount must be greater than 0";
+    if (amount > max) return `Amount must be less than ${max}`;
+    return "";
+  };
+
   return (
     <StyledMintPage>
       <Content>
@@ -125,8 +130,11 @@ const MintPage = () => {
             <Connector dark />
           </TopSection>
           <Image />
-          <Header>{"A:\\How many Aiko's do you want to mint?"}</Header>
-          <MintInput />
+          <MintInput
+            amount={amount}
+            setAmount={(v: number | null) => setAmount(v)}
+            error={error()}
+          />
           <Icon />
           <MintProgress />
           <MintButton />
