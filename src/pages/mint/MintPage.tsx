@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import Connector from "../../components/Connector";
 import Hexify from "../../components/Hexify";
+import MintButton from "./MintButton";
 import MintInput from "./MintInput";
 import MintProgress from "./MintProgess";
 
@@ -82,8 +83,8 @@ const Image = styled.div`
 
 const Header = styled.h1`
   color: white;
-  font-size: 2.9rem;
-  font-weight: 500;
+  font-size: 3rem;
+  font-weight: 400;
 `;
 
 const Icon = styled.div`
@@ -109,6 +110,7 @@ const MintPage = () => {
           <MintInput />
           <Icon />
           <MintProgress />
+          <MintButton />
           <div>meow</div>
         </MainSection>
       </Content>
