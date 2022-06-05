@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import Connector from "../../components/Connector";
 import Hexify from "../../components/Hexify";
+import MintInput from "./MintInput";
+import MintProgress from "./MintProgess";
 
 const StyledMintPage = styled.div`
   position: fixed;
@@ -9,6 +11,28 @@ const StyledMintPage = styled.div`
   width: 100%;
   height: 100%;
   display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #383838;
+`;
+
+const Content = styled.div`
+  display: flex;
+  height: 100%;
+  width: 100%;
+  max-height: 83rem;
+  max-width: 170rem;
+
+  clip-path: polygon(
+    1.5% 0%,
+    98.5% 0%,
+    100% 3%,
+    100% 97%,
+    98.5% 100%,
+    1.5% 100%,
+    0% 97%,
+    0% 3%
+  );
 `;
 
 const IllustrationSection = styled.div`
@@ -50,18 +74,44 @@ const Stage = styled.div`
   font-weight: 400;
 `;
 
+const Image = styled.div`
+  height: 25rem;
+  aspect-ratio: 1;
+  background: pink;
+`;
+
+const Header = styled.h1`
+  color: white;
+  font-size: 2.9rem;
+  font-weight: 500;
+`;
+
+const Icon = styled.div`
+  height: 6rem;
+  aspect-ratio: 1;
+  background: pink;
+`;
+
 const MintPage = () => {
   return (
     <StyledMintPage>
-      <IllustrationSection>illustration</IllustrationSection>
-      <MainSection>
-        <TopSection>
-          <Hexify dark>
-            <Stage>{"<stage one>"}</Stage>
-          </Hexify>
-          <Connector dark />
-        </TopSection>
-      </MainSection>
+      <Content>
+        <IllustrationSection>illustration</IllustrationSection>
+        <MainSection>
+          <TopSection>
+            <Hexify dark>
+              <Stage>{"<stage one>"}</Stage>
+            </Hexify>
+            <Connector dark />
+          </TopSection>
+          <Image />
+          <Header>{"A:\\How many Aiko's do you want to mint?"}</Header>
+          <MintInput />
+          <Icon />
+          <MintProgress />
+          <div>meow</div>
+        </MainSection>
+      </Content>
     </StyledMintPage>
   );
 };
