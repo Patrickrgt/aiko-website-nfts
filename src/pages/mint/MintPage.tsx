@@ -93,6 +93,25 @@ const Icon = styled.div`
   background: pink;
 `;
 
+const Footer = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+`;
+
+const Copywrite = styled.div`
+  width: 12rem;
+  height: 3rem;
+  background: pink;
+`;
+
+const Barcode = styled.div`
+  height: 2.5rem;
+  width: 6rem;
+  background: pink;
+`;
+
 const MintPage = () => {
   return (
     <StyledMintPage>
@@ -111,7 +130,10 @@ const MintPage = () => {
           <Icon />
           <MintProgress />
           <MintButton />
-          <div>meow</div>
+          <Footer>
+            <Copywrite />
+            <Barcode />
+          </Footer>
         </MainSection>
       </Content>
     </StyledMintPage>
