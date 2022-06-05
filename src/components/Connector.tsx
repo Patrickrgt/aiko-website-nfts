@@ -4,7 +4,7 @@ import { useDevice } from "../app/hooks/use-device";
 import Hexify from "./Hexify";
 
 const StyledConnector = styled.div`
-  position: fixed;
+  position: ${(props: Props) => (props.dark ? "relative" : "fixed")};
   transform: translate(0, 0);
   z-index: 3;
 
@@ -14,15 +14,15 @@ const StyledConnector = styled.div`
     filter: brightness(0.9);
   }
 
-  top: 7rem;
-  right: 7rem;
+  top: ${(props: Props) => (props.dark ? "auto" : "7rem")};
+  right: ${(props: Props) => (props.dark ? "auto" : "7rem")};
   @media only screen and (max-width: 1400px) {
-    top: 3rem;
-    right: 3rem;
+    top: ${(props: Props) => (props.dark ? "auto" : "3rem")};
+    right: ${(props: Props) => (props.dark ? "auto" : "3rem")};
   }
   @media only screen and (max-width: 600px) {
-    top: 1.5rem;
-    right: 1.5rem;
+    top: ${(props: Props) => (props.dark ? "auto" : "1.5rem")};
+    right: ${(props: Props) => (props.dark ? "auto" : "1.5rem")};
   }
 `;
 
@@ -61,7 +61,7 @@ const WhiteText = styled(Text)`
 `;
 
 const BlueText = styled(Text)`
-  color: #4e73a4;
+  color: ${(props: Props) => (props.dark ? "white" : "#4e73a4")};
 `;
 
 const Balance = styled.div`
@@ -93,19 +93,23 @@ const Balance = styled.div`
   }
 `;
 
-const Connector = () => {
+interface Props {
+  dark?: boolean;
+}
+
+const Connector = ({ dark }: Props) => {
   const { account, activateBrowserWallet } = useEthers();
   const { isMobile } = useDevice();
   const ethBalance = useEtherBalance(account);
 
   return (
-    <StyledConnector>
-      <Hexify>
+    <StyledConnector dark={dark}>
+      <Hexify dark={dark}>
         <Button active={!!account} onClick={() => activateBrowserWallet()}>
           {account && (
             <>
               <WhiteText>{"<A:\\"}</WhiteText>
-              <BlueText>{shortenAddress(account)}</BlueText>
+              <BlueText dark={dark}>{shortenAddress(account)}</BlueText>
               <Balance>{`${(Number(ethBalance ?? 0) / 10 ** 18).toPrecision(
                 2
               )} ETH`}</Balance>
@@ -114,7 +118,9 @@ const Connector = () => {
           {!account && (
             <>
               <WhiteText>{"<A:\\"}</WhiteText>
-              <BlueText>{isMobile ? "Connect" : "Connect Wallet"}</BlueText>
+              <BlueText dark={dark}>
+                {isMobile ? "Connect" : "Connect Wallet"}
+              </BlueText>
               <WhiteText>{">"}</WhiteText>
             </>
           )}
