@@ -34,7 +34,7 @@ interface HexifyProps {
 const BackgroundMiddle = styled.div`
   height: 100%;
   flex: 1;
-  background: ${(props: HexifyProps) => (props.dark ? "#42689A" : "#8AAAD7")};
+  background: ${(props: HexifyProps) => (props.dark ? "#4b6595" : "#8AAAD7")};
 `;
 
 const Content = styled.div`
