@@ -137,7 +137,7 @@ const MintPage = () => {
           />
           <Icon />
           <MintProgress />
-          <MintButton />
+          <MintButton amount={amount ?? 0} error={!amount || !!error()} />
           <Footer>
             <Copywrite />
             <Barcode />

@@ -42,7 +42,12 @@ const TextValue = styled.div`
   line-height: 1;
 `;
 
+interface ButtonProps {
+  error: boolean;
+}
+
 const Button = styled.button`
+  cursor: ${(props: ButtonProps) => (props.error ? "not-allowed" : "pointer")};
   background: #f7d173;
   height: 100%;
   width: 17rem;
@@ -61,7 +66,14 @@ const Button = styled.button`
   );
 `;
 
-const MintButton = () => {
+interface Props {
+  amount: number;
+  error: boolean;
+}
+
+const MintButton = ({ amount, error }: Props) => {
+  const price = 0.09;
+
   return (
     <Container>
       <Hexify dark>
@@ -69,18 +81,18 @@ const MintButton = () => {
           <TextArea>
             <TextItem>
               <TextHeader>Price</TextHeader>
-              <TextValue>0.09E</TextValue>
+              <TextValue>{`${price}E`}</TextValue>
             </TextItem>
             <TextItem>
               <TextHeader>Aikos</TextHeader>
-              <TextValue>2</TextValue>
+              <TextValue>{amount}</TextValue>
             </TextItem>
             <TextItem>
               <TextHeader>Total</TextHeader>
-              <TextValue>0.18E</TextValue>
+              <TextValue>{`${price * amount}E`}</TextValue>
             </TextItem>
           </TextArea>
-          <Button>{"<mint.exe>"}</Button>
+          <Button error={error}>{"<mint.exe>"}</Button>
         </StyledMintButton>
       </Hexify>
     </Container>
