@@ -251,8 +251,8 @@ const PopupTab = ({ tab }: Props) => {
                     {info.normal}
                   </InfoSection>
                   {info.subInfo &&
-                    info.subInfo.map((subInfo: InfoType) => (
-                      <SubInfoSection>
+                    info.subInfo.map((subInfo: InfoType, index: number) => (
+                      <SubInfoSection key={index}>
                         <SubBold>{subInfo.bold}</SubBold>
                         {subInfo.normal}
                       </SubInfoSection>
