@@ -48,7 +48,7 @@ const Button = styled.button`
 `;
 
 const Text = styled.span`
-  font-weight: 700;
+  font-weight: 500;
 
   font-size: 2rem;
   @media only screen and (max-width: 1400px) {
@@ -65,7 +65,7 @@ const BlueText = styled(Text)`
 `;
 
 const Balance = styled.div`
-  background: #4e73a4;
+  background: ${(props: Props) => (props.dark ? "#90A8D1" : "#4e73a4")};
   height: 100%;
   padding: 0.5rem;
   clip-path: polygon(
@@ -110,9 +110,10 @@ const Connector = ({ dark }: Props) => {
             <>
               <WhiteText>{"<A:\\"}</WhiteText>
               <BlueText dark={dark}>{shortenAddress(account)}</BlueText>
-              <Balance>{`${(Number(ethBalance ?? 0) / 10 ** 18).toPrecision(
-                2
-              )} ETH`}</Balance>
+              <Balance dark={dark}>{`${(
+                Number(ethBalance ?? 0) /
+                10 ** 18
+              ).toPrecision(2)} ETH`}</Balance>
             </>
           )}
           {!account && (
