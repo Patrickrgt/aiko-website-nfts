@@ -11,15 +11,15 @@ const TextContainer = styled.div`
 `;
 
 const Header = styled.div`
-  color: #4b6595;
+  color: #56729e;
   font-size: 4.5rem;
-  font-weight: 700;
+  font-weight: 600;
 `;
 
 const SubHeader = styled.div`
-  color: #4b6595;
-  font-size: 1.5rem;
-  font-weight: 600;
+  color: #56729e;
+  font-size: 1.6rem;
+  font-weight: 800;
   text-transform: uppercase;
 `;
 
@@ -27,7 +27,7 @@ const Input = styled.input`
   background: #4b6595;
   clip-path: var(--hex);
   font-size: 4.5rem;
-  font-weight: 600;
+  font-weight: 700;
   color: white;
   height: 6rem;
   width: 6rem;
@@ -35,9 +35,17 @@ const Input = styled.input`
   align-items: center;
   justify-content: center;
   text-align: center;
+  margin-left: 2rem;
 
   ::placeholder {
     color: rgba(255, 255, 255, 0.5);
+  }
+
+  -moz-appearance: textfield;
+  ::-webkit-outer-spin-button,
+  ::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
   }
 `;
 
