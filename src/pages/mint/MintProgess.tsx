@@ -38,7 +38,7 @@ const MintProgress = () => {
   return (
     <StyledMintProgress>
       <Bar percent={percent} />
-      <Text>{`${sold}/${supply}`}</Text>
+      <Text>{`${sold.toLocaleString()}/${supply.toLocaleString()}`}</Text>
     </StyledMintProgress>
   );
 };
