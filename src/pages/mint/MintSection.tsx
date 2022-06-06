@@ -18,11 +18,11 @@ const TopSection = styled.div`
 `;
 
 const Stage = styled.div`
-  height: 3.9rem;
+  height: 4.2rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0 1.7rem;
+  padding: 0 2rem;
   text-transform: uppercase;
   color: white;
   font-size: 1.9rem;
