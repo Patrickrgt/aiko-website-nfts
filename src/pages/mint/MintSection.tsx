@@ -54,7 +54,7 @@ const MintSection = () => {
         <Hexify dark>
           <Stage>{"<stage one>"}</Stage>
         </Hexify>
-        <Connector dark />
+        <Connector relative yellow />
       </TopSection>
       <Image src={mintIllustration} alt="Mint illustration" />
       <MintInput

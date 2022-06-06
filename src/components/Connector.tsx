@@ -4,7 +4,7 @@ import { useDevice } from "../app/hooks/use-device";
 import Hexify from "./Hexify";
 
 const StyledConnector = styled.div`
-  position: ${(props: Props) => (props.dark ? "relative" : "fixed")};
+  position: ${(props: Props) => (props.relative ? "relative" : "fixed")};
   transform: translate(0, 0);
   z-index: 3;
 
@@ -14,15 +14,15 @@ const StyledConnector = styled.div`
     filter: brightness(0.9);
   }
 
-  top: ${(props: Props) => (props.dark ? "auto" : "7rem")};
-  right: ${(props: Props) => (props.dark ? "auto" : "7rem")};
+  top: ${(props: Props) => (props.relative ? "auto" : "7rem")};
+  right: ${(props: Props) => (props.relative ? "auto" : "7rem")};
   @media only screen and (max-width: 1400px) {
-    top: ${(props: Props) => (props.dark ? "auto" : "3rem")};
-    right: ${(props: Props) => (props.dark ? "auto" : "3rem")};
+    top: ${(props: Props) => (props.relative ? "auto" : "3rem")};
+    right: ${(props: Props) => (props.relative ? "auto" : "3rem")};
   }
   @media only screen and (max-width: 600px) {
-    top: ${(props: Props) => (props.dark ? "auto" : "1.5rem")};
-    right: ${(props: Props) => (props.dark ? "auto" : "1.5rem")};
+    top: ${(props: Props) => (props.relative ? "auto" : "1.5rem")};
+    right: ${(props: Props) => (props.relative ? "auto" : "1.5rem")};
   }
 `;
 
@@ -57,15 +57,17 @@ const Text = styled.span`
 `;
 
 const WhiteText = styled(Text)`
-  color: white;
+  color: ${(props: Props) => (props.yellow ? "#b7944e" : "white")};
 `;
 
 const BlueText = styled(Text)`
-  color: ${(props: Props) => (props.dark ? "white" : "#4e73a4")};
+  color: ${(props: Props) =>
+    props.dark ? "white" : props.yellow ? "#b7944e" : "#4e73a4"};
 `;
 
 const Balance = styled.div`
-  background: ${(props: Props) => (props.dark ? "#90A8D1" : "#4e73a4")};
+  background: ${(props: Props) =>
+    props.dark ? "#90A8D1" : props.yellow ? "#b7944e" : "#4e73a4"};
   height: 100%;
   padding: 0.5rem;
   clip-path: polygon(
@@ -95,22 +97,26 @@ const Balance = styled.div`
 
 interface Props {
   dark?: boolean;
+  yellow?: boolean;
+  relative?: boolean;
 }
 
-const Connector = ({ dark }: Props) => {
+const Connector = ({ dark, yellow, relative }: Props) => {
   const { account, activateBrowserWallet } = useEthers();
   const { isMobile } = useDevice();
   const ethBalance = useEtherBalance(account);
 
   return (
-    <StyledConnector dark={dark}>
-      <Hexify dark={dark}>
+    <StyledConnector relative={relative}>
+      <Hexify dark={dark} yellow={yellow}>
         <Button active={!!account} onClick={() => activateBrowserWallet()}>
           {account && (
             <>
-              <WhiteText>{"<A:\\"}</WhiteText>
-              <BlueText dark={dark}>{shortenAddress(account)}</BlueText>
-              <Balance dark={dark}>{`${(
+              <WhiteText yellow={yellow}>{"<A:\\"}</WhiteText>
+              <BlueText dark={dark} yellow={yellow}>
+                {shortenAddress(account)}
+              </BlueText>
+              <Balance dark={dark} yellow={yellow}>{`${(
                 Number(ethBalance ?? 0) /
                 10 ** 18
               ).toPrecision(2)} ETH`}</Balance>
@@ -118,11 +124,11 @@ const Connector = ({ dark }: Props) => {
           )}
           {!account && (
             <>
-              <WhiteText>{"<A:\\"}</WhiteText>
-              <BlueText dark={dark}>
+              <WhiteText yellow={yellow}>{"<A:\\"}</WhiteText>
+              <BlueText dark={dark} yellow={yellow}>
                 {isMobile ? "Connect" : "Connect Wallet"}
               </BlueText>
-              <WhiteText>{">"}</WhiteText>
+              <WhiteText yellow={yellow}>{">"}</WhiteText>
             </>
           )}
         </Button>
