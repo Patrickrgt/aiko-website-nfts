@@ -11,7 +11,7 @@ const StyledMintPage = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #383838;
+  background: white;
 `;
 
 const Content = styled.div`
@@ -73,7 +73,7 @@ const Barcode = styled.div`
 `;
 
 const MintPage = () => {
-  const minted = true;
+  const minted = false;
 
   return (
     <StyledMintPage>
