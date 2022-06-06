@@ -1,4 +1,9 @@
 import styled from "styled-components";
+import { OPENSEA } from "../../app/globals";
+
+import decal from "../../assets/mint/confirmation-header.svg";
+import illustration from "../../assets/mint/confirmation-illustration.svg";
+import opensea from "../../assets/mint/opensea.svg";
 
 const TopContent = styled.div`
   display: flex;
@@ -7,10 +12,8 @@ const TopContent = styled.div`
   justify-content: center;
 `;
 
-const Decal = styled.div`
+const Decal = styled.img`
   width: 55rem;
-  height: 3rem;
-  background: pink;
 `;
 
 const Header = styled.div`
@@ -29,13 +32,11 @@ const SubHeader = styled.div`
   line-height: 1;
 `;
 
-const Image = styled.div`
-  width: 38rem;
-  aspect-ratio: 1;
-  background: pink;
+const Image = styled.img`
+  width: 36rem;
 `;
 
-const ButtonContainer = styled.button`
+const ButtonContainer = styled.a`
   display: flex;
   cursor: pointer;
   background: #f7d173;
@@ -53,11 +54,8 @@ const ButtonContainer = styled.button`
   );
 `;
 
-const OpenseaContainer = styled.div`
-  height: 5.5rem;
-  width: 5.5rem;
-  clip-path: var(--hex);
-  background: white;
+const Opensea = styled.img`
+  height: 5.2rem;
   margin-right: 5px;
 `;
 
@@ -89,13 +87,13 @@ const MintConfirmation = () => {
     <>
       <div />
       <TopContent>
-        <Decal />
+        <Decal src={decal} alt="Decal" />
         <Header>congratulations!</Header>
         <SubHeader>welcome to aiko virtual</SubHeader>
       </TopContent>
-      <Image />
-      <ButtonContainer>
-        <OpenseaContainer>meow</OpenseaContainer>
+      <Image src={illustration} alt="Illustration" />
+      <ButtonContainer href={OPENSEA} target="_blank" rel="noopener noreferrer">
+        <Opensea src={opensea} alt="Opensea Icon" />
         <ButtonLabel>{"<View In Opensea.exe>"}</ButtonLabel>
       </ButtonContainer>
     </>
