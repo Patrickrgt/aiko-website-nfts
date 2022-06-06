@@ -1,6 +1,10 @@
 import styled from "styled-components";
+
 import MintConfirmation from "./MintConfirmation";
 import MintSection from "./MintSection";
+
+import footerLeft from "../../assets/mint/footer-left.svg";
+import footerRight from "../../assets/mint/footer-right.svg";
 
 const StyledMintPage = styled.div`
   position: fixed;
@@ -42,6 +46,12 @@ const IllustrationSection = styled.div`
   justify-content: center;
 `;
 
+const Separator = styled.div`
+  height: 100%;
+  width: 1.2rem;
+  background: #afcaec;
+`;
+
 const MainSection = styled.div`
   flex: 1;
   height: 100%;
@@ -60,16 +70,12 @@ const Footer = styled.div`
   justify-content: space-between;
 `;
 
-const Copywrite = styled.div`
-  width: 12rem;
+const Copywrite = styled.img`
   height: 3rem;
-  background: pink;
 `;
 
-const Barcode = styled.div`
-  height: 2.5rem;
-  width: 6rem;
-  background: pink;
+const Barcode = styled.img`
+  height: 3rem;
 `;
 
 const MintPage = () => {
@@ -79,12 +85,13 @@ const MintPage = () => {
     <StyledMintPage>
       <Content>
         <IllustrationSection>illustration</IllustrationSection>
+        <Separator />
         <MainSection>
           {!minted && <MintSection />}
           {minted && <MintConfirmation />}
           <Footer>
-            <Copywrite />
-            <Barcode />
+            <Copywrite src={footerLeft} alt="Footer illustration" />
+            <Barcode src={footerRight} alt="Footer illustration" />
           </Footer>
         </MainSection>
       </Content>
