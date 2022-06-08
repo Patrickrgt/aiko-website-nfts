@@ -1,3 +1,4 @@
+import { useEthers } from "@usedapp/core";
 import styled from "styled-components";
 
 const StyledMintProgress = styled.div`
@@ -49,9 +50,13 @@ const Text = styled.div`
 `;
 
 const MintProgress = () => {
+  const { account } = useEthers();
+
   const supply = 3333;
   const sold = 2543;
   const percent = sold / supply;
+
+  if (!account) return null;
 
   return (
     <StyledMintProgress>
