@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Hexify from "./Hexify";
 
@@ -75,7 +76,8 @@ const Countdown = styled.div`
 `;
 
 const MintButton = () => {
-  const disabled = true;
+  const navigate = useNavigate();
+  const disabled = false;
 
   return (
     <ButtonContainer>
@@ -83,7 +85,7 @@ const MintButton = () => {
         <ButtonArea>
           <StyledMintButton
             disabled={disabled}
-            onClick={() => console.log("meow")}
+            onClick={() => navigate("/mint")}
           >
             <ButtonContent>
               <YellowText>{"<"}</YellowText>
