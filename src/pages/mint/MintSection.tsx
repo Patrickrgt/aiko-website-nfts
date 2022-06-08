@@ -11,6 +11,7 @@ import mintIllustration from "../../assets/mint/mint-illustration.svg";
 import decal from "../../assets/mint/decal.svg";
 
 const TopSection = styled.div`
+  position: relative;
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -18,6 +19,7 @@ const TopSection = styled.div`
 `;
 
 const Stage = styled.div`
+  position: relative;
   height: 4.2rem;
   display: flex;
   align-items: center;

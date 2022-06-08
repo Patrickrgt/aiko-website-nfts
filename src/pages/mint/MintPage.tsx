@@ -6,6 +6,7 @@ import MintSection from "./MintSection";
 
 import footerLeft from "../../assets/mint/footer-left.svg";
 import footerRight from "../../assets/mint/footer-right.svg";
+import bg from "../../assets/mint/mint-bg.svg";
 
 const StyledMintPage = styled.div`
   position: fixed;
@@ -54,6 +55,7 @@ const Separator = styled.div`
 `;
 
 const MainSection = styled.div`
+  position: relative;
   flex: 1;
   height: 100%;
   background: #90a8d1;
@@ -64,7 +66,15 @@ const MainSection = styled.div`
   justify-content: space-between;
 `;
 
+const Background = styled.img`
+  position: absolute;
+  top: 2rem;
+  left: 2rem;
+  width: calc(100% - 4rem);
+`;
+
 const Footer = styled.div`
+  position: relative;
   width: 100%;
   display: flex;
   align-items: flex-end;
@@ -88,6 +98,7 @@ const MintPage = () => {
         <IllustrationSection>illustration</IllustrationSection>
         <Separator />
         <MainSection>
+          <Background src={bg} alt="mint background image" />
           {!minted && <MintSection action={() => setMinted(true)} />}
           {minted && <MintConfirmation />}
           <Footer>

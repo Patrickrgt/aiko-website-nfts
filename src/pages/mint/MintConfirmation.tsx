@@ -6,6 +6,7 @@ import illustration from "../../assets/mint/confirmation-illustration.svg";
 import opensea from "../../assets/mint/opensea.svg";
 
 const TopContent = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
