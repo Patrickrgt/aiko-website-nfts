@@ -1,4 +1,7 @@
+import { useEthers } from "@usedapp/core";
 import styled from "styled-components";
+
+import lock from "../../assets/mint/blue-lock.svg";
 
 const Container = styled.div`
   position: relative;
@@ -43,6 +46,11 @@ const Error = styled.div`
   text-transform: uppercase;
 `;
 
+const InputContainer = styled.div`
+  position: relative;
+  margin-left: 2rem;
+`;
+
 const Input = styled.input`
   background: #4b6595;
   clip-path: var(--hex);
@@ -55,7 +63,6 @@ const Input = styled.input`
   align-items: center;
   justify-content: center;
   text-align: center;
-  margin-left: 2rem;
 
   ::placeholder {
     color: rgba(255, 255, 255, 0.5);
@@ -67,6 +74,20 @@ const Input = styled.input`
     -webkit-appearance: none;
     margin: 0;
   }
+
+  :disabled {
+    ::placeholder {
+      color: transparent;
+    }
+  }
+`;
+
+const Lock = styled.img`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 60%;
 `;
 
 interface Props {
@@ -76,6 +97,7 @@ interface Props {
 }
 
 const MintInput = ({ setAmount, amount, error }: Props) => {
+  const { account } = useEthers();
   const max = 2;
 
   return (
@@ -85,18 +107,26 @@ const MintInput = ({ setAmount, amount, error }: Props) => {
         <TextContainer>
           <Header>Insert the Number Here</Header>
           {error && <Error>{error}</Error>}
-          {!error && <SubHeader>{`You have ${max} spots left`}</SubHeader>}
+          {!error && account && (
+            <SubHeader>{`You have ${max} spots left`}</SubHeader>
+          )}
         </TextContainer>
-        <Input
-          type="number"
-          maxLength={max}
-          placeholder={max.toString()}
-          value={amount ? amount.toString() : ""}
-          onChange={(e) => {
-            if (e.target.value === "") setAmount(null);
-            setAmount(Number(e.target.value));
-          }}
-        />
+        <div>
+          <InputContainer>
+            <Input
+              disabled={!account}
+              type="number"
+              maxLength={max}
+              placeholder={max.toString()}
+              value={amount ? amount.toString() : ""}
+              onChange={(e) => {
+                if (e.target.value === "") setAmount(null);
+                setAmount(Number(e.target.value));
+              }}
+            />
+            {!account && <Lock src={lock} alt="lock" />}
+          </InputContainer>
+        </div>
       </StyledMintInput>
     </Container>
   );
