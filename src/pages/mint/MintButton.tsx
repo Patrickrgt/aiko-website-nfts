@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import Hexify from "../../components/Hexify";
 
+import lock from "../../assets/mint/orange-lock.svg";
+
 const Container = styled.div`
   width: 100%;
   max-width: 50rem;
@@ -47,6 +49,7 @@ interface ButtonProps {
 }
 
 const Button = styled.button`
+  position: relative;
   background: #f7d173;
   height: 100%;
   width: 17rem;
@@ -68,6 +71,22 @@ const Button = styled.button`
   :disabled {
     cursor: not-allowed;
   }
+`;
+
+const LockContainer = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #f8d173;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const Lock = styled.img`
+  height: 70%;
 `;
 
 interface Props {
@@ -99,6 +118,11 @@ const MintButton = ({ amount, error, action }: Props) => {
           </TextArea>
           <Button disabled={error} onClick={() => action()}>
             {"<mint.exe>"}
+            {error && (
+              <LockContainer>
+                <Lock src={lock} alt="lock" />
+              </LockContainer>
+            )}
           </Button>
         </StyledMintButton>
       </Hexify>
