@@ -7,6 +7,7 @@ import MintSection from "./MintSection";
 import footerLeft from "../../assets/mint/footer-left.svg";
 import footerRight from "../../assets/mint/footer-right.svg";
 import bg from "../../assets/mint/mint-bg.svg";
+import MintHomeButton from "./MintHomeButton";
 
 const StyledMintPage = styled.div`
   position: fixed;
@@ -40,6 +41,7 @@ const Content = styled.div`
 `;
 
 const IllustrationSection = styled.div`
+  position: relative;
   flex: 1;
   height: 100%;
   background: #4b6595;
@@ -95,7 +97,10 @@ const MintPage = () => {
   return (
     <StyledMintPage>
       <Content>
-        <IllustrationSection>illustration</IllustrationSection>
+        <IllustrationSection>
+          <MintHomeButton />
+          illustration
+        </IllustrationSection>
         <Separator />
         <MainSection>
           <Background src={bg} alt="mint background image" />
