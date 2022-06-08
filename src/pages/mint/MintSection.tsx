@@ -37,7 +37,11 @@ const Icon = styled.img`
   height: 5.8rem;
 `;
 
-const MintSection = () => {
+interface Props {
+  action: () => void;
+}
+
+const MintSection = ({ action }: Props) => {
   const [amount, setAmount] = useState<number | null>(null);
   const max = 2;
 
@@ -64,7 +68,11 @@ const MintSection = () => {
       />
       <Icon src={decal} alt="Mint decal" />
       <MintProgress />
-      <MintButton amount={amount ?? 0} error={!amount || !!error()} />
+      <MintButton
+        amount={amount ?? 0}
+        error={!amount || !!error()}
+        action={action}
+      />
     </>
   );
 };

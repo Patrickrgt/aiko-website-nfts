@@ -88,7 +88,7 @@ const MintPage = () => {
         <IllustrationSection>illustration</IllustrationSection>
         <Separator />
         <MainSection>
-          {!minted && <MintSection />}
+          {!minted && <MintSection action={() => setMinted(true)} />}
           {minted && <MintConfirmation />}
           <Footer>
             <Copywrite src={footerLeft} alt="Footer illustration" />

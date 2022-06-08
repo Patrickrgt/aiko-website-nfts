@@ -47,7 +47,6 @@ interface ButtonProps {
 }
 
 const Button = styled.button`
-  cursor: ${(props: ButtonProps) => (props.error ? "not-allowed" : "pointer")};
   background: #f7d173;
   height: 100%;
   width: 17rem;
@@ -64,14 +63,20 @@ const Button = styled.button`
     0% 75%,
     0% 25%
   );
+
+  cursor: pointer;
+  :disabled {
+    cursor: not-allowed;
+  }
 `;
 
 interface Props {
   amount: number;
   error: boolean;
+  action: () => void;
 }
 
-const MintButton = ({ amount, error }: Props) => {
+const MintButton = ({ amount, error, action }: Props) => {
   const price = 0.09;
 
   return (
@@ -92,7 +97,9 @@ const MintButton = ({ amount, error }: Props) => {
               <TextValue>{`${price * amount}E`}</TextValue>
             </TextItem>
           </TextArea>
-          <Button error={error}>{"<mint.exe>"}</Button>
+          <Button disabled={error} onClick={() => action()}>
+            {"<mint.exe>"}
+          </Button>
         </StyledMintButton>
       </Hexify>
     </Container>
