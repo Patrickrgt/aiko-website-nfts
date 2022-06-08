@@ -1,3 +1,4 @@
+import { useState } from "react";
 import styled from "styled-components";
 
 import MintConfirmation from "./MintConfirmation";
@@ -79,7 +80,7 @@ const Barcode = styled.img`
 `;
 
 const MintPage = () => {
-  const minted = false;
+  const [minted, setMinted] = useState(false);
 
   return (
     <StyledMintPage>
