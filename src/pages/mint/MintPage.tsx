@@ -8,6 +8,8 @@ import footerLeft from "../../assets/mint/footer-left.svg";
 import footerRight from "../../assets/mint/footer-right.svg";
 import bg from "../../assets/mint/mint-bg.svg";
 import MintHomeButton from "./MintHomeButton";
+import MintError from "./MintError";
+import MintLoading from "./MintLoading";
 
 const StyledMintPage = styled.div`
   position: fixed;
@@ -22,6 +24,7 @@ const StyledMintPage = styled.div`
 `;
 
 const Content = styled.div`
+  position: relative;
   display: flex;
   height: 100%;
   width: 100%;
@@ -93,6 +96,8 @@ const Barcode = styled.img`
 
 const MintPage = () => {
   const [minted, setMinted] = useState(false);
+  const [error, setError] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   return (
     <StyledMintPage>
@@ -104,13 +109,25 @@ const MintPage = () => {
         <Separator />
         <MainSection>
           <Background src={bg} alt="mint background image" />
-          {!minted && <MintSection action={() => setMinted(true)} />}
+          {!minted && (
+            <MintSection
+              action={() => {
+                setLoading(true);
+                setTimeout(() => {
+                  setLoading(false);
+                  setMinted(true);
+                }, 2000);
+              }}
+            />
+          )}
           {minted && <MintConfirmation />}
           <Footer>
             <Copywrite src={footerLeft} alt="Footer illustration" />
             <Barcode src={footerRight} alt="Footer illustration" />
           </Footer>
         </MainSection>
+        {error && <MintError close={() => setError(false)} />}
+        {loading && <MintLoading />}
       </Content>
     </StyledMintPage>
   );
