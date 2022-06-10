@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { useTick } from "../app/hooks/use-tick";
 import Hexify from "./Hexify";
 
 const ButtonContainer = styled.div`
@@ -69,13 +70,34 @@ const YellowText = styled(Text)`
 `;
 
 const Countdown = styled.div`
-  font-size: 3.9vh;
+  font-size: 3.7vh;
+  font-weight: 500;
   color: white;
   margin: 0 1.327vh;
+  display: flex;
+  align-items: center;
+`;
+
+const CountdownHighlight = styled.div`
+  font-size: 3.7vh;
+  font-weight: 500;
+  color: #ffd46c;
 `;
 
 const MintButton = () => {
   const disabled = true;
+
+  const tick = useTick();
+  const END = new Date("2022-06-20T00:00:00.000Z");
+  const now = new Date();
+  const remaining = END.getTime() - now.getTime();
+
+  const days = Math.floor(remaining / (1000 * 60 * 60 * 24));
+  const hours = Math.floor(
+    (remaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+  );
+  const minutes = Math.floor((remaining % (1000 * 60 * 60)) / (1000 * 60));
+  const seconds = Math.floor((remaining % (1000 * 60)) / 1000);
 
   return (
     <ButtonContainer>
@@ -91,7 +113,10 @@ const MintButton = () => {
               <YellowText>{">"}</YellowText>
             </ButtonContent>
           </StyledMintButton>
-          <Countdown>TBA</Countdown>
+          <Countdown>
+            <CountdownHighlight>{days}</CountdownHighlight>
+            {`:${hours}:${minutes}:${seconds}`}
+          </Countdown>
         </ButtonArea>
       </Hexify>
     </ButtonContainer>
