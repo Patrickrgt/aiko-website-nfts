@@ -13,6 +13,8 @@ const StyledMintOverlay = styled.div`
   background: rgba(255, 255, 255, 0.5);
   display: flex;
   align-items: center;
+  backdrop-filter: blur(2px);
+  z-index: 3;
 `;
 
 const Banner = styled.div`
