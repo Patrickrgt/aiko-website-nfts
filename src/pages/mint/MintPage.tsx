@@ -1,5 +1,6 @@
 import { useState } from "react";
 import styled, { keyframes } from "styled-components";
+import { useEthers } from "@usedapp/core";
 
 import MintConfirmation from "./MintConfirmation";
 import MintSection from "./MintSection";
@@ -81,6 +82,16 @@ const MainSection = styled.div`
   justify-content: space-between;
 `;
 
+const Overlay = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+`;
+
 const Background = styled.img`
   position: absolute;
   top: 2rem;
@@ -105,6 +116,7 @@ const Barcode = styled.img`
 `;
 
 const MintPage = () => {
+  const { account } = useEthers();
   const [minted, setMinted] = useState(false);
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -135,6 +147,7 @@ const MintPage = () => {
             <Copywrite src={footerLeft} alt="Footer illustration" />
             <Barcode src={footerRight} alt="Footer illustration" />
           </Footer>
+          {!account && <Overlay />}
         </MainSection>
         <MintError show={error} close={() => setError(false)} />
         <MintLoading show={loading} />
