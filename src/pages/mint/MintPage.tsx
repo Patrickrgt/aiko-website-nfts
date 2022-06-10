@@ -136,8 +136,8 @@ const MintPage = () => {
             <Barcode src={footerRight} alt="Footer illustration" />
           </Footer>
         </MainSection>
-        {error && <MintError close={() => setError(false)} />}
-        {loading && <MintLoading />}
+        <MintError show={error} close={() => setError(false)} />
+        <MintLoading show={loading} />
       </Content>
     </StyledMintPage>
   );

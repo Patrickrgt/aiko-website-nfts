@@ -1,8 +1,14 @@
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 
 import bg from "../../assets/mint/overlay-bg.svg";
 import exitAsset from "../../assets/svgs/exit-white.svg";
 import Hexify from "../../components/Hexify";
+
+interface OverlayProps {
+  show: boolean;
+  closed: boolean;
+}
 
 const StyledMintOverlay = styled.div`
   position: absolute;
@@ -15,6 +21,10 @@ const StyledMintOverlay = styled.div`
   align-items: center;
   backdrop-filter: blur(2px);
   z-index: 3;
+
+  transition: opacity 0.3s;
+  transform: scale(${(props: OverlayProps) => (props.closed ? 0 : 1)});
+  opacity: ${(props: OverlayProps) => (props.show ? 1 : 0)};
 `;
 
 const Banner = styled.div`
@@ -119,6 +129,7 @@ const Button = styled.button`
 `;
 
 interface Props {
+  show: boolean;
   asset: string;
   header: string;
   body: string;
@@ -128,6 +139,7 @@ interface Props {
 }
 
 const MintOverlay = ({
+  show,
   asset,
   header,
   body,
@@ -135,8 +147,20 @@ const MintOverlay = ({
   buttonAction,
   exit,
 }: Props) => {
+  const [closed, setClosed] = useState(true);
+
+  useEffect(() => {
+    if (show) {
+      setClosed(false);
+    } else {
+      setTimeout(() => {
+        setClosed(true);
+      }, 300);
+    }
+  }, [show]);
+
   return (
-    <StyledMintOverlay>
+    <StyledMintOverlay show={show} closed={closed}>
       <Banner>
         <Section>
           <Background src={bg} alt="background image" />
