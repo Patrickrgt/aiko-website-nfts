@@ -3,11 +3,12 @@ import styled from "styled-components";
 import { Outlet } from "react-router-dom";
 import { ChainId, Config, DAppProvider } from "@usedapp/core";
 
-import Footer from "./components/Footer";
 import Error from "./components/Error";
 import { INFURA_ID } from "./app/globals";
-import WalletSelector from "./components/WalletSelector";
 import LoadingScreen from "./components/LoadingScreen";
+import StoryPopup from "./components/StoryPopup";
+import ArchivesPopup from "./components/ArchivesPopup";
+import InfoPopup from "./components/InfoPopup";
 
 const StyledApp = styled.div`
   display: flex;
@@ -30,9 +31,10 @@ const App = () => {
       <StyledApp>
         <DAppProvider config={config}>
           <Outlet />
-          <Footer />
           <Error />
-          <WalletSelector />
+          <StoryPopup />
+          <ArchivesPopup />
+          <InfoPopup />
         </DAppProvider>
       </StyledApp>
     </Suspense>

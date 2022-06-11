@@ -35,7 +35,7 @@ interface Props {
 const Header = ({ children }: Props) => {
   return (
     <AikoFade>
-      <Hexify>
+      <Hexify dark>
         <Text>{children}</Text>
       </Hexify>
     </AikoFade>

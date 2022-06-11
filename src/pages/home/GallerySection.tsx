@@ -6,16 +6,18 @@ import Header from "../../components/Header";
 import AikoHex from "../../components/AikoHex";
 import GallerySlide from "./GallerySlide";
 import play from "../../assets/svgs/play.svg";
+import background from "../../assets/svgs/background.svg";
+import bubbles from "../../assets/svgs/bubbles.svg";
 
-import a1 from "../../assets/gallery/01.jpg";
-import a2 from "../../assets/gallery/02.jpg";
-import a3 from "../../assets/gallery/03.jpg";
-import a4 from "../../assets/gallery/04.jpg";
-import a5 from "../../assets/gallery/05.jpg";
-import a6 from "../../assets/gallery/06.jpg";
-import a7 from "../../assets/gallery/07.jpg";
-import a8 from "../../assets/gallery/08.jpg";
-import a9 from "../../assets/gallery/09.jpg";
+import a1 from "../../assets/gallery/1.jpg";
+import a2 from "../../assets/gallery/2.jpg";
+import a3 from "../../assets/gallery/3.jpg";
+import a4 from "../../assets/gallery/4.jpg";
+import a5 from "../../assets/gallery/5.jpg";
+import a6 from "../../assets/gallery/6.jpg";
+import a7 from "../../assets/gallery/7.jpg";
+import a8 from "../../assets/gallery/8.jpg";
+import a9 from "../../assets/gallery/9.jpg";
 import a10 from "../../assets/gallery/10.jpg";
 import a11 from "../../assets/gallery/11.jpg";
 import a12 from "../../assets/gallery/12.jpg";
@@ -26,6 +28,9 @@ import a16 from "../../assets/gallery/16.jpg";
 import a17 from "../../assets/gallery/17.jpg";
 import a18 from "../../assets/gallery/18.jpg";
 import a19 from "../../assets/gallery/19.jpg";
+import a20 from "../../assets/gallery/20.jpg";
+import a21 from "../../assets/gallery/21.jpg";
+import GalleryDecal from "../../components/Decal";
 
 const aikoList = [
   a1,
@@ -47,7 +52,32 @@ const aikoList = [
   a17,
   a18,
   a19,
+  a20,
+  a21,
 ];
+
+const Wrapper = styled.div`
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  height: calc(100vh - 10rem);
+  @media only screen and (max-width: 600px) {
+    height: auto;
+  }
+`;
+
+const SectionBackground = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to right, #eff6ff, #90b5e8);
+  z-index: -2;
+`;
 
 const Container = styled.div`
   position: relative;
@@ -55,10 +85,50 @@ const Container = styled.div`
   overflow: hidden;
 `;
 
+const MainBackground = styled.div`
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(45deg);
+  width: 150vh;
+  z-index: -1;
+
+  top: 200%;
+  @media only screen and (max-width: 600px) {
+    top: 470%;
+  }
+`;
+
+const BackgroundMainContainer = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+`;
+
+const BackgroundBubbleContainer = styled.div`
+  width: 18%;
+  position: absolute;
+  top: 0;
+  left: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+`;
+
+const BackgroundImage = styled.img`
+  width: 100%;
+`;
+
+const BubbleImage = styled.img`
+  width: 100%;
+`;
+
 const Background = styled.div`
   width: 100%;
   height: calc(100vh - 27rem);
-  background: linear-gradient(45deg, #ffffff, #ffc32c);
+  background: linear-gradient(to right, #fed475, #fefaf0);
   clip-path: polygon(
     2.5% 0%,
     97.5% 0%,
@@ -81,19 +151,19 @@ const Background = styled.div`
 
 const HeaderContainer = styled.div`
   position: absolute;
-  top: 0;
   left: 0;
   width: 100%;
   display: flex;
   justify-content: center;
   z-index: 1;
+  transform: translateY(-50%);
 
-  margin-top: 2.7rem;
+  top: 9rem;
   @media only screen and (max-width: 1400px) {
-    margin-top: 2.3rem;
+    top: 5rem;
   }
   @media only screen and (max-width: 600px) {
-    margin-top: 0.5rem;
+    top: 0;
   }
 `;
 
@@ -148,7 +218,7 @@ const MainAikoContainer = styled.div`
   position: absolute;
   left: 0;
   top: 0;
-  z-index: 25;
+  z-index: 50;
   > div {
     height: 100%;
   }
@@ -193,8 +263,19 @@ const GallerySection = () => {
 
   return (
     <Section id="gallery-scroll">
-      <Container>
-        <Background />
+      <MainBackground>
+        <BackgroundMainContainer>
+          <BackgroundImage src={background} alt="Background" />
+          <BackgroundImage src={background} alt="Background" />
+        </BackgroundMainContainer>
+        <BackgroundBubbleContainer>
+          <BubbleImage src={bubbles} alt="Background" />
+          <BubbleImage src={bubbles} alt="Background" />
+        </BackgroundBubbleContainer>
+      </MainBackground>
+      <Wrapper>
+        <SectionBackground />
+        <GalleryDecal />
         <HeaderContainer>
           <Header>
             <HeaderText>
@@ -202,40 +283,43 @@ const GallerySection = () => {
             </HeaderText>
           </Header>
         </HeaderContainer>
-        <Content>
-          <MainAikoContainer>
-            <AikoHex image={mainAiko} mega />
-            <Button
-              left
-              onClick={() => {
-                if (index === 0) {
-                  setMainAiko(aikoList[aikoList.length - 1]);
-                  setIndex(aikoList.length - 1);
-                  return;
-                }
-                setMainAiko(aikoList[index - 1]);
-                setIndex(index - 1);
-              }}
-            >
-              <ButtonIcon left src={play} alt="Left button" />
-            </Button>
-            <Button
-              onClick={() => {
-                if (index === aikoList.length - 1) {
-                  setMainAiko(aikoList[0]);
-                  setIndex(0);
-                  return;
-                }
-                setMainAiko(aikoList[index + 1]);
-                setIndex(index + 1);
-              }}
-            >
-              <ButtonIcon src={play} alt="Right button" />
-            </Button>
-          </MainAikoContainer>
-          <GallerySlide setMainAiko={(aiko: string) => setMainAiko(aiko)} />
-        </Content>
-      </Container>
+        <Container>
+          <Background />
+          <Content>
+            <MainAikoContainer>
+              <AikoHex image={mainAiko} mega />
+              <Button
+                left
+                onClick={() => {
+                  if (index === 0) {
+                    setMainAiko(aikoList[aikoList.length - 1]);
+                    setIndex(aikoList.length - 1);
+                    return;
+                  }
+                  setMainAiko(aikoList[index - 1]);
+                  setIndex(index - 1);
+                }}
+              >
+                <ButtonIcon left src={play} alt="Left button" />
+              </Button>
+              <Button
+                onClick={() => {
+                  if (index === aikoList.length - 1) {
+                    setMainAiko(aikoList[0]);
+                    setIndex(0);
+                    return;
+                  }
+                  setMainAiko(aikoList[index + 1]);
+                  setIndex(index + 1);
+                }}
+              >
+                <ButtonIcon src={play} alt="Right button" />
+              </Button>
+            </MainAikoContainer>
+            <GallerySlide setMainAiko={(aiko: string) => setMainAiko(aiko)} />
+          </Content>
+        </Container>
+      </Wrapper>
     </Section>
   );
 };

@@ -50,18 +50,19 @@ const WalletSelector = (): JSX.Element => {
   const connectingWallet = useSelector(selectConnectingWallet);
 
   return (
-    <Popup
-      show={connectingWallet && !account}
-      close={() => dispatch(walletConnected())}
-      header="Connect to a wallet"
-    >
-      <Option onClick={() => activateBrowserWallet()}>
-        <Name>Metamask</Name>
-      </Option>
-      <Option onClick={() => activate(walletConnectConnector)}>
-        <Name>Walletconnect</Name>
-      </Option>
-    </Popup>
+    <div>meow</div>
+    // <Popup
+    //   show={connectingWallet && !account}
+    //   close={() => dispatch(walletConnected())}
+    //   header="Connect to a wallet"
+    // >
+    //   <Option onClick={() => activateBrowserWallet()}>
+    //     <Name>Metamask</Name>
+    //   </Option>
+    //   <Option onClick={() => activate(walletConnectConnector)}>
+    //     <Name>Walletconnect</Name>
+    //   </Option>
+    // </Popup>
   );
 };
 

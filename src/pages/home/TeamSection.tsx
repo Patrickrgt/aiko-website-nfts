@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import Header from "../../components/Header";
 import Section from "../../components/Section";
-import teamDecal from "../../assets/svgs/team-decal.svg";
 import TeamMember, { TeamMemberType } from "./TeamMember";
 
 import chase from "../../assets/team-members/chase.jpg";
@@ -29,7 +28,7 @@ const teamMembers: TeamMemberType[] = [
   {
     image: garrid,
     name: "Garrid",
-    role: "Project Manager",
+    role: "Project & Art Director",
     twitter: "https://twitter.com/garridspen",
   },
   {
@@ -91,15 +90,19 @@ const TeamContainer = styled.div`
 const TeamMembers = styled.div`
   position: relative;
   display: grid;
-  grid-gap: 5px;
 
   width: 66%;
-  max-width: 120rem;
+  max-width: 125rem;
   grid-template-columns: repeat(4, 1fr);
+  grid-row-gap: 1.1rem;
+  grid-column-gap: 2.1rem;
   @media only screen and (max-width: 600px) {
-    width: calc(100vw - 6rem);
+    width: calc(100vw - 3rem);
+    margin-bottom: 7rem;
     max-width: none;
     grid-template-columns: repeat(2, 1fr);
+    grid-row-gap: 0.7rem;
+    grid-column-gap: 1.5rem;
   }
 `;
 
@@ -113,36 +116,6 @@ const TeamMembersBackground = styled.div`
   width: 75%;
 `;
 
-const OrangeBanner = styled.div`
-  height: 90%;
-  position: absolute;
-  top: 50%;
-  left: 0;
-  width: 100%;
-  transform: translateY(-50%);
-  background: #ffcf5f;
-`;
-
-const OrangeDecal = styled.img`
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-
-  height: 57%;
-  @media only screen and (max-width: 600px) {
-    height: 30%;
-  }
-`;
-
-const LeftDecal = styled(OrangeDecal)`
-  left: 0;
-`;
-
-const RightDecal = styled(OrangeDecal)`
-  right: 0;
-  transform: translateY(-50%) rotate(180deg);
-`;
-
 const TeamSection = () => {
   return (
     <Section id="team-scroll">
@@ -151,9 +124,6 @@ const TeamSection = () => {
           <Header>A:\Team</Header>
         </HeaderContainer>
         <TeamContainer>
-          <OrangeBanner />
-          <LeftDecal src={teamDecal} alt="Orange decal" />
-          <RightDecal src={teamDecal} alt="Orange decal" />
           <TeamMembers>
             <TeamMembersBackground />
             {teamMembers.map((teamMember: TeamMemberType) => (

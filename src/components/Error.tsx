@@ -10,22 +10,23 @@ const Error = () => {
   if (!error) return null;
 
   return (
-    <Popup
-      show
-      header={error.header}
-      subHeader={error.subHeader}
-      buttonText={
-        error.button === ErrorButtonType.SWITCH_TO_MAINNET
-          ? "Switch to Mainnet"
-          : undefined
-      }
-      buttonAction={
-        error.button === ErrorButtonType.SWITCH_TO_MAINNET
-          ? () => changeNetwork(1)
-          : undefined
-      }
-      close={() => dispatch(clearError())}
-    />
+    <div>meow</div>
+    // <Popup
+    //   show
+    //   header={error.header}
+    //   subHeader={error.subHeader}
+    //   buttonText={
+    //     error.button === ErrorButtonType.SWITCH_TO_MAINNET
+    //       ? "Switch to Mainnet"
+    //       : undefined
+    //   }
+    //   buttonAction={
+    //     error.button === ErrorButtonType.SWITCH_TO_MAINNET
+    //       ? () => changeNetwork(1)
+    //       : undefined
+    //   }
+    //   close={() => dispatch(clearError())}
+    // />
   );
 };
 

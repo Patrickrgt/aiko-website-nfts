@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Footer from "../../components/Footer";
 import Socials from "../../components/Socials";
 import GallerySection from "./GallerySection";
 import HeroSection from "./HeroSection";
@@ -24,6 +25,7 @@ const HomePage = () => {
       <StorySection />
       <RoadmapSection />
       <TeamSection />
+      <Footer />
     </StyledHomePage>
   );
 };

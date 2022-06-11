@@ -51,16 +51,27 @@ const StyledFooter = styled.div`
   }
 `;
 
-const DecalOuter = styled.div`
-  aspect-ratio: 1;
-  background: var(--secondary);
+const DecalContainer = styled.div`
   position: absolute;
   left: 50%;
   top: 0;
-  transform: translate(-50%, -50%) rotate(45deg);
+  transform: translate(-50%, 0);
+  overflow: hidden;
+  width: 20rem;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const DecalOuter = styled.div`
+  transform: translate(0, -50%) rotate(45deg);
+  aspect-ratio: 1;
+  background: var(--secondary);
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
 
   width: 9rem;
   @media only screen and (max-width: 1400px) {
@@ -87,19 +98,6 @@ const DecalInner = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-`;
-
-const WhiteOverlay = styled.div`
-  width: 100%;
-  height: 8rem;
-  background: white;
-  position: absolute;
-  bottom: 100%;
-  left: 0;
-
-  @media only screen and (max-width: 600px) {
-    display: none;
-  }
 `;
 
 const Certified = styled.img`
@@ -216,12 +214,13 @@ const Footer = () => {
             <IconOverlay src={meepoWhite} alt="Meepo" />
           </MeepoContainer>
         </Links>
-        <DecalOuter>
-          <DecalMiddle>
-            <DecalInner />
-          </DecalMiddle>
-        </DecalOuter>
-        <WhiteOverlay />
+        <DecalContainer>
+          <DecalOuter>
+            <DecalMiddle>
+              <DecalInner />
+            </DecalMiddle>
+          </DecalOuter>
+        </DecalContainer>
       </StyledFooter>
       <Music atBottom={atBottom} />
     </>

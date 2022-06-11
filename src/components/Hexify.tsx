@@ -17,8 +17,14 @@ const BackgroundContainer = styled.div`
   display: flex;
 `;
 
+interface BackgroundProps {
+  right?: boolean;
+}
+
 const BackgroundEnd = styled.img`
   height: 100%;
+  transform: ${(props: BackgroundProps) =>
+    props.right ? "translateX(-0.5px)" : "translateX(0.5px)"};
 `;
 
 interface HexifyProps {
@@ -28,10 +34,7 @@ interface HexifyProps {
 const BackgroundMiddle = styled.div`
   height: 100%;
   flex: 1;
-  background: ${(props: HexifyProps) =>
-    props.dark
-      ? "linear-gradient(to right, #42689A, #5B7BA3)"
-      : "linear-gradient(to right, #748abd, #92a7c6)"};
+  background: ${(props: HexifyProps) => (props.dark ? "#42689A" : "#8AAAD7")};
 `;
 
 const Content = styled.div`
@@ -56,6 +59,7 @@ const Hexify = ({ children, dark }: Props) => {
         />
         <BackgroundMiddle dark={dark} />
         <BackgroundEnd
+          right
           src={dark ? rightEndDark : rightEnd}
           alt="Background asset"
         />

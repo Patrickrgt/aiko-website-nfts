@@ -20,13 +20,13 @@ const StyledSocial = styled.a`
   justify-content: center;
   align-items: center;
   aspect-ratio: 1;
-  background: #799ecf;
+  background: #a0c0ed;
   clip-path: var(--hex);
   z-index: 2;
 
-  width: 5.5rem;
+  width: 5rem;
   @media only screen and (max-width: 1400px) {
-    width: 5rem;
+    width: 4.5rem;
   }
   @media only screen and (max-width: 600px) {
     width: 4.5rem;

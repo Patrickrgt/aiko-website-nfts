@@ -97,8 +97,13 @@ const RoadmapSeason = ({ season }: Props) => {
           {season.name}
         </SubHeaderContainer>
       </AikoFade>
-      {season.items.map((item) => (
-        <RoadmapItem key={item.header} item={item} />
+      {season.items.map((item, index) => (
+        <RoadmapItem
+          key={item.header}
+          item={item}
+          first={index === 0}
+          last={index === season.items.length - 1}
+        />
       ))}
     </StyledRoadmapSeason>
   );
