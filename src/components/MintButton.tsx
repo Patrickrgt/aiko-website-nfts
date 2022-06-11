@@ -88,7 +88,7 @@ const MintButton = () => {
   const disabled = true;
 
   const tick = useTick();
-  const END = new Date(1655586000000);
+  const END = new Date(1656172800000);
   const now = new Date();
   const remaining = END.getTime() - now.getTime();
 
