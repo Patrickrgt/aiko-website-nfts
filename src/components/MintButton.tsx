@@ -88,7 +88,7 @@ const MintButton = () => {
   const disabled = true;
 
   const tick = useTick();
-  const END = new Date("2022-06-20T00:00:00.000Z");
+  const END = new Date(1655586000000);
   const now = new Date();
   const remaining = END.getTime() - now.getTime();
 
