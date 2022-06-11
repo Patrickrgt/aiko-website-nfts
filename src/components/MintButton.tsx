@@ -84,6 +84,10 @@ const CountdownHighlight = styled.div`
   color: #ffd46c;
 `;
 
+const padZeros = (num: number) => {
+  return num < 10 ? `0${num}` : num;
+};
+
 const MintButton = () => {
   const disabled = true;
 
@@ -114,8 +118,8 @@ const MintButton = () => {
             </ButtonContent>
           </StyledMintButton>
           <Countdown>
-            <CountdownHighlight>{days}</CountdownHighlight>
-            {`:${hours}:${minutes}:${seconds}`}
+            <CountdownHighlight>{padZeros(days)}</CountdownHighlight>
+            {`:${padZeros(hours)}:${padZeros(minutes)}:${padZeros(seconds)}`}
           </Countdown>
         </ButtonArea>
       </Hexify>
