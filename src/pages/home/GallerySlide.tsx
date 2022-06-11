@@ -55,7 +55,6 @@ const aikos: string[] = [
   a17,
   a18,
   a19,
-  matarelli,
   a1,
   a2,
 ];
