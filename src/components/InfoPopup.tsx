@@ -31,7 +31,7 @@ const InfoPopup = () => {
             },
             {
               bold: "A:\\Traits > ",
-              normal: "XXX",
+              normal: "269",
               subInfo: [
                 {
                   bold: "…\\backgrounds >  ",
@@ -63,21 +63,13 @@ const InfoPopup = () => {
                 },
                 {
                   bold: "…\\h_acessories > ",
-                  normal: "26",
+                  normal: "16",
                 },
                 {
                   bold: "…\\hair > ",
                   normal: "45 with 2 variants",
                 },
               ],
-            },
-            {
-              bold: "A:\\Mint Date > ",
-              normal: "TBA",
-            },
-            {
-              bold: "A:\\Mint Price > ",
-              normal: "TBA",
             },
           ],
         },

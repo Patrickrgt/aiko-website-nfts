@@ -22,6 +22,8 @@ import a19 from "../../assets/gallery/10.jpg";
 import a6 from "../../assets/gallery/18.jpg";
 import a7 from "../../assets/gallery/17.jpg";
 import a10 from "../../assets/gallery/19.jpg";
+import a20 from "../../assets/gallery/20.jpg";
+import a21 from "../../assets/gallery/21.jpg";
 import crystal from "../../assets/team-members/crystal.jpg";
 import garrid from "../../assets/team-members/garrid.jpg";
 import kyo from "../../assets/team-members/kyo.jpg";
@@ -34,8 +36,8 @@ const aikos: string[] = [
   garrid,
   matarelli,
   crystal,
-  a1,
-  a2,
+  a20,
+  a21,
   a3,
   a4,
   a5,
@@ -53,7 +55,8 @@ const aikos: string[] = [
   a17,
   a18,
   a19,
-  matarelli,
+  a1,
+  a2,
 ];
 
 const StyledGallerySlide = styled.div`

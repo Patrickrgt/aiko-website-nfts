@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { useTick } from "../app/hooks/use-tick";
 import Hexify from "./Hexify";
 
 const ButtonContainer = styled.div`
@@ -70,14 +71,39 @@ const YellowText = styled(Text)`
 `;
 
 const Countdown = styled.div`
-  font-size: 3.9vh;
+  font-size: 3.7vh;
+  font-weight: 500;
   color: white;
   margin: 0 1.327vh;
+  display: flex;
+  align-items: center;
 `;
+
+const CountdownHighlight = styled.div`
+  font-size: 3.7vh;
+  font-weight: 500;
+  color: #ffd46c;
+`;
+
+const padZeros = (num: number) => {
+  return num < 10 ? `0${num}` : num;
+};
 
 const MintButton = () => {
   const navigate = useNavigate();
   const disabled = false;
+
+  const tick = useTick();
+  const END = new Date(1656172800000);
+  const now = new Date();
+  const remaining = END.getTime() - now.getTime();
+
+  const days = Math.floor(remaining / (1000 * 60 * 60 * 24));
+  const hours = Math.floor(
+    (remaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+  );
+  const minutes = Math.floor((remaining % (1000 * 60 * 60)) / (1000 * 60));
+  const seconds = Math.floor((remaining % (1000 * 60)) / 1000);
 
   return (
     <ButtonContainer>
@@ -93,7 +119,10 @@ const MintButton = () => {
               <YellowText>{">"}</YellowText>
             </ButtonContent>
           </StyledMintButton>
-          <Countdown>TBA</Countdown>
+          <Countdown>
+            <CountdownHighlight>{padZeros(days)}</CountdownHighlight>
+            {`:${padZeros(hours)}:${padZeros(minutes)}:${padZeros(seconds)}`}
+          </Countdown>
         </ButtonArea>
       </Hexify>
     </ButtonContainer>

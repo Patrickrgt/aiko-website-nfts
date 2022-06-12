@@ -28,6 +28,8 @@ import a16 from "../../assets/gallery/16.jpg";
 import a17 from "../../assets/gallery/17.jpg";
 import a18 from "../../assets/gallery/18.jpg";
 import a19 from "../../assets/gallery/19.jpg";
+import a20 from "../../assets/gallery/20.jpg";
+import a21 from "../../assets/gallery/21.jpg";
 import GalleryDecal from "../../components/Decal";
 
 const aikoList = [
@@ -50,6 +52,8 @@ const aikoList = [
   a17,
   a18,
   a19,
+  a20,
+  a21,
 ];
 
 const Wrapper = styled.div`
