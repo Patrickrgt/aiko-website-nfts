@@ -9,6 +9,7 @@ import MintProgress from "./MintProgess";
 
 import mintIllustration from "../../assets/mint/mint-illustration.svg";
 import decal from "../../assets/mint/decal.svg";
+import MintStage from "./MintStage";
 
 const TopSection = styled.div`
   position: relative;
@@ -58,9 +59,7 @@ const MintSection = ({ action }: Props) => {
   return (
     <>
       <TopSection>
-        <Hexify dark>
-          <Stage>{"<stage one>"}</Stage>
-        </Hexify>
+        <MintStage />
         <Connector relative yellow />
       </TopSection>
       <Image src={mintIllustration} alt="Mint illustration" />
