@@ -11,6 +11,7 @@ import bg from "../../assets/mint/mint-bg.svg";
 import MintHomeButton from "./MintHomeButton";
 import MintError from "./MintError";
 import MintLoading from "./MintLoading";
+import MintSoldOut from "./MintSoldOut";
 
 const fadeIn = keyframes`
   from {
@@ -123,6 +124,8 @@ const MintPage = () => {
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
 
+  const soldOut = false;
+
   return (
     <StyledMintPage>
       <Content>
@@ -153,6 +156,7 @@ const MintPage = () => {
         </MainSection>
         <MintError show={error} close={() => setError(false)} />
         <MintLoading show={loading} />
+        {soldOut && <MintSoldOut />}
       </Content>
     </StyledMintPage>
   );
