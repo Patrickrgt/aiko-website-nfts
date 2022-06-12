@@ -64,6 +64,7 @@ const HeroSection = () => {
         <Tabs />
         <MintButton />
         <Wing autoPlay muted loop>
+          <source src="/assets/wing.mp4" type="video/mp4; codecs=hvc1" />
           <source src="/assets/wing.webm" type="video/webm" />
         </Wing>
       </ImageContainer>
