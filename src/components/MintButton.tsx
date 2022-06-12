@@ -91,7 +91,6 @@ const padZeros = (num: number) => {
 
 const MintButton = () => {
   const navigate = useNavigate();
-  const disabled = false;
 
   const tick = useTick();
   const END = new Date(1656172800000);
@@ -105,12 +104,14 @@ const MintButton = () => {
   const minutes = Math.floor((remaining % (1000 * 60 * 60)) / (1000 * 60));
   const seconds = Math.floor((remaining % (1000 * 60)) / 1000);
 
+  const mintLive = END <= now;
+
   return (
     <ButtonContainer>
       <Hexify>
         <ButtonArea>
           <StyledMintButton
-            disabled={disabled}
+            disabled={!mintLive}
             onClick={() => navigate("/mint")}
           >
             <ButtonContent>
@@ -119,10 +120,13 @@ const MintButton = () => {
               <YellowText>{">"}</YellowText>
             </ButtonContent>
           </StyledMintButton>
-          <Countdown>
-            <CountdownHighlight>{padZeros(days)}</CountdownHighlight>
-            {`:${padZeros(hours)}:${padZeros(minutes)}:${padZeros(seconds)}`}
-          </Countdown>
+          {!mintLive && (
+            <Countdown>
+              <CountdownHighlight>{padZeros(days)}</CountdownHighlight>
+              {`:${padZeros(hours)}:${padZeros(minutes)}:${padZeros(seconds)}`}
+            </Countdown>
+          )}
+          {mintLive && <Countdown>Mint Live</Countdown>}
         </ButtonArea>
       </Hexify>
     </ButtonContainer>
