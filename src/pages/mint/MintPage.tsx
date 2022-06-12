@@ -98,6 +98,7 @@ const Background = styled.img`
   top: 2rem;
   left: 2rem;
   width: calc(100% - 4rem);
+  filter: brightness(100);
 `;
 
 const Footer = styled.div`
