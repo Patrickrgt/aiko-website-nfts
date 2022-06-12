@@ -95,6 +95,10 @@ interface Props {
   action: () => void;
 }
 
+const roundToDp = (value: number, dp: number) => {
+  return Math.round(value * 10 ** dp) / 10 ** dp;
+};
+
 const MintButton = ({ amount, error, action }: Props) => {
   const price = 0.09;
 
@@ -113,7 +117,7 @@ const MintButton = ({ amount, error, action }: Props) => {
             </TextItem>
             <TextItem>
               <TextHeader>Total</TextHeader>
-              <TextValue>{`${price * amount}E`}</TextValue>
+              <TextValue>{`${roundToDp(price * amount, 2)}E`}</TextValue>
             </TextItem>
           </TextArea>
           <Button disabled={error} onClick={() => action()}>
