@@ -241,33 +241,42 @@ export const useAccountInfo = (): AccountInfo => {
   };
 };
 
-export const useMintsRemaining = (): number => {
+export const useStage = (): string => {
   const tick = useTick();
-
   const now = new Date().getTime() / 1000;
-
   const fistSaleStartTime = useFirstSaleStartTime();
   const firstSaleEndTime = useFirstSaleEndTime();
   const secondSaleEndTime = useSecondSaleEndTime();
   const holderSaleEndTime = useHolderSaleEndTime();
+
+  if (now < fistSaleStartTime) return "error1";
+  if (now <= firstSaleEndTime) return "one";
+  if (now <= secondSaleEndTime) return "two";
+  if (now <= holderSaleEndTime) return "three";
+  return "error2";
+};
+
+export const useMintsRemaining = (): number => {
   const accountInfo = useAccountInfo();
-  const teamMax = useTeamMax();
   const firstOrbMax = useFirstOrbMax();
   const secondOrbMax = useSecondOrbMax();
   const holderMax = useHolderMax();
+  const stage = useStage();
 
-  const stage = () => {
-    if (now < fistSaleStartTime) return "error1";
-    if (now <= firstSaleEndTime) return "one";
-    if (now <= secondSaleEndTime) return "two";
-    if (now <= holderSaleEndTime) return "three";
-    return "error2";
-  };
-
-  const stage_ = stage();
-
-  if (stage_ === "one") return firstOrbMax - accountInfo.purchasedFirst;
-  if (stage_ === "two") return secondOrbMax - accountInfo.purchasedSecond;
-  if (stage_ === "three") return holderMax - accountInfo.purchasedHolder;
+  if (stage === "one") return firstOrbMax - accountInfo.purchasedFirst;
+  if (stage === "two") return secondOrbMax - accountInfo.purchasedSecond;
+  if (stage === "three") return holderMax - accountInfo.purchasedHolder;
   return 0;
+};
+
+export const usePrice = (): BigNumber => {
+  const stage = useStage();
+  const firstOrbPrice = useFirstOrbPrice();
+  const secondOrbPrice = useSecondOrbPrice();
+  const holderPrice = useHolderPrice();
+
+  if (stage === "one") return firstOrbPrice;
+  if (stage === "two") return secondOrbPrice;
+  if (stage === "three") return holderPrice;
+  return BigNumber.from(0);
 };

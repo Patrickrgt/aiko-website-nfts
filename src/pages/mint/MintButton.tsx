@@ -1,7 +1,9 @@
 import styled from "styled-components";
-import Hexify from "../../components/Hexify";
+import { BigNumber } from "ethers";
 
+import Hexify from "../../components/Hexify";
 import lock from "../../assets/mint/orange-lock.svg";
+import { usePrice } from "../../contracts/views";
 
 const Container = styled.div`
   width: 100%;
@@ -95,12 +97,8 @@ interface Props {
   action: () => void;
 }
 
-const roundToDp = (value: number, dp: number) => {
-  return Math.round(value * 10 ** dp) / 10 ** dp;
-};
-
 const MintButton = ({ amount, error, action }: Props) => {
-  const price = 0.09;
+  const price = usePrice();
 
   return (
     <Container>
@@ -109,7 +107,7 @@ const MintButton = ({ amount, error, action }: Props) => {
           <TextArea>
             <TextItem>
               <TextHeader>Price</TextHeader>
-              <TextValue>{`${price}E`}</TextValue>
+              <TextValue>{`${price.toString()}E`}</TextValue>
             </TextItem>
             <TextItem>
               <TextHeader>Aikos</TextHeader>
@@ -117,7 +115,7 @@ const MintButton = ({ amount, error, action }: Props) => {
             </TextItem>
             <TextItem>
               <TextHeader>Total</TextHeader>
-              <TextValue>{`${roundToDp(price * amount, 2)}E`}</TextValue>
+              <TextValue>{`${price.mul(BigNumber.from(amount))}E`}</TextValue>
             </TextItem>
           </TextArea>
           <Button disabled={error} onClick={() => action()}>

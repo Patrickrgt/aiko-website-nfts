@@ -5,10 +5,9 @@ import timer from "../../assets/mint/timer.svg";
 import {
   useFirstSaleEndTime,
   useFirstSaleStartTime,
-  useSecondSaleStartTime,
   useSecondSaleEndTime,
-  useHolderSaleStartTime,
   useHolderSaleEndTime,
+  useStage,
 } from "../../contracts/views";
 import { useTick } from "../../app/hooks/use-tick";
 
@@ -65,27 +64,15 @@ const padZeros = (num: number) => {
 };
 
 const MintStage = () => {
-  const tick = useTick();
-
-  const now = new Date().getTime() / 1000;
-
-  const fistSaleStartTime = useFirstSaleStartTime();
+  const stage = useStage();
   const firstSaleEndTime = useFirstSaleEndTime();
   const secondSaleEndTime = useSecondSaleEndTime();
   const holderSaleEndTime = useHolderSaleEndTime();
 
-  const stage = () => {
-    if (now < fistSaleStartTime) return "error1";
-    if (now <= firstSaleEndTime) return "one";
-    if (now <= secondSaleEndTime) return "two";
-    if (now <= holderSaleEndTime) return "three";
-    return "error2";
-  };
-
   const stageEnd = () => {
-    if (now <= firstSaleEndTime) return new Date(firstSaleEndTime * 1000);
-    if (now <= secondSaleEndTime) return new Date(secondSaleEndTime * 1000);
-    if (now <= holderSaleEndTime) return new Date(holderSaleEndTime * 1000);
+    if (stage === "one") return new Date(firstSaleEndTime * 1000);
+    if (stage === "two") return new Date(secondSaleEndTime * 1000);
+    if (stage === "three") return new Date(holderSaleEndTime * 1000);
     return new Date();
   };
 
@@ -100,7 +87,7 @@ const MintStage = () => {
   return (
     <Hexify dark>
       <Stage>
-        {`<stage ${stage()}>`}
+        {`<stage ${stage}>`}
         <CountdownContainer>
           <Image src={timer} alt="image" />
           <Countdown>{`${padZeros(hours)}:${padZeros(minutes)}:${padZeros(
