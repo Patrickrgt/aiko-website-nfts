@@ -1,9 +1,22 @@
-import { useContractCall } from "@usedapp/core";
+import { useContractCall, useEthers } from "@usedapp/core";
 import { utils, BigNumber } from "ethers";
 import useGlobals from "../app/hooks/use-globals";
 import { useTick } from "../app/hooks/use-tick";
 
 import abi from "./aiko.json";
+
+export const useTotalSupply = (): number => {
+  const globals = useGlobals();
+
+  const [value] = useContractCall({
+    abi: new utils.Interface(abi),
+    address: globals.AIKO,
+    method: "totalSupply",
+    args: [],
+  }) ?? [BigNumber.from(0)];
+
+  return Number(value.toString());
+};
 
 export const useTeamPrice = (): BigNumber => {
   const globals = useGlobals();
@@ -195,13 +208,14 @@ export interface AccountInfo {
 }
 
 export const useAccountInfo = (): AccountInfo => {
+  const { account } = useEthers();
   const globals = useGlobals();
 
   const [value] = useContractCall({
     abi: new utils.Interface(abi),
     address: globals.AIKO,
     method: "accountInfo",
-    args: [],
+    args: [account],
   }) ?? [
     {
       freeMinted: BigNumber.from(0),
@@ -211,11 +225,19 @@ export const useAccountInfo = (): AccountInfo => {
     },
   ];
 
+  if (!value.freeMinted)
+    return {
+      freeMinted: 0,
+      purchasedFirst: 0,
+      purchasedSecond: 0,
+      purchasedHolder: 0,
+    };
+
   return {
     freeMinted: Number(value.freeMinted.toString()),
-    purchasedFirst: Number(value.freeMinted.toString()),
-    purchasedSecond: Number(value.freeMinted.toString()),
-    purchasedHolder: Number(value.freeMinted.toString()),
+    purchasedFirst: Number(value.purchasedFirst.toString()),
+    purchasedSecond: Number(value.purchasedSecond.toString()),
+    purchasedHolder: Number(value.purchasedHolder.toString()),
   };
 };
 
