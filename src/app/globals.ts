@@ -2,13 +2,13 @@ export const INFURA_ID = "ce27c65027c64f7a8ea17c6e63dfae96";
 export const OPENSEA = "https://opensea.io/";
 
 interface GlobalsType {
-  WETH: string;
+  AIKO: string;
 }
 
 export const ETH_GLOBALS: GlobalsType = {
-  WETH: "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+  AIKO: "0xaF352D3fd299bF62170AEfd882B6A7D103342172",
 };
 
 export const RINKEBY_GLOBALS: GlobalsType = {
-  WETH: "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+  AIKO: "0xaF352D3fd299bF62170AEfd882B6A7D103342172",
 };
