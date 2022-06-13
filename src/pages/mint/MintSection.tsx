@@ -54,7 +54,7 @@ const MintSection = ({ action }: Props) => {
     if (!amount) return "";
     if (amount <= 0) return "Amount must be greater than 0";
     if (amount > mintsRemaining)
-      return `Amount must be less than ${mintsRemaining}`;
+      return `Amount can't be more than ${mintsRemaining}`;
     return "";
   };
 
