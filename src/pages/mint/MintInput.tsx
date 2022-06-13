@@ -94,11 +94,11 @@ interface Props {
   setAmount: (v: number | null) => void;
   amount: number | null;
   error: string;
+  max: number;
 }
 
-const MintInput = ({ setAmount, amount, error }: Props) => {
+const MintInput = ({ setAmount, amount, error, max }: Props) => {
   const { account } = useEthers();
-  const max = 2;
 
   return (
     <Container>

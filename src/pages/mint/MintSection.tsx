@@ -10,6 +10,7 @@ import MintProgress from "./MintProgess";
 import mintIllustration from "../../assets/mint/mint-illustration.svg";
 import decal from "../../assets/mint/decal.svg";
 import MintStage from "./MintStage";
+import { useMintsRemaining } from "../../contracts/views";
 
 const TopSection = styled.div`
   position: relative;
@@ -47,12 +48,13 @@ interface Props {
 
 const MintSection = ({ action }: Props) => {
   const [amount, setAmount] = useState<number | null>(null);
-  const max = 2;
+  const mintsRemaining = useMintsRemaining();
 
   const error = () => {
     if (!amount) return "";
     if (amount <= 0) return "Amount must be greater than 0";
-    if (amount > max) return `Amount must be less than ${max}`;
+    if (amount > mintsRemaining)
+      return `Amount must be less than ${mintsRemaining}`;
     return "";
   };
 
@@ -64,6 +66,7 @@ const MintSection = ({ action }: Props) => {
       </TopSection>
       <Image src={mintIllustration} alt="Mint illustration" />
       <MintInput
+        max={mintsRemaining}
         amount={amount}
         setAmount={(v: number | null) => setAmount(v)}
         error={error()}
