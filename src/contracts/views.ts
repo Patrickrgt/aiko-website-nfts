@@ -118,7 +118,7 @@ export const useFirstSaleStartTime = () => {
     args: [],
   }) ?? [BigNumber.from(0)];
 
-  return value;
+  return Number(value.toString());
 };
 
 export const useFirstSaleEndTime = () => {
@@ -131,7 +131,7 @@ export const useFirstSaleEndTime = () => {
     args: [],
   }) ?? [BigNumber.from(0)];
 
-  return value;
+  return Number(value.toString());
 };
 
 export const useSecondSaleStartTime = () => {
@@ -144,7 +144,7 @@ export const useSecondSaleStartTime = () => {
     args: [],
   }) ?? [BigNumber.from(0)];
 
-  return value;
+  return Number(value.toString());
 };
 
 export const useSecondSaleEndTime = () => {
@@ -157,7 +157,7 @@ export const useSecondSaleEndTime = () => {
     args: [],
   }) ?? [BigNumber.from(0)];
 
-  return value;
+  return Number(value.toString());
 };
 
 export const useHolderSaleStartTime = () => {
@@ -170,7 +170,7 @@ export const useHolderSaleStartTime = () => {
     args: [],
   }) ?? [BigNumber.from(0)];
 
-  return value;
+  return Number(value.toString());
 };
 
 export const useHolderSaleEndTime = () => {
@@ -183,7 +183,7 @@ export const useHolderSaleEndTime = () => {
     args: [],
   }) ?? [BigNumber.from(0)];
 
-  return value;
+  return Number(value.toString());
 };
 
 export interface AccountInfo {
