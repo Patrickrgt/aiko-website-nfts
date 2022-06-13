@@ -1,10 +1,11 @@
 import { useContractCall } from "@usedapp/core";
 import { utils, BigNumber } from "ethers";
 import useGlobals from "../app/hooks/use-globals";
+import { useTick } from "../app/hooks/use-tick";
 
 import abi from "./aiko.json";
 
-export const useTeamPrice = () => {
+export const useTeamPrice = (): BigNumber => {
   const globals = useGlobals();
 
   const [value] = useContractCall({
@@ -17,7 +18,7 @@ export const useTeamPrice = () => {
   return value;
 };
 
-export const useFirstOrbPrice = () => {
+export const useFirstOrbPrice = (): BigNumber => {
   const globals = useGlobals();
 
   const [value] = useContractCall({
@@ -30,7 +31,7 @@ export const useFirstOrbPrice = () => {
   return value;
 };
 
-export const useSecondOrbPrice = () => {
+export const useSecondOrbPrice = (): BigNumber => {
   const globals = useGlobals();
 
   const [value] = useContractCall({
@@ -43,7 +44,7 @@ export const useSecondOrbPrice = () => {
   return value;
 };
 
-export const useHolderPrice = () => {
+export const useHolderPrice = (): BigNumber => {
   const globals = useGlobals();
 
   const [value] = useContractCall({
@@ -56,7 +57,7 @@ export const useHolderPrice = () => {
   return value;
 };
 
-export const useTeamMax = () => {
+export const useTeamMax = (): number => {
   const globals = useGlobals();
 
   const [value] = useContractCall({
@@ -66,10 +67,10 @@ export const useTeamMax = () => {
     args: [],
   }) ?? [BigNumber.from(0)];
 
-  return value;
+  return Number(value.toString());
 };
 
-export const useFirstOrbMax = () => {
+export const useFirstOrbMax = (): number => {
   const globals = useGlobals();
 
   const [value] = useContractCall({
@@ -79,10 +80,10 @@ export const useFirstOrbMax = () => {
     args: [],
   }) ?? [BigNumber.from(0)];
 
-  return value;
+  return Number(value.toString());
 };
 
-export const useSecondOrbMax = () => {
+export const useSecondOrbMax = (): number => {
   const globals = useGlobals();
 
   const [value] = useContractCall({
@@ -92,10 +93,10 @@ export const useSecondOrbMax = () => {
     args: [],
   }) ?? [BigNumber.from(0)];
 
-  return value;
+  return Number(value.toString());
 };
 
-export const useHolderMax = () => {
+export const useHolderMax = (): number => {
   const globals = useGlobals();
 
   const [value] = useContractCall({
@@ -105,10 +106,10 @@ export const useHolderMax = () => {
     args: [],
   }) ?? [BigNumber.from(0)];
 
-  return value;
+  return Number(value.toString());
 };
 
-export const useFirstSaleStartTime = () => {
+export const useFirstSaleStartTime = (): number => {
   const globals = useGlobals();
 
   const [value] = useContractCall({
@@ -121,7 +122,7 @@ export const useFirstSaleStartTime = () => {
   return Number(value.toString());
 };
 
-export const useFirstSaleEndTime = () => {
+export const useFirstSaleEndTime = (): number => {
   const globals = useGlobals();
 
   const [value] = useContractCall({
@@ -134,7 +135,7 @@ export const useFirstSaleEndTime = () => {
   return Number(value.toString());
 };
 
-export const useSecondSaleStartTime = () => {
+export const useSecondSaleStartTime = (): number => {
   const globals = useGlobals();
 
   const [value] = useContractCall({
@@ -147,7 +148,7 @@ export const useSecondSaleStartTime = () => {
   return Number(value.toString());
 };
 
-export const useSecondSaleEndTime = () => {
+export const useSecondSaleEndTime = (): number => {
   const globals = useGlobals();
 
   const [value] = useContractCall({
@@ -160,7 +161,7 @@ export const useSecondSaleEndTime = () => {
   return Number(value.toString());
 };
 
-export const useHolderSaleStartTime = () => {
+export const useHolderSaleStartTime = (): number => {
   const globals = useGlobals();
 
   const [value] = useContractCall({
@@ -173,7 +174,7 @@ export const useHolderSaleStartTime = () => {
   return Number(value.toString());
 };
 
-export const useHolderSaleEndTime = () => {
+export const useHolderSaleEndTime = (): number => {
   const globals = useGlobals();
 
   const [value] = useContractCall({
@@ -187,10 +188,10 @@ export const useHolderSaleEndTime = () => {
 };
 
 export interface AccountInfo {
-  freeMinted: BigNumber;
-  purchasedFirst: BigNumber;
-  purchasedSecond: BigNumber;
-  purchasedHolder: BigNumber;
+  freeMinted: number;
+  purchasedFirst: number;
+  purchasedSecond: number;
+  purchasedHolder: number;
 }
 
 export const useAccountInfo = (): AccountInfo => {
@@ -210,5 +211,41 @@ export const useAccountInfo = (): AccountInfo => {
     },
   ];
 
-  return value;
+  return {
+    freeMinted: Number(value.freeMinted.toString()),
+    purchasedFirst: Number(value.freeMinted.toString()),
+    purchasedSecond: Number(value.freeMinted.toString()),
+    purchasedHolder: Number(value.freeMinted.toString()),
+  };
+};
+
+export const useMintsRemaining = (): number => {
+  const tick = useTick();
+
+  const now = new Date().getTime() / 1000;
+
+  const fistSaleStartTime = useFirstSaleStartTime();
+  const firstSaleEndTime = useFirstSaleEndTime();
+  const secondSaleEndTime = useSecondSaleEndTime();
+  const holderSaleEndTime = useHolderSaleEndTime();
+  const accountInfo = useAccountInfo();
+  const teamMax = useTeamMax();
+  const firstOrbMax = useFirstOrbMax();
+  const secondOrbMax = useSecondOrbMax();
+  const holderMax = useHolderMax();
+
+  const stage = () => {
+    if (now < fistSaleStartTime) return "error1";
+    if (now <= firstSaleEndTime) return "one";
+    if (now <= secondSaleEndTime) return "two";
+    if (now <= holderSaleEndTime) return "three";
+    return "error2";
+  };
+
+  const stage_ = stage();
+
+  if (stage_ === "one") return firstOrbMax - accountInfo.purchasedFirst;
+  if (stage_ === "two") return secondOrbMax - accountInfo.purchasedSecond;
+  if (stage_ === "three") return holderMax - accountInfo.purchasedHolder;
+  return 0;
 };
