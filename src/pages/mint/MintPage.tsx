@@ -12,6 +12,7 @@ import MintHomeButton from "./MintHomeButton";
 import MintError from "./MintError";
 import MintLoading from "./MintLoading";
 import MintSoldOut from "./MintSoldOut";
+import MintPending from "./MintPending";
 
 const fadeIn = keyframes`
   from {
@@ -157,6 +158,7 @@ const MintPage = () => {
         <MintError show={error} close={() => setError(false)} />
         <MintLoading show={loading} />
         {soldOut && <MintSoldOut />}
+        <MintPending />
       </Content>
     </StyledMintPage>
   );
