@@ -280,3 +280,37 @@ export const usePrice = (): BigNumber => {
   if (stage === "three") return holderPrice;
   return BigNumber.from(0);
 };
+
+export const useIsPending = (): boolean => {
+  const tick = useTick();
+  const now = new Date().getTime() / 1000;
+  const fistSaleStartTime = useFirstSaleStartTime();
+  const firstSaleEndTime = useFirstSaleEndTime();
+  const secondSaleStartTime = useSecondSaleStartTime();
+  const secondSaleEndTime = useSecondSaleEndTime();
+  const holderSaleStartTime = useHolderSaleStartTime();
+  const holderSaleEndTime = useHolderSaleEndTime();
+
+  if (now < fistSaleStartTime) return true;
+  if (now > firstSaleEndTime && now < secondSaleStartTime) return true;
+  if (now > secondSaleEndTime && now < holderSaleStartTime) return true;
+  return false;
+};
+
+export const useNextStage = (): Date => {
+  const tick = useTick();
+  const now = new Date().getTime() / 1000;
+  const fistSaleStartTime = useFirstSaleStartTime();
+  const firstSaleEndTime = useFirstSaleEndTime();
+  const secondSaleStartTime = useSecondSaleStartTime();
+  const secondSaleEndTime = useSecondSaleEndTime();
+  const holderSaleStartTime = useHolderSaleStartTime();
+  const holderSaleEndTime = useHolderSaleEndTime();
+
+  if (now < fistSaleStartTime) return new Date(fistSaleStartTime * 1000);
+  if (now > firstSaleEndTime && now < secondSaleStartTime)
+    return new Date(secondSaleStartTime * 1000);
+  if (now > secondSaleEndTime && now < holderSaleStartTime)
+    return new Date(holderSaleStartTime * 1000);
+  return new Date();
+};
