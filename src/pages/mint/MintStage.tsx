@@ -64,6 +64,7 @@ const padZeros = (num: number) => {
 };
 
 const MintStage = () => {
+  const tick = useTick();
   const stage = useStage();
   const firstSaleEndTime = useFirstSaleEndTime();
   const secondSaleEndTime = useSecondSaleEndTime();
