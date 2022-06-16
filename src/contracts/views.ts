@@ -4,6 +4,8 @@ import useGlobals from "../app/hooks/use-globals";
 import { useTick } from "../app/hooks/use-tick";
 
 import abi from "./aiko.json";
+import orbProofs from "./orbProofs.json";
+import holderProofs from "./holderProofs.json";
 
 export const useTotalSupply = (): number => {
   const globals = useGlobals();
@@ -242,6 +244,7 @@ export const useAccountInfo = (): AccountInfo => {
 };
 
 export const useStage = (): string => {
+  const { account } = useEthers();
   const tick = useTick();
   const now = new Date().getTime() / 1000;
   const fistSaleStartTime = useFirstSaleStartTime();
@@ -249,6 +252,7 @@ export const useStage = (): string => {
   const secondSaleEndTime = useSecondSaleEndTime();
   const holderSaleEndTime = useHolderSaleEndTime();
 
+  if (!account) return "error0";
   if (now < fistSaleStartTime) return "error1";
   if (now <= firstSaleEndTime) return "one";
   if (now <= secondSaleEndTime) return "two";
@@ -257,15 +261,30 @@ export const useStage = (): string => {
 };
 
 export const useMintsRemaining = (): number => {
+  const { account } = useEthers();
   const accountInfo = useAccountInfo();
   const firstOrbMax = useFirstOrbMax();
   const secondOrbMax = useSecondOrbMax();
   const holderMax = useHolderMax();
   const stage = useStage();
 
-  if (stage === "one") return firstOrbMax - accountInfo.purchasedFirst;
-  if (stage === "two") return secondOrbMax - accountInfo.purchasedSecond;
-  if (stage === "three") return holderMax - accountInfo.purchasedHolder;
+  if (!account) return 0;
+
+  if (stage === "one") {
+    const data = (orbProofs as any)[account];
+    if (!data || !data.Amount) return 0;
+    return Math.min(firstOrbMax, data.Amount) - accountInfo.purchasedFirst;
+  }
+  if (stage === "two") {
+    const data = (orbProofs as any)[account];
+    if (!data || !data.Amount) return 0;
+    return Math.min(secondOrbMax, data.Amount) - accountInfo.purchasedSecond;
+  }
+  if (stage === "three") {
+    const data = (holderProofs as any)[account];
+    if (!data || !data.Amount) return 0;
+    return holderMax - accountInfo.purchasedHolder;
+  }
   return 0;
 };
 
@@ -305,7 +324,6 @@ export const useNextStage = (): Date => {
   const secondSaleStartTime = useSecondSaleStartTime();
   const secondSaleEndTime = useSecondSaleEndTime();
   const holderSaleStartTime = useHolderSaleStartTime();
-  const holderSaleEndTime = useHolderSaleEndTime();
 
   if (now < fistSaleStartTime) return new Date(fistSaleStartTime * 1000);
   if (now > firstSaleEndTime && now < secondSaleStartTime)
