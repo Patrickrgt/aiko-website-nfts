@@ -6,6 +6,7 @@ import { useTick } from "../app/hooks/use-tick";
 import abi from "./aiko.json";
 import orbProofs from "./orbProofs.json";
 import holderProofs from "./holderProofs.json";
+import { MAX_SUPPLY } from "../app/globals";
 
 export const useTotalSupply = (): number => {
   const globals = useGlobals();
@@ -331,4 +332,9 @@ export const useNextStage = (): Date => {
   if (now > secondSaleEndTime && now < holderSaleStartTime)
     return new Date(holderSaleStartTime * 1000);
   return new Date();
+};
+
+export const useSoldOut = (): boolean => {
+  const totalSupply = useTotalSupply();
+  return totalSupply === MAX_SUPPLY;
 };
