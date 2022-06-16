@@ -89,6 +89,10 @@ const Numbers = styled.div`
   justify-content: center;
 `;
 
+const padZeros = (num: number) => {
+  return num < 10 ? `0${num}` : num;
+};
+
 const MintPending = () => {
   const tick = useTick();
   const time = useNextStage();
@@ -113,7 +117,9 @@ const MintPending = () => {
         <BottomText>will begin in</BottomText>
         <Countdown>
           <Icon src={timer} alt="timer icon" />
-          <Numbers>{`${hours}:${minutes}:${seconds}`}</Numbers>
+          <Numbers>{`${padZeros(hours)}:${padZeros(minutes)}:${padZeros(
+            seconds
+          )}`}</Numbers>
         </Countdown>
       </Content>
     </StyledMintPending>
