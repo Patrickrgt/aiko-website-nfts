@@ -1,3 +1,5 @@
+// TODO Error screen
+
 import { useState } from "react";
 import styled, { keyframes } from "styled-components";
 import { useEthers } from "@usedapp/core";
@@ -17,7 +19,7 @@ import {
   useMintHolders,
   useMintSecondOrb,
 } from "../../contracts/functions";
-import { useStage } from "../../contracts/views";
+import { useSoldOut, useStage } from "../../contracts/views";
 
 import orbProofs from "../../contracts/orbProofs.json";
 import holderProofs from "../../contracts/holderProofs.json";
@@ -138,8 +140,7 @@ const MintPage = () => {
   const { mintFirstOrbState, mintFirstOrb } = useMintFirstOrb();
   const { mintSecondtOrbState, mintSecondOrb } = useMintSecondOrb();
   const { mintHoldersState, mintHolders } = useMintHolders();
-
-  const soldOut = false; // TODO
+  const soldOut = useSoldOut();
 
   const loading =
     mintFirstOrbState.status === "Mining" ||
