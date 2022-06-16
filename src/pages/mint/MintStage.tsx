@@ -1,10 +1,10 @@
 import styled from "styled-components";
+import { useEthers } from "@usedapp/core";
 
 import Hexify from "../../components/Hexify";
 import timer from "../../assets/mint/timer.svg";
 import {
   useFirstSaleEndTime,
-  useFirstSaleStartTime,
   useSecondSaleEndTime,
   useHolderSaleEndTime,
   useStage,
@@ -64,6 +64,8 @@ const padZeros = (num: number) => {
 };
 
 const MintStage = () => {
+  const { account } = useEthers();
+
   const tick = useTick();
   const stage = useStage();
   const firstSaleEndTime = useFirstSaleEndTime();
@@ -71,6 +73,7 @@ const MintStage = () => {
   const holderSaleEndTime = useHolderSaleEndTime();
 
   const stageEnd = () => {
+    if (!account) return new Date();
     if (stage === "one") return new Date(firstSaleEndTime * 1000);
     if (stage === "two") return new Date(secondSaleEndTime * 1000);
     if (stage === "three") return new Date(holderSaleEndTime * 1000);
@@ -88,7 +91,7 @@ const MintStage = () => {
   return (
     <Hexify dark>
       <Stage>
-        {`<stage ${stage}>`}
+        {`<stage ${stage.substring(0, 1) === "e" ? "one" : stage}>`}
         <CountdownContainer>
           <Image src={timer} alt="image" />
           <Countdown>{`${padZeros(hours)}:${padZeros(minutes)}:${padZeros(

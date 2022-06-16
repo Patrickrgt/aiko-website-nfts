@@ -12,6 +12,15 @@ import MintHomeButton from "./MintHomeButton";
 import MintError from "./MintError";
 import MintLoading from "./MintLoading";
 import MintSoldOut from "./MintSoldOut";
+import {
+  useMintFirstOrb,
+  useMintHolders,
+  useMintSecondOrb,
+} from "../../contracts/functions";
+import { useStage } from "../../contracts/views";
+
+import orbProofs from "../../contracts/orbProofs.json";
+import holderProofs from "../../contracts/holderProofs.json";
 import MintPending from "./MintPending";
 
 const fadeIn = keyframes`
@@ -123,9 +132,42 @@ const MintPage = () => {
   const { account } = useEthers();
   const [minted, setMinted] = useState(false);
   const [error, setError] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [amount, setAmount] = useState<number | null>(null);
 
-  const soldOut = false;
+  const stage = useStage();
+  const { mintFirstOrbState, mintFirstOrb } = useMintFirstOrb();
+  const { mintSecondtOrbState, mintSecondOrb } = useMintSecondOrb();
+  const { mintHoldersState, mintHolders } = useMintHolders();
+
+  const soldOut = false; // TODO
+
+  const loading =
+    mintFirstOrbState.status === "Mining" ||
+    mintFirstOrbState.status === "PendingSignature" ||
+    mintSecondtOrbState.status === "Mining" ||
+    mintSecondtOrbState.status === "PendingSignature" ||
+    mintHoldersState.status === "Mining" ||
+    mintHoldersState.status === "PendingSignature";
+
+  const mint = () => {
+    if (loading) return;
+    if (!account) return;
+    if (stage === "one") {
+      const data = (orbProofs as any)[account];
+      if (!data || !data.Amount) return;
+      mintFirstOrb(amount, data.Amount, data.Proof);
+    }
+    if (stage === "two") {
+      const data = (orbProofs as any)[account];
+      if (!data || !data.Amount) return;
+      mintSecondOrb(amount, data.Amount, data.Proof);
+    }
+    if (stage === "three") {
+      const data = (holderProofs as any)[account];
+      if (!data || !data.Amount) return;
+      mintHolders(amount, data.Amount, data.Proof);
+    }
+  };
 
   return (
     <StyledMintPage>
@@ -139,13 +181,9 @@ const MintPage = () => {
           <Background src={bg} alt="mint background image" />
           {!minted && (
             <MintSection
-              action={() => {
-                setLoading(true);
-                setTimeout(() => {
-                  setLoading(false);
-                  setMinted(true);
-                }, 2000);
-              }}
+              amount={amount}
+              setAmount={(v: number | null) => setAmount(v)}
+              action={() => mint()}
             />
           )}
           {minted && <MintConfirmation />}

@@ -44,10 +44,11 @@ const Icon = styled.img`
 
 interface Props {
   action: () => void;
+  amount: number | null;
+  setAmount: (v: number | null) => void;
 }
 
-const MintSection = ({ action }: Props) => {
-  const [amount, setAmount] = useState<number | null>(null);
+const MintSection = ({ action, amount, setAmount }: Props) => {
   const mintsRemaining = useMintsRemaining();
 
   const error = () => {
