@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { BigNumber } from "ethers";
+import { utils, BigNumber } from "ethers";
 
 import Hexify from "../../components/Hexify";
 import lock from "../../assets/mint/orange-lock.svg";
@@ -107,7 +107,7 @@ const MintButton = ({ amount, error, action }: Props) => {
           <TextArea>
             <TextItem>
               <TextHeader>Price</TextHeader>
-              <TextValue>{`${price.toString()}E`}</TextValue>
+              <TextValue>{`${utils.formatEther(price)}E`}</TextValue>
             </TextItem>
             <TextItem>
               <TextHeader>Aikos</TextHeader>
@@ -115,7 +115,9 @@ const MintButton = ({ amount, error, action }: Props) => {
             </TextItem>
             <TextItem>
               <TextHeader>Total</TextHeader>
-              <TextValue>{`${price.mul(BigNumber.from(amount))}E`}</TextValue>
+              <TextValue>{`${utils.formatEther(
+                price.mul(BigNumber.from(amount))
+              )}E`}</TextValue>
             </TextItem>
           </TextArea>
           <Button disabled={error} onClick={() => action()}>
