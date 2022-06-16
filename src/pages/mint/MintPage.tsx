@@ -133,7 +133,6 @@ const Barcode = styled.img`
 const MintPage = () => {
   const { account } = useEthers();
   const [minted, setMinted] = useState(false);
-  const [error, setError] = useState(false);
   const [amount, setAmount] = useState<number | null>(null);
 
   const stage = useStage();
@@ -194,7 +193,7 @@ const MintPage = () => {
           </Footer>
           {!account && <Overlay />}
         </MainSection>
-        <MintError show={error} close={() => setError(false)} />
+        <MintError />
         <MintLoading show={loading} />
         {soldOut && <MintSoldOut />}
         <MintPending />

@@ -1,22 +1,22 @@
+import { useDispatch, useSelector } from "react-redux";
+
 import MintOverlay from "./MintOverlay";
-
 import error from "../../assets/mint/error-illustration.svg";
+import { clearError, selectError } from "../../state/errorSlice";
 
-interface Props {
-  show: boolean;
-  close: () => void;
-}
+const MintError = () => {
+  const dispatch = useDispatch();
+  const errorText = useSelector(selectError);
 
-const MintError = ({ show, close }: Props) => {
   return (
     <MintOverlay
-      show={show}
+      show={!!errorText}
       asset={error}
       header="Error"
       body="Oops, something went wrong! Please try again"
       buttonText="Ok"
-      buttonAction={close}
-      exit={close}
+      buttonAction={() => dispatch(clearError())}
+      exit={() => dispatch(clearError())}
     />
   );
 };
