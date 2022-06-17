@@ -214,33 +214,24 @@ export const useAccountInfo = (): AccountInfo => {
   const { account } = useEthers();
   const globals = useGlobals();
 
-  const [value] = useContractCall({
-    abi: new utils.Interface(abi),
-    address: globals.AIKO,
-    method: "accountInfo",
-    args: [account],
-  }) ?? [
-    {
-      freeMinted: BigNumber.from(0),
-      purchasedFirst: BigNumber.from(0),
-      purchasedSecond: BigNumber.from(0),
-      purchasedHolder: BigNumber.from(0),
-    },
-  ];
-
-  if (!value.freeMinted)
-    return {
-      freeMinted: 0,
-      purchasedFirst: 0,
-      purchasedSecond: 0,
-      purchasedHolder: 0,
-    };
+  const [freeMinted, purchasedFirst, purchasedSecond, purchasedHolder] =
+    useContractCall({
+      abi: new utils.Interface(abi),
+      address: globals.AIKO,
+      method: "accountInfo",
+      args: [account],
+    }) ?? [
+      BigNumber.from(3),
+      BigNumber.from(3),
+      BigNumber.from(3),
+      BigNumber.from(3),
+    ];
 
   return {
-    freeMinted: Number(value.freeMinted.toString()),
-    purchasedFirst: Number(value.purchasedFirst.toString()),
-    purchasedSecond: Number(value.purchasedSecond.toString()),
-    purchasedHolder: Number(value.purchasedHolder.toString()),
+    freeMinted: Number(freeMinted.toString()),
+    purchasedFirst: Number(purchasedFirst.toString()),
+    purchasedSecond: Number(purchasedSecond.toString()),
+    purchasedHolder: Number(purchasedHolder.toString()),
   };
 };
 
