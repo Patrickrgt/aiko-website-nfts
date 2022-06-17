@@ -1,5 +1,3 @@
-// TODO Error screen
-
 import { useEffect, useState } from "react";
 import styled, { keyframes } from "styled-components";
 import { useEthers } from "@usedapp/core";
