@@ -1,8 +1,9 @@
 // TODO Error screen
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styled, { keyframes } from "styled-components";
 import { useEthers } from "@usedapp/core";
+import { BigNumber } from "ethers";
 
 import MintConfirmation from "./MintConfirmation";
 import MintSection from "./MintSection";
@@ -19,7 +20,7 @@ import {
   useMintHolders,
   useMintSecondOrb,
 } from "../../contracts/functions";
-import { useSoldOut, useStage } from "../../contracts/views";
+import { usePrice, useSoldOut, useStage } from "../../contracts/views";
 
 import orbProofs from "../../contracts/orbProofs.json";
 import holderProofs from "../../contracts/holderProofs.json";
@@ -140,6 +141,7 @@ const MintPage = () => {
   const { mintSecondtOrbState, mintSecondOrb } = useMintSecondOrb();
   const { mintHoldersState, mintHolders } = useMintHolders();
   const soldOut = useSoldOut();
+  const price = usePrice();
 
   const loading =
     mintFirstOrbState.status === "Mining" ||
@@ -149,23 +151,35 @@ const MintPage = () => {
     mintHoldersState.status === "Mining" ||
     mintHoldersState.status === "PendingSignature";
 
+  useEffect(() => {
+    if (!loading) {
+      setAmount(null);
+    }
+  }, [loading]);
+
   const mint = () => {
     if (loading) return;
     if (!account) return;
     if (stage === "one") {
       const data = (orbProofs as any)[account];
       if (!data || !data.Amount) return;
-      mintFirstOrb(amount, data.Amount, data.Proof);
+      mintFirstOrb(amount, data.Amount, data.Proof, {
+        value: price.mul(BigNumber.from(amount)),
+      });
     }
     if (stage === "two") {
       const data = (orbProofs as any)[account];
       if (!data || !data.Amount) return;
-      mintSecondOrb(amount, data.Amount, data.Proof);
+      mintSecondOrb(amount, data.Amount, data.Proof, {
+        value: price.mul(BigNumber.from(amount)),
+      });
     }
     if (stage === "three") {
       const data = (holderProofs as any)[account];
       if (!data || !data.Amount) return;
-      mintHolders(amount, data.Amount, data.Proof);
+      mintHolders(amount, data.Amount, data.Proof, {
+        value: price.mul(BigNumber.from(amount)),
+      });
     }
   };
 
