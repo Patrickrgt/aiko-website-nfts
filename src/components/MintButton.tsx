@@ -93,7 +93,7 @@ const MintButton = () => {
   const navigate = useNavigate();
 
   const tick = useTick();
-  const END = new Date(1656172800000);
+  const END = new Date(1655761632000);
   const now = new Date();
   const remaining = END.getTime() - now.getTime();
 

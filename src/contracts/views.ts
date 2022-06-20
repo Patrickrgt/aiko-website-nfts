@@ -183,7 +183,7 @@ export const useHolderSaleStartTime = (): number => {
   const [value] = useContractCall({
     abi: new utils.Interface(abi),
     address: globals.AIKO,
-    method: "holderSaleStartTime",
+    method: "publicSaleStartTime",
     args: [],
   }) ?? [BigNumber.from(0)];
 
@@ -196,7 +196,7 @@ export const useHolderSaleEndTime = (): number => {
   const [value] = useContractCall({
     abi: new utils.Interface(abi),
     address: globals.AIKO,
-    method: "holderSaleEndTime",
+    method: "publicSaleEndTime",
     args: [],
   }) ?? [BigNumber.from(0)];
 
