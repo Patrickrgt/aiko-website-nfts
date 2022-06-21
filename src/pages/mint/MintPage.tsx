@@ -131,7 +131,7 @@ const Barcode = styled.img`
 
 const MintPage = () => {
   const { account } = useEthers();
-  const [minted, setMinted] = useState(false);
+  const [minted, setMinted] = useState(0);
   const [amount, setAmount] = useState<number | null>(null);
 
   const stage = useStage();
@@ -155,14 +155,15 @@ const MintPage = () => {
     mintHoldersState.status === "Success";
 
   useEffect(() => {
+    if (success) {
+      if (amount) setMinted(amount);
+      setAmount(null);
+      return;
+    }
     if (!loading) {
       setAmount(null);
     }
-  }, [loading]);
-
-  useEffect(() => {
-    if (success) setMinted(true);
-  }, [success]);
+  }, [loading, success]);
 
   const mint = () => {
     if (loading) return;
@@ -200,14 +201,14 @@ const MintPage = () => {
         <Separator />
         <MainSection>
           <Background src={bg} alt="mint background image" />
-          {!minted && (
+          {minted === 0 && (
             <MintSection
               amount={amount}
               setAmount={(v: number | null) => setAmount(v)}
               action={() => mint()}
             />
           )}
-          {minted && <MintConfirmation />}
+          {minted > 0 && <MintConfirmation amount={minted} />}
           <Footer>
             <Copywrite src={footerLeft} alt="Footer illustration" />
             <Barcode src={footerRight} alt="Footer illustration" />

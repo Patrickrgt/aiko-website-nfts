@@ -32,11 +32,23 @@ const SubHeader = styled.div`
   line-height: 1;
 `;
 
+const Amount = styled.div`
+  color: #4d6694;
+  font-size: 2.6rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  line-height: 1;
+`;
+
 const Image = styled.img`
   width: 36rem;
 `;
 
-const MintConfirmation = () => {
+interface Props {
+  amount: number;
+}
+
+const MintConfirmation = ({ amount }: Props) => {
   return (
     <>
       <div />
@@ -46,6 +58,7 @@ const MintConfirmation = () => {
         <SubHeader>welcome to aiko virtual</SubHeader>
       </TopContent>
       <Image src={illustration} alt="Illustration" />
+      <Amount>{`you minted ${amount} Aiko${amount > 1 ? "s" : ""}`}</Amount>
       <MintOpenseaButton />
     </>
   );
