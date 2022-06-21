@@ -149,11 +149,20 @@ const MintPage = () => {
     mintHoldersState.status === "Mining" ||
     mintHoldersState.status === "PendingSignature";
 
+  const success =
+    mintFirstOrbState.status === "Success" ||
+    mintSecondtOrbState.status === "Success" ||
+    mintHoldersState.status === "Success";
+
   useEffect(() => {
     if (!loading) {
       setAmount(null);
     }
   }, [loading]);
+
+  useEffect(() => {
+    if (success) setMinted(true);
+  }, [success]);
 
   const mint = () => {
     if (loading) return;
