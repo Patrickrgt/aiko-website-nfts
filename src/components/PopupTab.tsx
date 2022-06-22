@@ -5,6 +5,10 @@ const Container = styled.div`
   position: relative;
   width: 41.5%;
   margin-right: 3.4rem;
+
+  @media only screen and (max-width: 600px) {
+    display: none;
+  }
 `;
 
 const ImageContainer = styled.div`
@@ -124,12 +128,21 @@ const TextSection = styled.p`
   width: 100%;
   margin-bottom: 1.5rem;
   color: #7c693a;
-  font-size: 2.4rem;
   font-weight: 400;
 
   :first-letter {
     font-weight: 900;
     font-size: 2.6rem;
+  }
+
+  font-size: 2.4rem;
+  @media only screen and (max-width: 600px) {
+    font-size: 2rem;
+
+    :first-letter {
+      font-weight: 900;
+      font-size: 2.2rem;
+    }
   }
 `;
 

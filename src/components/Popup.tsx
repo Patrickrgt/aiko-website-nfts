@@ -47,6 +47,10 @@ const Container = styled.div`
   transition: all 0.3s;
   transform: scale(${(props: PopupProps) => (props.show ? 1 : 0)});
   opacity: ${(props: PopupProps) => (props.show ? 1 : 0)};
+
+  @media only screen and (max-width: 600px) {
+    margin: 1rem;
+  }
 `;
 
 const ExitButton = styled.button`
@@ -76,8 +80,6 @@ interface TabProps {
 }
 
 const Tab = styled.button`
-  width: 18rem;
-  height: 3rem;
   background: ${(props: TabProps) =>
     props.active ? "#FFCF61" : props.index === 2 ? "#D4AA48" : "#E7BB52"};
   cursor: pointer;
@@ -93,10 +95,18 @@ const Tab = styled.button`
     0% 0%
   );
   color: #7e6537;
-  font-size: 2.2rem;
   font-weight: 700;
   text-align: left;
   padding: 0 1rem;
+
+  width: 18rem;
+  height: 3rem;
+  font-size: 2.2rem;
+  @media only screen and (max-width: 600px) {
+    width: 12rem;
+    height: 2.7rem;
+    font-size: 1.9rem;
+  }
 `;
 
 interface Props {
