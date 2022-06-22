@@ -4,6 +4,7 @@ import useGlobals from "../app/hooks/use-globals";
 import { useTick } from "../app/hooks/use-tick";
 
 import abi from "./aiko.json";
+import freeProofs from "./freeProofs.json";
 import firstOrbProofs from "./firstOrbProofs.json";
 import secondOrbProofs from "./secondOrbProofs.json";
 import holderProofs from "./holderProofs.json";
@@ -369,4 +370,13 @@ export const useSoldOut = (): boolean => {
   const maxSupply = useMaxSupply();
   if (maxSupply === 0) return false;
   return totalSupply === maxSupply;
+};
+
+export const useHasFreeMint = (): boolean => {
+  const { account } = useEthers();
+  const accountInfo = useAccountInfo();
+  if (!account) return false;
+  const data = (freeProofs as any)[account];
+  if (!data || !data.Amount) return false;
+  return data.Amount - accountInfo.freeMinted > 0;
 };

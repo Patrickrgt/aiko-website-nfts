@@ -15,11 +15,13 @@ import MintLoading from "./MintLoading";
 import MintSoldOut from "./MintSoldOut";
 import {
   useMintFirstOrb,
+  useMintFree,
   useMintHolders,
   useMintSecondOrb,
 } from "../../contracts/functions";
-import { usePrice, useStage } from "../../contracts/views";
+import { useHasFreeMint, usePrice, useStage } from "../../contracts/views";
 
+import freeProofs from "../../contracts/freeProofs.json";
 import firstOrbProofs from "../../contracts/firstOrbProofs.json";
 import secondOrbProofs from "../../contracts/secondOrbProofs.json";
 import holderProofs from "../../contracts/holderProofs.json";
@@ -130,18 +132,36 @@ const Barcode = styled.img`
   height: 3rem;
 `;
 
+const FreeMint = styled.button`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 10rem;
+  width: 30rem;
+  background: red;
+  color: yellow;
+  font-size: 4rem;
+  font-weight: 800;
+  cursor: pointer;
+`;
+
 const MintPage = () => {
   const { account } = useEthers();
   const [minted, setMinted] = useState(0);
   const [amount, setAmount] = useState<number | null>(null);
 
   const stage = useStage();
+  const hasFreeMint = useHasFreeMint();
   const { mintFirstOrbState, mintFirstOrb } = useMintFirstOrb();
   const { mintSecondtOrbState, mintSecondOrb } = useMintSecondOrb();
   const { mintHoldersState, mintHolders } = useMintHolders();
+  const { mintFreeState, mintFree } = useMintFree();
   const price = usePrice();
 
   const loading =
+    mintFreeState.status === "Mining" ||
+    mintFreeState.status === "PendingSignature" ||
     mintFirstOrbState.status === "Mining" ||
     mintFirstOrbState.status === "PendingSignature" ||
     mintSecondtOrbState.status === "Mining" ||
@@ -150,11 +170,13 @@ const MintPage = () => {
     mintHoldersState.status === "PendingSignature";
 
   const success =
+    mintFreeState.status === "Success" ||
     mintFirstOrbState.status === "Success" ||
     mintSecondtOrbState.status === "Success" ||
     mintHoldersState.status === "Success";
 
   const hash =
+    mintFreeState?.transaction?.hash ||
     mintFirstOrbState?.transaction?.hash ||
     mintSecondtOrbState?.transaction?.hash ||
     mintHoldersState?.transaction?.hash ||
@@ -170,6 +192,14 @@ const MintPage = () => {
       setAmount(null);
     }
   }, [loading, success]);
+
+  const mintFreeeee = () => {
+    if (loading) return;
+    if (!account) return;
+    const data = (freeProofs as any)[account];
+    if (!data || !data.Amount) return;
+    mintFree(data.Amount, data.Amount, data.Proof);
+  };
 
   const mint = () => {
     if (loading) return;
@@ -227,6 +257,9 @@ const MintPage = () => {
         <MintLoading show={loading} hash={hash} />
         <MintSoldOut />
         <MintPending />
+        {hasFreeMint && (
+          <FreeMint onClick={mintFreeeee}>Free Mint (click me)</FreeMint>
+        )}
       </Content>
     </StyledMintPage>
   );
