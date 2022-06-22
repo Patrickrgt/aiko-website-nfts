@@ -7,7 +7,6 @@ import abi from "./aiko.json";
 import firstOrbProofs from "./firstOrbProofs.json";
 import secondOrbProofs from "./secondOrbProofs.json";
 import holderProofs from "./holderProofs.json";
-import { MAX_SUPPLY } from "../app/globals";
 
 export const useTotalSupply = (): number => {
   const globals = useGlobals();
@@ -352,7 +351,22 @@ export const useNextStage = (): Date => {
   return new Date();
 };
 
+export const useMaxSupply = (): number => {
+  const globals = useGlobals();
+
+  const [value] = useContractCall({
+    abi: new utils.Interface(abi),
+    address: globals.AIKO,
+    method: "MAX_SUPPLY",
+    args: [],
+  }) ?? [BigNumber.from(0)];
+
+  return Number(value.toString());
+};
+
 export const useSoldOut = (): boolean => {
   const totalSupply = useTotalSupply();
-  return totalSupply === MAX_SUPPLY;
+  const maxSupply = useMaxSupply();
+  if (maxSupply === 0) return false;
+  return totalSupply === maxSupply;
 };

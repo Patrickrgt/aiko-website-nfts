@@ -18,7 +18,7 @@ import {
   useMintHolders,
   useMintSecondOrb,
 } from "../../contracts/functions";
-import { usePrice, useSoldOut, useStage } from "../../contracts/views";
+import { usePrice, useStage } from "../../contracts/views";
 
 import firstOrbProofs from "../../contracts/firstOrbProofs.json";
 import secondOrbProofs from "../../contracts/secondOrbProofs.json";
@@ -139,7 +139,6 @@ const MintPage = () => {
   const { mintFirstOrbState, mintFirstOrb } = useMintFirstOrb();
   const { mintSecondtOrbState, mintSecondOrb } = useMintSecondOrb();
   const { mintHoldersState, mintHolders } = useMintHolders();
-  const soldOut = useSoldOut();
   const price = usePrice();
 
   const loading =
@@ -226,7 +225,7 @@ const MintPage = () => {
         </MainSection>
         <MintError />
         <MintLoading show={loading} hash={hash} />
-        {soldOut && <MintSoldOut />}
+        <MintSoldOut />
         <MintPending />
       </Content>
     </StyledMintPage>

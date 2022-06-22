@@ -1,7 +1,6 @@
 import { useEthers } from "@usedapp/core";
 import styled from "styled-components";
-import { MAX_SUPPLY } from "../../app/globals";
-import { useTotalSupply } from "../../contracts/views";
+import { useMaxSupply, useTotalSupply } from "../../contracts/views";
 
 const StyledMintProgress = styled.div`
   position: relative;
@@ -54,15 +53,16 @@ const Text = styled.div`
 const MintProgress = () => {
   const { account } = useEthers();
   const totalSupply = useTotalSupply();
+  const maxSupply = useMaxSupply();
 
-  const percent = totalSupply / MAX_SUPPLY;
+  const percent = maxSupply === 0 ? 0 : totalSupply / maxSupply;
 
   if (!account) return null;
 
   return (
     <StyledMintProgress>
       <Bar percent={percent} />
-      <Text>{`${totalSupply.toLocaleString()}/${MAX_SUPPLY.toLocaleString()}`}</Text>
+      <Text>{`${totalSupply.toLocaleString()}/${maxSupply.toLocaleString()}`}</Text>
     </StyledMintProgress>
   );
 };

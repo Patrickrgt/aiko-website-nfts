@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 import bg from "../../assets/mint/mint-bg.svg";
 import image from "../../assets/mint/sold-out.svg";
+import { useSoldOut } from "../../contracts/views";
 import MintOpenseaButton from "./MintOpenseaButton";
 
 const StyledMintSoldOut = styled.div`
@@ -46,6 +47,10 @@ const EmptySpace = styled.div`
 `;
 
 const MintSoldOut = () => {
+  const soldOut = useSoldOut();
+
+  if (!soldOut) return null;
+
   return (
     <StyledMintSoldOut>
       <EmptySpace />
