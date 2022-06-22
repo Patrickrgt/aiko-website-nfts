@@ -66,7 +66,7 @@ export const useHolderPrice = (): BigNumber => {
   const [value] = useContractCall({
     abi: new utils.Interface(abi),
     address: globals.AIKO,
-    method: "HOLDER_PRICE",
+    method: "PUBLIC_PRICE",
     args: [],
   }) ?? [BigNumber.from(0)];
 
@@ -118,7 +118,20 @@ export const useHolderMax = (): number => {
   const [value] = useContractCall({
     abi: new utils.Interface(abi),
     address: globals.AIKO,
-    method: "HOLDER_MAX",
+    method: "PUBLIC_MAX",
+    args: [],
+  }) ?? [BigNumber.from(0)];
+
+  return Number(value.toString());
+};
+
+export const useWalletMax = (): number => {
+  const globals = useGlobals();
+
+  const [value] = useContractCall({
+    abi: new utils.Interface(abi),
+    address: globals.AIKO,
+    method: "WALLET_MAX",
     args: [],
   }) ?? [BigNumber.from(0)];
 
@@ -214,7 +227,7 @@ export const useAccountInfo = (): AccountInfo => {
   const { account } = useEthers();
   const globals = useGlobals();
 
-  const [freeMinted, purchasedFirst, purchasedSecond, purchasedHolder] =
+  const [freeMinted, purchasedFirst, purchasedSecond, purchasedPublic] =
     useContractCall({
       abi: new utils.Interface(abi),
       address: globals.AIKO,
@@ -231,7 +244,7 @@ export const useAccountInfo = (): AccountInfo => {
     freeMinted: Number(freeMinted.toString()),
     purchasedFirst: Number(purchasedFirst.toString()),
     purchasedSecond: Number(purchasedSecond.toString()),
-    purchasedHolder: Number(purchasedHolder.toString()),
+    purchasedHolder: Number(purchasedPublic.toString()),
   };
 };
 
@@ -258,24 +271,37 @@ export const useMintsRemaining = (): number => {
   const firstOrbMax = useFirstOrbMax();
   const secondOrbMax = useSecondOrbMax();
   const holderMax = useHolderMax();
+  const walletMax = useWalletMax();
   const stage = useStage();
+
+  const remaining =
+    walletMax -
+    accountInfo.freeMinted +
+    accountInfo.purchasedFirst +
+    accountInfo.purchasedSecond +
+    accountInfo.purchasedHolder;
 
   if (!account) return 0;
 
   if (stage === "one") {
     const data = (orbProofs as any)[account];
     if (!data || !data.Amount) return 0;
-    return Math.min(firstOrbMax, data.Amount) - accountInfo.purchasedFirst;
+    return (
+      Math.min(firstOrbMax, data.Amount, remaining) - accountInfo.purchasedFirst
+    );
   }
   if (stage === "two") {
     const data = (orbProofs as any)[account];
     if (!data || !data.Amount) return 0;
-    return Math.min(secondOrbMax, data.Amount) - accountInfo.purchasedSecond;
+    return (
+      Math.min(secondOrbMax, data.Amount, remaining) -
+      accountInfo.purchasedSecond
+    );
   }
   if (stage === "three") {
     const data = (holderProofs as any)[account];
     if (!data || !data.Amount) return 0;
-    return holderMax - accountInfo.purchasedHolder;
+    return Math.min(holderMax - accountInfo.purchasedHolder, remaining);
   }
   return 0;
 };

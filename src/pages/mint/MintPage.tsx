@@ -154,6 +154,12 @@ const MintPage = () => {
     mintSecondtOrbState.status === "Success" ||
     mintHoldersState.status === "Success";
 
+  const hash =
+    mintFirstOrbState?.transaction?.hash ||
+    mintSecondtOrbState?.transaction?.hash ||
+    mintHoldersState?.transaction?.hash ||
+    "";
+
   useEffect(() => {
     if (success) {
       if (amount) setMinted(amount);
@@ -218,7 +224,7 @@ const MintPage = () => {
           {!account && <Overlay />}
         </MainSection>
         <MintError />
-        <MintLoading show={loading} />
+        <MintLoading show={loading} hash={hash} />
         {soldOut && <MintSoldOut />}
         <MintPending />
       </Content>
