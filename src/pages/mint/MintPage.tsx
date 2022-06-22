@@ -20,7 +20,8 @@ import {
 } from "../../contracts/functions";
 import { usePrice, useSoldOut, useStage } from "../../contracts/views";
 
-import orbProofs from "../../contracts/orbProofs.json";
+import firstOrbProofs from "../../contracts/firstOrbProofs.json";
+import secondOrbProofs from "../../contracts/secondOrbProofs.json";
 import holderProofs from "../../contracts/holderProofs.json";
 import MintPending from "./MintPending";
 
@@ -175,14 +176,14 @@ const MintPage = () => {
     if (loading) return;
     if (!account) return;
     if (stage === "one") {
-      const data = (orbProofs as any)[account];
+      const data = (firstOrbProofs as any)[account];
       if (!data || !data.Amount) return;
       mintFirstOrb(amount, data.Amount, data.Proof, {
         value: price.mul(BigNumber.from(amount)),
       });
     }
     if (stage === "two") {
-      const data = (orbProofs as any)[account];
+      const data = (secondOrbProofs as any)[account];
       if (!data || !data.Amount) return;
       mintSecondOrb(amount, data.Amount, data.Proof, {
         value: price.mul(BigNumber.from(amount)),

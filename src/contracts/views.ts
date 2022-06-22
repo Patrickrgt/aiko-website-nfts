@@ -4,7 +4,8 @@ import useGlobals from "../app/hooks/use-globals";
 import { useTick } from "../app/hooks/use-tick";
 
 import abi from "./aiko.json";
-import orbProofs from "./orbProofs.json";
+import firstOrbProofs from "./firstOrbProofs.json";
+import secondOrbProofs from "./secondOrbProofs.json";
 import holderProofs from "./holderProofs.json";
 import { MAX_SUPPLY } from "../app/globals";
 
@@ -284,14 +285,14 @@ export const useMintsRemaining = (): number => {
   if (!account) return 0;
 
   if (stage === "one") {
-    const data = (orbProofs as any)[account];
+    const data = (firstOrbProofs as any)[account];
     if (!data || !data.Amount) return 0;
     return (
       Math.min(firstOrbMax, data.Amount, remaining) - accountInfo.purchasedFirst
     );
   }
   if (stage === "two") {
-    const data = (orbProofs as any)[account];
+    const data = (secondOrbProofs as any)[account];
     if (!data || !data.Amount) return 0;
     return (
       Math.min(secondOrbMax, data.Amount, remaining) -
