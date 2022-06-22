@@ -121,6 +121,7 @@ const MintInput = ({ setAmount, amount, error, max }: Props) => {
               value={amount ? amount.toString() : ""}
               onChange={(e) => {
                 if (e.target.value === "") setAmount(null);
+                if (Number(e.target.value) > 9) return;
                 setAmount(Number(e.target.value));
               }}
             />
