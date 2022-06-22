@@ -208,7 +208,9 @@ const MintPage = () => {
               action={() => mint()}
             />
           )}
-          {minted > 0 && <MintConfirmation amount={minted} />}
+          {minted > 0 && (
+            <MintConfirmation amount={minted} close={() => setMinted(0)} />
+          )}
           <Footer>
             <Copywrite src={footerLeft} alt="Footer illustration" />
             <Barcode src={footerRight} alt="Footer illustration" />
