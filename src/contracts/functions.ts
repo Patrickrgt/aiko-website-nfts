@@ -45,8 +45,8 @@ export const useMintHolders = () => {
   const { state: mintHoldersState, send: mintHolders } = useContract(
     globals.AIKO,
     abi,
-    "holderAikoSale",
-    "Mint holders"
+    "publicAikoSale",
+    "Mint public"
   );
   return { mintHoldersState, mintHolders };
 };

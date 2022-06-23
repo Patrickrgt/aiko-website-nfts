@@ -33,7 +33,6 @@ import illustration from "../../assets/mint/illustration.png";
 import freeProofs from "../../contracts/freeProofs.json";
 import firstOrbProofs from "../../contracts/firstOrbProofs.json";
 import secondOrbProofs from "../../contracts/secondOrbProofs.json";
-import holderProofs from "../../contracts/holderProofs.json";
 import { selectError } from "../../state/errorSlice";
 
 const fadeIn = keyframes`
@@ -267,9 +266,7 @@ const MintPage = () => {
       });
     }
     if (stage === "three") {
-      const data = (holderProofs as any)[account];
-      if (!data || !data.Amount) return;
-      mintHolders(amount, data.Amount, data.Proof, {
+      mintHolders(amount, {
         value: price.mul(BigNumber.from(amount)),
       });
     }
