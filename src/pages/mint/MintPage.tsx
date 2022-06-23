@@ -81,7 +81,7 @@ const IllustrationSection = styled.div`
 `;
 
 const Illustration = styled.img`
-  height: calc(100% - 8rem);
+  height: calc(100% + 3.5rem);
 `;
 
 const Separator = styled.div`
