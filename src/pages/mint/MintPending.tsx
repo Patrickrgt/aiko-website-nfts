@@ -3,7 +3,12 @@ import styled from "styled-components";
 import bg from "../../assets/mint/pending.jpg";
 import decal from "../../assets/mint/pending-decal.svg";
 import timer from "../../assets/mint/pending-timer.svg";
-import { useIsPending, useNextStage } from "../../contracts/views";
+import {
+  useFirstSaleSoldOut,
+  useIsPending,
+  useNextStage,
+  useStage,
+} from "../../contracts/views";
 import { useTick } from "../../app/hooks/use-tick";
 
 const StyledMintPending = styled.div`
@@ -97,8 +102,10 @@ const MintPending = () => {
   const tick = useTick();
   const time = useNextStage();
   const show = useIsPending();
+  const firstSaleSoldOut = useFirstSaleSoldOut();
+  const stage = useStage();
 
-  if (!show) return null;
+  if (!show || !(stage === "one" && firstSaleSoldOut)) return null;
 
   const remaining = time.getTime() - new Date().getTime();
 

@@ -380,3 +380,26 @@ export const useHasFreeMint = (): boolean => {
   if (!data || !data.Amount) return false;
   return data.Amount - accountInfo.freeMinted > 0;
 };
+
+export const useFirstSaleMax = (): number => {
+  const globals = useGlobals();
+
+  const [value] = useContractCall({
+    abi: new utils.Interface(abi),
+    address: globals.AIKO,
+    method: "FIRST_SALE_MAX",
+    args: [],
+  }) ?? [BigNumber.from(0)];
+
+  return Number(value.toString());
+};
+
+export const useFirstSaleSoldOut = (): boolean => {
+  const firstSaleMax = useFirstSaleMax();
+  const totalSupply = useTotalSupply();
+
+  if (firstSaleMax === 0) return false;
+  if (totalSupply === 0) return false;
+  if (totalSupply >= firstSaleMax) return true;
+  return true;
+};

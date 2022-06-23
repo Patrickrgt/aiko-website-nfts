@@ -17,6 +17,7 @@ import {
   useMintSecondOrb,
 } from "../../contracts/functions";
 import {
+  useFirstSaleSoldOut,
   useHasFreeMint,
   useIsPending,
   usePrice,
@@ -199,6 +200,7 @@ const MintPage = () => {
   const { mintHoldersState, mintHolders } = useMintHolders();
   const { mintFreeState, mintFree } = useMintFree();
   const price = usePrice();
+  const firstSaleSoldOut = useFirstSaleSoldOut();
 
   const errorText = useSelector(selectError);
   const soldOut = useSoldOut();
@@ -214,7 +216,12 @@ const MintPage = () => {
     mintHoldersState.status === "Mining" ||
     mintHoldersState.status === "PendingSignature";
 
-  const showIllustration = !errorText && !loading && !soldOut && !isPending;
+  const showIllustration =
+    !errorText &&
+    !loading &&
+    !soldOut &&
+    !isPending &&
+    !(stage === "one" && firstSaleSoldOut);
 
   const success =
     mintFreeState.status === "Success" ||
