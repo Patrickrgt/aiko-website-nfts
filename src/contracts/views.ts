@@ -7,7 +7,6 @@ import abi from "./aiko.json";
 import freeProofs from "./freeProofs.json";
 import firstOrbProofs from "./firstOrbProofs.json";
 import secondOrbProofs from "./secondOrbProofs.json";
-import holderProofs from "./holderProofs.json";
 
 export const useTotalSupply = (): number => {
   const globals = useGlobals();
