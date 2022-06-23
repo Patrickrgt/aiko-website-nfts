@@ -403,6 +403,5 @@ export const useFirstSaleSoldOut = (): boolean => {
 
   if (firstSaleMax === 0) return false;
   if (totalSupply === 0) return false;
-  if (totalSupply >= firstSaleMax) return true;
-  return true;
+  return totalSupply >= firstSaleMax;
 };
