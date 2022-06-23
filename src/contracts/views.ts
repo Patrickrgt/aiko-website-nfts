@@ -277,31 +277,32 @@ export const useMintsRemaining = (): number => {
 
   const remaining =
     walletMax -
-    accountInfo.freeMinted +
-    accountInfo.purchasedFirst +
-    accountInfo.purchasedSecond +
-    accountInfo.purchasedHolder;
+    (accountInfo.freeMinted +
+      accountInfo.purchasedFirst +
+      accountInfo.purchasedSecond +
+      accountInfo.purchasedHolder);
 
   if (!account) return 0;
 
   if (stage === "one") {
     const data = (firstOrbProofs as any)[account];
     if (!data || !data.Amount) return 0;
-    return (
-      Math.min(firstOrbMax, data.Amount, remaining) - accountInfo.purchasedFirst
+    return Math.min(
+      firstOrbMax - accountInfo.purchasedFirst,
+      data.Amount - accountInfo.purchasedFirst,
+      remaining
     );
   }
   if (stage === "two") {
     const data = (secondOrbProofs as any)[account];
     if (!data || !data.Amount) return 0;
-    return (
-      Math.min(secondOrbMax, data.Amount, remaining) -
-      accountInfo.purchasedSecond
+    return Math.min(
+      secondOrbMax - accountInfo.purchasedSecond,
+      data.Amount - accountInfo.purchasedSecond,
+      remaining
     );
   }
   if (stage === "three") {
-    const data = (holderProofs as any)[account];
-    if (!data || !data.Amount) return 0;
     return Math.min(holderMax - accountInfo.purchasedHolder, remaining);
   }
   return 0;
