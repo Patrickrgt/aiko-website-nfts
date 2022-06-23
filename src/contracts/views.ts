@@ -274,6 +274,8 @@ export const useMintsRemaining = (): number => {
   const holderMax = useHolderMax();
   const walletMax = useWalletMax();
   const stage = useStage();
+  const totalSupply = useTotalSupply();
+  const firstSaleMax = useFirstSaleMax();
 
   const remaining =
     walletMax -
@@ -290,7 +292,8 @@ export const useMintsRemaining = (): number => {
     return Math.min(
       firstOrbMax - accountInfo.purchasedFirst,
       data.Amount - accountInfo.purchasedFirst,
-      remaining
+      remaining,
+      firstSaleMax >= totalSupply ? firstSaleMax - totalSupply : 0
     );
   }
   if (stage === "two") {
