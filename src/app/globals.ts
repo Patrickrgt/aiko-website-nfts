@@ -6,9 +6,9 @@ interface GlobalsType {
 }
 
 export const ETH_GLOBALS: GlobalsType = {
-  AIKO: "0x4d147cbCA82da4f23b7849D8A09017bC016Bd5a8",
+  AIKO: "0x4b1145ED577CaCF5E93Ffd237a1487465fe06B61",
 };
 
 export const RINKEBY_GLOBALS: GlobalsType = {
-  AIKO: "0x4d147cbCA82da4f23b7849D8A09017bC016Bd5a8",
+  AIKO: "0x4b1145ED577CaCF5E93Ffd237a1487465fe06B61",
 };
