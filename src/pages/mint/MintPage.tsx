@@ -5,10 +5,6 @@ import { BigNumber } from "ethers";
 
 import MintConfirmation from "./MintConfirmation";
 import MintSection from "./MintSection";
-
-import footerLeft from "../../assets/mint/footer-left.svg";
-import footerRight from "../../assets/mint/footer-right.svg";
-import bg from "../../assets/mint/mint-bg.svg";
 import MintHomeButton from "./MintHomeButton";
 import MintError from "./MintError";
 import MintLoading from "./MintLoading";
@@ -20,12 +16,17 @@ import {
   useMintSecondOrb,
 } from "../../contracts/functions";
 import { useHasFreeMint, usePrice, useStage } from "../../contracts/views";
+import MintPending from "./MintPending";
+
+import footerLeft from "../../assets/mint/footer-left.svg";
+import footerRight from "../../assets/mint/footer-right.svg";
+import bg from "../../assets/mint/mint-bg.svg";
+import illustration from "../../assets/mint/illustration.png";
 
 import freeProofs from "../../contracts/freeProofs.json";
 import firstOrbProofs from "../../contracts/firstOrbProofs.json";
 import secondOrbProofs from "../../contracts/secondOrbProofs.json";
 import holderProofs from "../../contracts/holderProofs.json";
-import MintPending from "./MintPending";
 
 const fadeIn = keyframes`
   from {
@@ -77,6 +78,10 @@ const IllustrationSection = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+`;
+
+const Illustration = styled.img`
+  height: calc(100% - 8rem);
 `;
 
 const Separator = styled.div`
@@ -232,7 +237,7 @@ const MintPage = () => {
       <Content>
         <IllustrationSection>
           <MintHomeButton />
-          illustration
+          <Illustration src={illustration} alt="Illustration" />
         </IllustrationSection>
         <Separator />
         <MainSection>
