@@ -276,9 +276,7 @@ const MintPage = () => {
     <StyledMintPage>
       <Container>
         <Content>
-          <IllustrationSection>
-            <MintHomeButton />
-          </IllustrationSection>
+          <IllustrationSection />
           <Separator />
           <MainSection>
             <Background src={bg} alt="mint background image" />
@@ -308,6 +306,7 @@ const MintPage = () => {
         </Content>
         {showIllustration && (
           <IllustrationContainer>
+            <MintHomeButton />
             <Illustration src={illustration} alt="Illustration" />
           </IllustrationContainer>
         )}
