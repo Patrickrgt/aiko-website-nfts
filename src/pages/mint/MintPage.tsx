@@ -139,16 +139,27 @@ const Barcode = styled.img`
 
 const FreeMint = styled.button`
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  height: 10rem;
-  width: 30rem;
-  background: red;
-  color: yellow;
-  font-size: 4rem;
-  font-weight: 800;
+  right: 3rem;
+  height: 4.2rem;
+  top: 8rem;
+  height: 4.2rem;
+  background: #ff6280;
+  padding: 0 2.4rem;
+  color: white;
+  font-weight: 500;
+  font-size: 2rem;
   cursor: pointer;
+
+  clip-path: polygon(
+    6% 0%,
+    94% 0%,
+    100% 25%,
+    100% 75%,
+    94% 100%,
+    6% 100%,
+    0% 75%,
+    0% 25%
+  );
 `;
 
 const MintPage = () => {
@@ -263,7 +274,7 @@ const MintPage = () => {
         <MintSoldOut />
         <MintPending />
         {hasFreeMint && (
-          <FreeMint onClick={mintFreeeee}>Free Mint (click me)</FreeMint>
+          <FreeMint onClick={mintFreeeee}>{"<freemint.exe>"}</FreeMint>
         )}
       </Content>
     </StyledMintPage>
