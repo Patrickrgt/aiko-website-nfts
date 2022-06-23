@@ -105,7 +105,7 @@ const MintPending = () => {
   const firstSaleSoldOut = useFirstSaleSoldOut();
   const stage = useStage();
 
-  if (!show || !(stage === "one" && firstSaleSoldOut)) return null;
+  if (!show && !(stage === "one" && firstSaleSoldOut)) return null;
 
   const remaining = time.getTime() - new Date().getTime();
 
