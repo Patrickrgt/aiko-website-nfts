@@ -47,6 +47,11 @@ const ButtonLabel = styled.div`
     0% 75%,
     0% 25%
   );
+
+  transition: 0.3s filter;
+  :hover {
+    filter: brightness(0.9);
+  }
 `;
 
 const MintOpenseaButton = () => {
