@@ -303,7 +303,7 @@ const MintPage = () => {
             <MintError />
             <MintLoading show={loading} hash={hash} />
             <MintSoldOut />
-            {hasFreeMint && minted === 0 && (
+            {hasFreeMint && minted === 0 && !soldOut && (
               <FreeMint onClick={mintFreeeee}>{"<freemint.exe>"}</FreeMint>
             )}
           </Content>
