@@ -19,6 +19,7 @@ import {
 import {
   useFirstSaleSoldOut,
   useHasFreeMint,
+  useIsLive,
   useIsPending,
   usePrice,
   useSoldOut,
@@ -201,6 +202,7 @@ const MintPage = () => {
   const { mintFreeState, mintFree } = useMintFree();
   const price = usePrice();
   const firstSaleSoldOut = useFirstSaleSoldOut();
+  const isLive = useIsLive();
 
   const errorText = useSelector(selectError);
   const soldOut = useSoldOut();
@@ -221,7 +223,8 @@ const MintPage = () => {
     !loading &&
     !soldOut &&
     !isPending &&
-    !(stage === "one" && firstSaleSoldOut);
+    !(stage === "one" && firstSaleSoldOut) &&
+    isLive;
 
   const success =
     mintFreeState.status === "Success" ||

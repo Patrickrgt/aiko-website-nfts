@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { SALE_START } from "../app/globals";
 import { useTick } from "../app/hooks/use-tick";
 import Hexify from "./Hexify";
 
@@ -93,7 +94,7 @@ const MintButton = () => {
   const navigate = useNavigate();
 
   const tick = useTick();
-  const END = new Date(1655761632000);
+  const END = new Date(SALE_START);
   const now = new Date();
   const remaining = END.getTime() - now.getTime();
 
@@ -110,10 +111,7 @@ const MintButton = () => {
     <ButtonContainer>
       <Hexify>
         <ButtonArea>
-          <StyledMintButton
-            disabled={!mintLive}
-            onClick={() => navigate("/mint")}
-          >
+          <StyledMintButton onClick={() => navigate("/mint")}>
             <ButtonContent>
               <YellowText>{"<"}</YellowText>
               <WhiteText>mint.exe</WhiteText>

@@ -5,11 +5,13 @@ import decal from "../../assets/mint/pending-decal.svg";
 import timer from "../../assets/mint/pending-timer.svg";
 import {
   useFirstSaleSoldOut,
+  useIsLive,
   useIsPending,
   useNextStage,
   useStage,
 } from "../../contracts/views";
 import { useTick } from "../../app/hooks/use-tick";
+import { SALE_START } from "../../app/globals";
 
 const StyledMintPending = styled.div`
   position: absolute;
@@ -104,10 +106,13 @@ const MintPending = () => {
   const show = useIsPending();
   const firstSaleSoldOut = useFirstSaleSoldOut();
   const stage = useStage();
+  const isLive = useIsLive();
 
-  if (!show && !(stage === "one" && firstSaleSoldOut)) return null;
+  if (!show && !(stage === "one" && firstSaleSoldOut) && isLive) return null;
 
-  const remaining = time.getTime() - new Date().getTime();
+  const target = isLive ? time : new Date(SALE_START);
+
+  const remaining = target.getTime() - new Date().getTime();
 
   const hours = Math.floor(
     (remaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
@@ -120,7 +125,9 @@ const MintPending = () => {
       <Background src={bg} alt="background" />
       <Content>
         <Decal src={decal} alt="decal" />
-        <TopText>next mint stage</TopText>
+
+        {isLive && <TopText>next mint stage</TopText>}
+        {!isLive && <TopText>{"<the aiko sale>"}</TopText>}
         <BottomText>will begin in</BottomText>
         <Countdown>
           <Icon src={timer} alt="timer icon" />
