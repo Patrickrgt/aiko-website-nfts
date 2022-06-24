@@ -17,6 +17,7 @@ const StyledMintPending = styled.div`
   justify-content: center;
   align-items: center;
   z-index: 3;
+  background: #aacbef;
 `;
 
 const Background = styled.img`
@@ -25,6 +26,7 @@ const Background = styled.img`
   left: 0;
   width: 100%;
   height: 100%;
+  background: #aacbef;
 `;
 
 const Content = styled.div`
