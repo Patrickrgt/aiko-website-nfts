@@ -92,12 +92,14 @@ const MintStage = () => {
     <Hexify dark>
       <Stage>
         {`<stage ${stage.substring(0, 1) === "e" ? "one" : stage}>`}
-        <CountdownContainer>
-          <Image src={timer} alt="image" />
-          <Countdown>{`${padZeros(hours)}:${padZeros(minutes)}:${padZeros(
-            seconds
-          )}`}</Countdown>
-        </CountdownContainer>
+        {account && (
+          <CountdownContainer>
+            <Image src={timer} alt="image" />
+            <Countdown>{`${padZeros(hours)}:${padZeros(minutes)}:${padZeros(
+              seconds
+            )}`}</Countdown>
+          </CountdownContainer>
+        )}
       </Stage>
     </Hexify>
   );
