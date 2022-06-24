@@ -3,13 +3,7 @@ import styled from "styled-components";
 import bg from "../../assets/mint/pending.jpg";
 import decal from "../../assets/mint/pending-decal.svg";
 import timer from "../../assets/mint/pending-timer.svg";
-import {
-  useFirstSaleSoldOut,
-  useIsLive,
-  useIsPending,
-  useNextStage,
-  useStage,
-} from "../../contracts/views";
+import { useIsLive, useIsPending, useNextStage } from "../../contracts/views";
 import { useTick } from "../../app/hooks/use-tick";
 import { SALE_START } from "../../app/globals";
 
@@ -103,12 +97,10 @@ const padZeros = (num: number) => {
 const MintPending = () => {
   const tick = useTick();
   const time = useNextStage();
-  const show = useIsPending();
-  const firstSaleSoldOut = useFirstSaleSoldOut();
-  const stage = useStage();
+  const isPending = useIsPending();
   const isLive = useIsLive();
 
-  if (!show && !(stage === "one" && firstSaleSoldOut) && isLive) return null;
+  if (!isPending && isLive) return null;
 
   const target = isLive ? time : new Date(SALE_START);
 

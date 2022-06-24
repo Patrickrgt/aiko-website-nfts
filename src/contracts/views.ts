@@ -331,8 +331,10 @@ export const useIsPending = (): boolean => {
   const secondSaleStartTime = useSecondSaleStartTime();
   const secondSaleEndTime = useSecondSaleEndTime();
   const holderSaleStartTime = useHolderSaleStartTime();
-  const holderSaleEndTime = useHolderSaleEndTime();
+  const stage = useStage();
+  const firstSaleSoldOut = useFirstSaleSoldOut();
 
+  if (stage === "one" && firstSaleSoldOut) return true;
   if (now < fistSaleStartTime) return true;
   if (now > firstSaleEndTime && now < secondSaleStartTime) return true;
   if (now > secondSaleEndTime && now < holderSaleStartTime) return true;
@@ -347,7 +349,11 @@ export const useNextStage = (): Date => {
   const secondSaleStartTime = useSecondSaleStartTime();
   const secondSaleEndTime = useSecondSaleEndTime();
   const holderSaleStartTime = useHolderSaleStartTime();
+  const stage = useStage();
+  const firstSaleSoldOut = useFirstSaleSoldOut();
 
+  if (stage === "one" && firstSaleSoldOut)
+    return new Date(secondSaleStartTime * 1000);
   if (now < fistSaleStartTime) return new Date(fistSaleStartTime * 1000);
   if (now > firstSaleEndTime && now < secondSaleStartTime)
     return new Date(secondSaleStartTime * 1000);

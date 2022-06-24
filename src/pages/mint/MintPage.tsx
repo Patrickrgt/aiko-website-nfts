@@ -17,7 +17,6 @@ import {
   useMintSecondOrb,
 } from "../../contracts/functions";
 import {
-  useFirstSaleSoldOut,
   useHasFreeMint,
   usePrice,
   useSoldOut,
@@ -174,6 +173,7 @@ const FreeMint = styled.button`
   font-weight: 500;
   font-size: 2rem;
   cursor: pointer;
+  z-index: 1000;
 
   clip-path: polygon(
     6% 0%,
@@ -199,7 +199,6 @@ const MintPage = () => {
   const { mintHoldersState, mintHolders } = useMintHolders();
   const { mintFreeState, mintFree } = useMintFree();
   const price = usePrice();
-  const firstSaleSoldOut = useFirstSaleSoldOut();
 
   const errorText = useSelector(selectError);
   const soldOut = useSoldOut();
@@ -214,11 +213,7 @@ const MintPage = () => {
     mintHoldersState.status === "Mining" ||
     mintHoldersState.status === "PendingSignature";
 
-  const showIllustration =
-    !errorText &&
-    !loading &&
-    !soldOut &&
-    !(stage === "one" && firstSaleSoldOut);
+  const showIllustration = !errorText && !loading && !soldOut;
   const success =
     mintFreeState.status === "Success" ||
     mintFirstOrbState.status === "Success" ||
@@ -303,7 +298,7 @@ const MintPage = () => {
             <MintError />
             <MintLoading show={loading} hash={hash} />
             <MintSoldOut />
-            {hasFreeMint && (
+            {hasFreeMint && minted === 0 && (
               <FreeMint onClick={mintFreeeee}>{"<freemint.exe>"}</FreeMint>
             )}
           </Content>
