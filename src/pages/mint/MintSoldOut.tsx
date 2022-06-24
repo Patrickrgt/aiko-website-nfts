@@ -1,9 +1,13 @@
 import styled from "styled-components";
 
-import bg from "../../assets/mint/mint-bg.svg";
-import image from "../../assets/mint/sold-out.svg";
 import { useSoldOut } from "../../contracts/views";
 import MintOpenseaButton from "./MintOpenseaButton";
+
+import bg from "../../assets/mint/mint-bg.svg";
+import image from "../../assets/mint/sold-out.svg";
+import pageBg from "../../assets/mint/sold-out-bg.png";
+import overlay from "../../assets/mint/sold-out-overlay.svg";
+import girl from "../../assets/mint/sold-out-girl.png";
 
 const StyledMintSoldOut = styled.div`
   position: absolute;
@@ -11,13 +15,35 @@ const StyledMintSoldOut = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
+  background: #44679a;
+  z-index: 3;
+`;
+
+const Background = styled.img`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+`;
+
+const Overlay = styled.img`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 87%;
+  height: 100%;
+`;
+
+const SoldOutContainer = styled.div`
+  position: absolute;
   display: flex;
-  background: #89a9d6;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  z-index: 3;
-  padding: 5rem;
+  padding: 10rem;
+  width: 70%;
+  height: 100%;
 `;
 
 const ImageContainer = styled.div`
@@ -46,6 +72,14 @@ const EmptySpace = styled.div`
   height: 6.2rem;
 `;
 
+const Girl = styled.img`
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 70%;
+  transform: translateX(-50%);
+`;
+
 const MintSoldOut = () => {
   const soldOut = useSoldOut();
 
@@ -53,12 +87,17 @@ const MintSoldOut = () => {
 
   return (
     <StyledMintSoldOut>
-      <EmptySpace />
-      <ImageContainer>
-        <ImageBackground src={bg} alt="background" />
-        <Image src={image} alt="sold out image" />
-      </ImageContainer>
-      <MintOpenseaButton />
+      <Background src={pageBg} alt="background" />
+      <Overlay src={overlay} alt="overlay" />
+      <SoldOutContainer>
+        <EmptySpace />
+        <ImageContainer>
+          <ImageBackground src={bg} alt="background" />
+          <Image src={image} alt="sold out image" />
+        </ImageContainer>
+        <MintOpenseaButton />
+      </SoldOutContainer>
+      <Girl src={girl} alt="girl" />
     </StyledMintSoldOut>
   );
 };
