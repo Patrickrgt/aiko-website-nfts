@@ -9,6 +9,8 @@ import meepo from "../assets/svgs/meepo.svg";
 import meepoWhite from "../assets/svgs/meepo-white.svg";
 import mirror from "../assets/svgs/mirror.svg";
 import mirrorWhite from "../assets/svgs/mirror-white.svg";
+import medium from "../assets/svgs/medium.svg";
+import mediumWhite from "../assets/svgs/medium-white.svg";
 import lock from "../assets/svgs/lock.svg";
 import Music from "./Music";
 
@@ -28,6 +30,11 @@ const links: LinkType[] = [
     icon: etherscan,
     whiteIcon: etherscanWhite,
     url: "",
+  },
+  {
+    icon: medium,
+    whiteIcon: mediumWhite,
+    url: "https://medium.com/@aikovirtual",
   },
 ];
 
@@ -108,11 +115,13 @@ const Links = styled.div`
   display: flex;
   height: 100%;
   padding: 0.2rem 0;
+  align-items: center;
+  justify-content: center;
 `;
 
 const Link = styled.a`
   position: relative;
-  height: 100%;
+  height: 65%;
 
   margin-left: 2.3rem;
   @media only screen and (max-width: 600px) {
