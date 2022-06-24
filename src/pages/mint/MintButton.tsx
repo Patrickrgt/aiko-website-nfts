@@ -73,6 +73,11 @@ const Button = styled.button`
   :disabled {
     cursor: not-allowed;
   }
+
+  transition: 0.3s filter;
+  :hover {
+    filter: brightness(0.9);
+  }
 `;
 
 const LockContainer = styled.div`
