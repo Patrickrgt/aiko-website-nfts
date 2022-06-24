@@ -19,8 +19,6 @@ import {
 import {
   useFirstSaleSoldOut,
   useHasFreeMint,
-  useIsLive,
-  useIsPending,
   usePrice,
   useSoldOut,
   useStage,
@@ -202,11 +200,9 @@ const MintPage = () => {
   const { mintFreeState, mintFree } = useMintFree();
   const price = usePrice();
   const firstSaleSoldOut = useFirstSaleSoldOut();
-  const isLive = useIsLive();
 
   const errorText = useSelector(selectError);
   const soldOut = useSoldOut();
-  const isPending = useIsPending();
 
   const loading =
     mintFreeState.status === "Mining" ||
@@ -222,10 +218,7 @@ const MintPage = () => {
     !errorText &&
     !loading &&
     !soldOut &&
-    !isPending &&
-    !(stage === "one" && firstSaleSoldOut) &&
-    isLive;
-
+    !(stage === "one" && firstSaleSoldOut);
   const success =
     mintFreeState.status === "Success" ||
     mintFirstOrbState.status === "Success" ||
@@ -283,45 +276,47 @@ const MintPage = () => {
   };
 
   return (
-    <StyledMintPage>
-      <Container>
-        <Content>
-          <IllustrationSection />
-          <Separator />
-          <MainSection>
-            <Background src={bg} alt="mint background image" />
-            {minted === 0 && (
-              <MintSection
-                amount={amount}
-                setAmount={(v: number | null) => setAmount(v)}
-                action={() => mint()}
-              />
+    <>
+      <StyledMintPage>
+        <Container>
+          <Content>
+            <IllustrationSection />
+            <Separator />
+            <MainSection>
+              <Background src={bg} alt="mint background image" />
+              {minted === 0 && (
+                <MintSection
+                  amount={amount}
+                  setAmount={(v: number | null) => setAmount(v)}
+                  action={() => mint()}
+                />
+              )}
+              {minted > 0 && (
+                <MintConfirmation amount={minted} close={() => setMinted(0)} />
+              )}
+              <Footer>
+                <Copywrite src={footerLeft} alt="Footer illustration" />
+                <Barcode src={footerRight} alt="Footer illustration" />
+              </Footer>
+              {!account && <Overlay />}
+            </MainSection>
+            <MintError />
+            <MintLoading show={loading} hash={hash} />
+            <MintSoldOut />
+            {hasFreeMint && (
+              <FreeMint onClick={mintFreeeee}>{"<freemint.exe>"}</FreeMint>
             )}
-            {minted > 0 && (
-              <MintConfirmation amount={minted} close={() => setMinted(0)} />
-            )}
-            <Footer>
-              <Copywrite src={footerLeft} alt="Footer illustration" />
-              <Barcode src={footerRight} alt="Footer illustration" />
-            </Footer>
-            {!account && <Overlay />}
-          </MainSection>
-          <MintError />
-          <MintLoading show={loading} hash={hash} />
-          <MintSoldOut />
-          <MintPending />
-          {hasFreeMint && (
-            <FreeMint onClick={mintFreeeee}>{"<freemint.exe>"}</FreeMint>
+          </Content>
+          {showIllustration && (
+            <IllustrationContainer>
+              <MintHomeButton />
+              <Illustration src={illustration} alt="Illustration" />
+            </IllustrationContainer>
           )}
-        </Content>
-        {showIllustration && (
-          <IllustrationContainer>
-            <MintHomeButton />
-            <Illustration src={illustration} alt="Illustration" />
-          </IllustrationContainer>
-        )}
-      </Container>
-    </StyledMintPage>
+        </Container>
+      </StyledMintPage>
+      <MintPending />
+    </>
   );
 };
 
