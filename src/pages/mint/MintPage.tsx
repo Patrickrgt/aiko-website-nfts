@@ -185,6 +185,11 @@ const FreeMint = styled.button`
     0% 75%,
     0% 25%
   );
+
+  transition: filter 0.3s;
+  :hover {
+    filter: brightness(0.9);
+  }
 `;
 
 const MintPage = () => {
