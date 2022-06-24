@@ -79,15 +79,13 @@ const Icon = styled.img`
   height: 100%;
 `;
 
-const Numbers = styled.div`
+const Numbers = styled.span`
   height: 100%;
   flex: 1;
   font-size: 10rem;
   color: white;
   font-weight: 900;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  vertical-align: middle;
 `;
 
 const padZeros = (num: number) => {
@@ -101,6 +99,7 @@ const MintPending = () => {
   const isLive = useIsLive();
 
   if (!isPending && isLive) return null;
+  return null;
 
   const target = isLive ? time : new Date(SALE_START);
 

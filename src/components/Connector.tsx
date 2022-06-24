@@ -49,6 +49,7 @@ const Button = styled.button`
 
 const Text = styled.span`
   font-weight: 500;
+  vertical-align: middle;
 
   font-size: 2rem;
   @media only screen and (max-width: 1400px) {

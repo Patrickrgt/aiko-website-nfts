@@ -22,6 +22,7 @@ const Stage = styled.div`
   color: white;
   font-size: 1.9rem;
   font-weight: 400;
+  vertical-align: middle;
 `;
 
 const CountdownContainer = styled.div`
@@ -47,7 +48,7 @@ const Image = styled.img`
   margin-right: 0.8rem;
 `;
 
-const Countdown = styled.div`
+const Countdown = styled.span`
   height: 100%;
   display: flex;
   align-items: center;
@@ -57,6 +58,7 @@ const Countdown = styled.div`
   color: #44679a;
   letter-spacing: 0rem;
   margin-right: 4px;
+  vertical-align: middle;
 `;
 
 const padZeros = (num: number) => {
