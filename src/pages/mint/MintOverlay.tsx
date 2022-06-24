@@ -126,6 +126,11 @@ const Button = styled.button`
   align-items: center;
   line-height: 1;
   cursor: pointer;
+
+  transition: 0.3s filter;
+  :hover {
+    filter: brightness(0.9);
+  }
 `;
 
 interface Props {
