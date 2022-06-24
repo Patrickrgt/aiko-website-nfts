@@ -269,6 +269,13 @@
     "type": "function"
   },
   {
+    "inputs": [],
+    "name": "emergencyWithdrawETH",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
     "inputs": [
       { "internalType": "uint64", "name": "amountToBuy", "type": "uint64" },
       { "internalType": "uint256", "name": "amount", "type": "uint256" },
@@ -530,6 +537,13 @@
     ],
     "name": "tokenURI",
     "outputs": [{ "internalType": "string", "name": "", "type": "string" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "totalFreeMinted",
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
     "stateMutability": "view",
     "type": "function"
   },

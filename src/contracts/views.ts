@@ -275,7 +275,7 @@ export const useMintsRemaining = (): number => {
   const walletMax = useWalletMax();
   const stage = useStage();
   const totalSupply = useTotalSupply();
-  const firstSaleMax = useFirstSaleMax();
+  const firstSaleMax = useAdjustedFirstSaleMax();
   const maxSupply = useMaxSupply();
 
   const remaining =
@@ -409,8 +409,41 @@ export const useFirstSaleMax = (): number => {
   return Number(value.toString());
 };
 
-export const useFirstSaleSoldOut = (): boolean => {
+export const useTotalFreeMinted = (): number => {
+  const globals = useGlobals();
+
+  const [value] = useContractCall({
+    abi: new utils.Interface(abi),
+    address: globals.AIKO,
+    method: "totalFreeMinted",
+    args: [],
+  }) ?? [BigNumber.from(0)];
+
+  return Number(value.toString());
+};
+
+export const useDevMinted = (): number => {
+  const globals = useGlobals();
+
+  const [value] = useContractCall({
+    abi: new utils.Interface(abi),
+    address: globals.AIKO,
+    method: "devMinted",
+    args: [],
+  }) ?? [BigNumber.from(0)];
+
+  return Number(value.toString());
+};
+
+export const useAdjustedFirstSaleMax = (): number => {
   const firstSaleMax = useFirstSaleMax();
+  const totalFreeMinted = useTotalFreeMinted();
+  const devMinted = useDevMinted();
+  return firstSaleMax + totalFreeMinted + devMinted;
+};
+
+export const useFirstSaleSoldOut = (): boolean => {
+  const firstSaleMax = useAdjustedFirstSaleMax();
   const totalSupply = useTotalSupply();
 
   if (firstSaleMax === 0) return false;
