@@ -21,21 +21,12 @@ const TopSection = styled.div`
   z-index: 2;
 `;
 
-const Stage = styled.div`
-  position: relative;
-  height: 4.2rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0 2rem;
-  text-transform: uppercase;
-  color: white;
-  font-size: 1.9rem;
-  font-weight: 400;
-`;
-
 const Image = styled.img`
   height: 30rem;
+
+  @media only screen and (max-width: 600px) {
+    height: 25rem;
+  }
 `;
 
 const Icon = styled.img`
