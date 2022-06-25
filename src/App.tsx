@@ -4,7 +4,6 @@ import { Outlet } from "react-router-dom";
 import { ChainId, Config, DAppProvider } from "@usedapp/core";
 
 import Error from "./components/Error";
-import { INFURA_ID } from "./app/globals";
 import LoadingScreen from "./components/LoadingScreen";
 import StoryPopup from "./components/StoryPopup";
 import ArchivesPopup from "./components/ArchivesPopup";
@@ -19,10 +18,6 @@ const StyledApp = styled.div`
 
 const config: Config = {
   autoConnect: false,
-  readOnlyChainId: ChainId.Mainnet,
-  readOnlyUrls: {
-    [ChainId.Mainnet]: `https://mainnet.infura.io/v3/${INFURA_ID}`,
-  },
 };
 
 const App = () => {

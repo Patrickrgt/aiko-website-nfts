@@ -1,4 +1,3 @@
-export const INFURA_ID = "ce27c65027c64f7a8ea17c6e63dfae96";
 export const OPENSEA = "https://opensea.io/";
 export const SECONDS_PADDING = 13;
 export const SALE_START = 1656169200000 + SECONDS_PADDING * 1000;
