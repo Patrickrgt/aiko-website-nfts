@@ -103,7 +103,7 @@ const FreeMint = () => {
 
   const actuallyHasFreeMint = hasFreeMint && minted === 0 && !soldOut;
 
-  //   if (!actuallyHasFreeMint) return null;
+  if (!actuallyHasFreeMint) return null;
 
   return (
     <StyledFreeMint onClick={mintFreeeee}>{"<freemint.exe>"}</StyledFreeMint>
