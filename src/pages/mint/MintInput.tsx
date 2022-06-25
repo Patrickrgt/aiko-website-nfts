@@ -22,28 +22,45 @@ const TextContainer = styled.div`
 
 const Intro = styled.div`
   color: white;
-  font-size: 3rem;
   font-weight: 400;
+
+  font-size: 3rem;
+  @media only screen and (max-width: 600px) {
+    font-size: 2.5rem;
+  }
 `;
 
 const Header = styled.div`
   color: #56729e;
-  font-size: 4.5rem;
   font-weight: 600;
+
+  font-size: 4.5rem;
+  @media only screen and (max-width: 600px) {
+    font-size: 3.5rem;
+    line-height: 1;
+  }
 `;
 
 const SubHeader = styled.div`
   color: #56729e;
-  font-size: 1.6rem;
   font-weight: 800;
   text-transform: uppercase;
+
+  font-size: 1.6rem;
+  @media only screen and (max-width: 600px) {
+    font-size: 1.3rem;
+  }
 `;
 
 const Error = styled.div`
   color: red;
-  font-size: 1.6rem;
   font-weight: 800;
   text-transform: uppercase;
+
+  font-size: 1.6rem;
+  @media only screen and (max-width: 600px) {
+    font-size: 1.3rem;
+  }
 `;
 
 const InputContainer = styled.div`
