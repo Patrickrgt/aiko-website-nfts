@@ -62,6 +62,11 @@ const Container = styled.div`
   height: 100%;
   max-height: 83rem;
   max-width: 170rem;
+
+  @media only screen and (max-width: 600px) {
+    max-height: none;
+    max-width: none;
+  }
 `;
 
 const Content = styled.div`
@@ -80,6 +85,9 @@ const Content = styled.div`
     0% 97%,
     0% 3%
   );
+  @media only screen and (max-width: 600px) {
+    clip-path: none;
+  }
 `;
 
 const IllustrationSection = styled.div`
@@ -90,6 +98,10 @@ const IllustrationSection = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+
+  @media only screen and (max-width: 600px) {
+    display: none;
+  }
 `;
 
 const IllustrationContainer = styled.div`
@@ -101,6 +113,10 @@ const IllustrationContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+
+  @media only screen and (max-width: 600px) {
+    display: none;
+  }
 `;
 
 const Illustration = styled.img`
@@ -112,6 +128,10 @@ const Separator = styled.div`
   height: 100%;
   width: 1.2rem;
   background: #afcaec;
+
+  @media only screen and (max-width: 600px) {
+    display: none;
+  }
 `;
 
 const MainSection = styled.div`
@@ -119,11 +139,15 @@ const MainSection = styled.div`
   flex: 1;
   height: 100%;
   background: #90a8d1;
-  padding: 3rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
+
+  padding: 3rem;
+  @media only screen and (max-width: 600px) {
+    padding: 2rem;
+  }
 `;
 
 const Overlay = styled.div`
