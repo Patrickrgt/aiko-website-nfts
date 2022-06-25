@@ -7,7 +7,7 @@ import abi from "./aiko.json";
 import freeProofs from "./freeProofs.json";
 import firstOrbProofs from "./firstOrbProofs.json";
 import secondOrbProofs from "./secondOrbProofs.json";
-import { SALE_START, SECONDS_PADDING } from "../app/globals";
+import { SECONDS_PADDING } from "../app/globals";
 
 export const useTotalSupply = (): number => {
   const globals = useGlobals();
@@ -452,8 +452,9 @@ export const useFirstSaleSoldOut = (): boolean => {
 };
 
 export const useIsLive = (): boolean => {
+  const globals = useGlobals();
   const tick = useTick();
-  const END = new Date(SALE_START);
+  const END = new Date(globals.SALE_START);
   const now = new Date();
   return END <= now;
 };
