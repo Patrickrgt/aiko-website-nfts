@@ -5,7 +5,7 @@ import decal from "../../assets/mint/pending-decal.svg";
 import timer from "../../assets/mint/pending-timer.svg";
 import { useIsLive, useIsPending, useNextStage } from "../../contracts/views";
 import { useTick } from "../../app/hooks/use-tick";
-import useGlobals from "../../app/hooks/use-globals";
+import { SALE_START } from "../../app/globals";
 
 const StyledMintPending = styled.div`
   position: absolute;
@@ -122,11 +122,10 @@ const MintPending = () => {
   const time = useNextStage();
   const isPending = useIsPending();
   const isLive = useIsLive();
-  const globals = useGlobals();
 
   if (!isPending && isLive) return null;
 
-  const target = isLive ? time : new Date(globals.SALE_START);
+  const target = isLive ? time : new Date(SALE_START);
 
   const remaining = target.getTime() - new Date().getTime();
 

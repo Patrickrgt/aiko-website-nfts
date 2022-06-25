@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import useGlobals from "../app/hooks/use-globals";
+import { SALE_START } from "../app/globals";
 import { useTick } from "../app/hooks/use-tick";
 import Hexify from "./Hexify";
 
@@ -92,10 +92,9 @@ const padZeros = (num: number) => {
 
 const MintButton = () => {
   const navigate = useNavigate();
-  const globals = useGlobals();
 
   const tick = useTick();
-  const END = new Date(globals.SALE_START);
+  const END = new Date(SALE_START);
   const now = new Date();
   const remaining = END.getTime() - now.getTime();
 
