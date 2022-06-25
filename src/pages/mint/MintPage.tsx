@@ -18,9 +18,11 @@ import {
 } from "../../contracts/functions";
 import {
   useHasFreeMint,
+  useMinted,
   usePrice,
   useSoldOut,
   useStage,
+  useWalletMax,
 } from "../../contracts/views";
 import MintPending from "./MintPending";
 
@@ -228,6 +230,8 @@ const MintPage = () => {
   const { mintHoldersState, mintHolders } = useMintHolders();
   const { mintFreeState, mintFree } = useMintFree();
   const price = usePrice();
+  const walletMax = useWalletMax();
+  const userMinted = useMinted();
 
   const errorText = useSelector(selectError);
   const soldOut = useSoldOut();
@@ -272,7 +276,11 @@ const MintPage = () => {
     if (!account) return;
     const data = (freeProofs as any)[account];
     if (!data || !data.Amount) return;
-    mintFree(data.Amount, data.Amount, data.Proof);
+    mintFree(
+      Math.min(walletMax - userMinted, data.Amount),
+      data.Amount,
+      data.Proof
+    );
   };
 
   const mint = () => {
