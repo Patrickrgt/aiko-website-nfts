@@ -1,20 +1,8 @@
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { SALE_START } from "../app/globals";
 import { useTick } from "../app/hooks/use-tick";
 import Hexify from "./Hexify";
-
-const ButtonContainer = styled.div`
-  position: absolute;
-  display: flex;
-  align-items: center;
-
-  top: 39%;
-  left: calc(5.7% + 2.7rem);
-  width: 33.1%;
-  height: 27%;
-  @media only screen and (max-width: 600px) {
-    display: none;
-  }
-`;
 
 const ButtonArea = styled.div`
   position: relative;
@@ -89,10 +77,10 @@ const padZeros = (num: number) => {
 };
 
 const MintButton = () => {
-  const disabled = true;
+  const navigate = useNavigate();
 
   const tick = useTick();
-  const END = new Date(1656169200000);
+  const END = new Date(SALE_START);
   const now = new Date();
   const remaining = END.getTime() - now.getTime();
 
@@ -103,27 +91,27 @@ const MintButton = () => {
   const minutes = Math.floor((remaining % (1000 * 60 * 60)) / (1000 * 60));
   const seconds = Math.floor((remaining % (1000 * 60)) / 1000);
 
+  const mintLive = END <= now;
+
   return (
-    <ButtonContainer>
-      <Hexify>
-        <ButtonArea>
-          <StyledMintButton
-            disabled={disabled}
-            onClick={() => console.log("meow")}
-          >
-            <ButtonContent>
-              <YellowText>{"<"}</YellowText>
-              <WhiteText>mint.exe</WhiteText>
-              <YellowText>{">"}</YellowText>
-            </ButtonContent>
-          </StyledMintButton>
+    <Hexify>
+      <ButtonArea>
+        <StyledMintButton onClick={() => navigate("/mint")}>
+          <ButtonContent>
+            <YellowText>{"<"}</YellowText>
+            <WhiteText>mint.exe</WhiteText>
+            <YellowText>{">"}</YellowText>
+          </ButtonContent>
+        </StyledMintButton>
+        {!mintLive && (
           <Countdown>
             <CountdownHighlight>{padZeros(days)}</CountdownHighlight>
             {`:${padZeros(hours)}:${padZeros(minutes)}:${padZeros(seconds)}`}
           </Countdown>
-        </ButtonArea>
-      </Hexify>
-    </ButtonContainer>
+        )}
+        {mintLive && <Countdown>Mint Live</Countdown>}
+      </ButtonArea>
+    </Hexify>
   );
 };
 

@@ -15,6 +15,10 @@ const LockedContainer = styled.div`
       opacity: 0;
     }
   }
+
+  @media only screen and (max-width: 600px) {
+    display: none;
+  }
 `;
 
 const Lock = styled.img`
@@ -41,7 +45,7 @@ const StyledTabs = styled.div`
   }
   @media only screen and (max-width: 600px) {
     top: 21%;
-    left: 10%;
+    left: 12%;
   }
 `;
 

@@ -8,15 +8,12 @@ const useGlobals = () => {
   const { chainId } = useEthers();
 
   if (chainId === 4) {
-    dispatch(clearError());
     return RINKEBY_GLOBALS;
   }
   if (chainId === 1) {
-    dispatch(clearError());
     return ETH_GLOBALS;
   }
   if (!chainId) {
-    dispatch(clearError());
     return ETH_GLOBALS;
   }
 

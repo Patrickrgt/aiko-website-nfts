@@ -1,10 +1,11 @@
 import styled from "styled-components";
+import { utils } from "ethers";
 import { shortenAddress, useEtherBalance, useEthers } from "@usedapp/core";
 import { useDevice } from "../app/hooks/use-device";
 import Hexify from "./Hexify";
 
 const StyledConnector = styled.div`
-  position: fixed;
+  position: ${(props: Props) => (props.relative ? "relative" : "fixed")};
   transform: translate(0, 0);
   z-index: 3;
 
@@ -14,15 +15,15 @@ const StyledConnector = styled.div`
     filter: brightness(0.9);
   }
 
-  top: 7rem;
-  right: 7rem;
+  top: ${(props: Props) => (props.relative ? "auto" : "7rem")};
+  right: ${(props: Props) => (props.relative ? "auto" : "7rem")};
   @media only screen and (max-width: 1400px) {
-    top: 3rem;
-    right: 3rem;
+    top: ${(props: Props) => (props.relative ? "auto" : "3rem")};
+    right: ${(props: Props) => (props.relative ? "auto" : "3rem")};
   }
   @media only screen and (max-width: 600px) {
-    top: 1.5rem;
-    right: 1.5rem;
+    top: ${(props: Props) => (props.relative ? "auto" : "1.5rem")};
+    right: ${(props: Props) => (props.relative ? "auto" : "1.5rem")};
   }
 `;
 
@@ -37,7 +38,7 @@ const Button = styled.button`
   justify-content: center;
   align-items: center;
 
-  height: 4.4rem;
+  height: 4.2rem;
   padding: ${(props: ButtonProps) =>
     props.active ? "0.7rem 0.9rem" : "0 2.4rem"};
   @media only screen and (max-width: 1400px) {
@@ -48,7 +49,8 @@ const Button = styled.button`
 `;
 
 const Text = styled.span`
-  font-weight: 700;
+  font-weight: 500;
+  vertical-align: middle;
 
   font-size: 2rem;
   @media only screen and (max-width: 1400px) {
@@ -57,15 +59,17 @@ const Text = styled.span`
 `;
 
 const WhiteText = styled(Text)`
-  color: white;
+  color: ${(props: Props) => (props.yellow ? "#b7944e" : "white")};
 `;
 
 const BlueText = styled(Text)`
-  color: #4e73a4;
+  color: ${(props: Props) =>
+    props.dark ? "white" : props.yellow ? "#b7944e" : "#4e73a4"};
 `;
 
 const Balance = styled.div`
-  background: #4e73a4;
+  background: ${(props: Props) =>
+    props.dark ? "#90A8D1" : props.yellow ? "#b7944e" : "#4e73a4"};
   height: 100%;
   padding: 0.5rem;
   clip-path: polygon(
@@ -93,29 +97,41 @@ const Balance = styled.div`
   }
 `;
 
-const Connector = () => {
+interface Props {
+  dark?: boolean;
+  yellow?: boolean;
+  relative?: boolean;
+}
+
+const Connector = ({ dark, yellow, relative }: Props) => {
   const { account, activateBrowserWallet } = useEthers();
   const { isMobile } = useDevice();
   const ethBalance = useEtherBalance(account);
 
   return (
-    <StyledConnector>
-      <Hexify>
+    <StyledConnector relative={relative}>
+      <Hexify dark={dark} yellow={yellow}>
         <Button active={!!account} onClick={() => activateBrowserWallet()}>
           {account && (
             <>
-              <WhiteText>{"<A:\\"}</WhiteText>
-              <BlueText>{shortenAddress(account)}</BlueText>
-              <Balance>{`${(Number(ethBalance ?? 0) / 10 ** 18).toPrecision(
-                2
-              )} ETH`}</Balance>
+              <WhiteText yellow={yellow}>{"<A:\\"}</WhiteText>
+              <BlueText dark={dark} yellow={yellow}>
+                {shortenAddress(account)}
+              </BlueText>
+              {ethBalance && (
+                <Balance dark={dark} yellow={yellow}>{`${Number(
+                  utils.formatEther(ethBalance)
+                ).toPrecision(2)} ETH`}</Balance>
+              )}
             </>
           )}
           {!account && (
             <>
-              <WhiteText>{"<A:\\"}</WhiteText>
-              <BlueText>{isMobile ? "Connect" : "Connect Wallet"}</BlueText>
-              <WhiteText>{">"}</WhiteText>
+              <WhiteText yellow={yellow}>{"<A:\\"}</WhiteText>
+              <BlueText dark={dark} yellow={yellow}>
+                {isMobile ? "Connect" : "Connect Wallet"}
+              </BlueText>
+              <WhiteText yellow={yellow}>{">"}</WhiteText>
             </>
           )}
         </Button>

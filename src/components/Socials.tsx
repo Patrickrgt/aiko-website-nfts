@@ -3,6 +3,7 @@ import Social from "./Social";
 import twitter from "../assets/svgs/twitter.svg";
 import discord from "../assets/svgs/discord.svg";
 import opensea from "../assets/svgs/opensea.svg";
+import { OPENSEA } from "../app/globals";
 
 interface SocialType {
   icon: string;
@@ -12,6 +13,7 @@ interface SocialType {
 const socials: SocialType[] = [
   {
     icon: opensea,
+    link: OPENSEA,
   },
   {
     icon: discord,

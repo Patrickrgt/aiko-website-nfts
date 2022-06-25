@@ -1,11 +1,15 @@
+export const OPENSEA = "https://opensea.io/collection/aikovirtualnft";
+export const SECONDS_PADDING = 13;
+export const SALE_START = 1656169200000 + SECONDS_PADDING * 1000;
+
 interface GlobalsType {
-  WETH: string;
+  AIKO: string;
 }
 
 export const ETH_GLOBALS: GlobalsType = {
-  WETH: "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+  AIKO: "0xb661AB9BCd2878C5F8C136f67fd550a9D7dF7197",
 };
 
 export const RINKEBY_GLOBALS: GlobalsType = {
-  WETH: "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+  AIKO: "0xD010802fAbE29FEd5EA340306e1F92fF46A7Ad21",
 };

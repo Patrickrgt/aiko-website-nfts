@@ -5,6 +5,10 @@ const Container = styled.div`
   position: relative;
   width: 41.5%;
   margin-right: 3.4rem;
+
+  @media only screen and (max-width: 600px) {
+    display: none;
+  }
 `;
 
 const ImageContainer = styled.div`
@@ -124,12 +128,21 @@ const TextSection = styled.p`
   width: 100%;
   margin-bottom: 1.5rem;
   color: #7c693a;
-  font-size: 2.4rem;
   font-weight: 400;
 
   :first-letter {
     font-weight: 900;
     font-size: 2.6rem;
+  }
+
+  font-size: 2.4rem;
+  @media only screen and (max-width: 600px) {
+    font-size: 2rem;
+
+    :first-letter {
+      font-weight: 900;
+      font-size: 2.2rem;
+    }
   }
 `;
 
@@ -244,20 +257,20 @@ const PopupTab = ({ tab }: Props) => {
                 <TextSection key={index}>{text}</TextSection>
               ))}
             {tab.info &&
-              tab.info.map((info: InfoType) => (
-                <>
+              tab.info.map((info: InfoType, index: number) => (
+                <div key={index}>
                   <InfoSection>
                     <Bold>{info.bold}</Bold>
                     {info.normal}
                   </InfoSection>
                   {info.subInfo &&
-                    info.subInfo.map((subInfo: InfoType) => (
-                      <SubInfoSection>
+                    info.subInfo.map((subInfo: InfoType, index: number) => (
+                      <SubInfoSection key={index}>
                         <SubBold>{subInfo.bold}</SubBold>
                         {subInfo.normal}
                       </SubInfoSection>
                     ))}
-                </>
+                </div>
               ))}
           </TextArea>
         </TextAreaContainer>

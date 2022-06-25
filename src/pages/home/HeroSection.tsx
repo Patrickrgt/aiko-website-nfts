@@ -55,6 +55,20 @@ const Wing = styled.video`
   }
 `;
 
+const MintButtonContainer = styled.div`
+  position: absolute;
+  display: flex;
+  align-items: center;
+  top: 39%;
+  left: calc(5.7% + 2.7rem);
+  width: 33.1%;
+  height: 27%;
+
+  @media only screen and (max-width: 600px) {
+    display: none;
+  }
+`;
+
 const HeroSection = () => {
   return (
     <Section id="home-scroll">
@@ -62,8 +76,11 @@ const HeroSection = () => {
       <ImageContainer>
         <HeroImage src={heroImage} alt="Hero image" />
         <Tabs />
-        <MintButton />
+        <MintButtonContainer>
+          <MintButton />
+        </MintButtonContainer>
         <Wing autoPlay muted loop>
+          <source src="/assets/wing.mp4" type="video/mp4; codecs=hvc1" />
           <source src="/assets/wing.webm" type="video/webm" />
         </Wing>
       </ImageContainer>
