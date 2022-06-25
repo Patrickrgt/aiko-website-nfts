@@ -4,20 +4,6 @@ import { SALE_START } from "../app/globals";
 import { useTick } from "../app/hooks/use-tick";
 import Hexify from "./Hexify";
 
-const ButtonContainer = styled.div`
-  position: absolute;
-  display: flex;
-  align-items: center;
-
-  top: 39%;
-  left: calc(5.7% + 2.7rem);
-  width: 33.1%;
-  height: 27%;
-  @media only screen and (max-width: 600px) {
-    display: none;
-  }
-`;
-
 const ButtonArea = styled.div`
   position: relative;
   display: flex;
@@ -108,26 +94,24 @@ const MintButton = () => {
   const mintLive = END <= now;
 
   return (
-    <ButtonContainer>
-      <Hexify>
-        <ButtonArea>
-          <StyledMintButton onClick={() => navigate("/mint")}>
-            <ButtonContent>
-              <YellowText>{"<"}</YellowText>
-              <WhiteText>mint.exe</WhiteText>
-              <YellowText>{">"}</YellowText>
-            </ButtonContent>
-          </StyledMintButton>
-          {!mintLive && (
-            <Countdown>
-              <CountdownHighlight>{padZeros(days)}</CountdownHighlight>
-              {`:${padZeros(hours)}:${padZeros(minutes)}:${padZeros(seconds)}`}
-            </Countdown>
-          )}
-          {mintLive && <Countdown>Mint Live</Countdown>}
-        </ButtonArea>
-      </Hexify>
-    </ButtonContainer>
+    <Hexify>
+      <ButtonArea>
+        <StyledMintButton onClick={() => navigate("/mint")}>
+          <ButtonContent>
+            <YellowText>{"<"}</YellowText>
+            <WhiteText>mint.exe</WhiteText>
+            <YellowText>{">"}</YellowText>
+          </ButtonContent>
+        </StyledMintButton>
+        {!mintLive && (
+          <Countdown>
+            <CountdownHighlight>{padZeros(days)}</CountdownHighlight>
+            {`:${padZeros(hours)}:${padZeros(minutes)}:${padZeros(seconds)}`}
+          </Countdown>
+        )}
+        {mintLive && <Countdown>Mint Live</Countdown>}
+      </ButtonArea>
+    </Hexify>
   );
 };
 
