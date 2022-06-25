@@ -6,6 +6,7 @@ import timer from "../../assets/mint/pending-timer.svg";
 import { useIsLive, useIsPending, useNextStage } from "../../contracts/views";
 import { useTick } from "../../app/hooks/use-tick";
 import { SALE_START } from "../../app/globals";
+import FreeMint from "./FreeMint";
 
 const StyledMintPending = styled.div`
   position: absolute;
@@ -151,6 +152,7 @@ const MintPending = () => {
           )}`}</Numbers>
         </Countdown>
       </Content>
+      <FreeMint />
     </StyledMintPending>
   );
 };

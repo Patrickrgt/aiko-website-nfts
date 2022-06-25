@@ -16,14 +16,7 @@ import {
   useMintHolders,
   useMintSecondOrb,
 } from "../../contracts/functions";
-import {
-  useHasFreeMint,
-  useMinted,
-  usePrice,
-  useSoldOut,
-  useStage,
-  useWalletMax,
-} from "../../contracts/views";
+import { usePrice, useSoldOut, useStage } from "../../contracts/views";
 import MintPending from "./MintPending";
 
 import footerLeft from "../../assets/mint/footer-left.svg";
@@ -31,10 +24,10 @@ import footerRight from "../../assets/mint/footer-right.svg";
 import bg from "../../assets/mint/mint-bg.svg";
 import illustration from "../../assets/mint/illustration.png";
 
-import freeProofs from "../../contracts/freeProofs.json";
 import firstOrbProofs from "../../contracts/firstOrbProofs.json";
 import secondOrbProofs from "../../contracts/secondOrbProofs.json";
 import { selectError } from "../../state/errorSlice";
+import FreeMint from "./FreeMint";
 
 const fadeIn = keyframes`
   from {
@@ -187,51 +180,17 @@ const Barcode = styled.img`
   height: 3rem;
 `;
 
-const FreeMint = styled.button`
-  position: absolute;
-  right: 3rem;
-  height: 4.2rem;
-  top: 8rem;
-  height: 4.2rem;
-  background: #ff6280;
-  padding: 0 2.4rem;
-  color: white;
-  font-weight: 500;
-  font-size: 2rem;
-  cursor: pointer;
-  z-index: 1000;
-
-  clip-path: polygon(
-    6% 0%,
-    94% 0%,
-    100% 25%,
-    100% 75%,
-    94% 100%,
-    6% 100%,
-    0% 75%,
-    0% 25%
-  );
-
-  transition: filter 0.3s;
-  :hover {
-    filter: brightness(0.9);
-  }
-`;
-
 const MintPage = () => {
   const { account } = useEthers();
   const [minted, setMinted] = useState(0);
   const [amount, setAmount] = useState<number | null>(null);
 
   const stage = useStage();
-  const hasFreeMint = useHasFreeMint();
   const { mintFirstOrbState, mintFirstOrb } = useMintFirstOrb();
   const { mintSecondtOrbState, mintSecondOrb } = useMintSecondOrb();
   const { mintHoldersState, mintHolders } = useMintHolders();
-  const { mintFreeState, mintFree } = useMintFree();
+  const { mintFreeState } = useMintFree();
   const price = usePrice();
-  const walletMax = useWalletMax();
-  const userMinted = useMinted();
 
   const errorText = useSelector(selectError);
   const soldOut = useSoldOut();
@@ -270,18 +229,6 @@ const MintPage = () => {
       setAmount(null);
     }
   }, [loading, success]);
-
-  const mintFreeeee = () => {
-    if (loading) return;
-    if (!account) return;
-    const data = (freeProofs as any)[account];
-    if (!data || !data.Amount) return;
-    mintFree(
-      Math.min(walletMax - userMinted, data.Amount),
-      data.Amount,
-      data.Proof
-    );
-  };
 
   const mint = () => {
     if (loading) return;
@@ -334,9 +281,7 @@ const MintPage = () => {
             </MainSection>
             <MintError />
             <MintLoading show={loading} hash={hash} />
-            {hasFreeMint && minted === 0 && !soldOut && (
-              <FreeMint onClick={mintFreeeee}>{"<freemint.exe>"}</FreeMint>
-            )}
+            <FreeMint />
           </Content>
           {showIllustration && (
             <IllustrationContainer>
