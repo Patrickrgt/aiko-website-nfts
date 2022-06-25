@@ -41,6 +41,10 @@ const CountdownContainer = styled.div`
     0% 25%
   );
   margin-left: 0.7rem;
+
+  @media only screen and (max-width: 600px) {
+    display: none;
+  }
 `;
 
 const Image = styled.img`
