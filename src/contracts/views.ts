@@ -316,6 +316,16 @@ export const useMintsRemaining = (): number => {
   return 0;
 };
 
+export const useMinted = (): number => {
+  const accountInfo = useAccountInfo();
+  return (
+    accountInfo.freeMinted +
+    accountInfo.purchasedFirst +
+    accountInfo.purchasedSecond +
+    accountInfo.purchasedHolder
+  );
+};
+
 export const usePrice = (): BigNumber => {
   const stage = useStage();
   const firstOrbPrice = useFirstOrbPrice();
