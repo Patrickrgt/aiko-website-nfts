@@ -24,7 +24,11 @@ const TextArea = styled.div`
   height: 100%;
   display: flex;
   align-items: center;
+
   padding-left: 4rem;
+  @media only screen and (max-width: 600px) {
+    padding-left: 1.5rem;
+  }
 `;
 
 const TextItem = styled.div`
