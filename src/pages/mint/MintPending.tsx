@@ -18,6 +18,7 @@ const StyledMintPending = styled.div`
   align-items: center;
   z-index: 3;
   background: #aacbef;
+  overflow: hidden;
 `;
 
 const Background = styled.img`
@@ -37,8 +38,11 @@ const Content = styled.div`
 `;
 
 const Decal = styled.img`
-  width: 100%;
   width: 61rem;
+
+  @media only screen and (max-width: 600px) {
+    width: calc(100vw - 2rem);
+  }
 `;
 
 const Text = styled.div`
@@ -51,19 +55,22 @@ const Text = styled.div`
 
 const TopText = styled(Text)`
   font-size: 7rem;
+  @media only screen and (max-width: 600px) {
+    font-size: 5rem;
+  }
 `;
 
 const BottomText = styled(Text)`
   font-size: 8.3rem;
+  @media only screen and (max-width: 600px) {
+    font-size: 5.5rem;
+  }
 `;
 
 const Countdown = styled.div`
   display: flex;
   align-items: center;
-  width: 61rem;
-  height: 12rem;
   background: #43679a;
-  padding: 1.5rem;
   margin-top: 1rem;
   clip-path: polygon(
     5% 0%,
@@ -75,6 +82,15 @@ const Countdown = styled.div`
     0% 75%,
     0% 25%
   );
+
+  width: 61rem;
+  height: 12rem;
+  padding: 1.5rem;
+  @media only screen and (max-width: 600px) {
+    width: 95vw;
+    height: 20vw;
+    padding: 1rem;
+  }
 `;
 
 const Icon = styled.img`
@@ -84,13 +100,17 @@ const Icon = styled.img`
 const Numbers = styled.span`
   height: 100%;
   flex: 1;
-  font-size: 10rem;
   color: white;
   font-weight: 900;
   display: flex;
   align-items: center;
   justify-content: center;
   vertical-align: middle;
+
+  font-size: 10rem;
+  @media only screen and (max-width: 600px) {
+    font-size: 6.5rem;
+  }
 `;
 
 const padZeros = (num: number) => {
