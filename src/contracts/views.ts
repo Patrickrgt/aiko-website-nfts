@@ -7,7 +7,7 @@ import abi from "./aiko.json";
 import freeProofs from "./freeProofs.json";
 import firstOrbProofs from "./firstOrbProofs.json";
 import secondOrbProofs from "./secondOrbProofs.json";
-import { SALE_START } from "../app/globals";
+import { SALE_START, SECONDS_PADDING } from "../app/globals";
 
 export const useTotalSupply = (): number => {
   const globals = useGlobals();
@@ -149,7 +149,7 @@ export const useFirstSaleStartTime = (): number => {
     args: [],
   }) ?? [BigNumber.from(0)];
 
-  return Number(value.toString());
+  return Number(value.toString()) + SECONDS_PADDING;
 };
 
 export const useFirstSaleEndTime = (): number => {
@@ -162,7 +162,7 @@ export const useFirstSaleEndTime = (): number => {
     args: [],
   }) ?? [BigNumber.from(0)];
 
-  return Number(value.toString());
+  return Number(value.toString()) - SECONDS_PADDING;
 };
 
 export const useSecondSaleStartTime = (): number => {
@@ -175,7 +175,7 @@ export const useSecondSaleStartTime = (): number => {
     args: [],
   }) ?? [BigNumber.from(0)];
 
-  return Number(value.toString());
+  return Number(value.toString()) + SECONDS_PADDING;
 };
 
 export const useSecondSaleEndTime = (): number => {
@@ -188,7 +188,7 @@ export const useSecondSaleEndTime = (): number => {
     args: [],
   }) ?? [BigNumber.from(0)];
 
-  return Number(value.toString());
+  return Number(value.toString()) - SECONDS_PADDING;
 };
 
 export const useHolderSaleStartTime = (): number => {
@@ -201,7 +201,7 @@ export const useHolderSaleStartTime = (): number => {
     args: [],
   }) ?? [BigNumber.from(0)];
 
-  return Number(value.toString());
+  return Number(value.toString()) + SECONDS_PADDING;
 };
 
 export const useHolderSaleEndTime = (): number => {
@@ -214,7 +214,7 @@ export const useHolderSaleEndTime = (): number => {
     args: [],
   }) ?? [BigNumber.from(0)];
 
-  return Number(value.toString());
+  return Number(value.toString()) - SECONDS_PADDING;
 };
 
 export interface AccountInfo {
