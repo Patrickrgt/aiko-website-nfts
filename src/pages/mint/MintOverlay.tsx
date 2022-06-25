@@ -29,9 +29,18 @@ const StyledMintOverlay = styled.div`
 
 const Banner = styled.div`
   width: 100%;
-  height: 72%;
   background: #364865;
   display: flex;
+
+  height: 72%;
+  @media only screen and (max-width: 600px) {
+    height: 100%;
+    padding: 2rem;
+
+    > div:first-child {
+      display: none;
+    }
+  }
 `;
 
 const Section = styled.div`
@@ -60,14 +69,19 @@ const Content = styled.div`
 `;
 
 const Model = styled.div`
-  height: 43%;
-  width: 50rem;
   background: white;
   display: flex;
   flex-direction: column;
   border-top-right-radius: 1rem;
   border-top-left-radius: 1rem;
   overflow: hidden;
+
+  height: 43%;
+  width: 50rem;
+  @media only screen and (max-width: 600px) {
+    width: 100%;
+    height: 30rem;
+  }
 `;
 
 const NavBar = styled.div`
