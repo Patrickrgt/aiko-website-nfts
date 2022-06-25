@@ -18,6 +18,7 @@ const StyledApp = styled.div`
 
 const config: Config = {
   autoConnect: false,
+  bufferGasLimitPercentage: 20,
 };
 
 const App = () => {
