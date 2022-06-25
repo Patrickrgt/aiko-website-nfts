@@ -17,6 +17,11 @@ const StyledMintSoldOut = styled.div`
   height: 100%;
   background: #44679a;
   z-index: 3;
+  overflow: hidden;
+
+  @media only screen and (max-width: 600px) {
+    background: #89a9d6;
+  }
 `;
 
 const Background = styled.img`
@@ -25,6 +30,10 @@ const Background = styled.img`
   left: 0;
   width: 100%;
   height: 100%;
+
+  @media only screen and (max-width: 600px) {
+    display: none;
+  }
 `;
 
 const Overlay = styled.img`
@@ -33,6 +42,10 @@ const Overlay = styled.img`
   left: 0;
   width: 87%;
   height: 100%;
+
+  @media only screen and (max-width: 600px) {
+    display: none;
+  }
 `;
 
 const SoldOutContainer = styled.div`
@@ -41,22 +54,37 @@ const SoldOutContainer = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  height: 100%;
+
   padding: 10rem;
   width: 70%;
-  height: 100%;
+  @media only screen and (max-width: 600px) {
+    padding: 3rem;
+    width: 100%;
+  }
 `;
 
 const ImageContainer = styled.div`
-  height: calc(100% - 16.4rem);
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
+
+  height: calc(100% - 16.4rem);
+  @media only screen and (max-width: 600px) {
+    height: auto;
+    width: 100%;
+  }
 `;
 
 const ImageBackground = styled.img`
   filter: brightness(100);
+
   height: calc(100% - 4rem);
+  @media only screen and (max-width: 600px) {
+    height: auto;
+    width: 140%;
+  }
 `;
 
 const Image = styled.img`
@@ -65,6 +93,11 @@ const Image = styled.img`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+
+  @media only screen and (max-width: 600px) {
+    height: auto;
+    width: 100%;
+  }
 `;
 
 const EmptySpace = styled.div`
@@ -78,6 +111,10 @@ const Girl = styled.img`
   top: 0;
   left: 70%;
   transform: translateX(-50%);
+
+  @media only screen and (max-width: 600px) {
+    display: none;
+  }
 `;
 
 const MintSoldOut = () => {
