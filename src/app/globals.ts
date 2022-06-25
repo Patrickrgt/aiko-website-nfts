@@ -1,5 +1,3 @@
-export const INFURA_ID = "ce27c65027c64f7a8ea17c6e63dfae96";
-
 interface GlobalsType {
   WETH: string;
 }
