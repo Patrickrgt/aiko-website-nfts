@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { utils } from "ethers";
 import { shortenAddress, useEtherBalance, useEthers } from "@usedapp/core";
 import { useDevice } from "../app/hooks/use-device";
 import Hexify from "./Hexify";
@@ -117,10 +118,11 @@ const Connector = ({ dark, yellow, relative }: Props) => {
               <BlueText dark={dark} yellow={yellow}>
                 {shortenAddress(account)}
               </BlueText>
-              <Balance dark={dark} yellow={yellow}>{`${(
-                Number(ethBalance ?? 0) /
-                10 ** 18
-              ).toPrecision(2)} ETH`}</Balance>
+              {ethBalance && (
+                <Balance dark={dark} yellow={yellow}>{`${Number(
+                  utils.formatEther(ethBalance)
+                ).toPrecision(2)} ETH`}</Balance>
+              )}
             </>
           )}
           {!account && (
