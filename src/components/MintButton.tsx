@@ -21,7 +21,7 @@ const MintButton = () => {
   return (
     <Hexify>
       <ButtonArea>
-        <Countdown>Sold Out!</Countdown>
+        <Countdown>A:\Sold Out</Countdown>
       </ButtonArea>
     </Hexify>
   );
