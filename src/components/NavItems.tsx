@@ -42,20 +42,8 @@ const StyledNavItems = styled.div`
 
   @media only screen and (max-width: 600px) {
     padding: 1.1rem 1.3rem;
-    margin-top: 9.5rem;
+    margin-top: 2rem;
     transform: translateY(0);
-  }
-`;
-
-const MintButtonContainer = styled.div`
-  display: none;
-  position: absolute;
-  bottom: calc(100% + 2.3rem);
-  left: 50%;
-  transform: translateX(-50%);
-
-  @media only screen and (max-width: 600px) {
-    display: flex;
   }
 `;
 
@@ -165,9 +153,6 @@ const NavItems = () => {
             }, 1000);
         }}
       >
-        <MintButtonContainer>
-          <MintButton />
-        </MintButtonContainer>
         <Background />
         <Selection style={{ transform: `translateX(${active * 12}rem)` }} />
         <ItemsContainer>
