@@ -6,7 +6,7 @@ import TeamMember, { TeamMemberType } from "./TeamMember";
 import chase from "../../assets/team-members/chase.jpg";
 import crystal from "../../assets/team-members/crystal.jpg";
 import garrid from "../../assets/team-members/garrid.jpg";
-import kinoko from "../../assets/team-members/kinoko.jpg";
+import shvrkboy from "../../assets/team-members/sharkboy.jpg";
 import kyo from "../../assets/team-members/kyo.jpg";
 import matarelli from "../../assets/team-members/matarelli.jpg";
 import vinne from "../../assets/team-members/vinne.jpg";
@@ -34,7 +34,7 @@ const teamMembers: TeamMemberType[] = [
   {
     image: matarelli,
     name: "Matarelli",
-    role: "Community Manager",
+    role: "Public Relations",
     twitter: "https://twitter.com/yourboyez",
   },
   {
@@ -44,10 +44,10 @@ const teamMembers: TeamMemberType[] = [
     twitter: "https://twitter.com/chromedcrystals",
   },
   {
-    image: kinoko,
-    name: "Kinoko",
-    role: "Technical Advisory",
-    twitter: "https://twitter.com/shroom_chan",
+    image: shvrkboy,
+    name: "Shvrkboy",
+    role: "Community Manager",
+    twitter: "https://twitter.com/0xignorance",
   },
   {
     image: kiwi,
