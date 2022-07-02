@@ -1,6 +1,4 @@
 export const OPENSEA = "https://opensea.io/collection/aikovirtualnft";
-export const SECONDS_PADDING = 13;
-export const SALE_START = 1656169200000 + SECONDS_PADDING * 1000;
 
 interface GlobalsType {
   AIKO: string;
