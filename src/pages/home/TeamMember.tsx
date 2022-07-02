@@ -2,7 +2,7 @@ import styled from "styled-components";
 import AikoFade from "../../components/AikoFade";
 
 import twitter from "../../assets/svgs/white-twitter.svg";
-import decal from "../../assets/svgs/team-decal.png";
+import decal from "../../assets/svgs/team-decal.svg";
 
 export interface TeamMemberType {
   image?: string;
