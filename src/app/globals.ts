@@ -1,4 +1,4 @@
-export const OPENSEA = "https://opensea.io/collection/aikovirtualnft";
+export const OPENSEA = "https://opensea.io/collection/aikovirtual";
 
 interface GlobalsType {
   AIKO: string;
