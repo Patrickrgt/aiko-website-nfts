@@ -64,6 +64,7 @@ export const selectShowingStory = (state: RootState) => state.ui.showingStory;
 
 export const selectShowingInfo = (state: RootState) => state.ui.showingInfo;
 
-export const selectShowingRewards = (state: RootState) => state.ui.showingRewards;
+export const selectShowingRewards = (state: RootState) =>
+  state.ui.showingRewards;
 
 export default uiSlice.reducer;
