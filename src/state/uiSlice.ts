@@ -1,13 +1,13 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { RootState } from './store'
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { RootState } from "./store";
 
 interface UiState {
-  connectingWallet: boolean
-  showingArchives: boolean
-  showingStory: boolean
-  showingInfo: boolean
+  connectingWallet: boolean;
+  showingArchives: boolean;
+  showingStory: boolean;
+  showingInfo: boolean;
   // userPanel States
-  showingRewards: boolean
+  showingRewards: boolean;
 }
 
 const initialState: UiState = {
@@ -17,32 +17,32 @@ const initialState: UiState = {
   showingInfo: false,
   // userPanel States
   showingRewards: false,
-}
+};
 
 export const uiSlice = createSlice({
-  name: 'ui',
+  name: "ui",
   initialState,
   reducers: {
     connectWallet: (state) => {
-      state.connectingWallet = true
+      state.connectingWallet = true;
     },
     walletConnected: (state) => {
-      state.connectingWallet = false
+      state.connectingWallet = false;
     },
     setShowingArchives: (state, action: PayloadAction<boolean>) => {
-      state.showingArchives = action.payload
+      state.showingArchives = action.payload;
     },
     setShowingStory: (state, action: PayloadAction<boolean>) => {
-      state.showingStory = action.payload
+      state.showingStory = action.payload;
     },
     setShowingInfo: (state, action: PayloadAction<boolean>) => {
-      state.showingInfo = action.payload
+      state.showingInfo = action.payload;
     },
     setShowingRewards: (state, action: PayloadAction<boolean>) => {
-      state.showingRewards = action.payload
+      state.showingRewards = action.payload;
     },
   },
-})
+});
 
 export const {
   connectWallet,
@@ -52,19 +52,18 @@ export const {
   setShowingInfo,
   // userPanel States
   setShowingRewards,
-} = uiSlice.actions
+} = uiSlice.actions;
 
 export const selectConnectingWallet = (state: RootState) =>
-  state.ui.connectingWallet
+  state.ui.connectingWallet;
 
 export const selectShowingArchives = (state: RootState) =>
-  state.ui.showingArchives
+  state.ui.showingArchives;
 
-export const selectShowingStory = (state: RootState) => state.ui.showingStory
+export const selectShowingStory = (state: RootState) => state.ui.showingStory;
 
-export const selectShowingInfo = (state: RootState) => state.ui.showingInfo
+export const selectShowingInfo = (state: RootState) => state.ui.showingInfo;
 
-export const selectShowingRewards = (state: RootState) =>
-  state.ui.showingRewards
+export const selectShowingRewards = (state: RootState) => state.ui.showingRewards;
 
-export default uiSlice.reducer
+export default uiSlice.reducer;
