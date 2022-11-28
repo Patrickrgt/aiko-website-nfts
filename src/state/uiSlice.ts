@@ -6,6 +6,8 @@ interface UiState {
   showingArchives: boolean;
   showingStory: boolean;
   showingInfo: boolean;
+  // userPanel States
+  showingRewards: boolean;
 }
 
 const initialState: UiState = {
@@ -13,6 +15,8 @@ const initialState: UiState = {
   showingArchives: false,
   showingStory: false,
   showingInfo: false,
+  // userPanel States
+  showingRewards: false,
 };
 
 export const uiSlice = createSlice({
@@ -34,6 +38,9 @@ export const uiSlice = createSlice({
     setShowingInfo: (state, action: PayloadAction<boolean>) => {
       state.showingInfo = action.payload;
     },
+    setShowingRewards: (state, action: PayloadAction<boolean>) => {
+      state.showingRewards = action.payload;
+    },
   },
 });
 
@@ -43,6 +50,8 @@ export const {
   setShowingArchives,
   setShowingStory,
   setShowingInfo,
+  // userPanel States
+  setShowingRewards,
 } = uiSlice.actions;
 
 export const selectConnectingWallet = (state: RootState) =>
@@ -54,5 +63,5 @@ export const selectShowingArchives = (state: RootState) =>
 export const selectShowingStory = (state: RootState) => state.ui.showingStory;
 
 export const selectShowingInfo = (state: RootState) => state.ui.showingInfo;
-
+export const selectShowingRewards = (state: RootState) => state.ui.showingRewards;
 export default uiSlice.reducer;
