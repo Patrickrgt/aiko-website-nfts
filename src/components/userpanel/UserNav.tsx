@@ -1,7 +1,8 @@
 import { ReactNode, useEffect, useState } from "react";
-// import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
+import { useEthers, useLookupAddress } from "@usedapp/core";
+
 import UserNavIcon, { NavIconType } from "./UserNavIcon";
 import UserNavSocial, { SocialIconType } from "./UserNavSocial";
 import { selectShowingNav, setShowingNav } from "../../state/uiSlice";
@@ -185,22 +186,61 @@ const NavUsernameContainer = styled.div`
   clip-path: var(--notched-sm);
   padding: 1rem 3rem 1rem 1rem;
   text-align: left;
-  width: fit-content;
+  width: 100%;
+  height: 4rem;
   overflow: visible;
   z-index: 1;
+  opacity: ${(props: NavProps) => (props.active ? "1" : "0")};
+  transition: all ease 0.3s;
 `;
 
-const NavUsername = styled.div`
+const PreNavUsername = styled.div`
   font-size: 2.5rem;
   color: white;
   text-shadow: -2px 2px 0 #000, 1px 1px 0 #000, 1px -1px 0 #000,
     -1px -1px 0 #000;
+  opacity: ${(props: NavProps) => (props.active ? "1" : "0")};
+  transition: all ease 0.3s;
 `;
-const NavWallet = styled.p`
-  font-size: 2rem;
+
+const PostNavUsername = styled.div`
+  font-size: 2.5rem;
+  color: white;
+  text-shadow: -2px 2px 0 #000, 1px 1px 0 #000, 1px -1px 0 #000,
+    -1px -1px 0 #000;
+  transition: all ease 0.3s;
+`;
+
+const PreNavWallet = styled.button`
+  cursor: pointer;
   background-color: #fff4cb;
   clip-path: var(--notched-sm);
   padding: 4rem 4rem 1rem 2rem;
+  transform: ${(props: NavProps) =>
+    props.active ? "translate(0, 0px)" : "translate(60%, 0)"};
+  transition: all ease 0.3s;
+`;
+
+const PreNavWalletText = styled.p`
+  transition: all ease 0.3s;
+  font-size: 2rem;
+  opacity: ${(props: NavProps) => (props.active ? "1" : "0")};
+`;
+
+const PostNavWallet = styled.button`
+  cursor: pointer;
+  background-color: #fff4cb;
+  clip-path: var(--notched-sm);
+  padding: 4rem 4rem 1rem 2rem;
+  /* transform: ${(props: NavProps) =>
+    props.active ? "translate(0, 0px)" : "translate(60%, 0)"}; */
+  transition: all ease 0.3s;
+`;
+
+const PostNavWalletText = styled.p`
+  transition: all ease 0.3s;
+  font-size: 2rem;
+  /* opacity: ${(props: NavProps) => (props.active ? "1" : "0")}; */
 `;
 
 const NavUserColumn = styled.div`
@@ -280,6 +320,7 @@ const DecorHorizontalDots3 = styled.span`
 const NavUserPfpContainer = styled.div`
   /* position: relative;
   top: 2rem; */
+  cursor: pointer;
   margin-top: 2rem;
   clip-path: var(--notched-md);
   background-color: #393939;
@@ -316,9 +357,15 @@ const NavUserSocial = styled.img`
 
 interface NavProps {
   active?: boolean;
+  account?: any;
 }
 
 const UserNav = () => {
+  const [hoverActive, setHoverActive] = useState(false);
+
+  const { activateBrowserWallet, account } = useEthers();
+  const { ens } = useLookupAddress(account);
+
   const [navActive, setActive] = useState(false);
 
   return (
@@ -341,14 +388,51 @@ const UserNav = () => {
 
       <NavUserContainer>
         <NavUserWalletContainer>
-          <NavUsernameContainer>
-            <NavUsername>A:\ Tim</NavUsername>
+          <NavUsernameContainer active={hoverActive}>
+            {/* {!ens && <PreNavUsername active={hoverActive} />} */}
+            {ens && (
+              <PostNavUsername>{`A:\\ ${ens.substr(
+                0,
+                ens.length - 4
+              )}`}</PostNavUsername>
+            )}
           </NavUsernameContainer>
-          <NavWallet>0x1205...2aF4D</NavWallet>
+          {!account && (
+            <PreNavWallet
+              onMouseEnter={() => setHoverActive(true)}
+              onMouseLeave={() => setHoverActive(false)}
+              active={hoverActive}
+              onClick={() => activateBrowserWallet()}
+            >
+              {/* 0x1205...2aF4D */}
+              <PreNavWalletText active={hoverActive}>
+                Connect Wallet
+              </PreNavWalletText>
+            </PreNavWallet>
+          )}
+          {account && (
+            <PostNavWallet>
+              <PostNavWalletText>
+                {`${account.substr(0, 6)}\u2026${account.substr(
+                  account.length - 5
+                )}`}{" "}
+              </PostNavWalletText>
+            </PostNavWallet>
+          )}
         </NavUserWalletContainer>
         <NavUserStats>
           <NavUserPfpContainer>
-            <NavUserPfp src="https://i.seadn.io/gae/R6xFSwTpGgo7JkoVa0Acvy3EGQqdTTh5uvT74BS9NHGsMYSeknz6iFljNHC6gGyqmK_laKlkUkRhcN43mJ_OLz4SdiW5yhEsmPFhhg?auto=format&w=1000" />
+            {!account && (
+              <NavUserPfp
+                onMouseEnter={() => setHoverActive(true)}
+                onMouseLeave={() => setHoverActive(false)}
+                onClick={() => activateBrowserWallet()}
+                src="https://via.placeholder.com/175x125"
+              />
+            )}
+            {account && (
+              <NavUserPfp src="https://i.seadn.io/gae/R6xFSwTpGgo7JkoVa0Acvy3EGQqdTTh5uvT74BS9NHGsMYSeknz6iFljNHC6gGyqmK_laKlkUkRhcN43mJ_OLz4SdiW5yhEsmPFhhg?auto=format&w=1000" />
+            )}
           </NavUserPfpContainer>
 
           <MeeposCollected>

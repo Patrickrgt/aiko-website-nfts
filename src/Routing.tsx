@@ -9,10 +9,7 @@ const Routing = () => {
       <Routes>
         <Route path="/" element={<App />}>
           <Route index element={<HomePage />} />
-          <Route path="*" element={<HomePage />} />
-        </Route>
-        <Route path="/userpanel" element={<App />}>
-          <Route index element={<UserLanding />} />
+          <Route path="userpanel" element={<UserLanding />} />
           <Route path="*" element={<HomePage />} />
         </Route>
       </Routes>
