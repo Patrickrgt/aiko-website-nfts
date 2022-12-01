@@ -16,7 +16,6 @@ const DecorationSpan2 = styled.span`
   position: absolute;
   top: 2rem;
   left: 3rem;
-
   margin: auto;
 `;
 
@@ -35,11 +34,11 @@ interface Props {
 
 const DecorHorizontal = ({ width }: Props) => {
   return (
-    <div>
+    <>
       <DecorationSpan width={width - 2} />
       <DecorationSpan2 width={width - 1} />
       <DecorationSpan3 width={width} />
-    </div>
+    </>
   );
 };
 

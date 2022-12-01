@@ -43,12 +43,39 @@ const stampRewards: StampRewardType[] = [
   },
 ];
 
+const StyledPopup = styled.div`
+  position: fixed;
+  display: flex;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+  opacity: ${(props: Props) => (props.show ? 1 : 0)};
+  /* transform: scale(${(props: Props) => (props.show ? 1 : 0)}); */
+  visibility: ${(props: Props) => (props.show ? "" : "hidden")};
+  transition: all ease 0.25s;
+`;
+
+const Background = styled.button`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.25);
+  transition: opacity 0.3s;
+  opacity: ${(props: Props) => (props.show ? 1 : 0)};
+`;
+
 const MainContainer = styled.div`
   transition: all ease 0.25s;
-  opacity: ${(props: Props) => (props.show ? "1" : "0")};
   transform: scale(${(props: Props) => (props.show ? 1 : 0)});
-  visibility: ${(props: Props) => (props.show ? "" : "hidden")};
+  opacity: ${(props: Props) => (props.show ? 1 : 0)};
 
+  /* visibility: ${(props: Props) => (props.show ? "" : "hidden")}; */
   position: absolute;
   left: 0;
   right: 0;
@@ -107,38 +134,45 @@ interface Props {
 
 const StampRewards = ({ show }: Props) => {
   const showing = useSelector(selectShowingRewards);
-  console.log(showing);
+  const dispatch = useDispatch();
+
   return (
     // Still need to create background with blur and onclick it will close
     // Main Container with notched borders
-    <MainContainer show={showing}>
-      <StampShadowBorder show={showing}>
-        <StampBorder>
-          {/* Title Bar with close button */}
-          <TitleBar />
-          {/* Contains everything below Stamp Rewards Title Bar */}
-          <StampContainer>
-            <RewardContainer>
-              <StampRewardContainer>
-                {/* Maps the Stamps and names from the object above  */}
-                {stampRewards.map((stampReward: StampRewardType) => (
-                  <StampReward
-                    key={stampReward.name}
-                    stampReward={stampReward}
-                  />
-                ))}
-              </StampRewardContainer>
-            </RewardContainer>
-            <WarningRedeemRow>
-              {/* Warning Container, separate from Redeem Container */}
-              <StampWarning />
-              {/* Redeem Container, contains Redeem Button */}
-              <StampRedeem />
-            </WarningRedeemRow>
-          </StampContainer>
-        </StampBorder>
-      </StampShadowBorder>
-    </MainContainer>
+    <StyledPopup show={showing}>
+      <Background
+        show={showing}
+        onClick={() => dispatch(setShowingRewards(false))}
+      />
+      <MainContainer show={showing}>
+        <StampShadowBorder show={showing}>
+          <StampBorder>
+            {/* Title Bar with close button */}
+            <TitleBar />
+            {/* Contains everything below Stamp Rewards Title Bar */}
+            <StampContainer>
+              <RewardContainer>
+                <StampRewardContainer>
+                  {/* Maps the Stamps and names from the object above  */}
+                  {stampRewards.map((stampReward: StampRewardType) => (
+                    <StampReward
+                      key={stampReward.name}
+                      stampReward={stampReward}
+                    />
+                  ))}
+                </StampRewardContainer>
+              </RewardContainer>
+              <WarningRedeemRow>
+                {/* Warning Container, separate from Redeem Container */}
+                <StampWarning />
+                {/* Redeem Container, contains Redeem Button */}
+                <StampRedeem />
+              </WarningRedeemRow>
+            </StampContainer>
+          </StampBorder>
+        </StampShadowBorder>
+      </MainContainer>
+    </StyledPopup>
   );
 };
 

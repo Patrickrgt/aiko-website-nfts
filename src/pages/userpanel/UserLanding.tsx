@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import UserNav from "../../components/userpanel/UserNav";
 import StampCollection from "../../components/userpanel/StampCollection";
 import StampRewards from "../../components/userpanel/StampRewards";
 import StampWarning from "../../components/userpanel/StampWarning";
@@ -15,6 +16,7 @@ const StyledHomePage = styled.div`
 const UserLanding = () => {
   return (
     <StyledHomePage>
+      <UserNav />
       <StampCollection />
       <StampRewards />
       {/* <StampWarning></StampWarning> */}

@@ -8,6 +8,7 @@ interface UiState {
   showingInfo: boolean;
   // userPanel States
   showingRewards: boolean;
+  showingNav: boolean;
 }
 
 const initialState: UiState = {
@@ -17,6 +18,7 @@ const initialState: UiState = {
   showingInfo: false,
   // userPanel States
   showingRewards: false,
+  showingNav: false,
 };
 
 export const uiSlice = createSlice({
@@ -41,6 +43,9 @@ export const uiSlice = createSlice({
     setShowingRewards: (state, action: PayloadAction<boolean>) => {
       state.showingRewards = action.payload;
     },
+    setShowingNav: (state, action: PayloadAction<boolean>) => {
+      state.showingNav = action.payload;
+    },
   },
 });
 
@@ -52,6 +57,7 @@ export const {
   setShowingInfo,
   // userPanel States
   setShowingRewards,
+  setShowingNav,
 } = uiSlice.actions;
 
 export const selectConnectingWallet = (state: RootState) =>
@@ -66,5 +72,7 @@ export const selectShowingInfo = (state: RootState) => state.ui.showingInfo;
 
 export const selectShowingRewards = (state: RootState) =>
   state.ui.showingRewards;
+
+export const selectShowingNav = (state: RootState) => state.ui.showingRewards;
 
 export default uiSlice.reducer;
