@@ -7,7 +7,14 @@ import UserNavIcon, { NavIconType } from "./UserNavIcon";
 import UserNavSocial, { SocialIconType } from "./UserNavSocial";
 import { selectShowingNav, setShowingNav } from "../../state/uiSlice";
 
-import star from "../../assets/placeholders/star.png";
+import logo from "../../assets/userpanel/logo.png";
+import meepocoin from "../../assets/userpanel/meepocoin.png";
+import star from "../../assets/userpanel/stampstar.png";
+
+import map from "../../assets/userpanel/buttonmap.png";
+import lobby from "../../assets/userpanel/buttonlobby.png";
+import lore from "../../assets/userpanel/buttonlore.png";
+import news from "../../assets/userpanel/buttonnews.png";
 
 // interface NavProps {
 //   nav?: boolean;
@@ -15,20 +22,20 @@ import star from "../../assets/placeholders/star.png";
 
 const navIcons: NavIconType[] = [
   {
-    image: "https://via.placeholder.com/175x245",
+    image: map,
     name: "A:\\Map",
   },
   {
-    image: "https://via.placeholder.com/175x245",
-    name: "A:\\Tab2",
+    image: lore,
+    name: "A:\\Lore",
   },
   {
-    image: "https://via.placeholder.com/175x245",
-    name: "A:\\Tab3",
+    image: news,
+    name: "A:\\News",
   },
   {
-    image: "https://via.placeholder.com/175x245",
-    name: "A:\\Tab4",
+    image: lobby,
+    name: "A:\\Lobby",
   },
 ];
 
@@ -51,7 +58,7 @@ const NavContainer = styled.div`
   width: 100%;
   display: flex;
   align-items: flex-start;
-  /* background-color: #dfe7f4; */
+  z-index: 2;
 `;
 
 const NavBackground = styled.div`
@@ -153,8 +160,9 @@ const NavLogo = styled.img`
   position: relative;
   padding-left: 2rem;
   margin-right: 2rem;
-  top: 3rem;
+  top: 2rem;
   cursor: pointer;
+  width: 10%;
 `;
 
 const NavIconContainer = styled.div`
@@ -266,6 +274,7 @@ const MeeposCollectedText = styled.p`
 const MeeposCollectedStar = styled.img`
   position: relative;
   bottom: 0.5rem;
+  width: 25px;
 `;
 
 const StampsCollected = styled.div`
@@ -287,6 +296,7 @@ const StampsCollectedText = styled.p`
 const StampsCollectedStar = styled.img`
   position: relative;
   bottom: 0.5rem;
+  width: 25px;
 `;
 
 const DecorHorizontalContainer = styled.div`
@@ -378,7 +388,7 @@ const UserNav = () => {
       </NavBackground>
       {/* <NavBackgroundShape /> */}
 
-      <NavLogo src="https://via.placeholder.com/175x125" />
+      <NavLogo src={logo} />
 
       <NavIconContainer>
         {navIcons.map((navIcon: NavIconType) => (
@@ -437,7 +447,7 @@ const UserNav = () => {
 
           <MeeposCollected>
             <MeeposCollectedText>20485</MeeposCollectedText>
-            <MeeposCollectedStar src={star} />
+            <MeeposCollectedStar src={meepocoin} />
           </MeeposCollected>
 
           <StampsCollected>

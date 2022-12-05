@@ -100,6 +100,26 @@ const GlobalStyle = createGlobalStyle`
             20px 100%, /* bottom left */ 
             0 calc(100% - 20px) /* bottom left */
         );
+        --notched-sm-bt: polygon(
+            0% 8px, /* top left */ 
+            0px 0%, /* top left */ 
+            0px 0%, /* top right */ 
+            100% 0px, /* top right */ 
+            100% calc(100% - 8px), /* bottom right */ 
+            calc(100% - 8px) 100%, /* bottom right */ 
+            8px 100%, /* bottom left */ 
+            0 calc(100% - 8px) /* bottom left */
+        );
+        --notched-bt: polygon(
+            0% 10px, /* top left */ 
+            0px 0%, /* top left */ 
+            0px 0%, /* top right */ 
+            100% 0px, /* top right */ 
+            100% calc(100% - 10px), /* bottom right */ 
+            calc(100% - 8px) 100%, /* bottom right */ 
+            10px 100%, /* bottom left */ 
+            0 calc(100% - 10px) /* bottom left */
+        );
     }
 
     * {

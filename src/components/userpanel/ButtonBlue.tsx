@@ -4,7 +4,7 @@ import styled from "styled-components";
 const ButtonShadow = styled.div`
   padding: 3px 3px 8px 3px;
   background-color: #393939;
-  width: 90%;
+  width: fit-content;
   margin: auto;
   clip-path: var(--notched-sm);
 `;
@@ -38,14 +38,14 @@ const Button = styled.button`
   margin: auto;
   position: relative;
   font-family: video, serif;
-  font-size: 3.5rem;
+  font-size: 4rem;
   clip-path: var(--notched-sm);
   font-weight: 800;
   color: white;
   text-shadow: -2px 2px 0 #000, 1px 1px 0 #000, 1px -1px 0 #000,
     -1px -1px 0 #000;
   background-image: linear-gradient(to bottom, #96c8fb, #667ecd);
-  padding: 1.5rem 0;
+  padding: 1.5rem 2.75rem;
   border: none;
   cursor: pointer;
   z-index: 1;

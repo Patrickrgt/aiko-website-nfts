@@ -17,9 +17,16 @@ const IconContainer = styled.div`
 `;
 
 const NavIconShadow = styled.div`
-  background-color: #3c3c3d;
+  background-color: #48484b;
+  padding: 1px 1px 1px 1px;
   clip-path: var(--notched-sm);
-  padding: 1px;
+`;
+
+const NavIconBackground = styled.div`
+  background-color: ${(props: NavProps) =>
+    props.active ? "#48484B" : "#F7E9A1"};
+  clip-path: var(--notched-sm);
+  padding: 1px 1px 0px 1px;
 `;
 
 const NavTitleShadow = styled.div`
@@ -35,9 +42,11 @@ const NavTitleShadow = styled.div`
 `;
 
 const NavIcon = styled.img`
+  filter: ${(props: NavProps) =>
+    props.active ? "brightness(0) invert(1)" : ""};
+  transition: filter 0.6s;
   width: 6rem;
   height: 6rem;
-  background-image: url("https://via.placeholder.com/100x100");
   clip-path: var(--notched-sm);
   cursor: pointer;
 `;
@@ -76,10 +85,14 @@ const UserNavIcon = ({ navIcon }: Props) => {
   return (
     <IconContainer>
       <NavIconShadow>
-        <NavIcon
-          onMouseEnter={() => setActive(true)}
-          onMouseLeave={() => setActive(false)}
-        />
+        <NavIconBackground active={navActive}>
+          <NavIcon
+            active={navActive}
+            src={navIcon.image}
+            onMouseEnter={() => setActive(true)}
+            onMouseLeave={() => setActive(false)}
+          />
+        </NavIconBackground>
       </NavIconShadow>
       <NavTitleShadow active={navActive}>
         <NavTitleDiv>
