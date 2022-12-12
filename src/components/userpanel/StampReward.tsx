@@ -50,16 +50,24 @@ const StampOverlay = styled.div`
         ? "linear-gradient(rgba(0, 0, 0, 0) 0%, #282626)"
         : "linear-gradient(rgba(0, 0, 0, 0) 0%, #282626)"};
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a6000000', endColorstr='#00000000',GradientType=0 ); /* IE6-9 */
-    transition: opacity 0.25s linear;
-    opacity: 1;
+    transition: opacity 0.25s ease-out;
+    opacity: ${(props: StampButtonProps) => (props.active ? "0" : "1")};
   }
 
-  &:hover::after {
+  /* &:hover::after {
     opacity: 0;
-  }
+  } */
+`;
+
+const RewardContainer = styled.div`
+  display: flex;
+  align-items: flex-start;
+  min-height: 250px;
+  max-height: 250px;
 `;
 
 const Reward = styled.img`
+  margin-bottom: auto;
   width: auto;
   display: block;
   clip-path: var(--notched);
@@ -88,7 +96,10 @@ const RewardName = styled.p`
   font-size: 1.75rem;
   color: white;
   position: relative;
-  bottom: 5.5rem;
+  bottom: 6rem;
+  cursor: default;
+  color: ${(props: StampButtonProps) => (props.active ? "black" : "white")};
+  transition: color 0.3s linear;
 `;
 
 const RewardRequirementContainer = styled.div`
@@ -135,6 +146,7 @@ const Check = styled.img`
 
 interface StampButtonProps {
   collected: boolean;
+  active?: boolean;
 }
 
 interface Props {
@@ -142,6 +154,8 @@ interface Props {
 }
 
 const StampReward = ({ stampReward }: Props) => {
+  const [hoverActive, setHoverActive] = useState(false);
+
   return (
     <>
       {stampReward.required !== 3 ? (
@@ -152,23 +166,42 @@ const StampReward = ({ stampReward }: Props) => {
       <StampOuter>
         <StampShadow>
           <StampInnerBorder collected={stampReward.collected}>
-            <StampOverlay collected={stampReward.collected}>
-              <Reward
-                src="https://via.placeholder.com/175x245"
-                alt={stampReward.name}
-              />
+            <StampOverlay
+              active={hoverActive}
+              onMouseEnter={() => setHoverActive(true)}
+              onMouseLeave={() => setHoverActive(false)}
+              collected={stampReward.collected}
+            >
+              <RewardContainer>
+                <Reward src={stampReward.image} alt={stampReward.name} />
+              </RewardContainer>
             </StampOverlay>
           </StampInnerBorder>
         </StampShadow>
 
-        <RewardName>{stampReward.name}</RewardName>
+        <RewardName
+          onMouseEnter={() => setHoverActive(true)}
+          onMouseLeave={() => setHoverActive(false)}
+          active={hoverActive}
+          collected={stampReward.collected}
+        >
+          {stampReward.name}
+        </RewardName>
         {stampReward.collected ? (
-          <RewardRequirement collected={stampReward.collected}>
+          <RewardRequirement
+            onMouseEnter={() => setHoverActive(true)}
+            onMouseLeave={() => setHoverActive(false)}
+            collected={stampReward.collected}
+          >
             <Check src={check} alt="check" />
           </RewardRequirement>
         ) : (
           <RewardRequirementContainer>
-            <RewardRequirement collected={stampReward.collected}>
+            <RewardRequirement
+              onMouseEnter={() => setHoverActive(true)}
+              onMouseLeave={() => setHoverActive(false)}
+              collected={stampReward.collected}
+            >
               {stampReward.required}
               <Star src={star} alt="star" />
             </RewardRequirement>

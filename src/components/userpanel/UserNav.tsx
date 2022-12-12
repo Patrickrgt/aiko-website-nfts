@@ -18,6 +18,10 @@ import lobby from "../../assets/userpanel/buttonlobby.png";
 import lore from "../../assets/userpanel/buttonlore.png";
 import news from "../../assets/userpanel/buttonnews.png";
 
+import opensea from "../../assets/svgs/opensea.svg";
+import twitter from "../../assets/svgs/twitter.svg";
+import home from "../../assets/userpanel/homewebsiteicon.png";
+
 // interface NavProps {
 //   nav?: boolean;
 // }
@@ -43,15 +47,15 @@ const navIcons: NavIconType[] = [
 
 const socialIcons: SocialIconType[] = [
   {
-    image: "https://via.placeholder.com/50x50",
+    image: twitter,
     name: "Twitter",
   },
   {
-    image: "https://via.placeholder.com/50x50",
+    image: opensea,
     name: "OpenSea",
   },
   {
-    image: "https://via.placeholder.com/50x50",
+    image: home,
     name: "Homepage",
   },
 ];

@@ -11,6 +11,11 @@ import TitleBar from "./TitleBar";
 import StampRedeem from "./StampRedeem";
 import StampWarning from "./StampWarning";
 
+import honorary from "../../assets/userpanel/honorary.png";
+import necklace from "../../assets/userpanel/necklace.png";
+import pin from "../../assets/userpanel/pin.png";
+import print from "../../assets/userpanel/print.png";
+
 // Takes image (str) in the future change to fetching from assets folder
 // name (str) - name of reward
 // collected (bool) - if yes changes to check and blue borders on reward and blue span link/connector
@@ -18,25 +23,25 @@ import StampWarning from "./StampWarning";
 // linked (bool) - really only for the last reward so that the span does not show
 const stampRewards: StampRewardType[] = [
   {
-    image: "https://via.placeholder.com/175x245",
+    image: print,
     name: "A3 Season Print",
     collected: true,
     required: 3,
   },
   {
-    image: "https://via.placeholder.com/175x245",
+    image: pin,
     name: "Inochi no Ki Pin",
     collected: true,
     required: 6,
   },
   {
-    image: "https://via.placeholder.com/175x245",
+    image: necklace,
     name: "Season Necklace",
     collected: false,
     required: 9,
   },
   {
-    image: "https://via.placeholder.com/175x245",
+    image: honorary,
     name: "Honorary Aiko",
     collected: false,
     required: 12,
