@@ -3,6 +3,8 @@ import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { useEthers, useLookupAddress } from "@usedapp/core";
 
+import JumboStampSystem from "./JumboStampSystem";
+
 import UserNavIcon, { NavIconType } from "./UserNavIcon";
 import UserNavSocial, { SocialIconType } from "./UserNavSocial";
 import { selectShowingNav, setShowingNav } from "../../state/uiSlice";
@@ -56,8 +58,8 @@ const socialIcons: SocialIconType[] = [
 
 const NavContainer = styled.div`
   width: 100%;
-  display: flex;
-  align-items: flex-start;
+  /* display: flex;
+  align-items: flex-start; */
   z-index: 2;
 `;
 
@@ -162,28 +164,39 @@ const NavLogo = styled.img`
   margin-right: 2rem;
   top: 2rem;
   cursor: pointer;
-  width: 10%;
+  width: 12%;
 `;
 
 const NavIconContainer = styled.div`
-  position: relative;
+  z-index: 100;
+  /* position: relative; */
   top: 3rem;
-  display: flex;
-  flex: auto;
+  display: inline-flex;
+  position: absolute;
   width: fit-content;
   height: fit-content;
   clip-path: var(--notched-sm);
 `;
 
-const NavUserWalletContainer = styled.div``;
+const NavWalletRewardsContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+`;
 
 const NavUserContainer = styled.div`
-  flex: 1, 0;
   display: flex;
   flex-direction: row;
   position: absolute;
-  right: 0;
+  top: 0;
+`;
+
+const NavUserWalletContainer = styled.div`
+  display: flex;
+  flex-direction: column;
   margin-right: 2rem;
+  /* background-color: black; */
+  align-items: flex-end;
 `;
 
 const NavUsernameContainer = styled.div`
@@ -194,9 +207,10 @@ const NavUsernameContainer = styled.div`
   clip-path: var(--notched-sm);
   padding: 1rem 3rem 1rem 1rem;
   text-align: left;
-  width: 100%;
+  width: fit-content;
   height: 4rem;
   overflow: visible;
+  margin-left: auto;
   z-index: 1;
   opacity: ${(props: NavProps) => (props.active ? "1" : "0")};
   transition: all ease 0.3s;
@@ -220,12 +234,13 @@ const PostNavUsername = styled.div`
 `;
 
 const PreNavWallet = styled.button`
+  width: fit-content;
   cursor: pointer;
   background-color: #fff4cb;
   clip-path: var(--notched-sm);
   padding: 4rem 4rem 1rem 2rem;
   transform: ${(props: NavProps) =>
-    props.active ? "translate(0, 0px)" : "translate(60%, 0)"};
+    props.active ? "translate(10%, 0px)" : "translate(60%, 0)"};
   transition: all ease 0.3s;
 `;
 
@@ -240,8 +255,7 @@ const PostNavWallet = styled.button`
   background-color: #fff4cb;
   clip-path: var(--notched-sm);
   padding: 4rem 4rem 1rem 2rem;
-  /* transform: ${(props: NavProps) =>
-    props.active ? "translate(0, 0px)" : "translate(60%, 0)"}; */
+  transform: translate(10%, 0px);
   transition: all ease 0.3s;
 `;
 
@@ -249,10 +263,6 @@ const PostNavWalletText = styled.p`
   transition: all ease 0.3s;
   font-size: 2rem;
   /* opacity: ${(props: NavProps) => (props.active ? "1" : "0")}; */
-`;
-
-const NavUserColumn = styled.div`
-  position: absolute;
 `;
 
 const MeeposCollected = styled.div`
@@ -396,78 +406,86 @@ const UserNav = () => {
         ))}
       </NavIconContainer>
 
-      <NavUserContainer>
-        <NavUserWalletContainer>
-          <NavUsernameContainer active={hoverActive}>
-            {/* {!ens && <PreNavUsername active={hoverActive} />} */}
-            {ens && (
-              <PostNavUsername>{`A:\\ ${ens.substr(
-                0,
-                ens.length - 4
-              )}`}</PostNavUsername>
-            )}
-          </NavUsernameContainer>
-          {!account && (
-            <PreNavWallet
-              onMouseEnter={() => setHoverActive(true)}
-              onMouseLeave={() => setHoverActive(false)}
-              active={hoverActive}
-              onClick={() => activateBrowserWallet()}
-            >
-              {/* 0x1205...2aF4D */}
-              <PreNavWalletText active={hoverActive}>
-                Connect Wallet
-              </PreNavWalletText>
-            </PreNavWallet>
-          )}
-          {account && (
-            <PostNavWallet>
-              <PostNavWalletText>
-                {`${account.substr(0, 6)}\u2026${account.substr(
-                  account.length - 5
-                )}`}{" "}
-              </PostNavWalletText>
-            </PostNavWallet>
-          )}
-        </NavUserWalletContainer>
-        <NavUserStats>
-          <NavUserPfpContainer>
+      <NavWalletRewardsContainer>
+        <NavUserContainer>
+          <NavUserWalletContainer>
+            <NavUsernameContainer active={hoverActive}>
+              {!ens && <PostNavUsername>A:\Welcome</PostNavUsername>}
+              {/* {!ens && <PreNavUsername active={hoverActive} />} */}
+              {ens && (
+                <PostNavUsername>{`A:\\ ${ens.substr(
+                  0,
+                  ens.length - 4
+                )}`}</PostNavUsername>
+              )}
+            </NavUsernameContainer>
+
             {!account && (
-              <NavUserPfp
+              <PreNavWallet
                 onMouseEnter={() => setHoverActive(true)}
                 onMouseLeave={() => setHoverActive(false)}
+                active={hoverActive}
                 onClick={() => activateBrowserWallet()}
-                src="https://via.placeholder.com/175x125"
-              />
+              >
+                {/* 0x1205...2aF4D */}
+                <PreNavWalletText active={hoverActive}>
+                  Connect Wallet
+                </PreNavWalletText>
+              </PreNavWallet>
             )}
+
             {account && (
-              <NavUserPfp src="https://i.seadn.io/gae/R6xFSwTpGgo7JkoVa0Acvy3EGQqdTTh5uvT74BS9NHGsMYSeknz6iFljNHC6gGyqmK_laKlkUkRhcN43mJ_OLz4SdiW5yhEsmPFhhg?auto=format&w=1000" />
+              <PostNavWallet>
+                <PostNavWalletText>
+                  {`${account.substr(0, 6)}\u2026${account.substr(
+                    account.length - 5
+                  )}`}{" "}
+                </PostNavWalletText>
+              </PostNavWallet>
             )}
-          </NavUserPfpContainer>
 
-          <MeeposCollected>
-            <MeeposCollectedText>20485</MeeposCollectedText>
-            <MeeposCollectedStar src={meepocoin} />
-          </MeeposCollected>
+            <JumboStampSystem />
+          </NavUserWalletContainer>
 
-          <StampsCollected>
-            <StampsCollectedText>4/12</StampsCollectedText>
-            <StampsCollectedStar src={star} />
-          </StampsCollected>
+          <NavUserStats>
+            <NavUserPfpContainer>
+              {!account && (
+                <NavUserPfp
+                  onMouseEnter={() => setHoverActive(true)}
+                  onMouseLeave={() => setHoverActive(false)}
+                  onClick={() => activateBrowserWallet()}
+                  src="https://via.placeholder.com/175x125"
+                />
+              )}
+              {account && (
+                <NavUserPfp src="https://i.seadn.io/gae/R6xFSwTpGgo7JkoVa0Acvy3EGQqdTTh5uvT74BS9NHGsMYSeknz6iFljNHC6gGyqmK_laKlkUkRhcN43mJ_OLz4SdiW5yhEsmPFhhg?auto=format&w=1000" />
+              )}
+            </NavUserPfpContainer>
 
-          <DecorHorizontalContainer>
-            <DecorHorizontalDots />
-            <DecorHorizontalDots2 />
-            <DecorHorizontalDots3 />
-          </DecorHorizontalContainer>
+            <MeeposCollected>
+              <MeeposCollectedText>20485</MeeposCollectedText>
+              <MeeposCollectedStar src={meepocoin} />
+            </MeeposCollected>
 
-          <NavUserSocialsContainer>
-            {socialIcons.map((socialIcon: SocialIconType) => (
-              <UserNavSocial key={socialIcon.name} socialIcon={socialIcon} />
-            ))}
-          </NavUserSocialsContainer>
-        </NavUserStats>
-      </NavUserContainer>
+            <StampsCollected>
+              <StampsCollectedText>4/12</StampsCollectedText>
+              <StampsCollectedStar src={star} />
+            </StampsCollected>
+
+            <DecorHorizontalContainer>
+              <DecorHorizontalDots />
+              <DecorHorizontalDots2 />
+              <DecorHorizontalDots3 />
+            </DecorHorizontalContainer>
+
+            <NavUserSocialsContainer>
+              {socialIcons.map((socialIcon: SocialIconType) => (
+                <UserNavSocial key={socialIcon.name} socialIcon={socialIcon} />
+              ))}
+            </NavUserSocialsContainer>
+          </NavUserStats>
+        </NavUserContainer>
+      </NavWalletRewardsContainer>
     </NavContainer>
   );
 };

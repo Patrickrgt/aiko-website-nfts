@@ -45,17 +45,17 @@ const StampImgContainer = styled.div`
     props.active ? "" : "saturate(30%)"};
   opacity: ${(props: JumboStampSystemProps) => (props.active ? "1" : "0.70")};
   clip-path: var(--notched-md-tp);
-  width: 175px;
-  max-width: 175px;
+  width: 200px;
+  max-width: 200px;
   width: auto;
-  height: 250px;
+  height: 275px;
   transition: all ease 0.3s;
 `;
 
 const StampImg = styled.img`
   filter: ${(props: JumboStampSystemProps) =>
     props.active ? "" : "saturate(50%)"};
-  transform: scale(0.8) translateX(-50px) translateY(-40px);
+  transform: scale(0.9) translateX(-3.75rem) translateY(-3rem);
   transition: all ease 0.3s;
 `;
 

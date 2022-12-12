@@ -17,7 +17,7 @@ const UserLanding = () => {
   return (
     <StyledHomePage>
       <UserNav />
-      <JumboStampSystem />
+      {/* <JumboStampSystem /> */}
       <StampRewards />
     </StyledHomePage>
   );

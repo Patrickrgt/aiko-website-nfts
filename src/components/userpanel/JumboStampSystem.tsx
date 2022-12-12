@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { selectShowingRewards, setShowingRewards } from "../../state/uiSlice";
 import star from "../../assets/placeholders/star.png";
+import arrow from "../../assets/userpanel/arrow.png";
 
 import holder from "../../assets/userpanel/holder.png";
 import explorer from "../../assets/userpanel/explorer.png";
@@ -129,6 +130,94 @@ const StampsRow = styled.div`
   flex-direction: row;
 `;
 
+const RewardsContainer = styled.div`
+  background-color: #cad7e3;
+  clip-path: var(--notched-md);
+  position: relative;
+`;
+
+const ArrowDecorationDiv = styled.div`
+  height: 100%;
+  width: 50%;
+  position: absolute;
+  z-index: 1;
+  top: 0;
+
+  &:before {
+    position: absolute;
+    content: "";
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 0;
+    background-color: #efa74c;
+    clip-path: polygon(
+      /* top left */ 0% 0,
+      /* top right */ 75% 0%,
+      /* bottom right */ 100% 75%,
+      /* bottom left */ 100% 100%,
+      /* bottom left */ 0% 100%
+    );
+  }
+
+  &:after {
+    position: absolute;
+    content: "";
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 0;
+    background-color: #ffc13a;
+    clip-path: polygon(
+      /* top left */ 0% 0,
+      /* top right */ 50% 0%,
+      /* bottom right */ 80% 100%,
+      /* bottom left */ 45% 100%,
+      /* bottom left */ 0% 100%
+    );
+  }
+`;
+
+const ArrowDecoration = styled.img`
+  position: absolute;
+  z-index: 2;
+  height: 100%;
+  transform: translate(-8rem, 0);
+`;
+
+const RewardsHeaderContainer = styled.div`
+  background-color: #8397cf;
+  clip-path: var(--notched-md-tp);
+  display: flex;
+  justify-content: flex-end;
+`;
+
+const RewardsButtonContainer = styled.div`
+  display: flex;
+  justify-content: flex-end;
+`;
+
+const RewardsButtonInner = styled.div`
+  padding: 1rem 1rem 1rem 0;
+  width: fit-content;
+`;
+
+const RewardsHeader = styled.p`
+  padding: 2rem 1rem;
+  font-size: 2.25rem;
+  color: white;
+  letter-spacing: -1px;
+`;
+
+const RewardsDate = styled.span`
+  padding: 0rem 1rem 0rem 1rem;
+  font-size: 2.25rem;
+  color: #e0ce83;
+  letter-spacing: -1px;
+`;
+
 interface JumboStampSystemProps {
   active?: boolean;
 }
@@ -162,11 +251,25 @@ const JumboStampSystem = () => {
                 <JumboStamp key={stamp.name} stamp={stamp} />
               ))}
             </StampsRow>
-
-            <ButtonBlue
-              content="Rewards"
-              close={() => dispatch(setShowingRewards(true))}
-            />
+            <RewardsContainer>
+              <ArrowDecorationDiv>
+                <ArrowDecoration src={arrow} />
+              </ArrowDecorationDiv>
+              <RewardsHeaderContainer>
+                <RewardsHeader>
+                  Redeem rewards only will be available on
+                  <RewardsDate>19/01/2023</RewardsDate>
+                </RewardsHeader>
+              </RewardsHeaderContainer>
+              <RewardsButtonContainer>
+                <RewardsButtonInner>
+                  <ButtonBlue
+                    content="Rewards"
+                    close={() => dispatch(setShowingRewards(true))}
+                  />
+                </RewardsButtonInner>
+              </RewardsButtonContainer>
+            </RewardsContainer>
           </JumboInnerContainer>
         </JumboInnerBorder>
       </JumboShadow>

@@ -5,7 +5,7 @@ const ButtonShadow = styled.div`
   padding: 3px 3px 8px 3px;
   background-color: #393939;
   width: fit-content;
-  margin: auto;
+  /* margin: auto; */
   clip-path: var(--notched-sm);
 `;
 
