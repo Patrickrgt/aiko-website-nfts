@@ -1,6 +1,6 @@
 import { ReactNode, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import styled from "styled-components";
+import styled, { css, keyframes } from "styled-components";
 import { selectShowingRewards, setShowingRewards } from "../../state/uiSlice";
 
 import ButtonBlue from "./ButtonBlue";
@@ -48,6 +48,43 @@ const stampRewards: StampRewardType[] = [
   },
 ];
 
+const slideForward = keyframes`
+   0% { height: 15%;  opacity: 1; width: 15%; }
+   15% { width: 100%; }
+   90% { height: 90%; opacity: 1; background-color: #2c2c2c;}
+   100% { height: 100%; opacity: 0; background-color: #1f1f1f;}
+`;
+
+const slideBack = keyframes`
+   0% { height: 100%;  opacity: 1 }
+   100% { height: 1px; opacity: 0}
+`;
+
+const appear = keyframes`
+  0% {  opacity: 0 }
+   80% { opacity: 0}
+   85% { opacity: 1}
+   90% { opacity: 0}
+   100% {  opacity: 1}
+`;
+
+const disappear = keyframes`
+   50% { opacity: 1; visibility: 1 }
+   100% {  opacity: 0; visibility: 0}
+`;
+
+const transparent = keyframes`
+   0% {  background-color: rgba(0,0,0,0); }
+   90% { background-color: rgba(0,0,0,0); }
+   100% {  background-color: #393939;}
+`;
+
+const apparent = keyframes`
+   0% {  background-color: #393939; }
+   75% { background-color: #393939; }
+   100% {  background-color: rgba(0,0,0,0);}
+`;
+
 const StyledPopup = styled.div`
   position: fixed;
   display: flex;
@@ -59,7 +96,6 @@ const StyledPopup = styled.div`
   align-items: center;
   z-index: 100;
   opacity: ${(props: Props) => (props.show ? 1 : 0)};
-  /* transform: scale(${(props: Props) => (props.show ? 1 : 0)}); */
   visibility: ${(props: Props) => (props.show ? "" : "hidden")};
   transition: all ease 0.25s;
 `;
@@ -100,6 +136,17 @@ const StampShadowBorder = styled.div`
   padding: 0.5rem 0.5rem 3rem 0.5rem;
   background-color: #393939;
   clip-path: var(--notched-md);
+
+  animation: ${(props: StampRewardProps) =>
+    props.show
+      ? css`
+          ${transparent} 1.5s cubic-bezier(1,0,1,-0.07)
+        `
+      : css`
+          ${apparent} 1.7s ease-out forwards
+        `};
+  animation-play-state: ${(props: StampRewardProps) =>
+    props.show ? "running" : "paused"};
 `;
 
 const StampBorder = styled.div`
@@ -111,6 +158,44 @@ const StampContainer = styled.div`
   padding: 2rem 2rem 0 2rem;
   font-family: video, serif;
   clip-path: var(--notched-md-bt);
+
+  animation: ${(props: StampRewardProps) =>
+    props.show
+      ? css`
+          ${appear} 2.35s cubic-bezier(.35,.01,.19,.83)
+        `
+      : css`
+          ${disappear} 1.7s ease-out forwards
+        `};
+  animation-play-state: ${(props: StampRewardProps) =>
+    props.show ? "running" : "paused"};
+`;
+
+const StampOverlay = styled.div`
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  display: inline-block;
+  clip-path: var(--notched);
+  background-color: #282626;
+  /* transition: opacity 0.25s ease-out; */
+  opacity: 0;
+  z-index: -1;
+
+  animation: ${(props: StampRewardProps) =>
+    props.show
+      ? css`
+          ${slideForward} 1.5s cubic-bezier(1,0,0,1)
+        `
+      : css`
+          ${slideBack} 1.7s ease-out forwards
+        `};
+  animation-play-state: ${(props: StampRewardProps) =>
+    props.show ? "running" : "paused"};
+  animation-delay: 0.25s;
 `;
 
 const WarningRedeemRow = styled.div`
@@ -126,7 +211,18 @@ const StampRewardContainer = styled.div`
   padding: 3rem 3rem;
   margin-bottom: 2rem;
   display: flex;
+  height: 100%;
   justify-content: center;
+  animation: ${(props: StampRewardProps) =>
+    props.show
+      ? css`
+          ${appear} 2.5s ease-in
+        `
+      : css`
+          ${disappear} 1.7s ease-out
+        `};
+  animation-play-state: ${(props: StampRewardProps) =>
+    props.show ? "running" : "paused"};
 `;
 
 interface StampRewardProps {
@@ -142,8 +238,7 @@ const StampRewards = ({ show }: Props) => {
   const dispatch = useDispatch();
 
   return (
-    // Still need to create background with blur and onclick it will close
-    // Main Container with notched borders
+    // Refractor background blur because using visiblity which affects performance...
     <StyledPopup show={showing}>
       <Background
         show={showing}
@@ -151,13 +246,16 @@ const StampRewards = ({ show }: Props) => {
       />
       <MainContainer show={showing}>
         <StampShadowBorder show={showing}>
+          <StampOverlay show={showing} />
+
           <StampBorder>
             {/* Title Bar with close button */}
             <TitleBar />
             {/* Contains everything below Stamp Rewards Title Bar */}
-            <StampContainer>
+
+            <StampContainer show={showing}>
               <RewardContainer>
-                <StampRewardContainer>
+                <StampRewardContainer show={showing}>
                   {/* Maps the Stamps and names from the object above  */}
                   {stampRewards.map((stampReward: StampRewardType) => (
                     <StampReward

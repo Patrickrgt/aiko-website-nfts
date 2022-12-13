@@ -9,9 +9,6 @@ export interface NavIconType {
 const IconContainer = styled.div`
   display: flex;
   flex-direction: column;
-  position: relative;
-  width: fit-content;
-  height: 100%;
   align-items: center;
   justify-content: center;
 `;
@@ -66,10 +63,6 @@ const NavTitle = styled.p`
   font-weight: 300;
   padding: 0 1rem 0 1rem;
 `;
-
-// interface NavProps {
-//   nav?: boolean;
-// }
 
 interface NavProps {
   active?: boolean;

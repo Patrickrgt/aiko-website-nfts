@@ -1,8 +1,29 @@
-import { ReactNode, useEffect, useState } from "react";
+import React, { ReactNode, useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import styled from "styled-components";
+import styled, { css, keyframes } from "styled-components";
 import DecorVertical from "./DecorVertical";
 import { selectShowingRewards, setShowingRewards } from "../../state/uiSlice";
+
+const slideForward = keyframes`
+   0% { height: 10%; width: 10%; visibility: 0 }
+   100% { height: 100%; width: 100%; visibility: 1}
+`;
+
+const slideBack = keyframes`
+   0% { height: 100%; width: 100%; visibility: 1 }
+   100% { height: 10%; width: 10%; visibility: 0}
+`;
+
+const appear = keyframes`
+   0% { opacity: 0; visibility: 0; font-size: 1rem; }
+   75% { opacity: 0; visibility: 0; font-size: 3rem; }
+   100% {  opacity: 1; visibility: 1}
+`;
+
+const disappear = keyframes`
+   50% { opacity: 1; visibility: 1 }
+   100% {  opacity: 0; visibility: 0}
+`;
 
 const StampRewardsTab = styled.div`
   display: flex;
@@ -14,6 +35,17 @@ const StampRewardsTab = styled.div`
   text-shadow: -2px 2px 0 #000, 2px 2px 0 #000, 2px -2px 0 #000,
     -2px -2px 0 #000;
   clip-path: var(--notched-md-tp);
+
+  animation: ${(props: StampRewardProps) =>
+    props.show
+      ? css`
+          ${slideForward} .5s cubic-bezier(1,0,0,1)
+        `
+      : css`
+          ${slideBack} .7s ease-out forwards
+        `};
+  animation-play-state: ${(props: StampRewardProps) =>
+    props.show ? "running" : "paused"};
 `;
 
 const Stripes = styled.div`
@@ -34,6 +66,17 @@ const Stripes = styled.div`
     /* bottom left */ 0 calc(100% - 4px) /* bottom left */
   );
 
+  animation: ${(props: StampRewardProps) =>
+    props.show
+      ? css`
+          ${slideForward} 1.25s cubic-bezier(1,0,0,1)
+        `
+      : css`
+          ${slideBack} .7s ease-out forwards
+        `};
+  animation-play-state: ${(props: StampRewardProps) =>
+    props.show ? "running" : "paused"};
+
   &:before {
     position: absolute;
     content: "";
@@ -51,6 +94,16 @@ const Stripes = styled.div`
 
       /* bottom left */ 0 calc(100% - 4px) /* bottom left */
     );
+    animation: ${(props: StampRewardProps) =>
+      props.show
+        ? css`
+            ${slideForward} 1.5s cubic-bezier(1,0,0,1)
+          `
+        : css`
+            ${slideBack} 1s ease-out forwards
+          `};
+    animation-play-state: ${(props: StampRewardProps) =>
+      props.show ? "running" : "paused"};
   }
   &:after {
     position: absolute;
@@ -70,6 +123,16 @@ const Stripes = styled.div`
 
       /* bottom left */ 0 calc(100% - 4px) /* bottom left */
     );
+    animation: ${(props: StampRewardProps) =>
+      props.show
+        ? css`
+            ${slideForward} 1.75s cubic-bezier(1,0,0,1)
+          `
+        : css`
+            ${slideBack} 1.2s ease-out forwards
+          `};
+    animation-play-state: ${(props: StampRewardProps) =>
+      props.show ? "running" : "paused"};
   }
 `;
 
@@ -78,6 +141,17 @@ const StampRewardsText = styled.p`
   font-weight: 800;
   color: white;
   margin-left: 4rem;
+
+  animation: ${(props: StampRewardProps) =>
+    props.show
+      ? css`
+          ${appear} 1.7s ease-in
+        `
+      : css`
+          ${disappear} 1.7s ease-out
+        `};
+  animation-play-state: ${(props: StampRewardProps) =>
+    props.show ? "running" : "paused"};
 `;
 
 const CloseTab = styled.button`
@@ -100,13 +174,19 @@ const CloseTabShadow = styled.div`
   clip-path: var(--notched-xsm);
 `;
 
+interface StampRewardProps {
+  show: boolean;
+}
+
 const TitleBar = () => {
+  const showing = useSelector(selectShowingRewards);
   const dispatch = useDispatch();
+
   return (
-    <StampRewardsTab>
-      <Stripes />
+    <StampRewardsTab show={showing}>
+      <Stripes show={showing} />
       <DecorVertical width={3} />
-      <StampRewardsText> STAMP REWARDS</StampRewardsText>
+      <StampRewardsText show={showing}> STAMP REWARDS</StampRewardsText>
       <CloseTabShadow>
         <CloseTab onClick={() => dispatch(setShowingRewards(false))}>
           x
