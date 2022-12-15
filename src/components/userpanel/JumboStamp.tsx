@@ -8,8 +8,8 @@ export interface StampType {
   image?: string;
   name: string;
   required: number;
-  tier1?: boolean;
-  tier2?: boolean;
+  tier1?: any;
+  tier2?: any;
   tier3?: boolean;
 }
 
@@ -107,6 +107,8 @@ const StampCollectedStar = styled.img`
   width: 3rem;
   height: 3rem;
   margin: 0 0.25rem;
+  filter: ${(props: JumboStampSystemProps) =>
+    props.active ? "" : "grayscale(1)"};
 `;
 
 interface JumboStampSystemProps {
@@ -135,9 +137,9 @@ const JumboStamp = ({ stamp }: Props) => {
             <StampTitle active={stampActive}>{stamp.name}</StampTitle>
             <StampCollected active={stampActive}>
               <StampCollectedContainer>
-                <StampCollectedStar src={star} />
-                <StampCollectedStar src={star} />
-                <StampCollectedStar src={star} />
+                <StampCollectedStar active={stamp.tier1} src={star} />
+                <StampCollectedStar active={stamp.tier2} src={star} />
+                <StampCollectedStar active={stamp.tier3} src={star} />
               </StampCollectedContainer>
             </StampCollected>
           </StampContentContainer>

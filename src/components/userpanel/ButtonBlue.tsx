@@ -25,10 +25,7 @@ const ButtonInner = styled.div`
     background-color: #f38a65;
     z-index: -1;
     transition: opacity 0.25s linear;
-    opacity: 0;
-  }
-  &:hover::before {
-    opacity: 1;
+    opacity: ${(props: ButtonProps) => (props.active ? "1" : "0")};
   }
 `;
 
@@ -59,12 +56,13 @@ const Button = styled.button`
     background-image: linear-gradient(to bottom, #f38a65, #ffca62);
     z-index: -1;
     transition: opacity 0.25s linear;
-    opacity: 0;
-  }
-  &:hover::before {
-    opacity: 1;
+    opacity: ${(props: ButtonProps) => (props.active ? "1" : "0")};
   }
 `;
+
+interface ButtonProps {
+  active?: boolean;
+}
 
 interface Props {
   content: string;
@@ -72,10 +70,19 @@ interface Props {
 }
 
 const ButtonBlue = ({ content, close }: Props) => {
+  const [hoverActive, setHoverActive] = useState(false);
+
   return (
     <ButtonShadow>
-      <ButtonInner>
-        <Button onClick={() => close()}>{content}</Button>
+      <ButtonInner active={hoverActive}>
+        <Button
+          active={hoverActive}
+          onMouseEnter={() => setHoverActive(true)}
+          onMouseLeave={() => setHoverActive(false)}
+          onClick={() => close()}
+        >
+          {content}
+        </Button>
       </ButtonInner>
     </ButtonShadow>
   );

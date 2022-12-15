@@ -1,5 +1,5 @@
 import { ReactNode, useEffect, useState } from "react";
-import styled from "styled-components";
+import styled, { css, keyframes } from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { useEthers, useLookupAddress } from "@usedapp/core";
 
@@ -34,6 +34,11 @@ const navIcons: NavIconType[] = [
     name: "A:\\Lobby",
   },
 ];
+
+const rotate = keyframes`
+   0% { transform: rotateY(0deg) rotateX(0deg); }
+   100% { transform: rotateY(360deg); }
+`;
 
 const NavContainer = styled.div`
   width: 100%;
@@ -132,16 +137,19 @@ const NavLogo = styled.img`
   margin-right: 2rem;
   top: 2rem;
   width: 12%;
+  animation: ${rotate} 10s infinite;
 `;
 
 const NavIconContainer = styled.div`
   z-index: 1;
-  top: 3rem;
   display: inline-flex;
   position: absolute;
-  width: fit-content;
+  justify-content: space-between;
+  background-color: #729abf;
+  width: 32rem;
   height: fit-content;
-  clip-path: var(--notched-sm);
+  top: 2.5rem;
+  border-radius: 2rem;
 `;
 
 const NavWalletRewardsContainer = styled.div`

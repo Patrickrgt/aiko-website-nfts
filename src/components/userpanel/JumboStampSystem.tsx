@@ -1,9 +1,11 @@
 import { ReactNode, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import styled from "styled-components";
+import styled, { css, keyframes } from "styled-components";
 import { selectShowingRewards, setShowingRewards } from "../../state/uiSlice";
 import star from "../../assets/placeholders/star.png";
 import arrow from "../../assets/userpanel/arrow.png";
+
+import { useBalanceOf } from "../../contracts/views";
 
 import holder from "../../assets/userpanel/holder.png";
 import explorer from "../../assets/userpanel/explorer.png";
@@ -18,7 +20,7 @@ const stamp: StampType[] = [
     image: holder,
     name: "Holder",
     required: 3,
-    tier1: true,
+    tier1: false,
     tier2: false,
     tier3: false,
   },
@@ -26,7 +28,7 @@ const stamp: StampType[] = [
     image: explorer,
     name: "Explorer",
     required: 3,
-    tier1: true,
+    tier1: false,
     tier2: false,
     tier3: false,
   },
@@ -34,7 +36,7 @@ const stamp: StampType[] = [
     image: creator,
     name: "Creator",
     required: 3,
-    tier1: true,
+    tier1: false,
     tier2: false,
     tier3: false,
   },
@@ -42,11 +44,41 @@ const stamp: StampType[] = [
     image: supporter,
     name: "Supporter",
     required: 3,
-    tier1: true,
+    tier1: false,
     tier2: false,
     tier3: false,
   },
 ];
+
+const slideForward = keyframes`
+   0% { width: 80%;  }
+   100% { width: 50%; }
+`;
+
+const slideBack = keyframes`
+   0% { width: 50%;  }
+   100% { width: 80%; }
+`;
+
+const fullForwardO = keyframes`
+      0% { width: 10%;  }
+   100% { width: 100%;}
+`;
+
+const fullBackO = keyframes`
+   0% { width: 100%;  }
+   100% { width: 10%;}
+`;
+
+const fullForwardY = keyframes`
+      0% { width: 10%;  }
+   100% { width: 100%;}
+`;
+
+const fullBackY = keyframes`
+   0% { width: 100%;  }
+   100% { width: 10%;}
+`;
 
 const JumboContainer = styled.div`
   display: flex;
@@ -56,7 +88,7 @@ const JumboContainer = styled.div`
 
 const JumboShadow = styled.div`
   background-color: #393939;
-  padding: 0.5rem 0.5rem 2rem 0.5rem;
+  padding: 0.5rem 0.5rem 3rem 0.5rem;
   clip-path: var(--notched-md);
 `;
 
@@ -138,10 +170,14 @@ const RewardsContainer = styled.div`
 
 const ArrowDecorationDiv = styled.div`
   height: 100%;
-  width: 50%;
+  transition: transform ease 1.25s;
+  width: 100%;
   position: absolute;
   z-index: 1;
   top: 0;
+
+  transform: ${(props: JumboStampSystemProps) =>
+    props.active ? "translate(-50%, 0)" : "translate(0px, 0)"};
 
   &:before {
     position: absolute;
@@ -154,8 +190,8 @@ const ArrowDecorationDiv = styled.div`
     background-color: #efa74c;
     clip-path: polygon(
       /* top left */ 0% 0,
-      /* top right */ 75% 0%,
-      /* bottom right */ 100% 75%,
+      /* top right */ 85% 0%,
+      /* bottom right */ 100% 85%,
       /* bottom left */ 100% 100%,
       /* bottom left */ 0% 100%
     );
@@ -172,9 +208,9 @@ const ArrowDecorationDiv = styled.div`
     background-color: #ffc13a;
     clip-path: polygon(
       /* top left */ 0% 0,
-      /* top right */ 50% 0%,
-      /* bottom right */ 80% 100%,
-      /* bottom left */ 45% 100%,
+      /* top right */ 74% 0%,
+      /* bottom right */ 90% 100%,
+      /* bottom left */ 75% 100%,
       /* bottom left */ 0% 100%
     );
   }
@@ -184,7 +220,9 @@ const ArrowDecoration = styled.img`
   position: absolute;
   z-index: 2;
   height: 100%;
-  transform: translate(-8rem, 0);
+  transform: ${(props: JumboStampSystemProps) =>
+    props.active ? "translate(10%, 0)" : "translate(0px, 0)"};
+  transition: transform 1.25s ease-out;
 `;
 
 const RewardsHeaderContainer = styled.div`
@@ -224,7 +262,35 @@ interface JumboStampSystemProps {
 
 const JumboStampSystem = () => {
   const dispatch = useDispatch();
-  const [stampActive, setActive] = useState(false);
+  const [hoverActive, setHoverActive] = useState(false);
+
+  const stamps = useBalanceOf();
+  const stampObj = stamp;
+
+  useEffect(() => {
+    const stampTiers = stamps.replaceAll(",", "");
+    const stampHoldings = [];
+    for (let i = 0; i < stampTiers.length; i++) {
+      if (stampTiers[i] === "1") {
+        stampHoldings[i] = true;
+      } else {
+        stampHoldings[i] = false;
+      }
+    }
+
+    // k is 0 - 11 for each in stampHoldings list/array could be either true or false. (1 - 12)
+    // i is 0 - 3 for each stamp, ie. Explorer, Holder... (1- 4)
+    // basically looping 3 times as if to say - Holder Tier i equals k of truth table
+    let k = 0;
+    for (let i = 0; i < Math.floor(stampHoldings.length / 3); i++) {
+      if (i > 0) {
+        k = i * 3;
+      }
+      stampObj[i].tier1 = stampHoldings[k];
+      stampObj[i].tier2 = stampHoldings[k + 1];
+      stampObj[i].tier3 = stampHoldings[k + 2];
+    }
+  }, [stamps]);
 
   return (
     <JumboContainer>
@@ -251,18 +317,34 @@ const JumboStampSystem = () => {
                 <JumboStamp key={stamp.name} stamp={stamp} />
               ))}
             </StampsRow>
-            <RewardsContainer>
-              <ArrowDecorationDiv>
-                <ArrowDecoration src={arrow} />
+            <RewardsContainer
+              onMouseEnter={() => setHoverActive(true)}
+              onMouseLeave={() => setHoverActive(false)}
+            >
+              <ArrowDecorationDiv
+                active={hoverActive}
+                onMouseEnter={() => setHoverActive(true)}
+                onMouseLeave={() => setHoverActive(false)}
+              >
+                <ArrowDecoration active={hoverActive} src={arrow} />
               </ArrowDecorationDiv>
-              <RewardsHeaderContainer>
+              <RewardsHeaderContainer
+                onMouseEnter={() => setHoverActive(true)}
+                onMouseLeave={() => setHoverActive(false)}
+              >
                 <RewardsHeader>
                   Redeem rewards only will be available on
                   <RewardsDate>19/01/2023</RewardsDate>
                 </RewardsHeader>
               </RewardsHeaderContainer>
-              <RewardsButtonContainer>
-                <RewardsButtonInner>
+              <RewardsButtonContainer
+                onMouseEnter={() => setHoverActive(true)}
+                onMouseLeave={() => setHoverActive(false)}
+              >
+                <RewardsButtonInner
+                  onMouseEnter={() => setHoverActive(true)}
+                  onMouseLeave={() => setHoverActive(false)}
+                >
                   <ButtonBlue
                     content="Rewards"
                     close={() => dispatch(setShowingRewards(true))}

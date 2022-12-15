@@ -11,11 +11,13 @@ const IconContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  position: relative;
+  justify-content: flex-start;
 `;
 
 const NavIconShadow = styled.div`
   background-color: #48484b;
-  padding: 1px 1px 1px 1px;
+  padding: 1.5px 1.5px 1.5px 1.5px;
   clip-path: var(--notched-sm);
 `;
 
@@ -26,9 +28,16 @@ const NavIconBackground = styled.div`
   padding: 1px 1px 0px 1px;
 `;
 
+const NavTitleContainer = styled.div`
+  z-index: 1;
+  position: absolute;
+  top: 5.5rem;
+  display: flex;
+`;
+
 const NavTitleShadow = styled.div`
   transition: all ease 0.3s;
-  margin-top: 1rem;
+  margin-top: 1.5rem;
   background-color: #393939;
   padding: 0.2rem 0.2rem 0.5rem 0.2rem;
   clip-path: var(--notched-sm);
@@ -77,6 +86,13 @@ const UserNavIcon = ({ navIcon }: Props) => {
 
   return (
     <IconContainer>
+      <NavTitleContainer>
+        <NavTitleShadow active={navActive}>
+          <NavTitleDiv>
+            <NavTitle>{navIcon.name}</NavTitle>
+          </NavTitleDiv>
+        </NavTitleShadow>
+      </NavTitleContainer>
       <NavIconShadow>
         <NavIconBackground active={navActive}>
           <NavIcon
@@ -87,11 +103,6 @@ const UserNavIcon = ({ navIcon }: Props) => {
           />
         </NavIconBackground>
       </NavIconShadow>
-      <NavTitleShadow active={navActive}>
-        <NavTitleDiv>
-          <NavTitle>{navIcon.name}</NavTitle>
-        </NavTitleDiv>
-      </NavTitleShadow>
     </IconContainer>
   );
 };

@@ -1,7 +1,12 @@
-import { ReactNode, useEffect, useState } from "react";
+import { ReactNode, useEffect, useState, useMemo } from "react";
 import styled from "styled-components";
+
 import { useDispatch, useSelector } from "react-redux";
-import { useEthers, useLookupAddress } from "@usedapp/core";
+import { useEthers, useLookupAddress, useCall } from "@usedapp/core";
+import { utils, constants, BigNumber, Contract as CTR } from "ethers";
+import { Contract } from "@ethersproject/contracts";
+import { useBalanceOf } from "../../contracts/views";
+import aikostamps from "../../contracts/aikostamps.json";
 
 import UserNavSocial, { SocialIconType } from "./UserNavSocial";
 
@@ -10,6 +15,7 @@ import JumboStampSystem from "./JumboStampSystem";
 import logo from "../../assets/userpanel/logo.png";
 import meepocoin from "../../assets/userpanel/meepocoin.png";
 import star from "../../assets/userpanel/stampstar.png";
+import baseaiko from "../../assets/userpanel/aikopfp.gif";
 
 import opensea from "../../assets/svgs/opensea.svg";
 import twitter from "../../assets/svgs/twitter.svg";
@@ -184,8 +190,6 @@ const DecorHorizontalDots3 = styled.span`
 `;
 
 const NavUserPfpContainer = styled.div`
-  /* position: relative;
-  top: 2rem; */
   cursor: pointer;
   margin-top: 2rem;
   clip-path: var(--notched-md);
@@ -194,6 +198,8 @@ const NavUserPfpContainer = styled.div`
 `;
 
 const NavUserPfp = styled.img`
+  filter: opacity(90%);
+  filter: hue-rotate(10deg);
   clip-path: var(--notched-md);
   width: 150px;
   height: 150px;
@@ -228,9 +234,21 @@ interface NavProps {
 
 const UserProfile = () => {
   const [hoverActive, setHoverActive] = useState(false);
-
   const { activateBrowserWallet, account } = useEthers();
   const { ens } = useLookupAddress(account);
+
+  const [stampsHeld, setStampsHeld] = useState(0);
+  const stamps = useBalanceOf();
+
+  useEffect(() => {
+    if (account && stamps) {
+      setStampsHeld(stamps.match(/1/g).length);
+      console.log(stamps.match(/1/g).length);
+    } else {
+      console.log("no account");
+      return;
+    }
+  }, [stamps]);
 
   return (
     <NavUserContainer>
@@ -279,11 +297,14 @@ const UserProfile = () => {
               onMouseEnter={() => setHoverActive(true)}
               onMouseLeave={() => setHoverActive(false)}
               onClick={() => activateBrowserWallet()}
-              src="https://via.placeholder.com/175x125"
+              src={baseaiko}
             />
           )}
           {account && (
-            <NavUserPfp src="https://i.seadn.io/gae/R6xFSwTpGgo7JkoVa0Acvy3EGQqdTTh5uvT74BS9NHGsMYSeknz6iFljNHC6gGyqmK_laKlkUkRhcN43mJ_OLz4SdiW5yhEsmPFhhg?auto=format&w=1000" />
+            <NavUserPfp
+              src="https://i.seadn.io/gae/R6xFSwTpGgo7JkoVa0Acvy3EGQqdTTh5uvT74BS9NHGsMYSeknz6iFljNHC6gGyqmK_laKlkUkRhcN43mJ_OLz4SdiW5yhEsmPFhhg?auto=format&w=1000"
+              onClick={() => useBalanceOf()}
+            />
           )}
         </NavUserPfpContainer>
 
@@ -293,7 +314,10 @@ const UserProfile = () => {
         </MeeposCollected>
 
         <StampsCollected>
-          <StampsCollectedText>4/12</StampsCollectedText>
+          {account && (
+            <StampsCollectedText>{`${stampsHeld}/12`}</StampsCollectedText>
+          )}
+
           <StampsCollectedStar src={star} />
         </StampsCollected>
 
