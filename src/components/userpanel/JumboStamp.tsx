@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { selectShowingRewards, setShowingRewards } from "../../state/uiSlice";
 import star from "../../assets/placeholders/star.png";
+import cursorhover from "../../assets/userpanel/cursorhover.png";
 
 export interface StampType {
   image?: string;
@@ -19,7 +20,7 @@ const Stamp = styled.div`
   background-color: #d8dbe0;
   padding: 2rem 1rem;
   text-align: center;
-  cursor: pointer;
+  cursor: url(${cursorhover}), auto;
 `;
 
 const StampShadow = styled.div`

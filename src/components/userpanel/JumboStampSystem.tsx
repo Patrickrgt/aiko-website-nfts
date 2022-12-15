@@ -11,6 +11,7 @@ import holder from "../../assets/userpanel/holder.png";
 import explorer from "../../assets/userpanel/explorer.png";
 import creator from "../../assets/userpanel/creator.png";
 import supporter from "../../assets/userpanel/supporter.png";
+import cursorhover from "../../assets/userpanel/cursorhover.png";
 
 import JumboStamp, { StampType } from "./JumboStamp";
 import ButtonBlue from "./ButtonBlue";
@@ -107,7 +108,7 @@ const JumboTabsContainer = styled.div`
 `;
 
 const JumboTab = styled.button`
-  cursor: pointer;
+  cursor: url(${cursorhover}), auto;
   background-color: ${(props: JumboStampSystemProps) =>
     props.active ? "#FCC453" : "#a9afb8"};
   text-shadow: ${(props: JumboStampSystemProps) =>

@@ -20,19 +20,30 @@ import baseaiko from "../../assets/userpanel/aikopfp.gif";
 import opensea from "../../assets/svgs/opensea.svg";
 import twitter from "../../assets/svgs/twitter.svg";
 import home from "../../assets/userpanel/homewebsiteicon.png";
+import medium from "../../assets/svgs/medium.svg";
+
+import cursorhover from "../../assets/userpanel/cursorhover.png";
 
 const socialIcons: SocialIconType[] = [
   {
     image: twitter,
     name: "Twitter",
+    link: "https://twitter.com/aikovirtual",
   },
   {
     image: opensea,
     name: "OpenSea",
+    link: "https://opensea.io/collection/aikovirtual",
   },
   {
     image: home,
     name: "Homepage",
+    link: "https://aikovirtual.com/",
+  },
+  {
+    image: medium,
+    name: "Medium",
+    link: "https://medium.com/@aikovirtual",
   },
 ];
 
@@ -87,7 +98,7 @@ const PostNavUsername = styled.div`
 
 const PreNavWallet = styled.button`
   width: fit-content;
-  cursor: pointer;
+  cursor: url(${cursorhover}), auto;
   background-color: #fff4cb;
   clip-path: var(--notched-sm);
   padding: 4rem 4rem 1rem 2rem;
@@ -103,7 +114,7 @@ const PreNavWalletText = styled.p`
 `;
 
 const PostNavWallet = styled.button`
-  cursor: pointer;
+  cursor: url(${cursorhover}), auto;
   background-color: #fff4cb;
   clip-path: var(--notched-sm);
   padding: 4rem 4rem 1rem 2rem;
@@ -190,7 +201,7 @@ const DecorHorizontalDots3 = styled.span`
 `;
 
 const NavUserPfpContainer = styled.div`
-  cursor: pointer;
+  cursor: url(${cursorhover}), auto;
   margin-top: 2rem;
   clip-path: var(--notched-md);
   background-color: #393939;
@@ -309,7 +320,7 @@ const UserProfile = () => {
         </NavUserPfpContainer>
 
         <MeeposCollected>
-          <MeeposCollectedText>20485</MeeposCollectedText>
+          {account && <StampsCollectedText>0</StampsCollectedText>}
           <MeeposCollectedStar src={meepocoin} />
         </MeeposCollected>
 

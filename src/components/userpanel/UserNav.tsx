@@ -158,14 +158,58 @@ const NavWalletRewardsContainer = styled.div`
   justify-content: center;
 `;
 
+const HoverText = styled.div`
+  z-index: 2;
+  position: absolute;
+  color: #393939;
+  padding: 1rem;
+  background-color: #ffc13a;
+  font-size: 1.5rem;
+  opacity: ${(props: NavProps) => (props.visible ? 1 : 0)};
+  transition: opacity 0.25s ease;
+  clip-path: var(--notched-sm);
+`;
+
 interface NavProps {
   active?: boolean;
   account?: any;
+  visible?: any;
 }
 
 const UserNav = () => {
+  const [top, setTop] = useState(0);
+  const [left, setLeft] = useState(0);
+  const [visible, setVisible] = useState(false);
+
+  const handleClick = (event: any) => {
+    setLeft(event.clientX + 50);
+    setTop(event.clientY);
+    setVisible(true);
+  };
+
+  useEffect(() => {
+    let timeoutId: any;
+    if (visible) {
+      timeoutId = setTimeout(() => setVisible(false), 3000);
+      window.addEventListener("mousemove", handleMouseMove);
+    }
+    return () => {
+      clearTimeout(timeoutId);
+      window.removeEventListener("mousemove", handleMouseMove);
+    };
+  }, [visible]);
+
+  const handleMouseMove = (event: any) => {
+    setLeft(event.clientX + 50);
+    setTop(event.clientY);
+    console.log(top);
+  };
+
   return (
     <NavContainer>
+      <HoverText visible={visible} style={{ top, left }}>
+        Currently a Work in Progress!
+      </HoverText>
       <Triangle />
       <NavBackground>
         <NavBackgroundDecor>
@@ -175,7 +219,7 @@ const UserNav = () => {
 
       <NavLogo src={logo} />
 
-      <NavIconContainer>
+      <NavIconContainer onClick={handleClick}>
         {navIcons.map((navIcon: NavIconType) => (
           <UserNavIcon key={navIcon.name} navIcon={navIcon} />
         ))}

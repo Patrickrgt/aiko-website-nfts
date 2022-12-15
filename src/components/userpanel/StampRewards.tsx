@@ -18,6 +18,8 @@ import necklace from "../../assets/userpanel/necklace.png";
 import pin from "../../assets/userpanel/pin.png";
 import print from "../../assets/userpanel/print.png";
 
+import cursorhover from "../../assets/userpanel/cursorhover.png";
+
 // Takes image (str) in the future change to fetching from assets folder
 // name (str) - name of reward
 // collected (bool) - if yes changes to check and blue borders on reward and blue span link/connector
@@ -111,6 +113,7 @@ const Background = styled.button`
   background-color: rgba(0, 0, 0, 0.25);
   transition: opacity 0.3s;
   opacity: ${(props: Props) => (props.show ? 1 : 0)};
+  cursor: url(${cursorhover}), auto;
 `;
 
 const MainContainer = styled.div`

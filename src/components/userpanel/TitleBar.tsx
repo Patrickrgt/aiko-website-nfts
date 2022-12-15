@@ -4,6 +4,8 @@ import styled, { css, keyframes } from "styled-components";
 import DecorVertical from "./DecorVertical";
 import { selectShowingRewards, setShowingRewards } from "../../state/uiSlice";
 
+import cursorhover from "../../assets/userpanel/cursorhover.png";
+
 const slideForward = keyframes`
    0% { height: 10%; width: 10%; visibility: 0 }
    100% { height: 100%; width: 100%; visibility: 1}
@@ -160,7 +162,7 @@ const CloseTab = styled.button`
   text-shadow: -1px 1px 0 #000, 1px 1px 0 #000, 1px -1px 0 #000,
     -1px -1px 0 #000;
   background-image: linear-gradient(to bottom, #fdbe7c, #e55f69);
-  cursor: pointer;
+  cursor: url(${cursorhover}), auto;
   width: 4rem;
   clip-path: var(--notched-xsm);
   border: none;

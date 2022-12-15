@@ -1,5 +1,6 @@
 import { ReactNode, useEffect, useState } from "react";
 import styled from "styled-components";
+import cursorhover from "../../assets/userpanel/cursorhover.png";
 
 export interface NavIconType {
   image?: string;
@@ -35,6 +36,15 @@ const NavTitleContainer = styled.div`
   display: flex;
 `;
 
+const HoverText = styled.div`
+  z-index: 2;
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: green;
+  opacity: ${(props: NavProps) => (props.visible ? 1 : 0)};
+`;
+
 const NavTitleShadow = styled.div`
   transition: all ease 0.3s;
   margin-top: 1.5rem;
@@ -54,7 +64,7 @@ const NavIcon = styled.img`
   width: 6rem;
   height: 6rem;
   clip-path: var(--notched-sm);
-  cursor: pointer;
+  cursor: url(${cursorhover}), auto;
 `;
 
 const NavTitleDiv = styled.div`
@@ -75,6 +85,9 @@ const NavTitle = styled.p`
 
 interface NavProps {
   active?: boolean;
+  top?: number;
+  left?: number;
+  visible?: boolean;
 }
 
 interface Props {
@@ -83,6 +96,33 @@ interface Props {
 
 const UserNavIcon = ({ navIcon }: Props) => {
   const [navActive, setActive] = useState(false);
+
+  const [top, setTop] = useState(0);
+  const [left, setLeft] = useState(0);
+  const [visible, setVisible] = useState(false);
+
+  const handleClick = (event: any) => {
+    setTop(event.clientY);
+    setLeft(event.clientY);
+    setVisible(true);
+  };
+
+  useEffect(() => {
+    let timeoutId: any;
+    if (visible) {
+      timeoutId = setTimeout(() => setVisible(false), 3000);
+      window.addEventListener("mousemove", handleMouseMove);
+    }
+    return () => {
+      clearTimeout(timeoutId);
+      window.removeEventListener("mousemove", handleMouseMove);
+    };
+  }, [visible]);
+
+  const handleMouseMove = (event: any) => {
+    setLeft(event.clientX);
+    setTop(event.clientY);
+  };
 
   return (
     <IconContainer>
@@ -100,6 +140,9 @@ const UserNavIcon = ({ navIcon }: Props) => {
             src={navIcon.image}
             onMouseEnter={() => setActive(true)}
             onMouseLeave={() => setActive(false)}
+            onClick={handleClick}
+            top={top}
+            left={left}
           />
         </NavIconBackground>
       </NavIconShadow>

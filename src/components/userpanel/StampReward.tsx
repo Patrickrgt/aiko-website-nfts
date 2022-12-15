@@ -4,6 +4,8 @@ import styled from "styled-components";
 import check from "../../assets/placeholders/check.png";
 import star from "../../assets/placeholders/star.png";
 
+import cursorhover from "../../assets/userpanel/cursorhover.png";
+
 export interface StampRewardType {
   image?: string;
   name: string;
@@ -107,7 +109,7 @@ const RewardRequirementContainer = styled.div`
 `;
 
 const RewardRequirement = styled.button`
-  cursor: pointer;
+  cursor: url(${cursorhover}), auto;
   position: relative;
   display: inherit;
   width: fit-content;

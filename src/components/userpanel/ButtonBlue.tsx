@@ -1,5 +1,6 @@
 import { ReactNode, useEffect, useState } from "react";
 import styled from "styled-components";
+import cursorhover from "../../assets/userpanel/cursorhover.png";
 
 const ButtonShadow = styled.div`
   padding: 3px 3px 8px 3px;
@@ -44,7 +45,7 @@ const Button = styled.button`
   background-image: linear-gradient(to bottom, #96c8fb, #667ecd);
   padding: 1.5rem 2.75rem;
   border: none;
-  cursor: pointer;
+  cursor: url(${cursorhover}), auto;
   z-index: 1;
   &:before {
     position: absolute;
