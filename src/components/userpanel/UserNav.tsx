@@ -163,7 +163,7 @@ const HoverText = styled.div`
   position: absolute;
   color: #393939;
   padding: 1rem;
-  background-color: #ffc13a;
+  background-color: #ffffff;
   font-size: 1.5rem;
   opacity: ${(props: NavProps) => (props.visible ? 1 : 0)};
   transition: opacity 0.25s ease;
@@ -210,6 +210,7 @@ const UserNav = () => {
       <HoverText visible={visible} style={{ top, left }}>
         Currently a Work in Progress!
       </HoverText>
+
       <Triangle />
       <NavBackground>
         <NavBackgroundDecor>

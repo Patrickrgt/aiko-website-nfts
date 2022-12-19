@@ -145,10 +145,10 @@ const StampShadowBorder = styled.div`
   animation: ${(props: StampRewardProps) =>
     props.show
       ? css`
-          ${transparent} 1.5s cubic-bezier(1,0,1,-0.07)
+          ${transparent} 1.2s cubic-bezier(1,0,1,-0.07)
         `
       : css`
-          ${apparent} 1.7s ease-out forwards
+          ${apparent} 1.2s ease-out forwards
         `};
   animation-play-state: ${(props: StampRewardProps) =>
     props.show ? "running" : "paused"};
@@ -167,10 +167,10 @@ const StampContainer = styled.div`
   animation: ${(props: StampRewardProps) =>
     props.show
       ? css`
-          ${appear} 2.35s cubic-bezier(.35,.01,.19,.83)
+          ${appear} 2s cubic-bezier(.35,.01,.19,.83)
         `
       : css`
-          ${disappear} 1.7s ease-out forwards
+          ${disappear} 1s ease-out forwards
         `};
   animation-play-state: ${(props: StampRewardProps) =>
     props.show ? "running" : "paused"};
@@ -193,10 +193,10 @@ const StampOverlay = styled.div`
   animation: ${(props: StampRewardProps) =>
     props.show
       ? css`
-          ${slideForward} 1.5s cubic-bezier(1,0,0,1)
+          ${slideForward} 1.2s cubic-bezier(1,0,0,1)
         `
       : css`
-          ${slideBack} 1.7s ease-out forwards
+          ${slideBack} 1.2s ease-out forwards
         `};
   animation-play-state: ${(props: StampRewardProps) =>
     props.show ? "running" : "paused"};
@@ -221,10 +221,10 @@ const StampRewardContainer = styled.div`
   animation: ${(props: StampRewardProps) =>
     props.show
       ? css`
-          ${appear} 2.5s ease-in
+          ${appear} 2.2s ease-in
         `
       : css`
-          ${disappear} 1.7s ease-out
+          ${disappear} 1s ease-out
         `};
   animation-play-state: ${(props: StampRewardProps) =>
     props.show ? "running" : "paused"};
