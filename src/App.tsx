@@ -2,7 +2,7 @@ import { Suspense } from "react";
 import styled from "styled-components";
 import { Outlet } from "react-router-dom";
 import { Config, DAppProvider, Mainnet, Rinkeby, Polygon } from "@usedapp/core";
-import { getDefaultProvider } from "ethers";
+import { ethers, getDefaultProvider } from "ethers";
 
 import Error from "./components/Error";
 import LoadingScreen from "./components/LoadingScreen";
@@ -22,7 +22,9 @@ const config: Config = {
   readOnlyUrls: {
     [Mainnet.chainId]: getDefaultProvider("mainnet"),
     [Rinkeby.chainId]: getDefaultProvider("rinkeby"),
-    [Polygon.chainId]: getDefaultProvider("matic"),
+    [Polygon.chainId]: new ethers.providers.JsonRpcProvider(
+      "https://polygon-rpc.com/"
+    ),
   },
 
   bufferGasLimitPercentage: 20,

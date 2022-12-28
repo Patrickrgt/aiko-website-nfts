@@ -4,31 +4,24 @@ import styled from "styled-components";
 import { selectShowingRewards, setShowingRewards } from "../../state/uiSlice";
 import star from "../../assets/placeholders/star.png";
 import cursorhover from "../../assets/userpanel/cursorhover.png";
-import { stampIndividual } from "./JumboStampSystem";
+import explorer1 from "../../assets/userpanel/explorer1.png";
 
-export interface StampType {
-  image?: string;
+export interface EditionType {
+  image: string;
   name: string;
-  id: number;
-  required: number;
-  tier1?: any;
-  tier2?: any;
-  tier3?: boolean;
-  visible: boolean;
+  collected: boolean;
 }
 
-const Stamp = styled.button`
+const Stamp = styled.div`
   display: flex;
   flex-direction: column;
-  background-color: #d8dbe0;
-  padding: 2rem 1rem;
+  padding: 0 0 2rem 0;
   text-align: center;
   cursor: url(${cursorhover}), auto;
 `;
 
 const StampShadow = styled.div`
-  background-color: ${(props: JumboStampSystemProps) =>
-    props.active ? "#494a4b" : ""};
+  background-color: #494a4b;
   transition: background-color 0.2s;
   /* background-color: #494a4b; */
   padding: 0.35rem 0.215rem 1rem 0.25rem;
@@ -37,7 +30,7 @@ const StampShadow = styled.div`
 
 const StampContainer = styled.div`
   background-color: ${(props: JumboStampSystemProps) =>
-    props.active ? "#ffba00" : ""};
+    props.active ? "#72D2FF" : "#BDBDBD"};
   transition: background-color 0.4s;
   padding: 0.5rem;
   clip-path: var(--notched-md);
@@ -49,18 +42,43 @@ const StampImgContainer = styled.div`
     props.active ? "" : "saturate(30%)"};
   opacity: ${(props: JumboStampSystemProps) => (props.active ? "1" : "0.70")};
   clip-path: var(--notched-md-tp);
-  width: 200px;
-  max-width: 200px;
+  width: 175px;
+  max-width: 175px;
   width: auto;
-  height: 275px;
+  height: 225px;
   transition: all ease 0.3s;
+`;
+
+const StampOverlay = styled.div`
+  &:after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    display: inline-block;
+    clip-path: var(--notched);
+    z-index: 2;
+    background: ${(props: JumboStampSystemProps) =>
+      props.active
+        ? "linear-gradient(to top, rgba(0, 0, 0, 0) 0%, #282626)"
+        : "linear-gradient(to top, rgba(0, 0, 0, 0) 0%, #282626)"};
+    transition: opacity 0.25s ease-out;
+    padding-top: 6rem;
+    opacity: ${(props: JumboStampSystemProps) => (props.active ? "0" : "1")};
+  }
 `;
 
 const StampImg = styled.img`
   filter: ${(props: JumboStampSystemProps) =>
     props.active ? "" : "saturate(50%)"};
-  transform: scale(0.9) translateX(-3.75rem) translateY(-3rem);
   transition: all ease 0.3s;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  transform: scale(1.1) translateY(1rem);
 `;
 
 const StampContentContainer = styled.div`
@@ -72,12 +90,12 @@ const StampGradient = styled.div`
   width: 100%;
   background-image: ${(props: JumboStampSystemProps) =>
     props.active
-      ? "linear-gradient(to bottom, rgba(255, 255, 255, 0), #ffba00)"
-      : "linear-gradient(to bottom, rgba(255, 255, 255, 0), #EAEAEA)"};
+      ? "linear-gradient(to bottom, rgba(255, 255, 255, 0), #799eff)"
+      : "linear-gradient(to bottom, rgba(255, 255, 255, 0), #A5A6A7)"};
   transition: background-color 0.6s;
   /* background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0), #ffba00); */
   bottom: 4rem;
-  padding: 6rem 0 4rem 0;
+  padding: 3rem 0 4rem 0;
 `;
 
 const StampTitle = styled.p`
@@ -88,17 +106,13 @@ const StampTitle = styled.p`
   transition: background-color 0.8s;
   transition: margin 0.4s;
   clip-path: var(--notched-tp);
-  margin-left: ${(props: JumboStampSystemProps) =>
-    props.active ? "" : "0.5rem"};
-  margin-right: ${(props: JumboStampSystemProps) =>
-    props.active ? "" : "0.5rem"};
   padding: 0.75rem 0 0.5rem 0;
 `;
 
 const StampCollected = styled.div`
   clip-path: var(--notched-md-bt);
   background-color: ${(props: JumboStampSystemProps) =>
-    props.active ? "#fee390" : "#EAEAEA"};
+    props.active ? "#799eff" : "#A3A4A4"};
   transition: background-color 0.6s;
   padding: 0.75rem 1rem;
   display: flex;
@@ -107,12 +121,14 @@ const StampCollected = styled.div`
 
 const StampCollectedContainer = styled.div``;
 
-const StampCollectedStar = styled.img`
-  width: 3rem;
-  height: 3rem;
-  margin: 0 0.25rem;
-  filter: ${(props: JumboStampSystemProps) =>
-    props.active ? "" : "grayscale(1)"};
+const StampCollectedText = styled.p`
+  font-size: 1.75rem;
+  text-shadow: ${(props: JumboStampSystemProps) =>
+    props.active
+      ? "-2px 2px 0 #2966d5, 2px 2px 0 #2966d5, 2px -2px 0 #2966d5, -2px -2px 0 #2966d5"
+      : "-2px 2px 0 #7A7A7A, 2px 2px 0 #7A7A7A, 2px -2px 0 #7A7A7A, -2px -2px 0 #7A7A7A"};
+  color: white;
+  text-transform: uppercase;
 `;
 
 interface JumboStampSystemProps {
@@ -120,48 +136,39 @@ interface JumboStampSystemProps {
 }
 
 interface Props {
-  stamp: StampType;
+  edition: EditionType;
 }
 
-const JumboStamp = ({ stamp }: Props) => {
+const StampEdition = ({ edition }: Props) => {
   const [stampActive, setActive] = useState(false);
-
-  const [change, setChange] = useState(false);
-  const [count, setCount] = useState(0);
-
-  useEffect(() => {
-    setCount(count + 1);
-    stamp.visible = change;
-    stamp = { ...stamp, visible: change };
-    console.log(stamp.visible, stampIndividual[stamp.id]);
-  }, [change]);
 
   return (
     <Stamp
-      key={count}
       onMouseEnter={() => setActive(true)}
       onMouseLeave={() => setActive(false)}
-      onClick={() => {
-        if (stamp) {
-          const obj = { ...stamp };
-          obj.visible = true;
-          stamp = obj;
-        }
-      }}
     >
-      <StampShadow active={stampActive}>
-        <StampContainer active={stampActive}>
-          <StampImgContainer active={stampActive}>
-            <StampImg active={stampActive} src={stamp.image} />
+      <StampShadow>
+        <StampContainer active={edition.collected}>
+          <StampImgContainer active={edition.collected}>
+            {!edition.collected && <StampOverlay active={stampActive} />}
+
+            <StampImg active={stampActive} src={edition.image} />
           </StampImgContainer>
           <StampContentContainer>
-            <StampGradient active={stampActive} />
-            <StampTitle active={stampActive}>{stamp.name}</StampTitle>
-            <StampCollected active={stampActive}>
+            <StampGradient active={edition.collected} />
+            <StampTitle active={edition.collected}>{edition.name}</StampTitle>
+            <StampCollected active={edition.collected}>
               <StampCollectedContainer>
-                <StampCollectedStar active={stamp.tier1} src={star} />
-                <StampCollectedStar active={stamp.tier2} src={star} />
-                <StampCollectedStar active={stamp.tier3} src={star} />
+                {edition.collected && (
+                  <StampCollectedText active={edition.collected}>
+                    Collected
+                  </StampCollectedText>
+                )}
+                {!edition.collected && (
+                  <StampCollectedText active={edition.collected}>
+                    Locked
+                  </StampCollectedText>
+                )}
               </StampCollectedContainer>
             </StampCollected>
           </StampContentContainer>
@@ -171,4 +178,4 @@ const JumboStamp = ({ stamp }: Props) => {
   );
 };
 
-export default JumboStamp;
+export default StampEdition;

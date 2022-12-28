@@ -1,53 +1,151 @@
 import { ReactNode, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled, { css, keyframes } from "styled-components";
+import { useEthers } from "@usedapp/core";
 import { selectShowingRewards, setShowingRewards } from "../../state/uiSlice";
 import star from "../../assets/placeholders/star.png";
 import arrow from "../../assets/userpanel/arrow.png";
 
-import { useBalanceOf } from "../../contracts/views";
+// import { useBalanceOf } from "../../contracts/views";
 
 import holder from "../../assets/userpanel/holder.png";
+import holder1 from "../../assets/userpanel/holder1.png";
+import holder2 from "../../assets/userpanel/holder2.png";
+import holder3 from "../../assets/userpanel/holder3.png";
+
 import explorer from "../../assets/userpanel/explorer.png";
+import explorer1 from "../../assets/userpanel/explorer1.png";
+import explorer2 from "../../assets/userpanel/explorer2.png";
+import explorer3 from "../../assets/userpanel/explorer3.png";
+
 import creator from "../../assets/userpanel/creator.png";
+import creator1 from "../../assets/userpanel/creator1.png";
+import creator2 from "../../assets/userpanel/creator2.png";
+import creator3 from "../../assets/userpanel/creator3.png";
+
 import supporter from "../../assets/userpanel/supporter.png";
+import supporter1 from "../../assets/userpanel/supporter1.png";
+import supporter2 from "../../assets/userpanel/supporter2.png";
+import supporter3 from "../../assets/userpanel/supporter3.png";
+
 import cursorhover from "../../assets/userpanel/cursorhover.png";
 
 import JumboStamp, { StampType } from "./JumboStamp";
+import StampIndividual, { IndividualStampType } from "./StampIndividual";
 import ButtonBlue from "./ButtonBlue";
 
-const stamp: StampType[] = [
+export const stampIndividual: IndividualStampType[] = [
   {
-    image: holder,
     name: "Holder",
+    image: holder,
+    id: 0,
+    character: "Mimi",
+    edition: [
+      {
+        image: holder1,
+        name: "1st Edition",
+        collected: true,
+      },
+      {
+        image: holder2,
+        name: "2nd Edition",
+        collected: false,
+      },
+      {
+        image: holder3,
+        name: "3rd Edition",
+        collected: false,
+      },
+    ],
     required: 3,
-    tier1: false,
+    tier1: true,
     tier2: false,
     tier3: false,
+    visible: false,
   },
   {
-    image: explorer,
     name: "Explorer",
+    image: explorer,
+    id: 1,
+    character: "Mimi2",
+    edition: [
+      {
+        image: explorer1,
+        name: "1st Edition",
+        collected: true,
+      },
+      {
+        image: explorer2,
+        name: "2nd Edition",
+        collected: true,
+      },
+      {
+        image: explorer3,
+        name: "3rd Edition",
+        collected: false,
+      },
+    ],
     required: 3,
-    tier1: false,
-    tier2: false,
+    tier1: true,
+    tier2: true,
     tier3: false,
+    visible: false,
   },
   {
-    image: creator,
     name: "Creator",
+    image: creator,
+    id: 2,
+    character: "Mimi3",
+    edition: [
+      {
+        image: creator1,
+        name: "1st Edition",
+        collected: true,
+      },
+      {
+        image: creator2,
+        name: "2nd Edition",
+        collected: true,
+      },
+      {
+        image: creator3,
+        name: "3rd Edition",
+        collected: true,
+      },
+    ],
     required: 3,
-    tier1: false,
-    tier2: false,
-    tier3: false,
+    tier1: true,
+    tier2: true,
+    tier3: true,
+    visible: false,
   },
   {
-    image: supporter,
     name: "Supporter",
+    image: supporter,
+    id: 3,
+    character: "Mimi4",
+    edition: [
+      {
+        image: supporter1,
+        name: "1st Edition",
+        collected: false,
+      },
+      {
+        image: supporter2,
+        name: "2nd Edition",
+        collected: false,
+      },
+      {
+        image: supporter3,
+        name: "3rd Edition",
+        collected: false,
+      },
+    ],
     required: 3,
     tier1: false,
     tier2: false,
     tier3: false,
+    visible: false,
   },
 ];
 
@@ -244,10 +342,8 @@ const RewardsButtonInner = styled.div`
 `;
 
 const RewardsHeader = styled.p`
-  padding: 2rem 1rem;
   font-size: 2.25rem;
   color: white;
-  letter-spacing: -1px;
 `;
 
 const RewardsDate = styled.span`
@@ -257,6 +353,52 @@ const RewardsDate = styled.span`
   letter-spacing: -1px;
 `;
 
+const IndividualStampTab = styled.div`
+  background-color: blue;
+  clip-path: var(--notched-md-tp);
+  width: 100%;
+  z-index: 2;
+`;
+
+const StampTabRow = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+const StampTitle = styled.h1`
+  font-size: 4rem;
+  font-weight: 400;
+  color: white;
+  margin-left: 4rem;
+  text-shadow: -3px 3px 0 #000, 2px 2px 0 #000, 2px -2px 0 #000,
+    -2px -2px 0 #000;
+  text-transform: uppercase;
+  flex: 1;
+`;
+
+const ButtonContainer = styled.div`
+  display: flex;
+  flex: 1;
+  justify-content: flex-end;
+  margin-right: 1rem;
+`;
+
+const IndividualStampContainer = styled.div`
+  background-color: grey;
+`;
+
+const MainContainer = styled.div`
+  display: ${(props: JumboStampSystemProps) =>
+    props.active ? "" : "  display: none"};
+`;
+
+const IndividualStampRow = styled.div``;
+const StampRaw = styled.div``;
+const StampEditionCol = styled.div``;
+const StampEditionRow = styled.div``;
+const StampEdition = styled.div``;
+const StampText = styled.p``;
+
 interface JumboStampSystemProps {
   active?: boolean;
 }
@@ -264,34 +406,43 @@ interface JumboStampSystemProps {
 const JumboStampSystem = () => {
   const dispatch = useDispatch();
   const [hoverActive, setHoverActive] = useState(false);
+  const [showLanding, setLanding] = useState(true);
 
-  const stamps = useBalanceOf();
-  const stampObj = stamp;
+  const { account } = useEthers();
 
-  useEffect(() => {
-    const stampTiers = stamps.replaceAll(",", "");
-    const stampHoldings = [];
-    for (let i = 0; i < stampTiers.length; i++) {
-      if (stampTiers[i] === "1") {
-        stampHoldings[i] = true;
-      } else {
-        stampHoldings[i] = false;
-      }
-    }
+  const [visible, setVisible] = useState(true);
 
-    // k is 0 - 11 for each in stampHoldings list/array could be either true or false. (1 - 12)
-    // i is 0 - 3 for each stamp, ie. Explorer, Holder... (1- 4)
-    // basically looping 3 times as if to say - Holder Tier i equals k of truth table
-    let k = 0;
-    for (let i = 0; i < Math.floor(stampHoldings.length / 3); i++) {
-      if (i > 0) {
-        k = i * 3;
-      }
-      stampObj[i].tier1 = stampHoldings[k];
-      stampObj[i].tier2 = stampHoldings[k + 1];
-      stampObj[i].tier3 = stampHoldings[k + 2];
-    }
-  }, [stamps]);
+  function handleShow() {
+    setVisible(!visible);
+  }
+
+  // const stamps = useBalanceOf();
+  // console.log(stamps, "stamps");
+  // const stampObj = stamp;
+
+  // useEffect(() => {
+  //   const stampTiers = stamps.replaceAll(",", "");
+  //   const stampHoldings = [];
+  //   for (let i = 0; i < stampTiers.length; i++) {
+  //     if (stampTiers[i] === "1") {
+  //       stampHoldings[i] = true;
+  //     } else {
+  //       stampHoldings[i] = false;
+  //     }
+  //   }
+
+  //   let k = 0;
+  //   for (let i = 0; i < Math.floor(stampHoldings.length / 3); i++) {
+  //     if (i > 0) {
+  //       k = i * 3;
+  //     }
+  //     stampObj[i].tier1 = stampHoldings[k];
+  //     stampObj[i].tier2 = stampHoldings[k + 1];
+  //     stampObj[i].tier3 = stampHoldings[k + 2];
+  //   }
+  // }, [stamps]);
+
+  if (!account) return null;
 
   return (
     <JumboContainer>
@@ -307,52 +458,61 @@ const JumboStampSystem = () => {
       <JumboShadow>
         <JumboInnerBorder>
           <JumboInnerContainer>
-            <StampTopContainer>
-              <StampTop />
-              <SeasonTab>
-                <SeasonText>Season 1</SeasonText>
-              </SeasonTab>
-            </StampTopContainer>
-            <StampsRow>
-              {stamp.map((stamp: StampType) => (
-                <JumboStamp key={stamp.name} stamp={stamp} />
-              ))}
-            </StampsRow>
-            <RewardsContainer
-              onMouseEnter={() => setHoverActive(true)}
-              onMouseLeave={() => setHoverActive(false)}
-            >
-              <ArrowDecorationDiv
-                active={hoverActive}
+            {stampIndividual.map((stampIndividual: IndividualStampType) => (
+              <StampIndividual
+                key={stampIndividual.name}
+                stampIndividual={stampIndividual}
+              />
+            ))}
+
+            <MainContainer active={showLanding}>
+              <StampTopContainer>
+                <StampTop />
+                <SeasonTab>
+                  <SeasonText>Season 1</SeasonText>
+                </SeasonTab>
+              </StampTopContainer>
+              <StampsRow>
+                {stampIndividual.map((stamp: StampType) => (
+                  <JumboStamp key={stamp.id} stamp={stamp} />
+                ))}
+              </StampsRow>
+              <RewardsContainer
                 onMouseEnter={() => setHoverActive(true)}
                 onMouseLeave={() => setHoverActive(false)}
               >
-                <ArrowDecoration active={hoverActive} src={arrow} />
-              </ArrowDecorationDiv>
-              <RewardsHeaderContainer
-                onMouseEnter={() => setHoverActive(true)}
-                onMouseLeave={() => setHoverActive(false)}
-              >
-                <RewardsHeader>
-                  Redeem rewards only will be available on
-                  <RewardsDate>19/01/2023</RewardsDate>
-                </RewardsHeader>
-              </RewardsHeaderContainer>
-              <RewardsButtonContainer
-                onMouseEnter={() => setHoverActive(true)}
-                onMouseLeave={() => setHoverActive(false)}
-              >
-                <RewardsButtonInner
+                <ArrowDecorationDiv
+                  active={hoverActive}
                   onMouseEnter={() => setHoverActive(true)}
                   onMouseLeave={() => setHoverActive(false)}
                 >
-                  <ButtonBlue
-                    content="Rewards"
-                    close={() => dispatch(setShowingRewards(true))}
-                  />
-                </RewardsButtonInner>
-              </RewardsButtonContainer>
-            </RewardsContainer>
+                  <ArrowDecoration active={hoverActive} src={arrow} />
+                </ArrowDecorationDiv>
+                <RewardsHeaderContainer
+                  onMouseEnter={() => setHoverActive(true)}
+                  onMouseLeave={() => setHoverActive(false)}
+                >
+                  <RewardsHeader>
+                    Redeem rewards only will be available on
+                    <RewardsDate>19/01/2023</RewardsDate>
+                  </RewardsHeader>
+                </RewardsHeaderContainer>
+                <RewardsButtonContainer
+                  onMouseEnter={() => setHoverActive(true)}
+                  onMouseLeave={() => setHoverActive(false)}
+                >
+                  <RewardsButtonInner
+                    onMouseEnter={() => setHoverActive(true)}
+                    onMouseLeave={() => setHoverActive(false)}
+                  >
+                    <ButtonBlue
+                      content="Rewards"
+                      close={() => dispatch(setShowingRewards(true))}
+                    />
+                  </RewardsButtonInner>
+                </RewardsButtonContainer>
+              </RewardsContainer>
+            </MainContainer>
           </JumboInnerContainer>
         </JumboInnerBorder>
       </JumboShadow>

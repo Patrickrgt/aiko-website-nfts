@@ -249,17 +249,26 @@ const UserProfile = () => {
   const { ens } = useLookupAddress(account);
 
   const [stampsHeld, setStampsHeld] = useState(0);
-  const stamps = useBalanceOf();
+  const [test, setTest] = useState(0);
 
-  useEffect(() => {
-    if (account && stamps) {
-      setStampsHeld(stamps.match(/1/g).length);
-      console.log(stamps.match(/1/g).length);
-    } else {
-      console.log("no account");
-      return;
-    }
-  }, [stamps]);
+  const stamps = useBalanceOf();
+  // console.log(stamps);
+  // useEffect(() => {
+  //   if (account) {
+  //     const stamps = useBalanceOf();
+  //     console.log(stamps);
+  //   }
+  // }, [account]);
+
+  // useEffect(() => {
+  //   if (account && stamps) {
+  //     setStampsHeld(stamps.match(/1/g).length);
+  //     console.log(stamps.match(/1/g).length);
+  //   } else {
+  //     console.log("no account");
+  //     return;
+  //   }
+  // }, [stamps]);
 
   return (
     <NavUserContainer>
@@ -312,10 +321,7 @@ const UserProfile = () => {
             />
           )}
           {account && (
-            <NavUserPfp
-              src="https://i.seadn.io/gae/R6xFSwTpGgo7JkoVa0Acvy3EGQqdTTh5uvT74BS9NHGsMYSeknz6iFljNHC6gGyqmK_laKlkUkRhcN43mJ_OLz4SdiW5yhEsmPFhhg?auto=format&w=1000"
-              onClick={() => useBalanceOf()}
-            />
+            <NavUserPfp src="https://i.seadn.io/gae/R6xFSwTpGgo7JkoVa0Acvy3EGQqdTTh5uvT74BS9NHGsMYSeknz6iFljNHC6gGyqmK_laKlkUkRhcN43mJ_OLz4SdiW5yhEsmPFhhg?auto=format&w=1000" />
           )}
         </NavUserPfpContainer>
 

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import styled, { css, keyframes } from "styled-components";
 import { selectShowingRewards, setShowingRewards } from "../../state/uiSlice";
 
-import { useBalanceOf } from "../../contracts/views";
+// import { useBalanceOf } from "../../contracts/views";
 
 import ButtonBlue from "./ButtonBlue";
 import DecorHorizontal from "./DecorHorizontal";
@@ -242,26 +242,24 @@ const StampRewards = ({ show }: Props) => {
   const showing = useSelector(selectShowingRewards);
   const dispatch = useDispatch();
 
-  const stamps = useBalanceOf();
-  const rewardsObj = stampRewards;
+  // const stamps = useBalanceOf();
+  // const rewardsObj = stampRewards;
 
-  useEffect(() => {
-    const stampTiers = stamps.replaceAll(",", "");
-    let stampHoldings = 0;
-    for (let i = 0; i < stampTiers.length; i++) {
-      if (stampTiers[i] === "1") {
-        stampHoldings += 1;
-      }
-    }
+  // useEffect(() => {
+  //   const stampTiers = stamps.replaceAll(",", "");
+  //   let stampHoldings = 0;
+  //   for (let i = 0; i < stampTiers.length; i++) {
+  //     if (stampTiers[i] === "1") {
+  //       stampHoldings += 1;
+  //     }
+  //   }
 
-    // i is 0 - 3 for each reward. (1 - 4)
-    // basically looping 4 times as if to say (Holder Tier i equals k of truth table)
-    for (let i = 0; i < Object.keys(rewardsObj).length; i++) {
-      if (stampHoldings >= rewardsObj[i].required) {
-        rewardsObj[i].collected = true;
-      }
-    }
-  }, [stamps]);
+  //   for (let i = 0; i < Object.keys(rewardsObj).length; i++) {
+  //     if (stampHoldings >= rewardsObj[i].required) {
+  //       rewardsObj[i].collected = true;
+  //     }
+  //   }
+  // }, [stamps]);
 
   return (
     // Refractor background blur because using visiblity which affects performance...
