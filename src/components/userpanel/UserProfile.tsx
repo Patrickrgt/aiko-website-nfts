@@ -252,7 +252,7 @@ const UserProfile = () => {
   const [test, setTest] = useState(0);
 
   const stamps = useBalanceOf();
-  // console.log(stamps);
+  console.log(stamps);
   // useEffect(() => {
   //   if (account) {
   //     const stamps = useBalanceOf();

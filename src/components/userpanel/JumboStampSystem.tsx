@@ -392,13 +392,6 @@ const MainContainer = styled.div`
     props.active ? "" : "  display: none"};
 `;
 
-const IndividualStampRow = styled.div``;
-const StampRaw = styled.div``;
-const StampEditionCol = styled.div``;
-const StampEditionRow = styled.div``;
-const StampEdition = styled.div``;
-const StampText = styled.p``;
-
 interface JumboStampSystemProps {
   active?: boolean;
 }

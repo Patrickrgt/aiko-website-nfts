@@ -142,11 +142,7 @@ const JumboStamp = ({ stamp }: Props) => {
       onMouseEnter={() => setActive(true)}
       onMouseLeave={() => setActive(false)}
       onClick={() => {
-        if (stamp) {
-          const obj = { ...stamp };
-          obj.visible = true;
-          stamp = obj;
-        }
+        setChange(true);
       }}
     >
       <StampShadow active={stampActive}>
