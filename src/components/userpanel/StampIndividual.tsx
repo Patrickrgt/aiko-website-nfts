@@ -21,6 +21,7 @@ import explorer2 from "../../assets/userpanel/explorer2.png";
 import explorer3 from "../../assets/userpanel/explorer3.png";
 
 import ButtonBlue from "./ButtonBlue";
+import DecorVertical from "./DecorVertical";
 import StampEdition, { EditionType } from "./StampEdition";
 import StampEditionJumbo, { EditionJumboType } from "./StampEditionJumbo";
 
@@ -84,32 +85,145 @@ const edition: EditionType[] = [
   },
 ];
 
+const slideForward = keyframes`
+   0% { height: 10%; width: 10%; visibility: 0 }
+   100% { height: 100%; width: 100%; visibility: 1}
+`;
+
+const slideBack = keyframes`
+   0% { height: 100%; width: 100%; visibility: 1 }
+   100% { height: 10%; width: 10%; visibility: 0}
+`;
+
+const appear = keyframes`
+   0% { transition: all ease; position: absolute; opacity: 0; }
+   70% {   opacity: 0; position: static; }
+   100% { opacity: 1;  display:block;  }
+`;
+
 const Container = styled.div`
-  z-index: 2;
+  z-index: -1;
+  animation: ${(props: StampIndividualProps) =>
+    props.show
+      ? css`
+          ${appear} 1.5s cubic-bezier(1,0,1,-0.07)
+        `
+      : css``};
+  transition: all ease 3s;
   display: ${(props: StampIndividualProps) => (props.show ? "" : "none")};
 
   /* display: ${(props: StampIndividualProps) => (props.show ? "" : "none")}; */
 `;
 
 const IndividualStampTab = styled.div`
-  background-color: blue;
+  background-color: #90a9e1;
   clip-path: var(--notched-md-tp);
 `;
 
 const StampTabRow = styled.div`
   display: flex;
   align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
 `;
 
 const StampTitle = styled.h1`
   font-size: 4rem;
   font-weight: 400;
   color: white;
-  margin-left: 4rem;
+  margin-left: 0.5rem;
   text-shadow: -3px 3px 0 #000, 2px 2px 0 #000, 2px -2px 0 #000,
     -2px -2px 0 #000;
   text-transform: uppercase;
   flex: 1;
+`;
+
+const Stripes = styled.div`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+  background-color: #658ac7;
+  clip-path: polygon(
+    0% 0px,
+    /* top left */ 27.77% 0%,
+    /* top right */ 108% calc(100%),
+    /* bottom right */ calc(100%) 100%,
+    /* bottom left */ 0 calc(100%) /* bottom left */
+  );
+
+  animation: ${(props: StampIndividualProps) =>
+    props.show
+      ? css`
+          ${slideForward} 4.5s cubic-bezier(1,0,0,1)
+        `
+      : css`
+          ${slideBack} .7s ease-out forwards
+        `};
+  animation-play-state: ${(props: StampIndividualProps) =>
+    props.show ? "running" : "paused"};
+
+  &:before {
+    position: absolute;
+    content: "";
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -3;
+    background-color: #f0a460;
+    clip-path: polygon(
+      0% 0px,
+      /* top left */ 24.44% 0%,
+      /* top right */ 100% calc(100%),
+      /* bottom right */ calc(100%) 100%,
+
+      /* bottom left */ 0 calc(100%) /* bottom left */
+    );
+    animation: ${(props: StampIndividualProps) =>
+      props.show
+        ? css`
+            ${slideForward} 4.5s cubic-bezier(1,0,0,1)
+          `
+        : css`
+            ${slideBack} 1s ease-out forwards
+          `};
+    animation-play-state: ${(props: StampIndividualProps) =>
+      props.show ? "running" : "paused"};
+  }
+  &:after {
+    position: absolute;
+    content: "";
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 0;
+
+    background-color: #ffd36a;
+    clip-path: polygon(
+      0% 0px,
+      /* top left */ 16.66% 0%,
+      /* top right */ 90% calc(100% - 4px),
+      /* bottom right */ calc(100% - 4px) 100%,
+
+      /* bottom left */ 0 calc(100% - 4px) /* bottom left */
+    );
+    animation: ${(props: StampIndividualProps) =>
+      props.show
+        ? css`
+            ${slideForward} 4.5s cubic-bezier(1,0,0,1)
+          `
+        : css`
+            ${slideBack} 1.2s ease-out forwards
+          `};
+    animation-play-state: ${(props: StampIndividualProps) =>
+      props.show ? "running" : "paused"};
+  }
 `;
 
 const ButtonContainer = styled.div`
@@ -121,7 +235,7 @@ const ButtonContainer = styled.div`
 
 const IndividualStampContainer = styled.div`
   background-color: #d8dbe0;
-  padding-bottom: 1rem;
+  padding-bottom: 0.5rem;
   clip-path: var(--notched-md-bt);
 `;
 const IndividualStampRow = styled.div`
@@ -134,6 +248,7 @@ const StampEditionCol = styled.div`
   flex-direction: column;
   position: relative;
   width: 100%;
+  margin: 0 1.5rem 0 0.5rem;
 `;
 const StampEditionRow = styled.div`
   display: flex;
@@ -191,7 +306,11 @@ const StampIndividual = ({ stampIndividual }: Props) => {
     <Container show={stampIndividual.visible}>
       <IndividualStampTab>
         <StampTabRow>
-          <StampTitle>{stampIndividual.name}</StampTitle>
+          <DecorVertical width={3} />
+          <StampTitle>
+            <Stripes show={stampIndividual.visible} />
+            {stampIndividual.name}
+          </StampTitle>
           <ButtonContainer>
             <ButtonBlue
               content="Rewards"

@@ -184,22 +184,54 @@ const fullBackY = keyframes`
    100% { width: 10%;}
 `;
 
+const changeView = keyframes`
+   0% { transition: all ease; opacity: 1;  height: 100%;}
+   70% {  position: absolute; top: 0; left: 0; opacity: 0; height: 1px; }
+   100% { position: absolute; top: 0; left: 0; opacity: 0; }
+`;
+
+const heightChange = keyframes`
+   0% { transition: all ease; height: 100%;}
+   50% {   height: 100%; }
+   75% {   height: 10%; }
+   100% { height: 100%; }
+`;
+
 const JumboContainer = styled.div`
   display: flex;
   position: relative;
   top: 5rem;
+  transition: all ease;
 `;
 
 const JumboShadow = styled.div`
   background-color: #393939;
   padding: 0.5rem 0.5rem 3rem 0.5rem;
   clip-path: var(--notched-md);
+  transition: all ease;
+  animation: ${(props: JumboStampSystemProps) =>
+    props.active
+      ? css`
+          ${heightChange} 1.5s cubic-bezier(1,0,0,1)
+        `
+      : css``};
+  animation-play-state: ${(props: JumboStampSystemProps) =>
+    props.active ? "running" : "paused"};
 `;
 
 const JumboInnerBorder = styled.div`
   background-color: #cfd2da;
   padding: 2rem 1.5rem;
   clip-path: var(--notched-md);
+  transition: all ease;
+  animation: ${(props: JumboStampSystemProps) =>
+    props.active
+      ? css`
+          ${heightChange} 1.5s cubic-bezier(1,0,0,1)
+        `
+      : css``};
+  animation-play-state: ${(props: JumboStampSystemProps) =>
+    props.active ? "running" : "paused"};
 `;
 
 const JumboTabsContainer = styled.div`
@@ -253,6 +285,7 @@ const SeasonText = styled.p`
   z-index: 100;
   color: white;
   font-size: 2rem;
+  white-space: nowrap;
 `;
 
 const StampTop = styled.div`
@@ -291,14 +324,13 @@ const ArrowDecorationDiv = styled.div`
     bottom: 0;
     left: 0;
     z-index: 0;
-    background-color: #efa74c;
-    clip-path: polygon(
-      /* top left */ 0% 0,
-      /* top right */ 85% 0%,
-      /* bottom right */ 100% 85%,
-      /* bottom left */ 100% 100%,
-      /* bottom left */ 0% 100%
-    );
+    background-color: ${(props: JumboStampSystemProps) =>
+      props.hide ? "#ffc13a" : "#efa74c"};
+    clip-path: ${(props: JumboStampSystemProps) =>
+      props.hide
+        ? "polygon(0% 0,100% 0%,100% 100%,100% 100%,0% 100%)"
+        : "polygon(0% 0,85% 0%,100% 85%,100% 100%,0% 100%)"};
+    transition: all 0.5s ease-out;
   }
 
   &:after {
@@ -310,30 +342,31 @@ const ArrowDecorationDiv = styled.div`
     left: 0;
     z-index: 0;
     background-color: #ffc13a;
-    clip-path: polygon(
-      /* top left */ 0% 0,
-      /* top right */ 74% 0%,
-      /* bottom right */ 90% 100%,
-      /* bottom left */ 75% 100%,
-      /* bottom left */ 0% 100%
-    );
+    clip-path: ${(props: JumboStampSystemProps) =>
+      props.hide
+        ? "polygon(0% 0,85% 0%,100% 100%,100% 100%,0% 100%)"
+        : "polygon(0% 0,74% 0%,90% 100%,75% 100%,0% 100%)"};
+    transition: clip-path 0.25s ease;
   }
 `;
 
 const ArrowDecoration = styled.img`
-  position: absolute;
+  position: relative;
   z-index: 2;
   height: 100%;
   transform: ${(props: JumboStampSystemProps) =>
     props.active ? "translate(10%, 0)" : "translate(0px, 0)"};
-  transition: transform 1.25s ease-out;
+  transform: ${(props: JumboStampSystemProps) =>
+    props.hide ? "translate(-60%)" : ""};
+  transition: all ease 1.25s;
 `;
 
 const RewardsHeaderContainer = styled.div`
   background-color: #8397cf;
-  clip-path: var(--notched-md-tp);
+  clip-path: var(--notched-sm-tp);
   display: flex;
   justify-content: flex-end;
+  padding: 1rem;
 `;
 
 const RewardsButtonContainer = styled.div`
@@ -349,6 +382,10 @@ const RewardsButtonInner = styled.div`
 const RewardsHeader = styled.p`
   font-size: 2.25rem;
   color: white;
+  text-overflow: clip;
+  white-space: nowrap;
+  font-family: video-cond, serif;
+  font-weight: 300;
 `;
 
 const RewardsDate = styled.span`
@@ -393,11 +430,23 @@ const IndividualStampContainer = styled.div`
 `;
 
 const MainContainer = styled.div`
-  display: ${(props: JumboStampSystemProps) => (props.active ? "none" : "")};
+  /* display: none; */
+  animation: ${(props: JumboStampSystemProps) =>
+    props.active
+      ? css`
+          ${changeView} 1.5s cubic-bezier(1,0,1,-0.07)
+        `
+      : css``};
+  transition: width ease 2s;
+  animation-fill-mode: forwards;
+  width: ${(props: JumboStampSystemProps) => (props.active ? "10%" : "100%")};
+  /* display: ${(props: JumboStampSystemProps) =>
+    props.active ? "none" : ""}; */
 `;
 
 interface JumboStampSystemProps {
   active?: boolean;
+  hide?: boolean;
 }
 
 const JumboStampSystem = () => {
@@ -454,8 +503,8 @@ const JumboStampSystem = () => {
         </JumboTab>
       </JumboTabsContainer>
 
-      <JumboShadow>
-        <JumboInnerBorder>
+      <JumboShadow active={showing}>
+        <JumboInnerBorder active={showing}>
           <JumboInnerContainer>
             {stampIndividual.map((stampIndividual: IndividualStampType) => (
               <StampIndividual
@@ -486,10 +535,15 @@ const JumboStampSystem = () => {
               >
                 <ArrowDecorationDiv
                   active={hoverActive}
+                  hide={showing}
                   onMouseEnter={() => setHoverActive(true)}
                   onMouseLeave={() => setHoverActive(false)}
                 >
-                  <ArrowDecoration active={hoverActive} src={arrow} />
+                  <ArrowDecoration
+                    hide={showing}
+                    active={hoverActive}
+                    src={arrow}
+                  />
                 </ArrowDecorationDiv>
                 <RewardsHeaderContainer
                   onMouseEnter={() => setHoverActive(true)}

@@ -25,10 +25,12 @@ export interface StampType {
 const Stamp = styled.button`
   display: flex;
   flex-direction: column;
-  background-color: #d8dbe0;
   padding: 2rem 1rem;
   text-align: center;
   cursor: url(${cursorhover}), auto;
+  transition: width ease 1.5s;
+  background-color: #d8dbe0;
+  width: ${(props: JumboStampSystemProps) => (props.active ? "0%" : "100%")};
 `;
 
 const StampShadow = styled.div`
@@ -131,6 +133,7 @@ interface Props {
 
 const JumboStamp = ({ stamp, show }: Props) => {
   const dispatch = useDispatch();
+  const showing = useSelector(selectShowingStamp);
   const [stampActive, setActive] = useState(false);
 
   const [change, setChange] = useState(false);
@@ -149,9 +152,12 @@ const JumboStamp = ({ stamp, show }: Props) => {
       onMouseEnter={() => setActive(true)}
       onMouseLeave={() => setActive(false)}
       onClick={() => {
-        dispatch(setShowingStamp(true));
-        show();
+        if (!showing) {
+          dispatch(setShowingStamp(true));
+          show();
+        }
       }}
+      active={showing}
     >
       <StampShadow active={stampActive}>
         <StampContainer active={stampActive}>

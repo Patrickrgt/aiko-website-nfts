@@ -63,9 +63,9 @@ const Stripes = styled.div`
   clip-path: polygon(
     0% 0px,
     /* top left */ 38% 0%,
-    /* top right */ 108% calc(100% - 4px),
-    /* bottom right */ calc(100% - 4px) 100%,
-    /* bottom left */ 0 calc(100% - 4px) /* bottom left */
+    /* top right */ 108% calc(100%),
+    /* bottom right */ calc(100%) 100%,
+    /* bottom left */ 0 calc(100%) /* bottom left */
   );
 
   animation: ${(props: StampRewardProps) =>
@@ -91,10 +91,10 @@ const Stripes = styled.div`
     clip-path: polygon(
       0% 0px,
       /* top left */ 33.33% 0%,
-      /* top right */ 100% calc(100% - 4px),
-      /* bottom right */ calc(100% - 4px) 100%,
+      /* top right */ 100% calc(100%),
+      /* bottom right */ calc(100%) 100%,
 
-      /* bottom left */ 0 calc(100% - 4px) /* bottom left */
+      /* bottom left */ 0 calc(100%) /* bottom left */
     );
     animation: ${(props: StampRewardProps) =>
       props.show
@@ -138,11 +138,16 @@ const Stripes = styled.div`
   }
 `;
 
+const DecorContainer = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
 const StampRewardsText = styled.p`
   font-size: 3rem;
   font-weight: 800;
   color: white;
-  margin-left: 4rem;
+  margin-left: 0.5rem;
 
   animation: ${(props: StampRewardProps) =>
     props.show
@@ -187,8 +192,11 @@ const TitleBar = () => {
   return (
     <StampRewardsTab show={showing}>
       <Stripes show={showing} />
-      <DecorVertical width={3} />
-      <StampRewardsText show={showing}> STAMP REWARDS</StampRewardsText>
+      <DecorContainer>
+        <DecorVertical width={3} />
+        <StampRewardsText show={showing}> STAMP REWARDS</StampRewardsText>
+      </DecorContainer>
+
       <CloseTabShadow>
         <CloseTab onClick={() => dispatch(setShowingRewards(false))}>
           x

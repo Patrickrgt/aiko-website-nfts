@@ -84,7 +84,7 @@ const transparent = keyframes`
 `;
 
 const apparent = keyframes`
-   0% {  background-color: #393939; }
+   0% {  background-color: #393939;  }
    75% { background-color: #393939; }
    100% {  background-color: rgba(0,0,0,0);}
 `;
@@ -94,7 +94,7 @@ const StyledPopup = styled.div`
   display: flex;
   top: 0;
   left: 0;
-  width: 100vw;
+  width: 100%;
   height: 100vh;
   justify-content: center;
   align-items: center;
@@ -102,6 +102,7 @@ const StyledPopup = styled.div`
   opacity: ${(props: Props) => (props.show ? 1 : 0)};
   visibility: ${(props: Props) => (props.show ? "" : "hidden")};
   transition: all ease 0.25s;
+  overflow-y: hidden;
 `;
 
 const Background = styled.button`
@@ -120,8 +121,6 @@ const MainContainer = styled.div`
   transition: all ease 0.25s;
   transform: scale(${(props: Props) => (props.show ? 1 : 0)});
   opacity: ${(props: Props) => (props.show ? 1 : 0)};
-
-  /* visibility: ${(props: Props) => (props.show ? "" : "hidden")}; */
   position: absolute;
   left: 0;
   right: 0;

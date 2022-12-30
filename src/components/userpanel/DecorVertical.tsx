@@ -1,31 +1,32 @@
 import { ReactNode, useEffect, useState } from "react";
 import styled from "styled-components";
 
+const Container = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 1rem;
+`;
+
 const DecorationSpan = styled.span`
   background: #e39858;
   padding: 20px calc(${(props: Props) => props.width}px * 2) 15px 2px;
-  position: absolute;
-  top: 2rem;
-  left: 4rem;
-  margin: auto;
+  position: relative;
+  margin-left: 0.25rem;
 `;
 
 const DecorationSpan2 = styled.span`
   background: #e39858;
   padding: 20px calc(${(props: Props) => props.width}px * 2) 15px 2px;
-  position: absolute;
-  top: 2rem;
-  left: 3rem;
-  margin: auto;
+  position: relative;
+  margin-left: 0.25rem;
 `;
 
 const DecorationSpan3 = styled.span`
   background: #e39858;
   padding: 20px calc(${(props: Props) => props.width}px * 2) 15px 2px;
-  position: absolute;
-  top: 2rem;
-  left: 1.75rem;
-  margin: auto;
+  position: relative;
+  margin-left: 0.25rem;
 `;
 
 interface Props {
@@ -34,11 +35,11 @@ interface Props {
 
 const DecorHorizontal = ({ width }: Props) => {
   return (
-    <>
-      <DecorationSpan width={width - 2} />
-      <DecorationSpan2 width={width - 1} />
-      <DecorationSpan3 width={width} />
-    </>
+    <Container>
+      <DecorationSpan width={width + 2} />
+      <DecorationSpan2 width={width} />
+      <DecorationSpan3 width={width - 2} />
+    </Container>
   );
 };
 
