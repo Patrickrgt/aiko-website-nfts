@@ -1,7 +1,12 @@
 import { ReactNode, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-import { selectShowingRewards, setShowingRewards } from "../../state/uiSlice";
+import {
+  selectShowingRewards,
+  setShowingRewards,
+  selectShowingStamp,
+  setShowingStamp,
+} from "../../state/uiSlice";
 import star from "../../assets/placeholders/star.png";
 import cursorhover from "../../assets/userpanel/cursorhover.png";
 import { stampIndividual } from "./JumboStampSystem";
@@ -121,9 +126,11 @@ interface JumboStampSystemProps {
 
 interface Props {
   stamp: StampType;
+  show: () => void;
 }
 
-const JumboStamp = ({ stamp }: Props) => {
+const JumboStamp = ({ stamp, show }: Props) => {
+  const dispatch = useDispatch();
   const [stampActive, setActive] = useState(false);
 
   const [change, setChange] = useState(false);
@@ -133,7 +140,7 @@ const JumboStamp = ({ stamp }: Props) => {
     setCount(count + 1);
     stamp.visible = change;
     stamp = { ...stamp, visible: change };
-    console.log(stamp.visible, stampIndividual[stamp.id]);
+    console.log(stamp.visible, stampIndividual[stamp.id].visible);
   }, [change]);
 
   return (
@@ -142,7 +149,8 @@ const JumboStamp = ({ stamp }: Props) => {
       onMouseEnter={() => setActive(true)}
       onMouseLeave={() => setActive(false)}
       onClick={() => {
-        setChange(true);
+        dispatch(setShowingStamp(true));
+        show();
       }}
     >
       <StampShadow active={stampActive}>

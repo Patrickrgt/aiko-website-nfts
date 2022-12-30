@@ -2,7 +2,12 @@ import { ReactNode, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled, { css, keyframes } from "styled-components";
 import { useEthers } from "@usedapp/core";
-import { selectShowingRewards, setShowingRewards } from "../../state/uiSlice";
+import {
+  selectShowingRewards,
+  setShowingRewards,
+  selectShowingStamp,
+  setShowingStamp,
+} from "../../state/uiSlice";
 import star from "../../assets/placeholders/star.png";
 import arrow from "../../assets/userpanel/arrow.png";
 
@@ -388,8 +393,7 @@ const IndividualStampContainer = styled.div`
 `;
 
 const MainContainer = styled.div`
-  display: ${(props: JumboStampSystemProps) =>
-    props.active ? "" : "  display: none"};
+  display: ${(props: JumboStampSystemProps) => (props.active ? "none" : "")};
 `;
 
 interface JumboStampSystemProps {
@@ -398,6 +402,8 @@ interface JumboStampSystemProps {
 
 const JumboStampSystem = () => {
   const dispatch = useDispatch();
+  const showing = useSelector(selectShowingStamp);
+
   const [hoverActive, setHoverActive] = useState(false);
   const [showLanding, setLanding] = useState(true);
 
@@ -458,7 +464,7 @@ const JumboStampSystem = () => {
               />
             ))}
 
-            <MainContainer active={showLanding}>
+            <MainContainer active={showing}>
               <StampTopContainer>
                 <StampTop />
                 <SeasonTab>
@@ -467,7 +473,11 @@ const JumboStampSystem = () => {
               </StampTopContainer>
               <StampsRow>
                 {stampIndividual.map((stamp: StampType) => (
-                  <JumboStamp key={stamp.id} stamp={stamp} />
+                  <JumboStamp
+                    key={stamp.id}
+                    stamp={stamp}
+                    show={() => (stamp.visible = true)}
+                  />
                 ))}
               </StampsRow>
               <RewardsContainer

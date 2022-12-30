@@ -2,7 +2,12 @@ import React, { ReactNode, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled, { css, keyframes } from "styled-components";
 import { useEthers } from "@usedapp/core";
-import { selectShowingRewards, setShowingRewards } from "../../state/uiSlice";
+import {
+  selectShowingRewards,
+  setShowingRewards,
+  selectShowingStamp,
+  setShowingStamp,
+} from "../../state/uiSlice";
 import star from "../../assets/placeholders/star.png";
 import arrow from "../../assets/userpanel/arrow.png";
 
@@ -192,7 +197,13 @@ const StampIndividual = ({ stampIndividual }: Props) => {
               content="Rewards"
               close={() => dispatch(setShowingRewards(true))}
             />
-            <ButtonBlue content="<" close={() => alert("close")} />
+            <ButtonBlue
+              content="<"
+              close={() => {
+                dispatch(setShowingStamp(false));
+                stampIndividual.visible = false;
+              }}
+            />
           </ButtonContainer>
         </StampTabRow>
       </IndividualStampTab>
