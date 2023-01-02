@@ -4,10 +4,10 @@ import { utils, BigNumber } from "ethers";
 import useGlobals from "../app/hooks/use-globals";
 
 import abi from "./aiko.json";
-import stampabi from "./aikostamps.json";
+import abiStamps from "./aikostamps.json";
 
 const CONTRACT_ADDR = "0x7f60e977a7b9677be1795efe5ad5516866ab69a6";
-const Interface = new utils.Interface(abi);
+const Interface = new utils.Interface(abiStamps);
 const ContractInstance = new Contract(CONTRACT_ADDR, Interface);
 
 export const useTotalSupply = (): number => {
