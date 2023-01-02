@@ -101,6 +101,29 @@ const appear = keyframes`
    100% { opacity: 1;  display:block;  }
 `;
 
+const slideRight = keyframes`
+   0% {}
+   70% {   width: 10%;  }
+   100% { width: 100%;   }
+`;
+
+const fadeIn = keyframes`
+   0% { transform: translateY(-10px);}
+   70% {  transform: translateY(-10px);  }
+   100% { transform: translateY(0);    }
+`;
+
+const typing = keyframes`
+  0% { width: 0; }
+  100% { width: 100%; }
+`;
+
+const blinkcaret = keyframes`
+  0% { border-color: transparent; }
+  50% { border-color: orange; }
+  100% { border-color: transparent; }
+`;
+
 const Container = styled.div`
   z-index: -1;
   animation: ${(props: StampIndividualProps) =>
@@ -108,7 +131,9 @@ const Container = styled.div`
       ? css`
           ${appear} 1.5s cubic-bezier(1,0,1,-0.07)
         `
-      : css``};
+      : css`
+          ${appear} 1.5s cubic-bezier(1,0,1,-0.07)
+        `};
   transition: all ease 3s;
   display: ${(props: StampIndividualProps) => (props.show ? "" : "none")};
 
@@ -118,6 +143,14 @@ const Container = styled.div`
 const IndividualStampTab = styled.div`
   background-color: #90a9e1;
   clip-path: var(--notched-md-tp);
+  animation: ${(props: StampIndividualProps) =>
+    props.show
+      ? css`
+          ${slideRight} 2s cubic-bezier(1,0,1,-0.07)
+        `
+      : css`
+          ${slideRight} 1.5s cubic-bezier(1,0,1,-0.07)
+        `};
 `;
 
 const StampTabRow = styled.div`
@@ -187,7 +220,7 @@ const Stripes = styled.div`
     animation: ${(props: StampIndividualProps) =>
       props.show
         ? css`
-            ${slideForward} 4.5s cubic-bezier(1,0,0,1)
+            ${slideForward} 4.75s cubic-bezier(1,0,0,1)
           `
         : css`
             ${slideBack} 1s ease-out forwards
@@ -216,7 +249,7 @@ const Stripes = styled.div`
     animation: ${(props: StampIndividualProps) =>
       props.show
         ? css`
-            ${slideForward} 4.5s cubic-bezier(1,0,0,1)
+            ${slideForward} 5s cubic-bezier(1,0,0,1)
           `
         : css`
             ${slideBack} 1.2s ease-out forwards
@@ -286,6 +319,14 @@ const StampText = styled.p`
   overflow: hidden;
   font-weight: 400;
   color: #4a4b4c;
+  animation: ${(props: StampIndividualProps) =>
+    props.show
+      ? css`
+          /* ${fadeIn} 2s cubic-bezier(1,0,1,-0.07) */
+        `
+      : css`
+          /* ${fadeIn} 1.5s cubic-bezier(1,0,1,-0.07) */
+        `};
 `;
 
 interface StampIndividualProps {
@@ -304,7 +345,7 @@ const StampIndividual = ({ stampIndividual }: Props) => {
 
   return (
     <Container show={stampIndividual.visible}>
-      <IndividualStampTab>
+      <IndividualStampTab show={stampIndividual.visible}>
         <StampTabRow>
           <DecorVertical width={3} />
           <StampTitle>
@@ -337,7 +378,7 @@ const StampIndividual = ({ stampIndividual }: Props) => {
           <StampEditionCol>
             <TextContainer>
               <TextShadow>
-                <StampText>
+                <StampText show={stampIndividual.visible}>
                   It's easy to find the Explorer Stamps, but not easy to collect
                   them, you need to be an active member through our community,
                   and explore the events, contests, and much more with youir

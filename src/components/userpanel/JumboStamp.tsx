@@ -1,6 +1,6 @@
 import { ReactNode, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import styled from "styled-components";
+import styled, { css, keyframes } from "styled-components";
 import {
   selectShowingRewards,
   setShowingRewards,
@@ -22,6 +22,20 @@ export interface StampType {
   visible: boolean;
 }
 
+const fadeOut = keyframes`
+   0% { transition: all ease; opacity: 1;}
+   75% {  opacity: 1; }
+   85% {   opacity: 0; }
+   100% { opacity: 1; }
+`;
+
+const fadeIn = keyframes`
+   0% { transition: all ease;opacity: 0;}
+   70% { transition: all ease; opacity: 0;}
+   75% { opacity: 1;}
+   100% { opacity: 1; }
+`;
+
 const Stamp = styled.button`
   display: flex;
   flex-direction: column;
@@ -29,8 +43,9 @@ const Stamp = styled.button`
   text-align: center;
   cursor: url(${cursorhover}), auto;
   transition: width ease 1.5s;
-  background-color: #d8dbe0;
-  width: ${(props: JumboStampSystemProps) => (props.active ? "0%" : "100%")};
+  /* background-color: #d8dbe0; */
+  /* width: ${(props: JumboStampSystemProps) =>
+    props.active ? "0%" : "100%"}; */
 `;
 
 const StampShadow = styled.div`

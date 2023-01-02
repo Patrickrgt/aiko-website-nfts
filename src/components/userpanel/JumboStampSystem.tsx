@@ -190,11 +190,91 @@ const changeView = keyframes`
    100% { position: absolute; top: 0; left: 0; opacity: 0; }
 `;
 
+const changeViewBack = keyframes`
+   0% { transition: all ease;  height: 1px;}
+   70% {  position: static; height: 100%;}
+   100% { position: static; height: 100%;}
+`;
+
 const heightChange = keyframes`
    0% { transition: all ease; height: 100%;}
    50% {   height: 100%; }
    75% {   height: 10%; }
    100% { height: 100%; }
+`;
+
+const heightChangeBack = keyframes`
+   0% { transition: all ease; height: 100%;}
+   10% { height: 10%;}
+   50% {   height: 17%; }
+   75% {   height: 74%; }
+   100% { height: 100%; }
+`;
+
+const widthChange = keyframes`
+   0% { transition: all ease; width: 100%;}
+   50% {   width: 100%; }
+   75% {   width: 10%; }
+   100% { width: 100%; }
+`;
+
+const widthChangeBack = keyframes`
+   0% { opacity: 0; transition: all ease; width: 1%;}
+   30% { opacity: 0; transition: all ease; width: 1%;}
+   45% { opacity: 1; width: 100%;}
+   100% { width: 100%; }
+`;
+
+const widthChange2 = keyframes`
+   0% { transition: all ease; width: 100%;}
+   75% {   width: 100%; }
+   85% {   width: 10%; }
+   100% { width: 100%; }
+`;
+
+const widthChangeBack2 = keyframes`
+   0% { transition: all ease; width: 10%;}
+   70% { transition: all ease; width: 10%;}
+   75% { width: 100%;}
+   100% { width: 100%; }
+`;
+
+const fadeIn = keyframes`
+   0% { transition: all ease; opacity: 1;}
+   75% {   opacity: 1; }
+   85% {   opacity: 0; }
+   100% { opacity: 1; }
+`;
+
+const fadeInBack = keyframes`
+   0% { transition: all ease; opacity: 0; transform: translateY(100px);}
+   70% { transition: all ease; opacity: 0; transform: translateY(100px);}
+   75% { opacity: 1; transform: translateY(0);}
+   100% { opacity: 1; transform: translateY(0);}
+`;
+
+const widthIn = keyframes`
+   0% { transition: all ease; width: 100%;}
+   100% { width: 0%; width: 100%;}
+`;
+
+const widthInBack = keyframes`
+   0% { transition: all ease; width: 0%;}
+   75% {   width: 0%; }
+   85% {   width: 0%; }
+   100% { width: 100%; }
+`;
+
+const moveIn = keyframes`
+   0% { transition: all ease;}
+   100% { width: 0%; width: 100%;}
+`;
+
+const moveInBack = keyframes`
+   0% { transition: all ease; transform: translateX(-100%);}
+   75% {   width: 0%; }
+   85% {   width: 0%; }
+   100% { width: 100%; }
 `;
 
 const JumboContainer = styled.div`
@@ -214,9 +294,11 @@ const JumboShadow = styled.div`
       ? css`
           ${heightChange} 1.5s cubic-bezier(1,0,0,1)
         `
-      : css``};
-  animation-play-state: ${(props: JumboStampSystemProps) =>
-    props.active ? "running" : "paused"};
+      : css`
+          ${heightChangeBack} 2s cubic-bezier(1,0,0,1)
+        `};
+  /* animation-play-state: ${(props: JumboStampSystemProps) =>
+    props.active ? "running" : "paused"}; */
 `;
 
 const JumboInnerBorder = styled.div`
@@ -229,7 +311,9 @@ const JumboInnerBorder = styled.div`
       ? css`
           ${heightChange} 1.5s cubic-bezier(1,0,0,1)
         `
-      : css``};
+      : css`
+          ${heightChangeBack} 1.5s cubic-bezier(1,0,0,1)
+        `};
   animation-play-state: ${(props: JumboStampSystemProps) =>
     props.active ? "running" : "paused"};
 `;
@@ -269,6 +353,14 @@ const JumboInnerContainer = styled.div`
 
 const StampTopContainer = styled.div`
   position: relative;
+  animation: ${(props: JumboStampSystemProps) =>
+    props.active
+      ? css`
+          ${widthChange} 2s cubic-bezier(1,0,0,1)
+        `
+      : css`
+          ${widthChangeBack} 2s cubic-bezier(1,0,0,1)
+        `};
 `;
 
 const SeasonTab = styled.div`
@@ -286,6 +378,7 @@ const SeasonText = styled.p`
   color: white;
   font-size: 2rem;
   white-space: nowrap;
+  z-index: 6;
 `;
 
 const StampTop = styled.div`
@@ -294,9 +387,21 @@ const StampTop = styled.div`
   padding: 1.75rem 1rem;
 `;
 
+const StampsRowContainer = styled.div`
+  background-color: #d8dbe0;
+`;
+
 const StampsRow = styled.div`
   display: flex;
   flex-direction: row;
+  animation: ${(props: JumboStampSystemProps) =>
+    props.active
+      ? css`
+          ${fadeIn} 2s linear
+        `
+      : css`
+          ${fadeInBack} 2s linear
+        `};
 `;
 
 const RewardsContainer = styled.div`
@@ -315,6 +420,14 @@ const ArrowDecorationDiv = styled.div`
 
   transform: ${(props: JumboStampSystemProps) =>
     props.active ? "translate(-50%, 0)" : "translate(0px, 0)"};
+  animation: ${(props: JumboStampSystemProps) =>
+    props.hide
+      ? css`
+          ${widthIn} 2.5s cubic-bezier(1,0,0,1)
+        `
+      : css`
+          ${widthInBack} 2.25s cubic-bezier(1,0,0,1)
+        `};
 
   &:before {
     position: absolute;
@@ -357,8 +470,16 @@ const ArrowDecoration = styled.img`
   transform: ${(props: JumboStampSystemProps) =>
     props.active ? "translate(10%, 0)" : "translate(0px, 0)"};
   transform: ${(props: JumboStampSystemProps) =>
-    props.hide ? "translate(-60%)" : ""};
+    props.hide ? "translate(5%) scale(1.6)" : ""};
   transition: all ease 1.25s;
+  animation: ${(props: JumboStampSystemProps) =>
+    props.hide
+      ? css`
+          ${moveIn} 2.1s cubic-bezier(1,0,0,1)
+        `
+      : css`
+          ${moveInBack} 2.1s cubic-bezier(1,0,0,1)
+        `};
 `;
 
 const RewardsHeaderContainer = styled.div`
@@ -437,9 +558,10 @@ const MainContainer = styled.div`
           ${changeView} 1.5s cubic-bezier(1,0,1,-0.07)
         `
       : css``};
-  transition: width ease 2s;
+  transition: visibility ease 2s;
   animation-fill-mode: forwards;
-  width: ${(props: JumboStampSystemProps) => (props.active ? "10%" : "100%")};
+  visibility: ${(props: JumboStampSystemProps) =>
+    props.active ? "hidden" : "visible"};
   /* display: ${(props: JumboStampSystemProps) =>
     props.active ? "none" : ""}; */
 `;
@@ -514,21 +636,23 @@ const JumboStampSystem = () => {
             ))}
 
             <MainContainer active={showing}>
-              <StampTopContainer>
+              <StampTopContainer active={showing}>
                 <StampTop />
                 <SeasonTab>
                   <SeasonText>Season 1</SeasonText>
                 </SeasonTab>
               </StampTopContainer>
-              <StampsRow>
-                {stampIndividual.map((stamp: StampType) => (
-                  <JumboStamp
-                    key={stamp.id}
-                    stamp={stamp}
-                    show={() => (stamp.visible = true)}
-                  />
-                ))}
-              </StampsRow>
+              <StampsRowContainer>
+                <StampsRow active={showing}>
+                  {stampIndividual.map((stamp: StampType) => (
+                    <JumboStamp
+                      key={stamp.id}
+                      stamp={stamp}
+                      show={() => (stamp.visible = true)}
+                    />
+                  ))}
+                </StampsRow>
+              </StampsRowContainer>
               <RewardsContainer
                 onMouseEnter={() => setHoverActive(true)}
                 onMouseLeave={() => setHoverActive(false)}

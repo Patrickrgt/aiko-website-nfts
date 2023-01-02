@@ -46,19 +46,14 @@ export const useTotalSupply = (): number => {
 //   return value?.[0];
 // };
 
-export function useBalanceOf(): number | undefined {
+export function useBalanceOf(): any | undefined {
   const { account } = useEthers();
-  const one = 1;
-
-  const { value, error } =
+  const { value: batch, error } =
     useCall(
       {
         contract: ContractInstance,
-        method: "balanceOfBatch",
-        args: [
-          [account, account],
-          ["1", "2"],
-        ],
+        method: "totalSupply",
+        args: ["1"],
       },
       {
         chainId: 137,
@@ -68,7 +63,7 @@ export function useBalanceOf(): number | undefined {
     console.error(error.message);
     return undefined;
   }
-  return value?.[0];
+  return batch;
 }
 
 // export const useBalanceOf = () => {
