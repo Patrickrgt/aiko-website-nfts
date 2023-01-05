@@ -25,29 +25,13 @@ export const useTotalSupply = (): number => {
 
 export function useBalanceOf(): number[] | undefined {
   const { account } = useEthers();
-  const stampCollection: number[] = [];
+  const ids = Array.from({ length: 12 }, (_, i) => i + 1);
   const { value, error } =
     useCall(
       {
         contract: ContractInstance,
         method: "balanceOfBatch",
-        args: [
-          [
-            account,
-            account,
-            account,
-            account,
-            account,
-            account,
-            account,
-            account,
-            account,
-            account,
-            account,
-            account,
-          ],
-          [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
-        ],
+        args: [ids.map((_) => account), ids],
       },
       {
         chainId: 137,
@@ -57,8 +41,5 @@ export function useBalanceOf(): number[] | undefined {
     console.error(error.message);
     return undefined;
   }
-  value?.[0].forEach((result: BigNumber, id: number) => {
-    stampCollection.push(Number(result));
-  });
-  return stampCollection;
+  return value?.[0].map((result: BigNumber) => Number(result));
 }
