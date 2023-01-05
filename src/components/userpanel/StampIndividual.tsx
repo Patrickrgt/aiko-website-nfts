@@ -85,6 +85,18 @@ const edition: EditionType[] = [
   },
 ];
 
+const fadeUp = keyframes`
+   0% { transition: all ease; opacity: 0; transform: translateY(100px);}
+   40% { transition: all ease; opacity: 0; transform: translateY(100px);}
+   100% { opacity: 1; transform: translateY(0);}
+`;
+
+const fadeDown = keyframes`
+   0% { transition: all ease; opacity: 0; transform: translateY(-100px);}
+   80% { transition: all ease; opacity: 0; transform: translateY(-100px);}
+   100% { opacity: 1; transform: translateY(0);}
+`;
+
 const slideForward = keyframes`
    0% { height: 10%; width: 10%; visibility: 0 }
    100% { height: 100%; width: 100%; visibility: 1}
@@ -97,13 +109,13 @@ const slideBack = keyframes`
 
 const appear = keyframes`
    0% { transition: all ease; position: absolute; opacity: 0; }
-   70% {   opacity: 0; position: static; }
+   25% {   opacity: 1; position: static; display:block;}
    100% { opacity: 1;  display:block;  }
 `;
 
 const slideRight = keyframes`
-   0% {}
-   70% {   width: 10%;  }
+   0% {opacity: 0;}
+   40% {   width: 10%;  }
    100% { width: 100%;   }
 `;
 
@@ -129,15 +141,13 @@ const Container = styled.div`
   animation: ${(props: StampIndividualProps) =>
     props.show
       ? css`
-          ${appear} 1.5s cubic-bezier(1,0,1,-0.07)
+          ${appear} 1s cubic-bezier(1,0,1,-0.07)
         `
       : css`
-          ${appear} 1.5s cubic-bezier(1,0,1,-0.07)
+          ${appear} 1s cubic-bezier(1,0,1,-0.07)
         `};
   transition: all ease 3s;
   display: ${(props: StampIndividualProps) => (props.show ? "" : "none")};
-
-  /* display: ${(props: StampIndividualProps) => (props.show ? "" : "none")}; */
 `;
 
 const IndividualStampTab = styled.div`
@@ -146,11 +156,9 @@ const IndividualStampTab = styled.div`
   animation: ${(props: StampIndividualProps) =>
     props.show
       ? css`
-          ${slideRight} 2s cubic-bezier(1,0,1,-0.07)
+          ${slideRight} 1.5s cubic-bezier(1,0,0,1)
         `
-      : css`
-          ${slideRight} 1.5s cubic-bezier(1,0,1,-0.07)
-        `};
+      : css``};
 `;
 
 const StampTabRow = styled.div`
@@ -158,6 +166,7 @@ const StampTabRow = styled.div`
   align-items: center;
   flex-direction: row;
   justify-content: space-between;
+  padding: 1rem 0;
 `;
 
 const StampTitle = styled.h1`
@@ -192,11 +201,9 @@ const Stripes = styled.div`
   animation: ${(props: StampIndividualProps) =>
     props.show
       ? css`
-          ${slideForward} 4.5s cubic-bezier(1,0,0,1)
+          ${slideForward} 2.5s cubic-bezier(1,0,0,1)
         `
-      : css`
-          ${slideBack} .7s ease-out forwards
-        `};
+      : css``};
   animation-play-state: ${(props: StampIndividualProps) =>
     props.show ? "running" : "paused"};
 
@@ -220,11 +227,9 @@ const Stripes = styled.div`
     animation: ${(props: StampIndividualProps) =>
       props.show
         ? css`
-            ${slideForward} 4.75s cubic-bezier(1,0,0,1)
+            ${slideForward} 2.75s cubic-bezier(1,0,0,1)
           `
-        : css`
-            ${slideBack} 1s ease-out forwards
-          `};
+        : css``};
     animation-play-state: ${(props: StampIndividualProps) =>
       props.show ? "running" : "paused"};
   }
@@ -249,11 +254,9 @@ const Stripes = styled.div`
     animation: ${(props: StampIndividualProps) =>
       props.show
         ? css`
-            ${slideForward} 5s cubic-bezier(1,0,0,1)
+            ${slideForward} 3s cubic-bezier(1,0,0,1)
           `
-        : css`
-            ${slideBack} 1.2s ease-out forwards
-          `};
+        : css``};
     animation-play-state: ${(props: StampIndividualProps) =>
       props.show ? "running" : "paused"};
   }
@@ -264,6 +267,18 @@ const ButtonContainer = styled.div`
   flex: 1;
   justify-content: flex-end;
   margin-right: 1rem;
+  animation: ${(props: StampIndividualProps) =>
+    props.show
+      ? css`
+          ${fadeUp} 2.25s cubic-bezier(1,0,0,1)
+        `
+      : css``};
+  animation-play-state: ${(props: StampIndividualProps) =>
+    props.show ? "running" : "paused"};
+`;
+
+const ButtonMargin = styled.span`
+  margin: 0 0.5rem;
 `;
 
 const IndividualStampContainer = styled.div`
@@ -271,6 +286,7 @@ const IndividualStampContainer = styled.div`
   padding-bottom: 0.5rem;
   clip-path: var(--notched-md-bt);
 `;
+
 const IndividualStampRow = styled.div`
   display: flex;
   flex-direction: row;
@@ -303,6 +319,12 @@ const TextContainer = styled.div`
 const TextShadow = styled.div`
   background-color: #494a4b;
   padding: 0.25rem 0.25rem 0.25rem 0.25rem;
+  animation: ${(props: StampIndividualProps) =>
+    props.show
+      ? css`
+          ${fadeDown} 2s cubic-bezier(1,0,0,1)
+        `
+      : css``};
 `;
 
 const StampText = styled.p`
@@ -322,11 +344,9 @@ const StampText = styled.p`
   animation: ${(props: StampIndividualProps) =>
     props.show
       ? css`
-          /* ${fadeIn} 2s cubic-bezier(1,0,1,-0.07) */
+          ${fadeDown} 2.5s cubic-bezier(1,0,0,1)
         `
-      : css`
-          /* ${fadeIn} 1.5s cubic-bezier(1,0,1,-0.07) */
-        `};
+      : css``};
 `;
 
 interface StampIndividualProps {
@@ -352,18 +372,23 @@ const StampIndividual = ({ stampIndividual }: Props) => {
             <Stripes show={stampIndividual.visible} />
             {stampIndividual.name}
           </StampTitle>
-          <ButtonContainer>
+          <ButtonContainer show={stampIndividual.visible}>
             <ButtonBlue
+              small={stampIndividual.visible}
               content="Rewards"
               close={() => dispatch(setShowingRewards(true))}
             />
+            <ButtonMargin />
             <ButtonBlue
-              content="<"
+              small={stampIndividual.visible}
+              symbol={stampIndividual.visible}
+              content="◀"
               close={() => {
                 dispatch(setShowingStamp(false));
                 stampIndividual.visible = false;
               }}
             />
+            <ButtonMargin />
           </ButtonContainer>
         </StampTabRow>
       </IndividualStampTab>
@@ -371,13 +396,14 @@ const StampIndividual = ({ stampIndividual }: Props) => {
         <IndividualStampRow>
           {editionJumbo.map((editionJumbo: EditionJumboType) => (
             <StampEditionJumbo
+              visible={stampIndividual.visible}
               key={editionJumbo.name}
               editionJumbo={stampIndividual}
             />
           ))}
           <StampEditionCol>
             <TextContainer>
-              <TextShadow>
+              <TextShadow show={stampIndividual.visible}>
                 <StampText show={stampIndividual.visible}>
                   It's easy to find the Explorer Stamps, but not easy to collect
                   them, you need to be an active member through our community,
@@ -387,8 +413,13 @@ const StampIndividual = ({ stampIndividual }: Props) => {
               </TextShadow>
             </TextContainer>
             <StampEditionRow>
-              {stampIndividual.edition.map((edition: EditionType) => (
-                <StampEdition key={edition.name} edition={edition} />
+              {stampIndividual.edition.map((edition: EditionType, index) => (
+                <StampEdition
+                  numberId={index + 1}
+                  visible={stampIndividual.visible}
+                  key={index}
+                  edition={edition}
+                />
               ))}
             </StampEditionRow>
           </StampEditionCol>

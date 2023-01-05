@@ -1,6 +1,6 @@
 import { ReactNode, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import styled from "styled-components";
+import styled, { css, keyframes } from "styled-components";
 import { selectShowingRewards, setShowingRewards } from "../../state/uiSlice";
 import star from "../../assets/placeholders/star.png";
 import explorer from "../../assets/userpanel/explorer.png";
@@ -17,12 +17,26 @@ export interface EditionJumboType {
   tier3: boolean;
 }
 
+const fadeLeft = keyframes`
+   0% { transition: all ease; opacity: 0; transform: translateX(-100px);}
+   30% { transition: all ease; opacity: 0; transform: translateX(-100px);}
+   100% { opacity: 1; transform: translateY(0);}
+`;
+
 const Stamp = styled.div`
   display: flex;
   flex-direction: column;
   padding: 2rem 1rem;
   text-align: center;
   cursor: url(${cursorhover}), auto;
+  animation: ${(props: JumboStampSystemProps) =>
+    props.visible
+      ? css`
+          ${fadeLeft} 2.15s cubic-bezier(1,0,0,1)
+        `
+      : css``};
+  animation-play-state: ${(props: JumboStampSystemProps) =>
+    props.visible ? "running" : "paused"};
 `;
 
 const StampShadow = styled.div`
@@ -113,17 +127,20 @@ const StampCollectedStar = styled.img`
 
 interface JumboStampSystemProps {
   active?: boolean;
+  visible?: boolean;
 }
 
 interface Props {
   editionJumbo: EditionJumboType;
+  visible: boolean;
 }
 
-const StampEditionJumbo = ({ editionJumbo }: Props) => {
+const StampEditionJumbo = ({ visible, editionJumbo }: Props) => {
   const [stampActive, setActive] = useState(false);
 
   return (
     <Stamp
+      visible={visible}
       onMouseEnter={() => setActive(true)}
       onMouseLeave={() => setActive(false)}
     >

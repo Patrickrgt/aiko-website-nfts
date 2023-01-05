@@ -249,26 +249,13 @@ const UserProfile = () => {
   const { ens } = useLookupAddress(account);
 
   const [stampsHeld, setStampsHeld] = useState(0);
-  const [test, setTest] = useState(0);
-
   const stamps = useBalanceOf();
-  console.log(stamps);
-  // useEffect(() => {
-  //   if (account) {
-  //     const stamps = useBalanceOf();
-  //     console.log(stamps);
-  //   }
-  // }, [account]);
 
-  // useEffect(() => {
-  //   if (account && stamps) {
-  //     setStampsHeld(stamps.match(/1/g).length);
-  //     console.log(stamps.match(/1/g).length);
-  //   } else {
-  //     console.log("no account");
-  //     return;
-  //   }
-  // }, [stamps]);
+  useEffect(() => {
+    if (stamps) {
+      setStampsHeld(stamps.reduce((total, current) => total + current, 0));
+    }
+  }, [stamps]);
 
   return (
     <NavUserContainer>

@@ -1,6 +1,6 @@
 import { ReactNode, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import styled from "styled-components";
+import styled, { css, keyframes } from "styled-components";
 import { selectShowingRewards, setShowingRewards } from "../../state/uiSlice";
 import star from "../../assets/placeholders/star.png";
 import cursorhover from "../../assets/userpanel/cursorhover.png";
@@ -12,12 +12,30 @@ export interface EditionType {
   collected: boolean;
 }
 
+const fadeUp = keyframes`
+   0% { transition: all ease; opacity: 0; transform: translateY(100px);}
+   30% { transition: all ease; opacity: 0; transform: translateY(100px);}
+   100% { opacity: 1; transform: translateY(0);}
+`;
+
 const Stamp = styled.div`
+  opacity: 0;
   display: flex;
   flex-direction: column;
   padding: 0 0 2rem 0;
   text-align: center;
   cursor: url(${cursorhover}), auto;
+  animation: ${(props: JumboStampSystemProps) =>
+    props.visible
+      ? css`
+          ${fadeUp} cubic-bezier(1,0,0,1) forwards
+        `
+      : css``};
+  animation-duration: ${(props: JumboStampSystemProps) =>
+    `calc(${props.numberId}s / 2)`};
+  animation-delay: 1s;
+  animation-play-state: ${(props: JumboStampSystemProps) =>
+    props.visible ? "running" : "paused"};
 `;
 
 const StampShadow = styled.div`
@@ -133,17 +151,23 @@ const StampCollectedText = styled.p`
 
 interface JumboStampSystemProps {
   active?: boolean;
+  visible?: boolean;
+  numberId?: number;
 }
 
 interface Props {
   edition: EditionType;
+  visible: boolean;
+  numberId: number;
 }
 
-const StampEdition = ({ edition }: Props) => {
+const StampEdition = ({ visible, numberId, edition }: Props) => {
   const [stampActive, setActive] = useState(false);
 
   return (
     <Stamp
+      numberId={numberId}
+      visible={visible}
       onMouseEnter={() => setActive(true)}
       onMouseLeave={() => setActive(false)}
     >

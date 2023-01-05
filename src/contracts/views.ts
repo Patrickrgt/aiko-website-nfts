@@ -23,37 +23,31 @@ export const useTotalSupply = (): number => {
   return Number(value.toString());
 };
 
-// export const useBalanceOf = () => {
-//   const globals = useGlobals();
-
-//   const { account } = useEthers();
-
-//   const { value, error } =
-//     useCall(
-//       {
-//         contract: ContractInstance,
-//         method: "name",
-//         args: [],
-//       },
-//       {
-//         chainId: 137,
-//       }
-//     ) ?? {};
-//   if (error) {
-//     console.error(error.message);
-//     return undefined;
-//   }
-//   return value?.[0];
-// };
-
-export function useBalanceOf(): any | undefined {
+export function useBalanceOf(): number[] | undefined {
   const { account } = useEthers();
-  const { value: batch, error } =
+  const stampCollection: number[] = [];
+  const { value, error } =
     useCall(
       {
         contract: ContractInstance,
-        method: "totalSupply",
-        args: ["1"],
+        method: "balanceOfBatch",
+        args: [
+          [
+            account,
+            account,
+            account,
+            account,
+            account,
+            account,
+            account,
+            account,
+            account,
+            account,
+            account,
+            account,
+          ],
+          [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+        ],
       },
       {
         chainId: 137,
@@ -63,36 +57,8 @@ export function useBalanceOf(): any | undefined {
     console.error(error.message);
     return undefined;
   }
-  return batch;
+  value?.[0].forEach((result: BigNumber, id: number) => {
+    stampCollection.push(Number(result));
+  });
+  return stampCollection;
 }
-
-// export const useBalanceOf = () => {
-//   const globals = useGlobals();
-
-//   const { account } = useEthers();
-
-//   const [batchBalance] = useContractCall({
-//     abi: new utils.Interface(stampabi),
-//     address: globals.AIKO,
-//     method: "balanceOfBatch",
-//     args: [
-//       [
-//         account,
-//         account,
-//         account,
-//         account,
-//         account,
-//         account,
-//         account,
-//         account,
-//         account,
-//         account,
-//         account,
-//         account,
-//       ],
-//       [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
-//     ],
-//   }) ?? [BigNumber.from(0)];
-
-//   return batchBalance.toString();
-// };

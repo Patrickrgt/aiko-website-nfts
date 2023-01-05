@@ -10,6 +10,7 @@ import {
 } from "../../state/uiSlice";
 import star from "../../assets/placeholders/star.png";
 import arrow from "../../assets/userpanel/arrow.png";
+import { useBalanceOf } from "../../contracts/views";
 
 // import { useBalanceOf } from "../../contracts/views";
 
@@ -49,7 +50,7 @@ export const stampIndividual: IndividualStampType[] = [
       {
         image: holder1,
         name: "1st Edition",
-        collected: true,
+        collected: false,
       },
       {
         image: holder2,
@@ -63,71 +64,43 @@ export const stampIndividual: IndividualStampType[] = [
       },
     ],
     required: 3,
-    tier1: true,
+    tier1: false,
     tier2: false,
-    tier3: false,
-    visible: false,
-  },
-  {
-    name: "Explorer",
-    image: explorer,
-    id: 1,
-    character: "Mimi2",
-    edition: [
-      {
-        image: explorer1,
-        name: "1st Edition",
-        collected: true,
-      },
-      {
-        image: explorer2,
-        name: "2nd Edition",
-        collected: true,
-      },
-      {
-        image: explorer3,
-        name: "3rd Edition",
-        collected: false,
-      },
-    ],
-    required: 3,
-    tier1: true,
-    tier2: true,
     tier3: false,
     visible: false,
   },
   {
     name: "Creator",
     image: creator,
-    id: 2,
+    id: 1,
     character: "Mimi3",
     edition: [
       {
         image: creator1,
         name: "1st Edition",
-        collected: true,
+        collected: false,
       },
       {
         image: creator2,
         name: "2nd Edition",
-        collected: true,
+        collected: false,
       },
       {
         image: creator3,
         name: "3rd Edition",
-        collected: true,
+        collected: false,
       },
     ],
     required: 3,
-    tier1: true,
-    tier2: true,
-    tier3: true,
+    tier1: false,
+    tier2: false,
+    tier3: false,
     visible: false,
   },
   {
     name: "Supporter",
     image: supporter,
-    id: 3,
+    id: 2,
     character: "Mimi4",
     edition: [
       {
@@ -142,6 +115,34 @@ export const stampIndividual: IndividualStampType[] = [
       },
       {
         image: supporter3,
+        name: "3rd Edition",
+        collected: false,
+      },
+    ],
+    required: 3,
+    tier1: false,
+    tier2: false,
+    tier3: false,
+    visible: false,
+  },
+  {
+    name: "Explorer",
+    image: explorer,
+    id: 3,
+    character: "Mimi2",
+    edition: [
+      {
+        image: explorer1,
+        name: "1st Edition",
+        collected: false,
+      },
+      {
+        image: explorer2,
+        name: "2nd Edition",
+        collected: false,
+      },
+      {
+        image: explorer3,
         name: "3rd Edition",
         collected: false,
       },
@@ -186,20 +187,20 @@ const fullBackY = keyframes`
 
 const changeView = keyframes`
    0% { transition: all ease; opacity: 1;  height: 100%;}
-   70% {  position: absolute; top: 0; left: 0; opacity: 0; height: 1px; }
+   10% { transition: all ease; opacity: 0;  height: 100%;}
+   25% {  position: absolute; top: 0; left: 0; opacity: 0; height: 1px; }
    100% { position: absolute; top: 0; left: 0; opacity: 0; }
 `;
 
 const changeViewBack = keyframes`
    0% { transition: all ease;  height: 1px;}
-   70% {  position: static; height: 100%;}
+   50% {  position: static; height: 100%;}
    100% { position: static; height: 100%;}
 `;
 
 const heightChange = keyframes`
    0% { transition: all ease; height: 100%;}
-   50% {   height: 100%; }
-   75% {   height: 10%; }
+   10% { height: 10%;}
    100% { height: 100%; }
 `;
 
@@ -295,10 +296,8 @@ const JumboShadow = styled.div`
           ${heightChange} 1.5s cubic-bezier(1,0,0,1)
         `
       : css`
-          ${heightChangeBack} 2s cubic-bezier(1,0,0,1)
+          ${heightChangeBack} 1.5s cubic-bezier(1,0,0,1)
         `};
-  /* animation-play-state: ${(props: JumboStampSystemProps) =>
-    props.active ? "running" : "paused"}; */
 `;
 
 const JumboInnerBorder = styled.div`
@@ -356,10 +355,10 @@ const StampTopContainer = styled.div`
   animation: ${(props: JumboStampSystemProps) =>
     props.active
       ? css`
-          ${widthChange} 2s cubic-bezier(1,0,0,1)
+          ${widthChange} 1.5s cubic-bezier(1,0,0,1)
         `
       : css`
-          ${widthChangeBack} 2s cubic-bezier(1,0,0,1)
+          ${widthChangeBack} 1.5s cubic-bezier(1,0,0,1)
         `};
 `;
 
@@ -397,10 +396,10 @@ const StampsRow = styled.div`
   animation: ${(props: JumboStampSystemProps) =>
     props.active
       ? css`
-          ${fadeIn} 2s linear
+          ${fadeIn} 1.5s linear
         `
       : css`
-          ${fadeInBack} 2s linear
+          ${fadeInBack} 1.5s linear
         `};
 `;
 
@@ -423,10 +422,10 @@ const ArrowDecorationDiv = styled.div`
   animation: ${(props: JumboStampSystemProps) =>
     props.hide
       ? css`
-          ${widthIn} 2.5s cubic-bezier(1,0,0,1)
+          ${widthIn} 1.75s cubic-bezier(1,0,0,1)
         `
       : css`
-          ${widthInBack} 2.25s cubic-bezier(1,0,0,1)
+          ${widthInBack} 1.75s cubic-bezier(1,0,0,1)
         `};
 
   &:before {
@@ -475,10 +474,10 @@ const ArrowDecoration = styled.img`
   animation: ${(props: JumboStampSystemProps) =>
     props.hide
       ? css`
-          ${moveIn} 2.1s cubic-bezier(1,0,0,1)
+          ${moveIn} 1.6s cubic-bezier(1,0,0,1)
         `
       : css`
-          ${moveInBack} 2.1s cubic-bezier(1,0,0,1)
+          ${moveInBack} 1.6s cubic-bezier(1,0,0,1)
         `};
 `;
 
@@ -555,7 +554,7 @@ const MainContainer = styled.div`
   animation: ${(props: JumboStampSystemProps) =>
     props.active
       ? css`
-          ${changeView} 1.5s cubic-bezier(1,0,1,-0.07)
+          ${changeView} 1s cubic-bezier(1,0,1,-0.07)
         `
       : css``};
   transition: visibility ease 2s;
@@ -577,42 +576,34 @@ const JumboStampSystem = () => {
 
   const [hoverActive, setHoverActive] = useState(false);
   const [showLanding, setLanding] = useState(true);
-
-  const { account } = useEthers();
-
   const [visible, setVisible] = useState(true);
 
   function handleShow() {
     setVisible(!visible);
   }
 
-  // const stamps = useBalanceOf();
-  // console.log(stamps, "stamps");
-  // const stampObj = stamp;
+  const { account } = useEthers();
+  const stamps = useBalanceOf();
 
-  // useEffect(() => {
-  //   const stampTiers = stamps.replaceAll(",", "");
-  //   const stampHoldings = [];
-  //   for (let i = 0; i < stampTiers.length; i++) {
-  //     if (stampTiers[i] === "1") {
-  //       stampHoldings[i] = true;
-  //     } else {
-  //       stampHoldings[i] = false;
-  //     }
-  //   }
+  console.log(stamps);
 
-  //   let k = 0;
-  //   for (let i = 0; i < Math.floor(stampHoldings.length / 3); i++) {
-  //     if (i > 0) {
-  //       k = i * 3;
-  //     }
-  //     stampObj[i].tier1 = stampHoldings[k];
-  //     stampObj[i].tier2 = stampHoldings[k + 1];
-  //     stampObj[i].tier3 = stampHoldings[k + 2];
-  //   }
-  // }, [stamps]);
+  useEffect(() => {
+    if (stamps) {
+      let k = 0;
+      for (let i = 0; i < Math.floor(stamps.length / 3); i++) {
+        if (i > 0) {
+          k = i * 3;
+        }
+        stampIndividual[i].edition[0].collected = Boolean(stamps[i]);
+        stampIndividual[i].edition[1].collected = Boolean(stamps[i + 4]);
+        stampIndividual[i].edition[2].collected = Boolean(stamps[i + 8]);
 
-  if (!account) return null;
+        stampIndividual[i].tier1 = Boolean(stamps[i]);
+        stampIndividual[i].tier2 = Boolean(stamps[i + 4]);
+        stampIndividual[i].tier3 = Boolean(stamps[i + 8]);
+      }
+    }
+  }, [stamps]);
 
   return (
     <JumboContainer>

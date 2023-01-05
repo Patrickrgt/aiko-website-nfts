@@ -134,7 +134,11 @@ const UserNavIcon = ({ navIcon }: Props) => {
         </NavTitleShadow>
       </NavTitleContainer>
       <NavIconShadow>
-        <NavIconBackground active={navActive}>
+        <NavIconBackground
+          active={navActive}
+          onMouseEnter={() => setActive(true)}
+          onMouseLeave={() => setActive(false)}
+        >
           <NavIcon
             active={navActive}
             src={navIcon.image}
