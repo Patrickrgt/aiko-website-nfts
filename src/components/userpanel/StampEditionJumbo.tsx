@@ -1,4 +1,4 @@
-import { ReactNode, useEffect, useState } from "react";
+import { ReactNode, useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled, { css, keyframes } from "styled-components";
 import { selectShowingRewards, setShowingRewards } from "../../state/uiSlice";
@@ -6,6 +6,9 @@ import star from "../../assets/placeholders/star.png";
 import explorer from "../../assets/userpanel/explorer.png";
 
 import cursorhover from "../../assets/userpanel/cursorhover.png";
+
+import soundHoverLarge from "../../assets/userpanel/Market_SFX_-_BUTTON_HOVER_-_LARGE.wav";
+import soundClickLarge from "../../assets/userpanel/Market_SFX_-_BUTTON_PRESS_-_LARGE.wav";
 
 export interface EditionJumboType {
   image: string;
@@ -138,12 +141,39 @@ interface Props {
 const StampEditionJumbo = ({ visible, editionJumbo }: Props) => {
   const [stampActive, setActive] = useState(false);
 
+  const audioHoverLarge = useRef<HTMLAudioElement>(null);
+  const audioClickLarge = useRef<HTMLAudioElement>(null);
+
+  const playHoverAudio = () => {
+    if (audioHoverLarge.current) {
+      audioHoverLarge.current.currentTime = 0;
+      audioHoverLarge.current.play();
+    }
+  };
+
+  const playClickAudio = () => {
+    if (audioClickLarge.current) {
+      audioClickLarge.current.currentTime = 0;
+      audioClickLarge.current.play();
+    }
+  };
+
   return (
     <Stamp
       visible={visible}
-      onMouseEnter={() => setActive(true)}
+      onMouseEnter={() => {
+        setActive(true);
+        playHoverAudio();
+      }}
       onMouseLeave={() => setActive(false)}
+      onClick={() => playClickAudio()}
     >
+      <audio ref={audioHoverLarge} src={soundHoverLarge}>
+        <track kind="captions" />
+      </audio>
+      <audio ref={audioClickLarge} src={soundClickLarge}>
+        <track kind="captions" />
+      </audio>
       <StampShadow active={editionJumbo.tier1}>
         <StampContainer active={editionJumbo.tier1}>
           <StampImgContainer active={editionJumbo.tier1}>

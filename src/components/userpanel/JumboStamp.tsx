@@ -1,4 +1,4 @@
-import { ReactNode, useEffect, useState } from "react";
+import { ReactNode, useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled, { css, keyframes } from "styled-components";
 import {
@@ -10,6 +10,9 @@ import {
 import star from "../../assets/placeholders/star.png";
 import cursorhover from "../../assets/userpanel/cursorhover.png";
 import { stampIndividual } from "./JumboStampSystem";
+
+import soundHoverLarge from "../../assets/userpanel/Market_SFX_-_BUTTON_HOVER_-_LARGE.wav";
+import soundClickLarge from "../../assets/userpanel/Market_SFX_-_BUTTON_PRESS_-_LARGE.wav";
 
 export interface StampType {
   image?: string;
@@ -154,6 +157,23 @@ const JumboStamp = ({ stamp, show }: Props) => {
   const [change, setChange] = useState(false);
   const [count, setCount] = useState(0);
 
+  const audioHoverLarge = useRef<HTMLAudioElement>(null);
+  const audioClickLarge = useRef<HTMLAudioElement>(null);
+
+  const playHoverAudio = () => {
+    if (audioHoverLarge.current && showing === false) {
+      audioHoverLarge.current.currentTime = 0;
+      audioHoverLarge.current.play();
+    }
+  };
+
+  const playClickAudio = () => {
+    if (audioClickLarge.current) {
+      audioClickLarge.current.currentTime = 0;
+      audioClickLarge.current.play();
+    }
+  };
+
   useEffect(() => {
     setCount(count + 1);
     stamp.visible = change;
@@ -164,16 +184,27 @@ const JumboStamp = ({ stamp, show }: Props) => {
   return (
     <Stamp
       key={count}
-      onMouseEnter={() => setActive(true)}
+      onMouseEnter={() => {
+        setActive(true);
+        playHoverAudio();
+      }}
       onMouseLeave={() => setActive(false)}
       onClick={() => {
         if (!showing) {
+          playClickAudio();
           dispatch(setShowingStamp(true));
           show();
         }
       }}
       active={showing}
     >
+      <audio ref={audioHoverLarge} src={soundHoverLarge}>
+        <track kind="captions" />
+      </audio>
+      <audio ref={audioClickLarge} src={soundClickLarge}>
+        <track kind="captions" />
+      </audio>
+
       <StampShadow active={stampActive}>
         <StampContainer active={stampActive}>
           <StampImgContainer active={stampActive}>

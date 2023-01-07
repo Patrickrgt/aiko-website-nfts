@@ -1,5 +1,8 @@
-import { ReactNode, useEffect, useState } from "react";
+import { ReactNode, useEffect, useState, useRef } from "react";
 import styled from "styled-components";
+
+import soundHoverSmall from "../../assets/userpanel/Market_SFX_-_BUTTON_HOVER_-_SMALL.wav";
+import soundClickSmall from "../../assets/userpanel/Market_SFX_-_BUTTON_PRESS_-_SMALL.wav";
 
 import cursorhover from "../../assets/userpanel/cursorhover.png";
 
@@ -53,11 +56,37 @@ interface Props {
 
 const UserNavSocial = ({ socialIcon }: Props) => {
   const [navActive, setActive] = useState(false);
+  const audioHoverSmall = useRef<HTMLAudioElement>(null);
+  const audioClickSmall = useRef<HTMLAudioElement>(null);
+
+  const playHoverAudio = () => {
+    if (audioHoverSmall.current) {
+      audioHoverSmall.current.currentTime = 0;
+      audioHoverSmall.current.play();
+    }
+  };
+
+  const playClickAudio = () => {
+    if (audioClickSmall.current) {
+      audioClickSmall.current.currentTime = 0;
+      audioClickSmall.current.play();
+    }
+  };
 
   return (
     <NavUserSocialShadow>
-      <NavLink href={socialIcon.link} target="_blank">
-        <NavUserContainer>
+      <audio ref={audioHoverSmall} src={soundHoverSmall}>
+        <track kind="captions" />
+      </audio>
+      <audio ref={audioClickSmall} src={soundClickSmall}>
+        <track kind="captions" />
+      </audio>
+      <NavLink
+        href={socialIcon.link}
+        target="_blank"
+        onClick={() => playClickAudio()}
+      >
+        <NavUserContainer onMouseEnter={() => playHoverAudio()}>
           <NavUserSocial src={socialIcon.image} />
         </NavUserContainer>
       </NavLink>

@@ -1,6 +1,10 @@
-import { ReactNode, useEffect, useState } from "react";
+import { ReactNode, useEffect, useState, useRef } from "react";
 import styled from "styled-components";
+
 import cursorhover from "../../assets/userpanel/cursorhover.png";
+
+import soundHoverMedium from "../../assets/userpanel/Market_SFX_-_BUTTON_HOVER_-_MEDIUM.wav";
+import soundClickMedium from "../../assets/userpanel/Market_SFX_-_BUTTON_PRESS_-_MEDIUM.wav";
 
 const ButtonShadow = styled.div`
   padding: 3px 3px 12px 3px;
@@ -79,16 +83,45 @@ interface Props {
 const ButtonBlue = ({ content, close, small, symbol }: Props) => {
   const [hoverActive, setHoverActive] = useState(false);
 
+  const audioHoverMedium = useRef<HTMLAudioElement>(null);
+  const audioClickMedium = useRef<HTMLAudioElement>(null);
+
+  const playHoverAudio = () => {
+    if (audioHoverMedium.current) {
+      audioHoverMedium.current.currentTime = 0;
+      audioHoverMedium.current.play();
+    }
+  };
+
+  const playClickAudio = () => {
+    if (audioClickMedium.current) {
+      audioClickMedium.current.currentTime = 0;
+      audioClickMedium.current.play();
+    }
+  };
+
   return (
     <ButtonShadow>
+      <audio ref={audioHoverMedium} src={soundHoverMedium}>
+        <track kind="captions" />
+      </audio>
+      <audio ref={audioClickMedium} src={soundClickMedium}>
+        <track kind="captions" />
+      </audio>
       <ButtonInner active={hoverActive}>
         <Button
           active={hoverActive}
           small={small}
           symbol={symbol}
-          onMouseEnter={() => setHoverActive(true)}
+          onMouseEnter={() => {
+            setHoverActive(true);
+            playHoverAudio();
+          }}
           onMouseLeave={() => setHoverActive(false)}
-          onClick={() => close()}
+          onClick={() => {
+            playClickAudio();
+            close();
+          }}
         >
           {content}
         </Button>

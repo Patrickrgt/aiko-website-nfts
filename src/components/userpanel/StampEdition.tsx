@@ -1,10 +1,13 @@
-import { ReactNode, useEffect, useState } from "react";
+import { ReactNode, useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled, { css, keyframes } from "styled-components";
 import { selectShowingRewards, setShowingRewards } from "../../state/uiSlice";
 import star from "../../assets/placeholders/star.png";
 import cursorhover from "../../assets/userpanel/cursorhover.png";
 import explorer1 from "../../assets/userpanel/explorer1.png";
+
+import soundHoverTab from "../../assets/userpanel/Market_SFX_-_TAB_HOVER.wav";
+import soundClickTab from "../../assets/userpanel/Market_SFX_-_TAB_PRESS.wav";
 
 export interface EditionType {
   image: string;
@@ -164,13 +167,40 @@ interface Props {
 const StampEdition = ({ visible, numberId, edition }: Props) => {
   const [stampActive, setActive] = useState(false);
 
+  const audioHoverTab = useRef<HTMLAudioElement>(null);
+  const audioClickTab = useRef<HTMLAudioElement>(null);
+
+  const playHoverAudio = () => {
+    if (audioHoverTab.current) {
+      audioHoverTab.current.currentTime = 0;
+      audioHoverTab.current.play();
+    }
+  };
+
+  const playClickAudio = () => {
+    if (audioClickTab.current) {
+      audioClickTab.current.currentTime = 0;
+      audioClickTab.current.play();
+    }
+  };
+
   return (
     <Stamp
       numberId={numberId}
       visible={visible}
-      onMouseEnter={() => setActive(true)}
+      onMouseEnter={() => {
+        setActive(true);
+        playHoverAudio();
+      }}
       onMouseLeave={() => setActive(false)}
+      onClick={() => playClickAudio()}
     >
+      <audio ref={audioHoverTab} src={soundHoverTab}>
+        <track kind="captions" />
+      </audio>
+      <audio ref={audioClickTab} src={soundClickTab}>
+        <track kind="captions" />
+      </audio>
       <StampShadow>
         <StampContainer active={edition.collected}>
           <StampImgContainer active={edition.collected}>

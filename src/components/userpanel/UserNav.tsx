@@ -168,6 +168,7 @@ const HoverText = styled.div`
   opacity: ${(props: NavProps) => (props.visible ? 1 : 0)};
   transition: opacity 0.25s ease;
   clip-path: var(--notched-sm);
+  visibility: ${(props: NavProps) => (props.visible ? "" : "hidden")};
 `;
 
 interface NavProps {

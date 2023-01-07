@@ -1,4 +1,4 @@
-import { ReactNode, useEffect, useState } from "react";
+import { ReactNode, useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled, { css, keyframes } from "styled-components";
 import { useEthers } from "@usedapp/core";
@@ -39,6 +39,9 @@ import cursorhover from "../../assets/userpanel/cursorhover.png";
 import JumboStamp, { StampType } from "./JumboStamp";
 import StampIndividual, { IndividualStampType } from "./StampIndividual";
 import ButtonBlue from "./ButtonBlue";
+
+import soundHoverTab from "../../assets/userpanel/Market_SFX_-_TAB_HOVER.wav";
+import soundClickSmall from "../../assets/userpanel/Market_SFX_-_BUTTON_PRESS_-_DISABLED.wav";
 
 export const stampIndividual: IndividualStampType[] = [
   {
@@ -645,7 +648,9 @@ const JumboStampSystem = () => {
                 </StampsRow>
               </StampsRowContainer>
               <RewardsContainer
-                onMouseEnter={() => setHoverActive(true)}
+                onMouseEnter={() => {
+                  setHoverActive(true);
+                }}
                 onMouseLeave={() => setHoverActive(false)}
               >
                 <ArrowDecorationDiv

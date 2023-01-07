@@ -1,4 +1,4 @@
-import { ReactNode, useEffect, useState, useMemo } from "react";
+import { ReactNode, useEffect, useState, useMemo, useRef } from "react";
 import styled from "styled-components";
 
 import { useDispatch, useSelector } from "react-redux";
@@ -23,6 +23,9 @@ import home from "../../assets/userpanel/homewebsiteicon.png";
 import medium from "../../assets/svgs/medium.svg";
 
 import cursorhover from "../../assets/userpanel/cursorhover.png";
+
+import soundHoverTab from "../../assets/userpanel/Market_SFX_-_TAB_HOVER.wav";
+import soundClickTab from "../../assets/userpanel/Market_SFX_-_TAB_PRESS.wav";
 
 const socialIcons: SocialIconType[] = [
   {
@@ -251,6 +254,23 @@ const UserProfile = () => {
   const [stampsHeld, setStampsHeld] = useState(0);
   const stamps = useBalanceOf();
 
+  const audioHoverTab = useRef<HTMLAudioElement>(null);
+  const audioClickTab = useRef<HTMLAudioElement>(null);
+
+  const playHoverAudio = () => {
+    if (audioHoverTab.current) {
+      audioHoverTab.current.currentTime = 0;
+      audioHoverTab.current.play();
+    }
+  };
+
+  const playClickAudio = () => {
+    if (audioClickTab.current) {
+      audioClickTab.current.currentTime = 0;
+      audioClickTab.current.play();
+    }
+  };
+
   useEffect(() => {
     if (stamps) {
       setStampsHeld(stamps.reduce((total, current) => total + current, 0));
@@ -259,6 +279,12 @@ const UserProfile = () => {
 
   return (
     <NavUserContainer>
+      <audio ref={audioHoverTab} src={soundHoverTab}>
+        <track kind="captions" />
+      </audio>
+      <audio ref={audioClickTab} src={soundClickTab}>
+        <track kind="captions" />
+      </audio>
       <NavUserWalletContainer>
         <NavUsernameContainer active={hoverActive}>
           {!ens && <PostNavUsername>A:\Welcome</PostNavUsername>}
@@ -272,10 +298,16 @@ const UserProfile = () => {
 
         {!account && (
           <PreNavWallet
-            onMouseEnter={() => setHoverActive(true)}
+            onMouseEnter={() => {
+              setHoverActive(true);
+              playHoverAudio();
+            }}
             onMouseLeave={() => setHoverActive(false)}
             active={hoverActive}
-            onClick={() => activateBrowserWallet()}
+            onClick={() => {
+              activateBrowserWallet();
+              playClickAudio();
+            }}
           >
             {/* 0x1205...2aF4D */}
             <PreNavWalletText active={hoverActive}>
@@ -301,9 +333,15 @@ const UserProfile = () => {
         <NavUserPfpContainer>
           {!account && (
             <NavUserPfp
-              onMouseEnter={() => setHoverActive(true)}
+              onMouseEnter={() => {
+                setHoverActive(true);
+                playHoverAudio();
+              }}
               onMouseLeave={() => setHoverActive(false)}
-              onClick={() => activateBrowserWallet()}
+              onClick={() => {
+                activateBrowserWallet();
+                playClickAudio();
+              }}
               src={baseaiko}
             />
           )}

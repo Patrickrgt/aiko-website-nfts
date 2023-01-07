@@ -4,6 +4,9 @@ import styled, { css, keyframes } from "styled-components";
 import DecorVertical from "./DecorVertical";
 import { selectShowingRewards, setShowingRewards } from "../../state/uiSlice";
 
+import soundHoverSmall from "../../assets/userpanel/Market_SFX_-_BUTTON_HOVER_-_SMALL.wav";
+import soundClickSmall from "../../assets/userpanel/Market_SFX_-_BUTTON_PRESS_-_DISABLED.wav";
+
 import cursorhover from "../../assets/userpanel/cursorhover.png";
 
 const slideForward = keyframes`
@@ -189,8 +192,31 @@ const TitleBar = () => {
   const showing = useSelector(selectShowingRewards);
   const dispatch = useDispatch();
 
+  const audioHoverSmall = useRef<HTMLAudioElement>(null);
+  const audioClickSmall = useRef<HTMLAudioElement>(null);
+
+  const playHoverAudio = () => {
+    if (audioHoverSmall.current) {
+      audioHoverSmall.current.currentTime = 0;
+      audioHoverSmall.current.play();
+    }
+  };
+
+  const playClickAudio = () => {
+    if (audioClickSmall.current) {
+      audioClickSmall.current.currentTime = 0;
+      audioClickSmall.current.play();
+    }
+  };
+
   return (
     <StampRewardsTab show={showing}>
+      <audio ref={audioHoverSmall} src={soundHoverSmall}>
+        <track kind="captions" />
+      </audio>
+      <audio ref={audioClickSmall} src={soundClickSmall}>
+        <track kind="captions" />
+      </audio>
       <Stripes show={showing} />
       <DecorContainer>
         <DecorVertical width={3} />
@@ -198,7 +224,13 @@ const TitleBar = () => {
       </DecorContainer>
 
       <CloseTabShadow>
-        <CloseTab onClick={() => dispatch(setShowingRewards(false))}>
+        <CloseTab
+          onMouseEnter={() => playHoverAudio()}
+          onClick={() => {
+            dispatch(setShowingRewards(false));
+            playClickAudio();
+          }}
+        >
           x
         </CloseTab>
       </CloseTabShadow>

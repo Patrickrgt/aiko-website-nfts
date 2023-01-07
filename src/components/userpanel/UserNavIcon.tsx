@@ -1,6 +1,9 @@
-import { ReactNode, useEffect, useState } from "react";
+import { ReactNode, useEffect, useState, useRef } from "react";
 import styled from "styled-components";
 import cursorhover from "../../assets/userpanel/cursorhover.png";
+
+import soundHoverSmall from "../../assets/userpanel/Market_SFX_-_BUTTON_HOVER_-_SMALL.wav";
+import soundClickSmall from "../../assets/userpanel/Market_SFX_-_BUTTON_PRESS_-_DISABLED.wav";
 
 export interface NavIconType {
   image?: string;
@@ -101,7 +104,25 @@ const UserNavIcon = ({ navIcon }: Props) => {
   const [left, setLeft] = useState(0);
   const [visible, setVisible] = useState(false);
 
+  const audioHoverSmall = useRef<HTMLAudioElement>(null);
+  const audioClickSmall = useRef<HTMLAudioElement>(null);
+
+  const playHoverAudio = () => {
+    if (audioHoverSmall.current) {
+      audioHoverSmall.current.currentTime = 0;
+      audioHoverSmall.current.play();
+    }
+  };
+
+  const playClickAudio = () => {
+    if (audioClickSmall.current) {
+      audioClickSmall.current.currentTime = 0;
+      audioClickSmall.current.play();
+    }
+  };
+
   const handleClick = (event: any) => {
+    playClickAudio();
     setTop(event.clientY);
     setLeft(event.clientY);
     setVisible(true);
@@ -126,6 +147,12 @@ const UserNavIcon = ({ navIcon }: Props) => {
 
   return (
     <IconContainer>
+      <audio ref={audioHoverSmall} src={soundHoverSmall}>
+        <track kind="captions" />
+      </audio>
+      <audio ref={audioClickSmall} src={soundClickSmall}>
+        <track kind="captions" />
+      </audio>
       <NavTitleContainer>
         <NavTitleShadow active={navActive}>
           <NavTitleDiv>
@@ -136,7 +163,10 @@ const UserNavIcon = ({ navIcon }: Props) => {
       <NavIconShadow>
         <NavIconBackground
           active={navActive}
-          onMouseEnter={() => setActive(true)}
+          onMouseEnter={() => {
+            setActive(true);
+            playHoverAudio();
+          }}
           onMouseLeave={() => setActive(false)}
         >
           <NavIcon
