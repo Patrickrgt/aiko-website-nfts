@@ -35,9 +35,10 @@ const WarningText = styled.p`
   font-family: video, serif;
   color: #6e6e70;
   font-weight: 400;
-  font-size: 2rem; /* 18px */
+  font-size: 2.15rem; /* 18px */
   line-height: 120%;
   letter-spacing: 0.25px;
+  width: 700px;
 `;
 
 const StampWarning = () => {

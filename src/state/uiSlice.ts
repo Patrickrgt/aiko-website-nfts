@@ -10,6 +10,8 @@ interface UiState {
   showingRewards: boolean;
   showingNav: boolean;
   showingStamp: boolean;
+  muteAudio: boolean;
+  animationEnd: boolean;
 }
 
 const initialState: UiState = {
@@ -21,6 +23,8 @@ const initialState: UiState = {
   showingRewards: false,
   showingNav: false,
   showingStamp: false,
+  muteAudio: false,
+  animationEnd: true,
 };
 
 export const uiSlice = createSlice({
@@ -51,6 +55,12 @@ export const uiSlice = createSlice({
     setShowingStamp: (state, action: PayloadAction<boolean>) => {
       state.showingStamp = action.payload;
     },
+    setMuteAudio: (state, action: PayloadAction<boolean>) => {
+      state.muteAudio = action.payload;
+    },
+    setAnimationEnd: (state, action: PayloadAction<boolean>) => {
+      state.animationEnd = action.payload;
+    },
   },
 });
 
@@ -64,6 +74,8 @@ export const {
   setShowingRewards,
   setShowingNav,
   setShowingStamp,
+  setMuteAudio,
+  setAnimationEnd,
 } = uiSlice.actions;
 
 export const selectConnectingWallet = (state: RootState) =>
@@ -82,5 +94,9 @@ export const selectShowingRewards = (state: RootState) =>
 export const selectShowingNav = (state: RootState) => state.ui.showingRewards;
 
 export const selectShowingStamp = (state: RootState) => state.ui.showingStamp;
+
+export const selectMuteAudio = (state: RootState) => state.ui.muteAudio;
+
+export const selectAnimationEnd = (state: RootState) => state.ui.animationEnd;
 
 export default uiSlice.reducer;

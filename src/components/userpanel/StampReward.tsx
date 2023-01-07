@@ -1,5 +1,9 @@
 import { ReactNode, useEffect, useState, useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
 import styled from "styled-components";
+
+import { selectAnimationEnd } from "../../state/uiSlice";
 
 import check from "../../assets/placeholders/check.png";
 import star from "../../assets/placeholders/star.png";
@@ -102,9 +106,10 @@ const RewardName = styled.p`
   color: white;
   position: relative;
   bottom: 6rem;
-  cursor: default;
   color: ${(props: StampButtonProps) => (props.active ? "black" : "white")};
   transition: color 0.3s linear;
+  cursor: url(${cursorhover}), auto;
+  pointer-events: none;
 `;
 
 const RewardRequirementContainer = styled.div`
@@ -160,12 +165,13 @@ interface Props {
 
 const StampReward = ({ stampReward }: Props) => {
   const [hoverActive, setHoverActive] = useState(false);
+  const animationEnd = useSelector(selectAnimationEnd);
 
   const audioHoverTab = useRef<HTMLAudioElement>(null);
   const audioClickTab = useRef<HTMLAudioElement>(null);
 
   const playHoverAudio = () => {
-    if (audioHoverTab.current) {
+    if (audioHoverTab.current && animationEnd) {
       audioHoverTab.current.currentTime = 0;
       audioHoverTab.current.play();
     }

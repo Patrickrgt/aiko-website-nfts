@@ -1,7 +1,11 @@
 import { ReactNode, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled, { css, keyframes } from "styled-components";
-import { selectShowingRewards, setShowingRewards } from "../../state/uiSlice";
+import {
+  selectShowingRewards,
+  setShowingRewards,
+  setAnimationEnd,
+} from "../../state/uiSlice";
 
 import { useBalanceOf } from "../../contracts/views";
 
@@ -117,26 +121,23 @@ const Background = styled.button`
   cursor: url(${cursorhover}), auto;
 `;
 
+const StampFullContainer = styled.div`
+  max-width: 100%;
+  margin: auto;
+`;
+
 const MainContainer = styled.div`
   transition: all ease 0.25s;
   transform: scale(${(props: Props) => (props.show ? 1 : 0)});
   opacity: ${(props: Props) => (props.show ? 1 : 0)};
-  position: absolute;
-  left: 0;
-  right: 0;
   margin-left: auto;
   margin-right: auto;
-  top: 50%;
-  transform: translateY(-50%);
-  max-width: 48.88%;
 `;
 
 const StampShadowBorder = styled.div`
   transition: all ease 0.25s;
   transform: scale(${(props: Props) => (props.show ? 1 : 0)});
-  position: relative;
   width: fit-content;
-  margin: auto;
   padding: 0.5rem 0.5rem 3rem 0.5rem;
   background-color: #393939;
   clip-path: var(--notched-md);
@@ -215,6 +216,7 @@ const StampRewardContainer = styled.div`
   padding: 3rem 3rem;
   margin-bottom: 2rem;
   display: flex;
+  width: fit-content;
   height: 100%;
   justify-content: center;
   animation: ${(props: StampRewardProps) =>
@@ -263,37 +265,47 @@ const StampRewards = ({ show }: Props) => {
         show={showing}
         onClick={() => dispatch(setShowingRewards(false))}
       />
-      <MainContainer show={showing}>
-        <StampShadowBorder show={showing}>
-          <StampOverlay show={showing} />
+      <StampFullContainer>
+        <MainContainer show={showing}>
+          <StampShadowBorder
+            show={showing}
+            onAnimationStart={() => {
+              dispatch(setAnimationEnd(false));
+            }}
+            onAnimationEnd={() => {
+              dispatch(setAnimationEnd(true));
+            }}
+          >
+            <StampOverlay show={showing} />
 
-          <StampBorder>
-            {/* Title Bar with close button */}
-            <TitleBar />
-            {/* Contains everything below Stamp Rewards Title Bar */}
+            <StampBorder>
+              {/* Title Bar with close button */}
+              <TitleBar />
+              {/* Contains everything below Stamp Rewards Title Bar */}
 
-            <StampContainer show={showing}>
-              <RewardContainer>
-                <StampRewardContainer show={showing}>
-                  {/* Maps the Stamps and names from the object above  */}
-                  {stampRewards.map((stampReward: StampRewardType) => (
-                    <StampReward
-                      key={stampReward.name}
-                      stampReward={stampReward}
-                    />
-                  ))}
-                </StampRewardContainer>
-              </RewardContainer>
-              <WarningRedeemRow>
-                {/* Warning Container, separate from Redeem Container */}
-                <StampWarning />
-                {/* Redeem Container, contains Redeem Button */}
-                <StampRedeem />
-              </WarningRedeemRow>
-            </StampContainer>
-          </StampBorder>
-        </StampShadowBorder>
-      </MainContainer>
+              <StampContainer show={showing}>
+                <RewardContainer>
+                  <StampRewardContainer show={showing}>
+                    {/* Maps the Stamps and names from the object above  */}
+                    {stampRewards.map((stampReward: StampRewardType) => (
+                      <StampReward
+                        key={stampReward.name}
+                        stampReward={stampReward}
+                      />
+                    ))}
+                  </StampRewardContainer>
+                </RewardContainer>
+                <WarningRedeemRow>
+                  {/* Warning Container, separate from Redeem Container */}
+                  <StampWarning />
+                  {/* Redeem Container, contains Redeem Button */}
+                  <StampRedeem />
+                </WarningRedeemRow>
+              </StampContainer>
+            </StampBorder>
+          </StampShadowBorder>
+        </MainContainer>
+      </StampFullContainer>
     </StyledPopup>
   );
 };

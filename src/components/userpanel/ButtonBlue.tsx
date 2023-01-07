@@ -1,5 +1,9 @@
 import { ReactNode, useEffect, useState, useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
 import styled from "styled-components";
+
+import { selectAnimationEnd } from "../../state/uiSlice";
 
 import cursorhover from "../../assets/userpanel/cursorhover.png";
 
@@ -53,6 +57,7 @@ const Button = styled.button`
   border: none;
   cursor: url(${cursorhover}), auto;
   z-index: 1;
+  opacity: 1;
   &:before {
     position: absolute;
     content: "";
@@ -82,9 +87,12 @@ interface Props {
 
 const ButtonBlue = ({ content, close, small, symbol }: Props) => {
   const [hoverActive, setHoverActive] = useState(false);
+  const animationEnd = useSelector(selectAnimationEnd);
 
   const audioHoverMedium = useRef<HTMLAudioElement>(null);
   const audioClickMedium = useRef<HTMLAudioElement>(null);
+
+  const buttonRef = useRef<HTMLButtonElement>(null);
 
   const playHoverAudio = () => {
     if (audioHoverMedium.current) {
@@ -92,6 +100,12 @@ const ButtonBlue = ({ content, close, small, symbol }: Props) => {
       audioHoverMedium.current.play();
     }
   };
+
+  useEffect(() => {
+    if (buttonRef.current) {
+      console.log(buttonRef.current.style.opacity);
+    }
+  }, [buttonRef]);
 
   const playClickAudio = () => {
     if (audioClickMedium.current) {
@@ -110,6 +124,7 @@ const ButtonBlue = ({ content, close, small, symbol }: Props) => {
       </audio>
       <ButtonInner active={hoverActive}>
         <Button
+          ref={buttonRef}
           active={hoverActive}
           small={small}
           symbol={symbol}
