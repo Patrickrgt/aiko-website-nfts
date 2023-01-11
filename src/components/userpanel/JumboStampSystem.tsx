@@ -588,8 +588,6 @@ const JumboStampSystem = () => {
   const { account } = useEthers();
   const stamps = useBalanceOf();
 
-  console.log(stamps);
-
   useEffect(() => {
     if (stamps) {
       let k = 0;

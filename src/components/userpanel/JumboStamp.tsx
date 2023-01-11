@@ -178,7 +178,6 @@ const JumboStamp = ({ stamp, show }: Props) => {
     setCount(count + 1);
     stamp.visible = change;
     stamp = { ...stamp, visible: change };
-    console.log(stamp.visible, stampIndividual[stamp.id].visible);
   }, [change]);
 
   return (

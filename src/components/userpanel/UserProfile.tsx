@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEthers, useLookupAddress, useCall } from "@usedapp/core";
 import { utils, constants, BigNumber, Contract as CTR } from "ethers";
 import { Contract } from "@ethersproject/contracts";
-import { useBalanceOf } from "../../contracts/views";
+import { useBalanceOf, getAikoHoldings } from "../../contracts/views";
 import aikostamps from "../../contracts/aikostamps.json";
 
 import UserNavSocial, { SocialIconType } from "./UserNavSocial";
@@ -253,6 +253,7 @@ const UserProfile = () => {
 
   const [stampsHeld, setStampsHeld] = useState(0);
   const stamps = useBalanceOf();
+  const aikos = getAikoHoldings();
 
   const audioHoverTab = useRef<HTMLAudioElement>(null);
   const audioClickTab = useRef<HTMLAudioElement>(null);
@@ -276,6 +277,17 @@ const UserProfile = () => {
       setStampsHeld(stamps.reduce((total, current) => total + current, 0));
     }
   }, [stamps]);
+
+  useEffect(() => {
+    let aikosPfpList = null;
+    if (aikos) {
+      console.log(aikos);
+      aikos.then((res) => {
+        aikosPfpList = res;
+        console.log(aikosPfpList);
+      });
+    }
+  }, [aikos]);
 
   return (
     <NavUserContainer>
