@@ -6,6 +6,8 @@ import { useEthers, useLookupAddress, useCall } from "@usedapp/core";
 import { utils, constants, BigNumber, Contract as CTR } from "ethers";
 import { Contract } from "@ethersproject/contracts";
 import { useBalanceOf, getAikoHoldings } from "../../contracts/views";
+import { setShowingNfts, selectGlobalNft } from "../../state/uiSlice";
+
 import aikostamps from "../../contracts/aikostamps.json";
 
 import UserNavSocial, { SocialIconType } from "./UserNavSocial";
@@ -248,8 +250,10 @@ interface NavProps {
 
 const UserProfile = () => {
   const [hoverActive, setHoverActive] = useState(false);
+  const nftPfp = useSelector(selectGlobalNft);
   const { activateBrowserWallet, account } = useEthers();
   const { ens } = useLookupAddress(account);
+  const dispatch = useDispatch();
 
   const [stampsHeld, setStampsHeld] = useState(0);
   const stamps = useBalanceOf();
@@ -281,10 +285,8 @@ const UserProfile = () => {
   useEffect(() => {
     let aikosPfpList = null;
     if (aikos) {
-      console.log(aikos);
       aikos.then((res) => {
         aikosPfpList = res;
-        console.log(aikosPfpList);
       });
     }
   }, [aikos]);
@@ -358,7 +360,13 @@ const UserProfile = () => {
             />
           )}
           {account && (
-            <NavUserPfp src="https://i.seadn.io/gae/R6xFSwTpGgo7JkoVa0Acvy3EGQqdTTh5uvT74BS9NHGsMYSeknz6iFljNHC6gGyqmK_laKlkUkRhcN43mJ_OLz4SdiW5yhEsmPFhhg?auto=format&w=1000" />
+            <NavUserPfp
+              onClick={() => {
+                dispatch(setShowingNfts(true));
+                console.log(nftPfp);
+              }}
+              src={nftPfp}
+            />
           )}
         </NavUserPfpContainer>
 

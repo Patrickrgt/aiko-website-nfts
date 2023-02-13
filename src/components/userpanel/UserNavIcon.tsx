@@ -8,6 +8,7 @@ import soundClickSmall from "../../assets/userpanel/Market_SFX_-_BUTTON_PRESS_-_
 export interface NavIconType {
   image?: string;
   name: string;
+  color: string;
 }
 
 const IconContainer = styled.div`
@@ -27,7 +28,7 @@ const NavIconShadow = styled.div`
 
 const NavIconBackground = styled.div`
   background-color: ${(props: NavProps) =>
-    props.active ? "#48484B" : "#F7E9A1"};
+    props.active ? "#48484B" : `${props.color}`};
   clip-path: var(--notched-sm);
   padding: 1px 1px 0px 1px;
 `;
@@ -68,6 +69,7 @@ const NavIcon = styled.img`
   height: 6rem;
   clip-path: var(--notched-sm);
   cursor: url(${cursorhover}), auto;
+  opacity: 0.5;
 `;
 
 const NavTitleDiv = styled.div`
@@ -91,6 +93,7 @@ interface NavProps {
   top?: number;
   left?: number;
   visible?: boolean;
+  color?: string;
 }
 
 interface Props {
@@ -163,6 +166,7 @@ const UserNavIcon = ({ navIcon }: Props) => {
       <NavIconShadow>
         <NavIconBackground
           active={navActive}
+          color={navIcon.color}
           onMouseEnter={() => {
             setActive(true);
             playHoverAudio();

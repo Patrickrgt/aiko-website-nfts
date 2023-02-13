@@ -40,9 +40,8 @@ const NavUserContainer = styled.div`
 `;
 
 const NavUserSocial = styled.img`
-  aspect-ratio: 1/1;
-  max-width: 35px;
-  max-height: 35px;
+  max-width: 36px;
+  max-height: 36px;
   filter: brightness(0) invert(1);
 `;
 

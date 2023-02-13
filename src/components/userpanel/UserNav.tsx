@@ -20,18 +20,22 @@ const navIcons: NavIconType[] = [
   {
     image: map,
     name: "A:\\Map",
+    color: "#FCC453",
   },
   {
     image: lore,
     name: "A:\\Lore",
+    color: "#F7E9A1",
   },
   {
     image: news,
     name: "A:\\News",
+    color: "#FCC453",
   },
   {
     image: lobby,
     name: "A:\\Lobby",
+    color: "#F7E9A1",
   },
 ];
 
@@ -222,8 +226,8 @@ const UserNav = () => {
       <NavLogo src={logo} />
 
       <NavIconContainer onClick={handleClick}>
-        {navIcons.map((navIcon: NavIconType) => (
-          <UserNavIcon key={navIcon.name} navIcon={navIcon} />
+        {navIcons.map((navIcon: NavIconType, id: number) => (
+          <UserNavIcon key={id} navIcon={navIcon} />
         ))}
       </NavIconContainer>
 

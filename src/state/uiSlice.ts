@@ -10,8 +10,10 @@ interface UiState {
   showingRewards: boolean;
   showingNav: boolean;
   showingStamp: boolean;
+  showingNfts: boolean;
   muteAudio: boolean;
   animationEnd: boolean;
+  globalNft: string;
 }
 
 const initialState: UiState = {
@@ -23,8 +25,11 @@ const initialState: UiState = {
   showingRewards: false,
   showingNav: false,
   showingStamp: false,
+  showingNfts: false,
   muteAudio: false,
   animationEnd: true,
+  globalNft:
+    "https://ipfs.io/ipfs/QmbZUQoh7y1GoKuzWNAZJqsrLF71kAxDYqnAcLWvwkS5nS/2229.png",
 };
 
 export const uiSlice = createSlice({
@@ -55,11 +60,17 @@ export const uiSlice = createSlice({
     setShowingStamp: (state, action: PayloadAction<boolean>) => {
       state.showingStamp = action.payload;
     },
+    setShowingNfts: (state, action: PayloadAction<boolean>) => {
+      state.showingNfts = action.payload;
+    },
     setMuteAudio: (state, action: PayloadAction<boolean>) => {
       state.muteAudio = action.payload;
     },
     setAnimationEnd: (state, action: PayloadAction<boolean>) => {
       state.animationEnd = action.payload;
+    },
+    setGlobalNft: (state, action: PayloadAction<string>) => {
+      state.globalNft = action.payload;
     },
   },
 });
@@ -74,8 +85,10 @@ export const {
   setShowingRewards,
   setShowingNav,
   setShowingStamp,
+  setShowingNfts,
   setMuteAudio,
   setAnimationEnd,
+  setGlobalNft,
 } = uiSlice.actions;
 
 export const selectConnectingWallet = (state: RootState) =>
@@ -95,8 +108,12 @@ export const selectShowingNav = (state: RootState) => state.ui.showingRewards;
 
 export const selectShowingStamp = (state: RootState) => state.ui.showingStamp;
 
+export const selectShowingNfts = (state: RootState) => state.ui.showingNfts;
+
 export const selectMuteAudio = (state: RootState) => state.ui.muteAudio;
 
 export const selectAnimationEnd = (state: RootState) => state.ui.animationEnd;
+
+export const selectGlobalNft = (state: RootState) => state.ui.globalNft;
 
 export default uiSlice.reducer;

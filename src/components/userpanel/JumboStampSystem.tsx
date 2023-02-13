@@ -669,7 +669,7 @@ const JumboStampSystem = () => {
                 >
                   <RewardsHeader>
                     Redeem rewards only will be available on
-                    <RewardsDate>19/01/2023</RewardsDate>
+                    <RewardsDate>XX/XX/XXXX</RewardsDate>
                   </RewardsHeader>
                 </RewardsHeaderContainer>
                 <RewardsButtonContainer
