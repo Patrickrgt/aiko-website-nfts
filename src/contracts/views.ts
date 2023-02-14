@@ -27,23 +27,41 @@ export const getAikoHoldings = async (): Promise<string[] | undefined> => {
     const { account } = useEthers();
     const ownedAikos: string[] = [];
     if (account) {
-      const response = await alchemy.nft
-        .getNftsForOwner(account, {
-          pageSize: 100,
-          contractAddresses: ["0xb661ab9bcd2878c5f8c136f67fd550a9d7df7197"],
-        })
-        .then((res) => JSON.parse(JSON.stringify(res)))
-        .then((json) =>
-          json.ownedNfts.map((prop: any) =>
-            ownedAikos.push(prop.media[0].gateway.toString())
-          )
-        );
-      return ownedAikos;
+      const response = await alchemy.nft.getNftsForOwner(account, {
+        pageSize: 100,
+        contractAddresses: ["0xb661ab9bcd2878c5f8c136f67fd550a9d7df7197"],
+      });
+      return response.ownedNfts.map((prop: any) =>
+        prop.media[0].gateway.toString()
+      );
     }
   } catch (error) {
     console.log(error);
   }
 };
+
+// export const getAikoHoldings = async (): Promise<string[] | undefined> => {
+//   try {
+//     const { account } = useEthers();
+//     const ownedAikos: string[] = [];
+//     if (account) {
+//       const response = await alchemy.nft
+//         .getNftsForOwner(account, {
+//           pageSize: 100,
+//           contractAddresses: ["0xb661ab9bcd2878c5f8c136f67fd550a9d7df7197"],
+//         })
+//         .then((res) => JSON.parse(JSON.stringify(res)))
+//         .then((json) =>
+//           json.ownedNfts.map((prop: any) =>
+//             ownedAikos.push(prop.media[0].gateway.toString())
+//           )
+//         );
+//       return ownedAikos;
+//     }
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
 
 // export const getAikoHoldings = async (): Promise<string[] | undefined> => {
 //   try {

@@ -14,6 +14,7 @@ interface UiState {
   muteAudio: boolean;
   animationEnd: boolean;
   globalNft: string;
+  globalAccount: string;
 }
 
 const initialState: UiState = {
@@ -28,8 +29,8 @@ const initialState: UiState = {
   showingNfts: false,
   muteAudio: false,
   animationEnd: true,
-  globalNft:
-    "https://ipfs.io/ipfs/QmbZUQoh7y1GoKuzWNAZJqsrLF71kAxDYqnAcLWvwkS5nS/2229.png",
+  globalNft: "",
+  globalAccount: "",
 };
 
 export const uiSlice = createSlice({
@@ -72,6 +73,9 @@ export const uiSlice = createSlice({
     setGlobalNft: (state, action: PayloadAction<string>) => {
       state.globalNft = action.payload;
     },
+    setGlobalAccount: (state, action: PayloadAction<string>) => {
+      state.globalAccount = action.payload;
+    },
   },
 });
 
@@ -89,6 +93,7 @@ export const {
   setMuteAudio,
   setAnimationEnd,
   setGlobalNft,
+  setGlobalAccount,
 } = uiSlice.actions;
 
 export const selectConnectingWallet = (state: RootState) =>
@@ -115,5 +120,7 @@ export const selectMuteAudio = (state: RootState) => state.ui.muteAudio;
 export const selectAnimationEnd = (state: RootState) => state.ui.animationEnd;
 
 export const selectGlobalNft = (state: RootState) => state.ui.globalNft;
+
+export const selectGlobalAccount = (state: RootState) => state.ui.globalAccount;
 
 export default uiSlice.reducer;

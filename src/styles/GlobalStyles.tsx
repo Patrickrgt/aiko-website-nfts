@@ -120,6 +120,16 @@ const GlobalStyle = createGlobalStyle`
             10px 100%, /* bottom left */ 
             0 calc(100% - 10px) /* bottom left */
         );
+        --notched-r-md: polygon(
+            0% 0px,/* top left */ 
+            20px 0%,/* top left */ 
+            calc(100% - 20px) 0%,/* top right */ 
+            100% 20px,/* top right */ 
+            100% calc(100% - 20px),/* bottom right */ 
+            calc(100% - 20px) 100%,/* bottom right */ 
+            20px 100%,/* bottom left */ 
+            0 calc(100% - 0px) /* bottom left */
+        );
     }
 
     * {

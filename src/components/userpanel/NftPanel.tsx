@@ -6,6 +6,7 @@ import {
   setShowingNfts,
   setGlobalNft,
   selectGlobalNft,
+  selectGlobalAccount,
 } from "../../state/uiSlice";
 
 import { useBalanceOf, getAikoHoldings } from "../../contracts/views";
@@ -103,10 +104,11 @@ const StampBorder = styled.div`
 
 const StampContainer = styled.div`
   background-color: #c6d0eb;
-  padding: 2rem;
+  padding: 2rem 2rem;
+  display: flex;
   font-family: video, serif;
   clip-path: var(--notched-md);
-  max-width: 910px;
+  max-width: 1050px;
   animation: ${(props: NftProps) =>
     props.show
       ? css`
@@ -152,6 +154,7 @@ const WarningRedeemRow = styled.div`
 
 const RewardContainer = styled.div`
   padding: 0.5rem;
+  margin: 0 2rem;
   background-color: #edeef5;
   clip-path: var(--notched-md);
 `;
@@ -206,10 +209,21 @@ const Aiko = styled.img`
   }
 `;
 
-const Pagination = styled.button`
-  background-color: black;
-  color: white;
+const PaginationLeft = styled.button`
+  color: #ffd362;
   font-size: 6rem;
+  clip-path: var(--notched-r-md);
+  background-color: #ffd362;
+  cursor: pointer;
+  transform: rotate(180deg);
+`;
+
+const PaginationRight = styled.button`
+  color: #ffd362;
+  font-size: 6rem;
+  background-color: #ffd362;
+  clip-path: var(--notched-r-md);
+  cursor: pointer;
 `;
 
 interface NftProps {
@@ -227,29 +241,33 @@ const StampRewards = ({ show }: Props) => {
   const [currList, setCurrList] = useState([""]);
   const [active, setActive] = useState(false);
 
+  const account = useSelector(selectGlobalAccount);
+
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 15;
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
 
   useEffect(() => {
-    if (aikos !== undefined) {
-      console.log("ah");
-      aikos.then((res) => {
-        if (
-          Array.isArray(res) &&
-          res.every((item) => typeof item === "string")
-        ) {
-          setAikoList(res);
-          setGlobalNft(aikoList[0]);
-          console.log(aikoList);
-        }
-      });
+    try {
+      if (account !== undefined) {
+        aikos.then((res) => {
+          if (
+            Array.isArray(res) &&
+            res.every((item) => typeof item === "string")
+          ) {
+            setAikoList(res);
+          }
+        });
+      }
+    } catch (error) {
+      console.log(error);
     }
-  }, [aikos]);
+  }, [account]);
 
   useEffect(() => {
     setCurrList(aikoList.slice(startIndex, endIndex));
+    dispatch(setGlobalNft(aikoList[0]));
   }, [aikoList]);
 
   const showing = useSelector(selectShowingNfts);
@@ -274,6 +292,12 @@ const StampRewards = ({ show }: Props) => {
             {/* Contains everything below Stamp Rewards Title Bar */}
 
             <StampContainer show={showing}>
+              <PaginationLeft
+                onClick={() => setCurrentPage(currentPage - 1)}
+                disabled={currentPage === 1}
+              >
+                ◀
+              </PaginationLeft>
               <RewardContainer>
                 <StampRewardContainer show={showing}>
                   {currList.map((aiko, id) => (
@@ -281,19 +305,13 @@ const StampRewards = ({ show }: Props) => {
                   ))}
                 </StampRewardContainer>
               </RewardContainer>
+              <PaginationRight
+                onClick={() => setCurrentPage(currentPage + 1)}
+                disabled={endIndex >= aikoList.length}
+              >
+                ◀
+              </PaginationRight>
             </StampContainer>
-            <Pagination
-              onClick={() => setCurrentPage(currentPage - 1)}
-              disabled={currentPage === 1}
-            >
-              ◀
-            </Pagination>
-            <Pagination
-              onClick={() => setCurrentPage(currentPage + 1)}
-              disabled={endIndex >= aikoList.length}
-            >
-              ◀
-            </Pagination>
           </StampBorder>
         </MainContainer>
       </AikoFullContainer>

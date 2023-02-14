@@ -6,7 +6,11 @@ import { useEthers, useLookupAddress, useCall } from "@usedapp/core";
 import { utils, constants, BigNumber, Contract as CTR } from "ethers";
 import { Contract } from "@ethersproject/contracts";
 import { useBalanceOf, getAikoHoldings } from "../../contracts/views";
-import { setShowingNfts, selectGlobalNft } from "../../state/uiSlice";
+import {
+  setShowingNfts,
+  selectGlobalNft,
+  setGlobalAccount,
+} from "../../state/uiSlice";
 
 import aikostamps from "../../contracts/aikostamps.json";
 
@@ -277,6 +281,12 @@ const UserProfile = () => {
   };
 
   useEffect(() => {
+    if (account) {
+      dispatch(setGlobalAccount(account));
+    }
+  }, [account]);
+
+  useEffect(() => {
     if (stamps) {
       setStampsHeld(stamps.reduce((total, current) => total + current, 0));
     }
@@ -363,7 +373,6 @@ const UserProfile = () => {
             <NavUserPfp
               onClick={() => {
                 dispatch(setShowingNfts(true));
-                console.log(nftPfp);
               }}
               src={nftPfp}
             />
