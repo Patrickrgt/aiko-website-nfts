@@ -97,7 +97,7 @@ const PreNavUsername = styled.div`
   transition: all ease 0.3s;
 `;
 
-const PostNavUsername = styled.div`
+const PostNavUsername = styled.span`
   font-size: 2.5rem;
   color: white;
   text-shadow: -2px 2px 0 #000, 1px 1px 0 #000, 1px -1px 0 #000,
@@ -134,7 +134,6 @@ const PostNavWallet = styled.button`
 const PostNavWalletText = styled.p`
   transition: all ease 0.3s;
   font-size: 2rem;
-  /* opacity: ${(props: NavProps) => (props.active ? "1" : "0")}; */
 `;
 
 const MeeposCollected = styled.div`
@@ -223,6 +222,7 @@ const NavUserPfp = styled.img`
   clip-path: var(--notched-md);
   width: 150px;
   height: 150px;
+  background-size: 150px 150px;
 `;
 
 const NavUserStats = styled.div`
@@ -249,6 +249,7 @@ const NavUserSocial = styled.img`
 
 interface NavProps {
   active?: boolean;
+  ens?: boolean;
   account?: any;
 }
 
@@ -310,15 +311,20 @@ const UserProfile = () => {
         <track kind="captions" />
       </audio>
       <NavUserWalletContainer>
-        <NavUsernameContainer active={hoverActive}>
-          {!ens && <PostNavUsername>A:\Welcome</PostNavUsername>}
-          {ens && (
-            <PostNavUsername>{`A:\\ ${ens.substr(
-              0,
-              ens.length - 4
-            )}`}</PostNavUsername>
-          )}
-        </NavUsernameContainer>
+        {ens ? (
+          <NavUsernameContainer active={!!ens}>
+            <PostNavUsername
+              onError={(e) => {
+                const target = e.target as HTMLSpanElement;
+                target.textContent = "Generating User...";
+              }}
+            >{`A:\\ ${ens.substr(0, ens.length - 4)}`}</PostNavUsername>
+          </NavUsernameContainer>
+        ) : (
+          <NavUsernameContainer active={hoverActive}>
+            <PostNavUsername>A:\Welcome</PostNavUsername>
+          </NavUsernameContainer>
+        )}
 
         {!account && (
           <PreNavWallet
@@ -375,6 +381,10 @@ const UserProfile = () => {
                 dispatch(setShowingNfts(true));
               }}
               src={nftPfp}
+              onError={(e) => {
+                const target = e.target as HTMLImageElement;
+                target.src = baseaiko;
+              }}
             />
           )}
         </NavUserPfpContainer>

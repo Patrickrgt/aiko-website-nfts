@@ -236,7 +236,6 @@ interface Props {
 }
 
 const StampRewards = ({ show }: Props) => {
-  const aikos = getAikoHoldings();
   const [aikoList, setAikoList] = useState([""]);
   const [currList, setCurrList] = useState([""]);
   const [active, setActive] = useState(false);
@@ -248,6 +247,7 @@ const StampRewards = ({ show }: Props) => {
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
 
+  const aikos = getAikoHoldings();
   async function fetchNFTs() {
     try {
       const aikoList = await aikos;

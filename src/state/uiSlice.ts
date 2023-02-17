@@ -29,7 +29,8 @@ const initialState: UiState = {
   showingNfts: false,
   muteAudio: false,
   animationEnd: true,
-  globalNft: "",
+  globalNft:
+    "https://aikovirtual.mypinata.cloud/ipfs/QmZ2qm2nPdc7p6sATD1QKL4keShffYtFmaS66bFJde2GbR",
   globalAccount: "",
 };
 
