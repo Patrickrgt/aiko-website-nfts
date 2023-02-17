@@ -210,20 +210,24 @@ const Aiko = styled.img`
 `;
 
 const PaginationLeft = styled.button`
-  color: #ffd362;
+  color: ${(props: NftProps) => (props.active ? "#a9afb8" : "#ffd362")};
   font-size: 6rem;
   clip-path: var(--notched-r-md);
   background-color: #ffd362;
   cursor: pointer;
   transform: rotate(180deg);
+  background-color: ${(props: NftProps) =>
+    props.active ? "#a9afb8" : "#ffffff;"};
 `;
 
 const PaginationRight = styled.button`
-  color: #ffd362;
+  color: ${(props: NftProps) => (props.active ? "#a9afb8" : "#ffd362")};
   font-size: 6rem;
   background-color: #ffd362;
   clip-path: var(--notched-r-md);
   cursor: pointer;
+  background-color: ${(props: NftProps) =>
+    props.active ? "#a9afb8" : "#ffffff;"};
 `;
 
 interface NftProps {
@@ -298,6 +302,7 @@ const StampRewards = ({ show }: Props) => {
               <PaginationLeft
                 onClick={() => setCurrentPage(currentPage - 1)}
                 disabled={currentPage === 1}
+                active={currentPage === 1}
               >
                 ◀
               </PaginationLeft>
@@ -311,6 +316,7 @@ const StampRewards = ({ show }: Props) => {
               <PaginationRight
                 onClick={() => setCurrentPage(currentPage + 1)}
                 disabled={endIndex >= aikoList.length}
+                active={endIndex >= aikoList.length}
               >
                 ◀
               </PaginationRight>
