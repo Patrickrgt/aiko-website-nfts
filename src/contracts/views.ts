@@ -23,20 +23,16 @@ const settings = {
 const alchemy = new Alchemy(settings);
 
 export const getAikoHoldings = async (): Promise<string[] | undefined> => {
-  try {
-    const { account } = useEthers();
-    const ownedAikos: string[] = [];
-    if (account) {
-      const response = await alchemy.nft.getNftsForOwner(account, {
-        pageSize: 100,
-        contractAddresses: ["0xb661ab9bcd2878c5f8c136f67fd550a9d7df7197"],
-      });
-      return response.ownedNfts.map((prop: any) =>
-        prop.media[0].gateway.toString()
-      );
-    }
-  } catch (error) {
-    console.log(error);
+  const { account } = useEthers();
+  const ownedAikos: string[] = [];
+  if (account) {
+    const response = await alchemy.nft.getNftsForOwner(account, {
+      pageSize: 100,
+      contractAddresses: ["0xb661ab9bcd2878c5f8c136f67fd550a9d7df7197"],
+    });
+    return response.ownedNfts.map((prop: any) =>
+      prop.media[0].gateway.toString()
+    );
   }
 };
 
