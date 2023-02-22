@@ -214,10 +214,11 @@ const NavUserPfpOverlay = styled.div`
   clip-path: var(--notched-md);
   /* background-color: #e31414; */
   padding: 0.15rem 0.15rem 0.15rem 0.15rem;
-  transition: all ease 0.2s;
+  transition: all ease 0.25s;
   position: relative;
   &:hover {
-    background-color: ${(props: NavProps) => (props.active ? "#fff" : "")};
+    background-color: ${(props: NavProps) =>
+      props.active ? "rgba(255, 208, 0, 1)" : ""};
   }
 
   &:hover:after {
@@ -227,8 +228,7 @@ const NavUserPfpOverlay = styled.div`
     right: 0;
     bottom: 0;
     left: 0;
-    background-color: rgba(255, 208, 0, 0.197);
-    opacity: ${(props: NavProps) => (props.active ? "1" : "0")};
+    background-color: rgba(255, 208, 0, 0.1);
     transition: all 0.3s ease-in-out;
   }
 `;
@@ -412,32 +412,32 @@ const UserProfile = () => {
 
       <NavUserStats>
         <NavUserPfpContainer>
-          <NavUserPfpOverlay
-            active={!!account}
-            onClick={() => {
-              if (hasAikos) {
-                dispatch(setShowingNfts(true));
-              } else {
+          {!account && (
+            <NavUserPfp
+              active={!!account}
+              onMouseEnter={() => {
+                setHoverActive(true);
+                playHoverAudio();
+              }}
+              onMouseLeave={() => setHoverActive(false)}
+              onClick={() => {
+                activateBrowserWallet();
                 playClickAudio();
-              }
-            }}
-          >
-            {!account && (
-              <NavUserPfp
-                active={!!account}
-                onMouseEnter={() => {
-                  setHoverActive(true);
-                  playHoverAudio();
-                }}
-                onMouseLeave={() => setHoverActive(false)}
-                onClick={() => {
-                  activateBrowserWallet();
+              }}
+              src={baseaiko}
+            />
+          )}
+          {account && (
+            <NavUserPfpOverlay
+              active={!!account}
+              onClick={() => {
+                if (hasAikos) {
+                  dispatch(setShowingNfts(true));
+                } else {
                   playClickAudio();
-                }}
-                src={baseaiko}
-              />
-            )}
-            {account && (
+                }
+              }}
+            >
               <NavUserPfp
                 active={!account}
                 onClick={() => {
@@ -453,8 +453,8 @@ const UserProfile = () => {
                   target.src = baseaiko;
                 }}
               />
-            )}
-          </NavUserPfpOverlay>
+            </NavUserPfpOverlay>
+          )}
         </NavUserPfpContainer>
 
         <MeeposCollected>
