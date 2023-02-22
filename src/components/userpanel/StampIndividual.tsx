@@ -30,6 +30,7 @@ export interface IndividualStampType {
   image: string;
   id: number;
   character: string;
+  description: string;
   required: number;
   edition: [
     {
@@ -405,10 +406,8 @@ const StampIndividual = ({ stampIndividual }: Props) => {
             <TextContainer>
               <TextShadow show={stampIndividual.visible}>
                 <StampText show={stampIndividual.visible}>
-                  It's easy to find the Explorer Stamps, but not easy to collect
-                  them, you need to be an active member through our community,
-                  and explore the events, contests, and much more with youir
-                  adventurer friends! <br /> A:\Stay Virtuyal! -Mimi
+                  {stampIndividual.description} <br /> A:\Stay Virtual! -
+                  {stampIndividual.character}
                 </StampText>
               </TextShadow>
             </TextContainer>

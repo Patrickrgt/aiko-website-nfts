@@ -15,6 +15,7 @@ import map from "../../assets/userpanel/buttonmap.png";
 import lobby from "../../assets/userpanel/buttonlobby.png";
 import lore from "../../assets/userpanel/buttonlore.png";
 import news from "../../assets/userpanel/buttonnews.png";
+import cursorhover from "../../assets/userpanel/cursorhover.png";
 
 const navIcons: NavIconType[] = [
   {
@@ -163,6 +164,7 @@ const NavWalletRewardsContainer = styled.div`
 `;
 
 const HoverText = styled.div`
+  white-space: nowrap;
   z-index: 2;
   position: absolute;
   color: #393939;
@@ -172,7 +174,7 @@ const HoverText = styled.div`
   opacity: ${(props: NavProps) => (props.visible ? 1 : 0)};
   transition: opacity 0.25s ease;
   clip-path: var(--notched-sm);
-  visibility: ${(props: NavProps) => (props.visible ? "" : "hidden")};
+  display: ${(props: NavProps) => (props.visible ? "static" : "none")};
 `;
 
 interface NavProps {
@@ -205,9 +207,19 @@ const UserNav = () => {
   }, [visible]);
 
   const handleMouseMove = (event: any) => {
-    setLeft(event.clientX + 50);
-    setTop(event.clientY);
-    console.log(top);
+    const mouse_x = event.clientX;
+    const mouse_y = event.clientY;
+    const window_width = window.innerWidth;
+    const window_height = window.innerHeight;
+    const is_on_right_edge = mouse_x > window_width - 320;
+
+    if (is_on_right_edge) {
+      setLeft(mouse_x - 250);
+      setTop(mouse_y);
+    } else {
+      setLeft(mouse_x + 50);
+      setTop(mouse_y);
+    }
   };
 
   return (

@@ -48,7 +48,9 @@ export const stampIndividual: IndividualStampType[] = [
     name: "Holder",
     image: holder,
     id: 0,
-    character: "Mimi",
+    character: "Mitsu",
+    description:
+      "To collect my magazine covers you can just secure and hold any Aiko for a certain amount of time! If you don't have an Aiko, check our Opensea on the links to your right! We are rewarding everyone!",
     edition: [
       {
         image: holder1,
@@ -76,7 +78,9 @@ export const stampIndividual: IndividualStampType[] = [
     name: "Creator",
     image: creator,
     id: 1,
-    character: "Mimi3",
+    character: "Megumi",
+    description:
+      "I'm an artist who wants to move people with my brushstrokes. Creating pieces that make virtuals feel amazing is my core! Why not make your own and show our Aikommunity?",
     edition: [
       {
         image: creator1,
@@ -104,7 +108,9 @@ export const stampIndividual: IndividualStampType[] = [
     name: "Supporter",
     image: supporter,
     id: 2,
-    character: "Mimi4",
+    character: "Marisa",
+    description:
+      "I love helping people, especially those who don't ask for it out loud but show it through their actions. I give stamps to virtuals who make our community happy with their awesome content!",
     edition: [
       {
         image: supporter1,
@@ -132,7 +138,9 @@ export const stampIndividual: IndividualStampType[] = [
     name: "Explorer",
     image: explorer,
     id: 3,
-    character: "Mimi2",
+    character: "Mimi",
+    description:
+      "It's easy to find the Explorer Stamps, but not easy to collect them, you need to be an active member through our community, and explore our events, contests, with your virtual friends!",
     edition: [
       {
         image: explorer1,

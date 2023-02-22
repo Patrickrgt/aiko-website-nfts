@@ -7,6 +7,7 @@ import {
   setGlobalNft,
   selectGlobalNft,
   selectGlobalAccount,
+  setHasAikos,
 } from "../../state/uiSlice";
 
 import { useBalanceOf, getAikoHoldings } from "../../contracts/views";
@@ -21,10 +22,10 @@ import print from "../../assets/userpanel/print.png";
 import cursorhover from "../../assets/userpanel/cursorhover.png";
 
 const slideForward = keyframes`
-   0% { height: 15%;  opacity: 1; width: 15%; }
-   15% { width: 100%; }
-   90% { height: 90%; opacity: 1; background-color: #2c2c2c;}
-   100% { height: 100%; opacity: 0; background-color: #1f1f1f;}
+   0% { height: 0%;  opacity: 1; width: 15%; clip-path: var(--notched-md);}
+   15% { height: 100%; }
+   90% { width: 100%; opacity: 1; background-color: #c6d0eb;}
+   100% { width: 100%; opacity: 0; background-color: #c6d0eb; clip-path: var(--notched-md);}
 `;
 
 const slideBack = keyframes`
@@ -70,7 +71,6 @@ const StyledPopup = styled.div`
   opacity: ${(props: Props) => (props.show ? 1 : 0)};
   visibility: ${(props: Props) => (props.show ? "" : "hidden")};
   transition: all ease 0.25s;
-  overflow-y: hidden;
 `;
 
 const Background = styled.button`
@@ -108,6 +108,7 @@ const StampContainer = styled.div`
   display: flex;
   font-family: video, serif;
   clip-path: var(--notched-md);
+  transition: all 0.5s ease-in-out;
   max-width: 1050px;
   animation: ${(props: NftProps) =>
     props.show
@@ -130,7 +131,7 @@ const StampOverlay = styled.div`
   height: 100%;
   display: inline-block;
   clip-path: var(--notched);
-  background-color: #282626;
+  background-color: #c6d0eb;
   /* transition: opacity 0.25s ease-out; */
   opacity: 0;
   z-index: -1;
@@ -146,6 +147,22 @@ const StampOverlay = styled.div`
   animation-play-state: ${(props: NftProps) =>
     props.show ? "running" : "paused"};
   animation-delay: 0.25s;
+
+  &.slideIn {
+    animation: ${(props: NftProps) =>
+      props.show
+        ? css`
+            ${slideForward} 1.2s cubic-bezier(1,0,0,1)
+          `
+        : css`
+            ${slideBack} 1.2s ease-out forwards
+          `};
+    animation-play-state: ${(props: NftProps) =>
+      props.show ? "running" : "paused"};
+    animation-duration: 0.5s;
+    animation-fill-mode: both;
+    animation-delay: 1s;
+  }
 `;
 
 const WarningRedeemRow = styled.div`
@@ -214,10 +231,10 @@ const PaginationLeft = styled.button`
   font-size: 6rem;
   clip-path: var(--notched-r-md);
   background-color: #ffd362;
-  cursor: pointer;
+  cursor: url(${cursorhover}), auto;
   transform: rotate(180deg);
   background-color: ${(props: NftProps) =>
-    props.active ? "#a9afb8" : "#ffffff;"};
+    props.active ? "#a9afb8" : "#ffd362;"};
 `;
 
 const PaginationRight = styled.button`
@@ -225,9 +242,9 @@ const PaginationRight = styled.button`
   font-size: 6rem;
   background-color: #ffd362;
   clip-path: var(--notched-r-md);
-  cursor: pointer;
+  cursor: url(${cursorhover}), auto;
   background-color: ${(props: NftProps) =>
-    props.active ? "#a9afb8" : "#ffffff;"};
+    props.active ? "#a9afb8" : "#ffd362;"};
 `;
 
 interface NftProps {
@@ -247,7 +264,7 @@ const StampRewards = ({ show }: Props) => {
   const account = useSelector(selectGlobalAccount);
 
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 15;
+  const itemsPerPage = 5;
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
 
@@ -257,9 +274,11 @@ const StampRewards = ({ show }: Props) => {
       const aikoList = await aikos;
       if (
         Array.isArray(aikoList) &&
-        aikoList.every((item) => typeof item === "string")
+        aikoList.every((item) => typeof item === "string") &&
+        aikoList.length > 0
       ) {
         setAikoList(aikoList);
+        dispatch(setHasAikos(true));
       }
     } catch (error) {
       console.log(error);
@@ -275,7 +294,7 @@ const StampRewards = ({ show }: Props) => {
   useEffect(() => {
     setCurrList(aikoList.slice(startIndex, endIndex));
     dispatch(setGlobalNft(aikoList[0]));
-  }, [aikoList]);
+  }, [currentPage, aikoList]);
 
   const showing = useSelector(selectShowingNfts);
   const dispatch = useDispatch();
@@ -304,7 +323,7 @@ const StampRewards = ({ show }: Props) => {
                 disabled={currentPage === 1}
                 active={currentPage === 1}
               >
-                ◀
+                ▶
               </PaginationLeft>
               <RewardContainer>
                 <StampRewardContainer show={showing}>
@@ -314,11 +333,13 @@ const StampRewards = ({ show }: Props) => {
                 </StampRewardContainer>
               </RewardContainer>
               <PaginationRight
-                onClick={() => setCurrentPage(currentPage + 1)}
+                onClick={() => {
+                  setCurrentPage(currentPage + 1);
+                }}
                 disabled={endIndex >= aikoList.length}
                 active={endIndex >= aikoList.length}
               >
-                ◀
+                ▶
               </PaginationRight>
             </StampContainer>
           </StampBorder>

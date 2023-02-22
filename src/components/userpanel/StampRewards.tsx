@@ -93,6 +93,11 @@ const apparent = keyframes`
    100% {  background-color: rgba(0,0,0,0);}
 `;
 
+const backdrop = keyframes`
+   0% {  backdrop-filter: blur(8px); opacity: 0  }
+   100% {  opacity: 1;}
+`;
+
 const StyledPopup = styled.div`
   position: fixed;
   display: flex;
@@ -119,6 +124,17 @@ const Background = styled.button`
   transition: opacity 0.3s;
   opacity: ${(props: Props) => (props.show ? 1 : 0)};
   cursor: url(${cursorhover}), auto;
+  backdrop-filter: blur(4px);
+  animation: ${(props: StampRewardProps) =>
+    props.show
+      ? css`
+          ${backdrop} 0.6s ease-in-out forwards
+        `
+      : css`
+          ${apparent} 0.6s ease-out forwards
+        `};
+  animation-play-state: ${(props: StampRewardProps) =>
+    props.show ? "running" : "paused"};
 `;
 
 const StampFullContainer = styled.div`
