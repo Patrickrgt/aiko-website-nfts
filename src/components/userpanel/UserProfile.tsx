@@ -5,13 +5,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEthers, useLookupAddress, useCall } from "@usedapp/core";
 import { utils, constants, BigNumber, Contract as CTR } from "ethers";
 import { Contract } from "@ethersproject/contracts";
-import { useBalanceOf, getAikoHoldings } from "../../contracts/views";
+import { useBalanceOf } from "../../contracts/views";
 import {
   setShowingNfts,
   selectGlobalNft,
   setGlobalAccount,
   selectHasAikos,
 } from "../../state/uiSlice";
+import check from "../../assets/placeholders/check.png";
 
 import aikostamps from "../../contracts/aikostamps.json";
 
@@ -244,23 +245,6 @@ const NavUserPfpContainer = styled.div`
   position: relative;
 `;
 
-const NavUserPfp = styled.img`
-  filter: opacity(90%);
-  filter: hue-rotate(10deg);
-  clip-path: var(--notched-md);
-  width: 150px;
-  height: 150px;
-  background-size: 150px 150px;
-  transition: all ease-in-out 0.3s;
-
-  &:hover {
-    border: ${(props: NavProps) =>
-      props.active ? "2px solid white" : "2px solid transprent"};
-    /* filter: ${(props: NavProps) =>
-      props.active ? "hue-rotate(-150deg);" : "hue-rotate(-150deg);"}; */
-  }
-`;
-
 const Overlay = styled.div`
   &:before {
     content: "";
@@ -269,8 +253,26 @@ const Overlay = styled.div`
     right: 0;
     bottom: 0;
     left: 0;
-    background-color: rgba(0, 132, 255, 0.5);
+    background-color: rgba(229, 255, 0, 0.5);
     transition: all 0.3s linear;
+    opacity: ${(props: NavProps) => (props.active ? 1 : 0)};
+    transition: 0.3s ease-in-out;
+  }
+`;
+
+const NavUserPfp = styled.div`
+  filter: opacity(90%);
+  filter: hue-rotate(10deg);
+  clip-path: var(--notched-md);
+  background-image: url(${(props) => props.pfp});
+  width: 150px;
+  height: 150px;
+  background-size: 150px 150px;
+  transition: all cubic-bezier(0.16, -0.05, 0.83, 1.06) 0.3s;
+
+  &:hover {
+    border: ${(props: NavProps) =>
+      props.active ? "2px solid white" : "2px solid transprent"};
   }
 `;
 
@@ -296,14 +298,68 @@ const NavUserSocial = styled.img`
   clip-path: var(--notched-sm);
 `;
 
+const OverlayContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  filter: drop-shadow(1px 1px 3px #f1e64f) drop-shadow(-1px 1px 3px #f1e64f)
+    drop-shadow(1px -1px 3px #f1e64f) drop-shadow(-1px -1px 3px #f1e64f);
+  opacity: ${(props: NavProps) => (props.active ? 1 : 0)};
+  transition: 0.3s ease-in-out;
+  opacity: ${(props: NavProps) => (props.active ? 1 : 0)};
+  transform: ${(props: NavProps) =>
+    props.active ? "translate(0, 0)" : "translate(0, 40px)"};
+`;
+
+const OverlayCheck = styled.img`
+  transform: translate(0, 40px);
+  transition: all 0.2s cubic-bezier(1, 0, 0, 1);
+  width: 50px;
+  width: 50px;
+  margin-bottom: 6px;
+  filter: invert(1) drop-shadow(1px 1px 0 black) drop-shadow(-1px 1px 0 black)
+    drop-shadow(1px -1px 0 black) drop-shadow(-1px -1px 0 black);
+  opacity: ${(props: NavProps) => (props.active ? 1 : 0)};
+  opacity: ${(props: NavProps) => (props.active ? 1 : 0)};
+  transition: 0.3s ease-in-out;
+  opacity: ${(props: NavProps) => (props.active ? 1 : 0)};
+  transform: ${(props: NavProps) =>
+    props.active ? "translate(0, 0)" : "translate(0, 40px)"};
+`;
+
+const OverlayText = styled.div`
+  transform: translate(0, 40px);
+  transition: all 0.2s cubic-bezier(1, 0, 0, 1);
+  opacity: ${(props: NavProps) => (props.active ? 1 : 0)};
+  transform: ${(props: NavProps) =>
+    props.active ? "translate(0, 0)" : "translate(0, 40px)"};
+  &:before {
+    content: "Change NFT";
+    font-size: 2.25rem;
+    text-shadow: -3px -3px 0 #000, 0 -3px 0 #000, 3px -3px 0 #000, 3px 0 0 #000,
+      3px 3px 0 #000, 0 3px 0 #000, -3px 3px 0 #000, -3px 0 0 #000;
+    color: white;
+    position: relative;
+    z-index: 100;
+  }
+`;
+
 interface NavProps {
   active?: boolean;
   ens?: boolean;
   account?: any;
+  pfp?: string;
 }
 
 const UserProfile = () => {
   const [hoverActive, setHoverActive] = useState(false);
+  const [pfpHoverActive, setPfpHoverActive] = useState(false);
   const nftPfp = useSelector(selectGlobalNft);
   const hasAikos = useSelector(selectHasAikos);
 
@@ -313,7 +369,6 @@ const UserProfile = () => {
 
   const [stampsHeld, setStampsHeld] = useState(0);
   const stamps = useBalanceOf();
-  const aikos = getAikoHoldings();
 
   const audioHoverTab = useRef<HTMLAudioElement>(null);
   const audioClickTab = useRef<HTMLAudioElement>(null);
@@ -343,15 +398,6 @@ const UserProfile = () => {
       setStampsHeld(stamps.reduce((total, current) => total + current, 0));
     }
   }, [stamps]);
-
-  useEffect(() => {
-    let aikosPfpList = null;
-    if (aikos) {
-      aikos.then((res) => {
-        aikosPfpList = res;
-      });
-    }
-  }, [aikos]);
 
   return (
     <NavUserContainer>
@@ -424,12 +470,13 @@ const UserProfile = () => {
                 activateBrowserWallet();
                 playClickAudio();
               }}
-              src={baseaiko}
+              pfp={baseaiko}
+              // src={baseaiko}
             />
           )}
           {account && (
-            <NavUserPfpOverlay
-              active={!!account}
+            <NavUserPfp
+              active={!account}
               onClick={() => {
                 if (hasAikos) {
                   dispatch(setShowingNfts(true));
@@ -437,23 +484,25 @@ const UserProfile = () => {
                   playClickAudio();
                 }
               }}
+              pfp={nftPfp}
+              // src={nftPfp}
+              onError={(e) => {
+                const target = e.target as HTMLImageElement;
+                target.src = baseaiko;
+              }}
+              onMouseEnter={() => {
+                setPfpHoverActive(true);
+              }}
+              onMouseLeave={() => {
+                setPfpHoverActive(false);
+              }}
             >
-              <NavUserPfp
-                active={!account}
-                onClick={() => {
-                  if (hasAikos) {
-                    dispatch(setShowingNfts(true));
-                  } else {
-                    playClickAudio();
-                  }
-                }}
-                src={nftPfp}
-                onError={(e) => {
-                  const target = e.target as HTMLImageElement;
-                  target.src = baseaiko;
-                }}
-              />
-            </NavUserPfpOverlay>
+              <Overlay active={pfpHoverActive} />
+              <OverlayContainer active={pfpHoverActive}>
+                <OverlayCheck src={check} active={pfpHoverActive} />
+                <OverlayText active={pfpHoverActive} />
+              </OverlayContainer>
+            </NavUserPfp>
           )}
         </NavUserPfpContainer>
 

@@ -1,4 +1,4 @@
-import { ReactNode, useEffect, useState, useMemo } from "react";
+import { ReactNode, useEffect, useState, useMemo, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled, { css, keyframes } from "styled-components";
 import {
@@ -268,10 +268,9 @@ const StampRewards = ({ show }: Props) => {
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
 
-  const aikos = getAikoHoldings();
   async function fetchNFTs() {
     try {
-      const aikoList = await aikos;
+      const aikoList = await getAikoHoldings();
       if (
         Array.isArray(aikoList) &&
         aikoList.every((item) => typeof item === "string") &&
@@ -285,7 +284,7 @@ const StampRewards = ({ show }: Props) => {
     }
   }
 
-  useEffect(() => {
+  useMemo(() => {
     if (account !== undefined) {
       fetchNFTs();
     }

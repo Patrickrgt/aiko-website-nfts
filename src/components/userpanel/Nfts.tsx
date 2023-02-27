@@ -106,7 +106,6 @@ interface Props {
 }
 
 const Nfts = ({ aiko }: Props) => {
-  const aikos = getAikoHoldings();
   const [aikoList, setAikoList] = useState([""]);
   const [active, setActive] = useState(false);
 
