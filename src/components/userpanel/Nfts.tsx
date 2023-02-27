@@ -14,6 +14,7 @@ import cursorhover from "../../assets/userpanel/cursorhover.png";
 import check from "../../assets/placeholders/check.png";
 
 const AikoShadow = styled.div`
+  flex-wrap: nowrap;
   padding: 0.5rem 0.25rem 0.75rem 0.25rem;
   transition: background-color 0.2s;
   background-color: ${(props: NftProps) =>
@@ -25,6 +26,7 @@ const AikoShadow = styled.div`
 `;
 
 const Aiko = styled.div`
+  flex-wrap: nowrap;
   max-width: 150px;
   max-height: 150px;
   min-width: 150px;
@@ -53,6 +55,7 @@ const Overlay = styled.div`
 `;
 
 const OverlayContainer = styled.div`
+  flex-wrap: nowrap;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -72,13 +75,13 @@ const OverlayCheck = styled.img`
     props.selected ? "translate(0, 0)" : "translate(0, 40px)"};
   transition: all 0.2s cubic-bezier(1, 0, 0, 1);
   width: 50px;
-  width: 50px;
   margin-bottom: 6px;
   filter: invert(1) drop-shadow(1px 1px 0 black) drop-shadow(-1px 1px 0 black)
     drop-shadow(1px -1px 0 black) drop-shadow(-1px -1px 0 black);
 `;
 
 const OverlayText = styled.div`
+  flex-wrap: nowrap;
   opacity: ${(props: NftProps) => (props.selected ? 1 : 0)};
   transform: ${(props: NftProps) =>
     props.selected ? "translate(0, 0)" : "translate(0, 40px)"};

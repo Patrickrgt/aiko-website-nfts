@@ -132,6 +132,8 @@ const GlobalStyle = createGlobalStyle`
         );
     }
 
+
+
     * {
         box-sizing: border-box;
         margin: 0;
@@ -156,6 +158,7 @@ const GlobalStyle = createGlobalStyle`
     a {
         text-decoration: none;
     }
+
 `;
 
 const GlobalStyles = (): JSX.Element => {

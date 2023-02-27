@@ -1,4 +1,11 @@
-import { ReactNode, useEffect, useState, useMemo, useCallback } from "react";
+import {
+  ReactNode,
+  useEffect,
+  useState,
+  useMemo,
+  useCallback,
+  useRef,
+} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled, { css, keyframes } from "styled-components";
 import {
@@ -22,10 +29,16 @@ import print from "../../assets/userpanel/print.png";
 import cursorhover from "../../assets/userpanel/cursorhover.png";
 
 const slideForward = keyframes`
-   0% { height: 0%;  opacity: 1; width: 15%; clip-path: var(--notched-md);}
+   0% { height: 0%; opacity: 1; width: 15%; clip-path: var(--notched-md);}
    15% { height: 100%; }
    90% { width: 100%; opacity: 1; background-color: #c6d0eb;}
    100% { width: 100%; opacity: 0; background-color: #c6d0eb; clip-path: var(--notched-md);}
+`;
+
+const slideForwardPfp = keyframes`
+   0% { height: 100%; width: 100%;}
+   15% { height: 5%; width: 5%;}
+   100% {  height: 100%;   width: 100%;}
 `;
 
 const slideBack = keyframes`
@@ -100,16 +113,10 @@ const MainContainer = styled.div`
 
 const StampBorder = styled.div`
   position: relative;
-`;
-
-const StampContainer = styled.div`
-  background-color: #c6d0eb;
-  padding: 2rem 2rem;
   display: flex;
-  font-family: video, serif;
-  clip-path: var(--notched-md);
-  transition: all 0.5s ease-in-out;
-  max-width: 1050px;
+  flex-direction: column;
+  align-items: center;
+  flex-wrap: nowrap;
   animation: ${(props: NftProps) =>
     props.show
       ? css`
@@ -120,6 +127,23 @@ const StampContainer = styled.div`
         `};
   animation-play-state: ${(props: NftProps) =>
     props.show ? "running" : "paused"};
+`;
+
+const StampContainer = styled.div`
+  background-color: #c6d0eb;
+  padding: 2rem 2rem;
+  display: flex;
+  font-family: video, serif;
+  clip-path: var(--notched-md);
+  transition: all 0.5s ease-in-out;
+  max-width: 1050px;
+  height: 100%;
+  animation: ${(props: NftProps) =>
+    props.play
+      ? css`
+          ${slideForwardPfp} .6s cubic-bezier(.75,-0.25,.25,1.25) forwards
+        `
+      : "none"};
 `;
 
 const StampOverlay = styled.div`
@@ -146,6 +170,7 @@ const StampOverlay = styled.div`
         `};
   animation-play-state: ${(props: NftProps) =>
     props.show ? "running" : "paused"};
+
   animation-delay: 0.25s;
 
   &.slideIn {
@@ -170,6 +195,9 @@ const WarningRedeemRow = styled.div`
 `;
 
 const RewardContainer = styled.div`
+  white-space: nowrap;
+  display: flex;
+  flex-wrap: nowrap;
   padding: 0.5rem;
   margin: 0 2rem;
   background-color: #edeef5;
@@ -178,9 +206,9 @@ const RewardContainer = styled.div`
 
 const StampRewardContainer = styled.div`
   display: flex;
+  flex-wrap: nowrap;
   width: fit-content;
   height: 100%;
-  flex-wrap: wrap;
   justify-content: center;
   animation: ${(props: NftProps) =>
     props.show
@@ -227,10 +255,10 @@ const Aiko = styled.img`
 `;
 
 const PaginationLeft = styled.button`
+  flex-wrap: nowrap;
   color: ${(props: NftProps) => (props.active ? "#a9afb8" : "#ffd362")};
   font-size: 6rem;
   clip-path: var(--notched-r-md);
-  background-color: #ffd362;
   cursor: url(${cursorhover}), auto;
   transform: rotate(180deg);
   background-color: ${(props: NftProps) =>
@@ -238,18 +266,29 @@ const PaginationLeft = styled.button`
 `;
 
 const PaginationRight = styled.button`
+  flex-wrap: nowrap;
   color: ${(props: NftProps) => (props.active ? "#a9afb8" : "#ffd362")};
   font-size: 6rem;
-  background-color: #ffd362;
   clip-path: var(--notched-r-md);
   cursor: url(${cursorhover}), auto;
   background-color: ${(props: NftProps) =>
     props.active ? "#a9afb8" : "#ffd362;"};
 `;
 
+const PaginationPage = styled.h1`
+  margin-top: 1rem;
+  font-size: 2.25rem;
+  text-shadow: -3px -3px 0 #000, 0 -3px 0 #000, 3px -3px 0 #000, 3px 0 0 #000,
+    3px 3px 0 #000, 0 3px 0 #000, -3px 3px 0 #000, -3px 0 0 #000;
+  color: white;
+  position: relative;
+  z-index: 100;
+`;
+
 interface NftProps {
   show?: boolean;
   active?: boolean;
+  play?: boolean;
 }
 
 interface Props {
@@ -260,6 +299,7 @@ const StampRewards = ({ show }: Props) => {
   const [aikoList, setAikoList] = useState([""]);
   const [currList, setCurrList] = useState([""]);
   const [active, setActive] = useState(false);
+  const [playAnimation, setPlayAnimation] = useState(false);
 
   const account = useSelector(selectGlobalAccount);
 
@@ -267,6 +307,13 @@ const StampRewards = ({ show }: Props) => {
   const itemsPerPage = 5;
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
+
+  const handleAnimationClick = () => {
+    setPlayAnimation(true);
+    setTimeout(() => {
+      setPlayAnimation(false);
+    }, 800);
+  };
 
   async function fetchNFTs() {
     try {
@@ -292,7 +339,6 @@ const StampRewards = ({ show }: Props) => {
 
   useEffect(() => {
     setCurrList(aikoList.slice(startIndex, endIndex));
-    dispatch(setGlobalNft(aikoList[0]));
   }, [currentPage, aikoList]);
 
   const showing = useSelector(selectShowingNfts);
@@ -300,6 +346,8 @@ const StampRewards = ({ show }: Props) => {
 
   const [stampsHeld, setStampsHeld] = useState(0);
   const stamps = useBalanceOf();
+
+  const pageLength = Math.ceil(aikoList.length / itemsPerPage);
 
   return (
     // Refractor background blur because using visiblity which affects performance...
@@ -310,15 +358,20 @@ const StampRewards = ({ show }: Props) => {
       />
       <AikoFullContainer>
         <MainContainer show={showing}>
-          <StampOverlay show={showing} />
+          <StampOverlay show={showing} play={playAnimation} />
 
-          <StampBorder>
+          <StampBorder show={showing}>
             {/* Title Bar with close button */}
             {/* Contains everything below Stamp Rewards Title Bar */}
 
-            <StampContainer show={showing}>
+            <StampContainer play={playAnimation} show={showing}>
               <PaginationLeft
-                onClick={() => setCurrentPage(currentPage - 1)}
+                onClick={() => {
+                  if (!playAnimation) {
+                    setCurrentPage(currentPage - 1);
+                    handleAnimationClick();
+                  }
+                }}
                 disabled={currentPage === 1}
                 active={currentPage === 1}
               >
@@ -333,7 +386,10 @@ const StampRewards = ({ show }: Props) => {
               </RewardContainer>
               <PaginationRight
                 onClick={() => {
-                  setCurrentPage(currentPage + 1);
+                  if (!playAnimation) {
+                    setCurrentPage(currentPage + 1);
+                    handleAnimationClick();
+                  }
                 }}
                 disabled={endIndex >= aikoList.length}
                 active={endIndex >= aikoList.length}
@@ -341,6 +397,9 @@ const StampRewards = ({ show }: Props) => {
                 ▶
               </PaginationRight>
             </StampContainer>
+            <PaginationPage>
+              {currentPage} / {pageLength}
+            </PaginationPage>
           </StampBorder>
         </MainContainer>
       </AikoFullContainer>
