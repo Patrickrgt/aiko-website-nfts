@@ -29,16 +29,24 @@ import print from "../../assets/userpanel/print.png";
 import cursorhover from "../../assets/userpanel/cursorhover.png";
 
 const slideForward = keyframes`
-   0% { height: 0%; opacity: 1; width: 15%; clip-path: var(--notched-md);}
-   15% { height: 100%; }
-   90% { width: 100%; opacity: 1; background-color: #c6d0eb;}
-   100% { width: 100%; opacity: 0; background-color: #c6d0eb; clip-path: var(--notched-md);}
+   0% { height: 5%; opacity: 1; width: 5%; clip-path: var(--notched-md);}
+   35% { height: 88%; width: 15%;}
+   45% { height: 88%; width: 15%;}
+   80% { width: 100%; opacity: 1; background-color: #c6d0eb;}
+   100% {  height: 88%; width: 100%; opacity: 1; background-color: #c6d0eb; clip-path: var(--notched-md);}
 `;
 
 const slideForwardPfp = keyframes`
-   0% { height: 100%; width: 100%;}
-   15% { height: 5%; width: 5%;}
-   100% {  height: 100%;   width: 100%;}
+   0% { transform: scale(1);}
+   35% { transform: scale(.75, .75);}
+   60% { transform: scale(.75, .75);}
+   100% {  transform: scale(1); }
+`;
+
+const slideDown = keyframes`
+   0% { transform:  translate(0, 300px);}
+   25% { transform: translate(0px, 0px);}
+   100% {  transform: translate(0px, 300px);}
 `;
 
 const slideBack = keyframes`
@@ -48,9 +56,7 @@ const slideBack = keyframes`
 
 const appear = keyframes`
   0% {  opacity: 0 }
-   80% { opacity: 0}
-   85% { opacity: 1}
-   90% { opacity: 0}
+  80% {  opacity: 0 }
    100% {  opacity: 1}
 `;
 
@@ -120,7 +126,7 @@ const StampBorder = styled.div`
   animation: ${(props: NftProps) =>
     props.show
       ? css`
-          ${appear} 2s cubic-bezier(.35,.01,.19,.83)
+          ${appear} 0.8s cubic-bezier(.35,.01,.19,.83)
         `
       : css`
           ${disappear} 1s ease-out forwards
@@ -156,28 +162,24 @@ const StampOverlay = styled.div`
   display: inline-block;
   clip-path: var(--notched);
   background-color: #c6d0eb;
-  /* transition: opacity 0.25s ease-out; */
   opacity: 0;
   z-index: -1;
-
   animation: ${(props: NftProps) =>
     props.show
       ? css`
-          ${slideForward} 1.2s cubic-bezier(1,0,0,1)
+          ${slideForward} .6s cubic-bezier(1,0,0,1)
         `
       : css`
           ${slideBack} 1.2s ease-out forwards
         `};
   animation-play-state: ${(props: NftProps) =>
     props.show ? "running" : "paused"};
-
-  animation-delay: 0.25s;
-
+  animation-delay: 0.15s;
   &.slideIn {
     animation: ${(props: NftProps) =>
       props.show
         ? css`
-            ${slideForward} 1.2s cubic-bezier(1,0,0,1)
+            ${slideForward} .4s cubic-bezier(1,0,0,1)
           `
         : css`
             ${slideBack} 1.2s ease-out forwards
@@ -202,6 +204,27 @@ const RewardContainer = styled.div`
   margin: 0 2rem;
   background-color: #edeef5;
   clip-path: var(--notched-md);
+  position: relative;
+`;
+
+const Overlay = styled.div`
+  &:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: #ffd362;
+    transform: translate(300px, 300px);
+    transition: transform 0.3s ease-in-out;
+    animation: ${(props: NftProps) =>
+      props.play
+        ? css`
+            ${slideDown} .6s cubic-bezier(.75,-0.25,.25,1.25) forwards
+          `
+        : "none"};
+  }
 `;
 
 const StampRewardContainer = styled.div`
@@ -213,7 +236,7 @@ const StampRewardContainer = styled.div`
   animation: ${(props: NftProps) =>
     props.show
       ? css`
-          ${appear} 2.2s ease-in
+          ${appear} 0.5s ease-in
         `
       : css`
           ${disappear} 1s ease-out
@@ -255,6 +278,7 @@ const Aiko = styled.img`
 `;
 
 const PaginationLeft = styled.button`
+  z-index: 3;
   flex-wrap: nowrap;
   color: ${(props: NftProps) => (props.active ? "#a9afb8" : "#ffd362")};
   font-size: 6rem;
@@ -266,6 +290,7 @@ const PaginationLeft = styled.button`
 `;
 
 const PaginationRight = styled.button`
+  z-index: 3;
   flex-wrap: nowrap;
   color: ${(props: NftProps) => (props.active ? "#a9afb8" : "#ffd362")};
   font-size: 6rem;
@@ -276,7 +301,7 @@ const PaginationRight = styled.button`
 `;
 
 const PaginationPage = styled.h1`
-  margin-top: 1rem;
+  margin-top: 1.25rem;
   font-size: 2.25rem;
   text-shadow: -3px -3px 0 #000, 0 -3px 0 #000, 3px -3px 0 #000, 3px 0 0 #000,
     3px 3px 0 #000, 0 3px 0 #000, -3px 3px 0 #000, -3px 0 0 #000;
@@ -308,6 +333,16 @@ const StampRewards = ({ show }: Props) => {
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
 
+  useMemo(() => {
+    if (account !== undefined) {
+      fetchNFTs();
+    }
+  }, [account]);
+
+  useEffect(() => {
+    setCurrList(aikoList.slice(startIndex, endIndex));
+  }, [currentPage, aikoList]);
+
   const handleAnimationClick = () => {
     setPlayAnimation(true);
     setTimeout(() => {
@@ -330,16 +365,6 @@ const StampRewards = ({ show }: Props) => {
       console.log(error);
     }
   }
-
-  useMemo(() => {
-    if (account !== undefined) {
-      fetchNFTs();
-    }
-  }, [account]);
-
-  useEffect(() => {
-    setCurrList(aikoList.slice(startIndex, endIndex));
-  }, [currentPage, aikoList]);
 
   const showing = useSelector(selectShowingNfts);
   const dispatch = useDispatch();
@@ -380,10 +405,11 @@ const StampRewards = ({ show }: Props) => {
               <RewardContainer>
                 <StampRewardContainer show={showing}>
                   {currList.map((aiko, id) => (
-                    <Nfts aiko={aiko} />
+                    <Nfts play={playAnimation} aiko={aiko} />
                   ))}
                 </StampRewardContainer>
               </RewardContainer>
+
               <PaginationRight
                 onClick={() => {
                   if (!playAnimation) {

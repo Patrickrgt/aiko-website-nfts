@@ -13,6 +13,20 @@ import { useBalanceOf, getAikoHoldings } from "../../contracts/views";
 import cursorhover from "../../assets/userpanel/cursorhover.png";
 import check from "../../assets/placeholders/check.png";
 
+const slideDown = keyframes`
+   0% { transform:  translate(0, 300px);}
+   25% { transform: translate(0px, 0px);}
+   65% { transform: translate(0px, 0px);}
+   100% {  transform: translate(0px, 300px);}
+`;
+
+const slideDownShow = keyframes`
+   0% { transform:  translate(0, 0px);}
+   25% { transform: translate(0px, 300px);}
+   65% { transform: translate(0px, 300px);}
+   100% {  transform: translate(0px, 0px);}
+`;
+
 const AikoShadow = styled.div`
   flex-wrap: nowrap;
   padding: 0.5rem 0.25rem 0.75rem 0.25rem;
@@ -35,9 +49,40 @@ const Aiko = styled.div`
   clip-path: var(--notched-md);
   transition: filter 0.2s;
   background-image: url(${(props) => props.pfp});
-  filter: ${(props: NftProps) => (props.active ? "" : "")};
+  animation: ${(props: NftProps) =>
+    props.show
+      ? css`
+          ${slideDownShow} 0.8s  cubic-bezier(1,0,0,1) forwards 1
+        `
+      : "none"};
+  animation-play-state: ${(props: NftProps) =>
+    props.show ? "running" : "paused"};
   background-size: 150px 150px;
   background-blend-mode: color;
+`;
+
+const TransitionOverlay = styled.div`
+  &:before {
+    content: "";
+    z-index: 3;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    transform: translate(0, 300px);
+    animation: ${(props: Props) =>
+      props.play
+        ? css`
+            ${slideDown} .8s  cubic-bezier(1,0,0,1) forwards
+          `
+        : "none"};
+    background: url("https://aikovirtual.mypinata.cloud/ipfs/QmZ2qm2nPdc7p6sATD1QKL4keShffYtFmaS66bFJde2GbR"),
+      #676d7e;
+    background-size: 150px 150px;
+    transition: all 0.3s linear;
+    filter: grayscale(90%);
+  }
 `;
 
 const Overlay = styled.div`
@@ -106,9 +151,10 @@ interface NftProps {
 
 interface Props {
   aiko?: string;
+  play?: boolean;
 }
 
-const Nfts = ({ aiko }: Props) => {
+const Nfts = ({ aiko, play }: Props) => {
   const [aikoList, setAikoList] = useState([""]);
   const [active, setActive] = useState(false);
 
@@ -122,6 +168,7 @@ const Nfts = ({ aiko }: Props) => {
   return (
     <AikoShadow active={active} selected={nftPfp === aiko}>
       <Aiko
+        show={showing}
         selected={nftPfp === aiko}
         pfp={aiko}
         active={active}
@@ -133,6 +180,7 @@ const Nfts = ({ aiko }: Props) => {
           }
         }}
       >
+        <TransitionOverlay play={play} />
         <Overlay selected={nftPfp === aiko} />
         <OverlayContainer>
           <OverlayCheck src={check} selected={nftPfp === aiko} />
