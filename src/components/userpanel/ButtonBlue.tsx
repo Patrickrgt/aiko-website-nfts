@@ -3,7 +3,11 @@ import { useDispatch, useSelector } from "react-redux";
 
 import styled from "styled-components";
 
-import { selectAnimationEnd } from "../../state/uiSlice";
+import {
+  selectAnimationEnd,
+  selectMuteAudio,
+  setMuteAudio,
+} from "../../state/uiSlice";
 
 import cursorhover from "../../assets/userpanel/cursorhover.png";
 
@@ -88,6 +92,7 @@ interface Props {
 const ButtonBlue = ({ content, close, small, symbol }: Props) => {
   const [hoverActive, setHoverActive] = useState(false);
   const animationEnd = useSelector(selectAnimationEnd);
+  const mute = useSelector(selectMuteAudio);
 
   const audioHoverMedium = useRef<HTMLAudioElement>(null);
   const audioClickMedium = useRef<HTMLAudioElement>(null);
@@ -95,20 +100,14 @@ const ButtonBlue = ({ content, close, small, symbol }: Props) => {
   const buttonRef = useRef<HTMLButtonElement>(null);
 
   const playHoverAudio = () => {
-    if (audioHoverMedium.current) {
+    if (audioHoverMedium.current && mute) {
       audioHoverMedium.current.currentTime = 0;
       audioHoverMedium.current.play();
     }
   };
 
-  useEffect(() => {
-    if (buttonRef.current) {
-      console.log(buttonRef.current.style.opacity);
-    }
-  }, [buttonRef]);
-
   const playClickAudio = () => {
-    if (audioClickMedium.current) {
+    if (audioClickMedium.current && mute) {
       audioClickMedium.current.currentTime = 0;
       audioClickMedium.current.play();
     }

@@ -16,6 +16,7 @@ interface UiState {
   globalNft: string;
   globalAccount: string;
   hasAikos: boolean;
+  stampsHeld: number;
 }
 
 const initialState: UiState = {
@@ -34,6 +35,7 @@ const initialState: UiState = {
     "https://aikovirtual.mypinata.cloud/ipfs/QmZ2qm2nPdc7p6sATD1QKL4keShffYtFmaS66bFJde2GbR",
   globalAccount: "",
   hasAikos: false,
+  stampsHeld: 0,
 };
 
 export const uiSlice = createSlice({
@@ -82,6 +84,9 @@ export const uiSlice = createSlice({
     setHasAikos: (state, action: PayloadAction<boolean>) => {
       state.hasAikos = action.payload;
     },
+    setStampsHeld: (state, action: PayloadAction<number>) => {
+      state.stampsHeld = action.payload;
+    },
   },
 });
 
@@ -101,6 +106,7 @@ export const {
   setGlobalNft,
   setGlobalAccount,
   setHasAikos,
+  setStampsHeld,
 } = uiSlice.actions;
 
 export const selectConnectingWallet = (state: RootState) =>
@@ -131,5 +137,7 @@ export const selectGlobalNft = (state: RootState) => state.ui.globalNft;
 export const selectGlobalAccount = (state: RootState) => state.ui.globalAccount;
 
 export const selectHasAikos = (state: RootState) => state.ui.hasAikos;
+
+export const selectStampsHeld = (state: RootState) => state.ui.stampsHeld;
 
 export default uiSlice.reducer;

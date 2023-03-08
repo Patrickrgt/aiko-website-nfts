@@ -1,7 +1,12 @@
 import { ReactNode, useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled, { css, keyframes } from "styled-components";
-import { selectShowingRewards, setShowingRewards } from "../../state/uiSlice";
+import {
+  selectShowingRewards,
+  setShowingRewards,
+  selectMuteAudio,
+  setMuteAudio,
+} from "../../state/uiSlice";
 import star from "../../assets/placeholders/star.png";
 import explorer from "../../assets/userpanel/explorer.png";
 
@@ -52,9 +57,10 @@ const StampShadow = styled.div`
 `;
 
 const StampContainer = styled.div`
+  position: relative;
   background-color: ${(props: JumboStampSystemProps) =>
     props.active ? "#72D2FF" : "#BDBDBD"};
-  transition: background-color 0.4s;
+  transition: all 0.4s;
   padding: 0.5rem;
   clip-path: var(--notched-md);
 `;
@@ -71,6 +77,10 @@ const StampImgContainer = styled.div`
   height: 350px;
   max-height: 375px;
   transition: all ease 0.3s;
+  &:before {
+    filter: ${(props: JumboStampSystemProps) =>
+      props.hover ? "saturate(30%)" : "saturate(30%)"};
+  }
 `;
 
 const StampImg = styled.img`
@@ -128,9 +138,24 @@ const StampCollectedStar = styled.img`
     props.active ? "" : "grayscale(1)"};
 `;
 
+const Overlay = styled.div`
+  /* &:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(234, 255, 0, 0.353);
+    z-index: 3;
+    transition: all 0.3s linear;
+  } */
+`;
+
 interface JumboStampSystemProps {
   active?: boolean;
   visible?: boolean;
+  hover?: boolean;
 }
 
 interface Props {
@@ -140,19 +165,22 @@ interface Props {
 
 const StampEditionJumbo = ({ visible, editionJumbo }: Props) => {
   const [stampActive, setActive] = useState(false);
+  const [hoverActive, setHover] = useState(false);
+
+  const mute = useSelector(selectMuteAudio);
 
   const audioHoverLarge = useRef<HTMLAudioElement>(null);
   const audioClickLarge = useRef<HTMLAudioElement>(null);
 
   const playHoverAudio = () => {
-    if (audioHoverLarge.current) {
+    if (audioHoverLarge.current && mute) {
       audioHoverLarge.current.currentTime = 0;
       audioHoverLarge.current.play();
     }
   };
 
   const playClickAudio = () => {
-    if (audioClickLarge.current) {
+    if (audioClickLarge.current && mute) {
       audioClickLarge.current.currentTime = 0;
       audioClickLarge.current.play();
     }
@@ -165,7 +193,9 @@ const StampEditionJumbo = ({ visible, editionJumbo }: Props) => {
         setActive(true);
         playHoverAudio();
       }}
-      onMouseLeave={() => setActive(false)}
+      onMouseLeave={() => {
+        setActive(false);
+      }}
       onClick={() => playClickAudio()}
     >
       <audio ref={audioHoverLarge} src={soundHoverLarge}>
@@ -176,6 +206,7 @@ const StampEditionJumbo = ({ visible, editionJumbo }: Props) => {
       </audio>
       <StampShadow active={editionJumbo.tier1}>
         <StampContainer active={editionJumbo.tier1}>
+          <Overlay />
           <StampImgContainer active={editionJumbo.tier1}>
             <StampImg active={editionJumbo.tier1} src={editionJumbo.image} />
           </StampImgContainer>

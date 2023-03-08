@@ -1,4 +1,4 @@
-import { ReactNode, useEffect, useState } from "react";
+import { ReactNode, useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled, { css, keyframes } from "styled-components";
 import {
@@ -6,12 +6,18 @@ import {
   setShowingNfts,
   setGlobalNft,
   selectGlobalNft,
+  selectGlobalAccount,
+  selectMuteAudio,
+  setMuteAudio,
 } from "../../state/uiSlice";
 
 import { useBalanceOf, getAikoHoldings } from "../../contracts/views";
 
 import cursorhover from "../../assets/userpanel/cursorhover.png";
 import check from "../../assets/placeholders/check.png";
+
+import soundHoverMedium from "../../assets/userpanel/Market_SFX_-_TAB_HOVER.wav";
+import soundClickMedium from "../../assets/userpanel/Market_SFX_-_BUTTON_PRESS_-_MEDIUM.wav";
 
 const slideDown = keyframes`
    0% { transform:  translate(0, 300px);}
@@ -160,10 +166,31 @@ const Nfts = ({ aiko, play }: Props) => {
 
   const showing = useSelector(selectShowingNfts);
   const nftPfp = useSelector(selectGlobalNft);
+  const mute = useSelector(selectMuteAudio);
+
   const dispatch = useDispatch();
 
   const [stampsHeld, setStampsHeld] = useState(0);
-  const stamps = useBalanceOf();
+
+  const account = useSelector(selectGlobalAccount);
+  // const stamps = useBalanceOf(account);
+
+  const audioHoverMedium = useRef<HTMLAudioElement>(null);
+  const audioClickMedium = useRef<HTMLAudioElement>(null);
+
+  const playHoverAudio = () => {
+    if (audioHoverMedium.current && showing === true && mute) {
+      audioHoverMedium.current.currentTime = 0;
+      audioHoverMedium.current.play();
+    }
+  };
+
+  const playClickAudio = () => {
+    if (audioClickMedium.current && mute) {
+      audioClickMedium.current.currentTime = 0;
+      audioClickMedium.current.play();
+    }
+  };
 
   return (
     <AikoShadow active={active} selected={nftPfp === aiko}>
@@ -172,14 +199,24 @@ const Nfts = ({ aiko, play }: Props) => {
         selected={nftPfp === aiko}
         pfp={aiko}
         active={active}
-        onMouseEnter={() => setActive(true)}
         onMouseLeave={() => setActive(false)}
+        onMouseEnter={() => {
+          playHoverAudio();
+          setActive(true);
+        }}
         onClick={() => {
           if (aiko) {
+            playClickAudio();
             dispatch(setGlobalNft(aiko));
           }
         }}
       >
+        <audio ref={audioHoverMedium} src={soundHoverMedium}>
+          <track kind="captions" />
+        </audio>
+        <audio ref={audioClickMedium} src={soundClickMedium}>
+          <track kind="captions" />
+        </audio>
         <TransitionOverlay play={play} />
         <Overlay selected={nftPfp === aiko} />
         <OverlayContainer>

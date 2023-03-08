@@ -45,7 +45,7 @@ const StampRedeem = () => {
   return (
     <RedeemContainer>
       <ShippingText>
-        SHIPPING FEE: &nbsp; <ShippingPrice>20 USD</ShippingPrice>
+        SHIPPING FEE: &nbsp; <ShippingPrice>ETA</ShippingPrice>
       </ShippingText>
       <ButtonBlue
         close={() => {

@@ -20,8 +20,9 @@ const StyledApp = styled.div`
 const config: Config = {
   autoConnect: false,
   readOnlyUrls: {
-    [Mainnet.chainId]: getDefaultProvider("mainnet"),
-    [Rinkeby.chainId]: getDefaultProvider("rinkeby"),
+    [Mainnet.chainId]: new ethers.providers.JsonRpcProvider(
+      "https://eth-mainnet.g.alchemy.com/v2/8iVRJ1Rswjzp0S3ySwiWOaS0jtoZ4uRg"
+    ),
     [Polygon.chainId]: new ethers.providers.JsonRpcProvider(
       "https://polygon-rpc.com/"
     ),

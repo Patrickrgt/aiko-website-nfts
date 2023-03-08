@@ -6,6 +6,8 @@ import {
   setShowingRewards,
   selectShowingStamp,
   setShowingStamp,
+  selectMuteAudio,
+  setMuteAudio,
 } from "../../state/uiSlice";
 import star from "../../assets/placeholders/star.png";
 import cursorhover from "../../assets/userpanel/cursorhover.png";
@@ -152,6 +154,7 @@ interface Props {
 const JumboStamp = ({ stamp, show }: Props) => {
   const dispatch = useDispatch();
   const showing = useSelector(selectShowingStamp);
+  const mute = useSelector(selectMuteAudio);
   const [stampActive, setActive] = useState(false);
 
   const [change, setChange] = useState(false);
@@ -161,14 +164,14 @@ const JumboStamp = ({ stamp, show }: Props) => {
   const audioClickLarge = useRef<HTMLAudioElement>(null);
 
   const playHoverAudio = () => {
-    if (audioHoverLarge.current && showing === false) {
+    if (audioHoverLarge.current && showing === false && mute) {
       audioHoverLarge.current.currentTime = 0;
       audioHoverLarge.current.play();
     }
   };
 
   const playClickAudio = () => {
-    if (audioClickLarge.current) {
+    if (audioClickLarge.current && mute) {
       audioClickLarge.current.currentTime = 0;
       audioClickLarge.current.play();
     }

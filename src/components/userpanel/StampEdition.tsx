@@ -1,7 +1,12 @@
 import { ReactNode, useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled, { css, keyframes } from "styled-components";
-import { selectShowingRewards, setShowingRewards } from "../../state/uiSlice";
+import {
+  selectShowingRewards,
+  setShowingRewards,
+  selectMuteAudio,
+  setMuteAudio,
+} from "../../state/uiSlice";
 import star from "../../assets/placeholders/star.png";
 import cursorhover from "../../assets/userpanel/cursorhover.png";
 import explorer1 from "../../assets/userpanel/explorer1.png";
@@ -167,18 +172,20 @@ interface Props {
 const StampEdition = ({ visible, numberId, edition }: Props) => {
   const [stampActive, setActive] = useState(false);
 
+  const mute = useSelector(selectMuteAudio);
+
   const audioHoverTab = useRef<HTMLAudioElement>(null);
   const audioClickTab = useRef<HTMLAudioElement>(null);
 
   const playHoverAudio = () => {
-    if (audioHoverTab.current) {
+    if (audioHoverTab.current && mute) {
       audioHoverTab.current.currentTime = 0;
       audioHoverTab.current.play();
     }
   };
 
   const playClickAudio = () => {
-    if (audioClickTab.current) {
+    if (audioClickTab.current && mute) {
       audioClickTab.current.currentTime = 0;
       audioClickTab.current.play();
     }

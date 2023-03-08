@@ -22,8 +22,9 @@ const settings = {
 };
 const alchemy = new Alchemy(settings);
 
-export const getAikoHoldings = async (): Promise<string[] | undefined> => {
-  const { account } = useEthers();
+export const getAikoHoldings = async (
+  account: string
+): Promise<string[] | undefined> => {
   if (account) {
     const response = await alchemy.nft.getNftsForOwner(account, {
       pageSize: 100,

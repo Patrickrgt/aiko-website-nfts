@@ -1,10 +1,14 @@
-import { ReactNode, useEffect, useState } from "react";
+import { ReactNode, useEffect, useState, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled, { css, keyframes } from "styled-components";
 import {
   selectShowingRewards,
+  selectGlobalAccount,
   setShowingRewards,
   setAnimationEnd,
+  selectStampsHeld,
+  selectMuteAudio,
+  setMuteAudio,
 } from "../../state/uiSlice";
 
 import { useBalanceOf } from "../../contracts/views";
@@ -202,10 +206,8 @@ const StampOverlay = styled.div`
   display: inline-block;
   clip-path: var(--notched);
   background-color: #282626;
-  /* transition: opacity 0.25s ease-out; */
   opacity: 0;
   z-index: -1;
-
   animation: ${(props: StampRewardProps) =>
     props.show
       ? css`
@@ -257,18 +259,18 @@ interface Props {
 
 const StampRewards = ({ show }: Props) => {
   const showing = useSelector(selectShowingRewards);
+  const account = useSelector(selectGlobalAccount);
+  const stamps = useSelector(selectStampsHeld);
+
   const dispatch = useDispatch();
 
-  const [stampsHeld, setStampsHeld] = useState(0);
-  const stamps = useBalanceOf();
+  const [rewards, setRewards] = useState(stampRewards);
+
   const rewardsObj = stampRewards;
 
   useEffect(() => {
-    if (stamps) {
-      setStampsHeld(stamps.reduce((total, current) => total + current, 0));
-    }
     for (let i = 0; i < Object.keys(rewardsObj).length; i++) {
-      if (stampsHeld >= rewardsObj[i].required) {
+      if (stamps >= rewardsObj[i].required) {
         rewardsObj[i].collected = true;
       }
     }
@@ -303,12 +305,14 @@ const StampRewards = ({ show }: Props) => {
                 <RewardContainer>
                   <StampRewardContainer show={showing}>
                     {/* Maps the Stamps and names from the object above  */}
-                    {stampRewards.map((stampReward: StampRewardType) => (
-                      <StampReward
-                        key={stampReward.name}
-                        stampReward={stampReward}
-                      />
-                    ))}
+                    {stampRewards.map(
+                      (stampReward: StampRewardType, index: number) => (
+                        <StampReward
+                          key={index.toString()}
+                          stampReward={stampReward}
+                        />
+                      )
+                    )}
                   </StampRewardContainer>
                 </RewardContainer>
                 <WarningRedeemRow>

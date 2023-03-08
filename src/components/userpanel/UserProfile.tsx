@@ -2,19 +2,26 @@ import { ReactNode, useEffect, useState, useMemo, useRef } from "react";
 import styled from "styled-components";
 
 import { useDispatch, useSelector } from "react-redux";
+
 import { useEthers, useLookupAddress, useCall } from "@usedapp/core";
 import { utils, constants, BigNumber, Contract as CTR } from "ethers";
 import { Contract } from "@ethersproject/contracts";
+import abiStamps from "../../contracts/aikostamps.json";
+
 import { useBalanceOf } from "../../contracts/views";
+
 import {
   setShowingNfts,
   selectGlobalNft,
   setGlobalAccount,
   selectHasAikos,
+  setStampsHeld,
+  selectStampsHeld,
+  setMuteAudio,
+  selectMuteAudio,
 } from "../../state/uiSlice";
-import check from "../../assets/placeholders/check.png";
 
-import aikostamps from "../../contracts/aikostamps.json";
+import check from "../../assets/placeholders/check.png";
 
 import UserNavSocial, { SocialIconType } from "./UserNavSocial";
 
@@ -22,6 +29,8 @@ import JumboStampSystem from "./JumboStampSystem";
 
 import logo from "../../assets/userpanel/logo.png";
 import meepocoin from "../../assets/userpanel/meepocoin.png";
+import mute from "../../assets/userpanel/mute.png";
+import unmute from "../../assets/userpanel/unmute.png";
 import star from "../../assets/userpanel/stampstar.png";
 import baseaiko from "../../assets/userpanel/aikopfp.gif";
 
@@ -34,6 +43,10 @@ import cursorhover from "../../assets/userpanel/cursorhover.png";
 
 import soundHoverTab from "../../assets/userpanel/Market_SFX_-_TAB_HOVER.wav";
 import soundClickTab from "../../assets/userpanel/Market_SFX_-_TAB_PRESS.wav";
+
+const CONTRACT_ADDR = "0x7f60e977a7b9677be1795efe5ad5516866ab69a6";
+const Interface = new utils.Interface(abiStamps);
+const ContractInstance = new Contract(CONTRACT_ADDR, Interface);
 
 const socialIcons: SocialIconType[] = [
   {
@@ -350,11 +363,40 @@ const OverlayText = styled.div`
   }
 `;
 
+const NavUserPfpOverall = styled.div`
+  position: relative;
+`;
+
+const MuteContainer = styled.div`
+  background-color: #363636;
+  padding: 0.25rem;
+  clip-path: var(--notched-xsm);
+  bottom: 0;
+  position: absolute;
+  margin-left: -55px;
+  margin-bottom: 30px;
+  cursor: url(${cursorhover}), auto;
+`;
+
+const MuteButton = styled.img`
+  clip-path: var(--notched-xsm);
+  width: 35px;
+  height: 35px;
+  padding: 0.75rem;
+  transition: all 0.3s ease;
+  background-color: ${(props: NavProps) =>
+    props.muted ? "#fcea9e" : "#b2bcc3"};
+  &:hover {
+    opacity: 0.5;
+  }
+`;
+
 interface NavProps {
   active?: boolean;
   ens?: boolean;
   account?: any;
   pfp?: string;
+  muted?: boolean;
 }
 
 const UserProfile = () => {
@@ -362,26 +404,103 @@ const UserProfile = () => {
   const [pfpHoverActive, setPfpHoverActive] = useState(false);
   const nftPfp = useSelector(selectGlobalNft);
   const hasAikos = useSelector(selectHasAikos);
+  const stampsNum = useSelector(selectStampsHeld);
+  const muteAudio = useSelector(selectMuteAudio);
 
   const { activateBrowserWallet, account } = useEthers();
   const { ens } = useLookupAddress(account);
   const dispatch = useDispatch();
 
-  const [stampsHeld, setStampsHeld] = useState(0);
-  const stamps = useBalanceOf();
+  const [stampsHeld, setStampsNum] = useState(0);
 
   const audioHoverTab = useRef<HTMLAudioElement>(null);
   const audioClickTab = useRef<HTMLAudioElement>(null);
 
+  // const [getAccount, setAccount] = useState("");
+
+  // useMemo(() => {
+  //   if (account && account.length > 0) {
+  //     setAccount(account);
+  //   }
+  // }, [account, stampsHeld, getAccount, activateBrowserWallet]);
+
+  // useMemo(() => {
+  //   try {
+  //     const stampsNums = stamps
+  //       ? stamps.reduce((total, current) => total + current, 0)
+  //       : 0;
+  //     dispatch(setStampsHeld(stampsNums));
+  //     setStampsNum(stampsNums);
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // }, [account]);
+
+  // function getStamps(): number[] | undefined {
+  //   const ids = Array.from({ length: 12 }, (_, i) => i + 1);
+  //   const { value, error } =
+  //     useCall(
+  //       {
+  //         contract: ContractInstance,
+  //         method: "balanceOfBatch",
+  //         args: [ids.map((_) => account), ids],
+  //       },
+  //       {
+  //         chainId: 137,
+  //       }
+  //     ) ?? {};
+  //   if (error) {
+  //     console.error(error.message, "getStamps");
+  //     return undefined;
+  //   }
+  //   console.log(value);
+  //   const stamps = value?.[0].map((result: BigNumber) => Number(result));
+  //   const stampsNums = stamps.reduce(
+  //     (total: number, current: number) => total + current,
+  //     0
+  //   );
+  //   dispatch(setStampsHeld(stampsNums));
+  //   setStampsNum(stampsNum);
+  //   return [1];
+  // }
+
+  const stamps = useBalanceOf();
+
+  useEffect(() => {
+    try {
+      if (stamps) {
+        const stampsNums = stamps
+          ? stamps.reduce((total, current) => total + current, 0)
+          : 0;
+        dispatch(setStampsHeld(stampsNums));
+        setStampsNum(stampsNum);
+      }
+    } catch (err) {
+      console.log(err, "UserProfile");
+    }
+  }, [stamps]);
+
+  function handleStamps() {
+    // const stamps =
+    // console.log(stamps);
+    // if (stamps) {
+    //   const stampsNums = stamps
+    //     ? stamps.reduce((total, current) => total + current, 0)
+    //     : 0;
+    //   dispatch(setStampsHeld(stampsNums));
+    //   setStampsNum(stampsNum);
+    // }
+  }
+
   const playHoverAudio = () => {
-    if (audioHoverTab.current) {
+    if (audioHoverTab.current && muteAudio) {
       audioHoverTab.current.currentTime = 0;
       audioHoverTab.current.play();
     }
   };
 
   const playClickAudio = () => {
-    if (audioClickTab.current) {
+    if (audioClickTab.current && muteAudio) {
       audioClickTab.current.currentTime = 0;
       audioClickTab.current.play();
     }
@@ -392,12 +511,6 @@ const UserProfile = () => {
       dispatch(setGlobalAccount(account));
     }
   }, [account]);
-
-  useEffect(() => {
-    if (stamps) {
-      setStampsHeld(stamps.reduce((total, current) => total + current, 0));
-    }
-  }, [stamps]);
 
   return (
     <NavUserContainer>
@@ -433,6 +546,7 @@ const UserProfile = () => {
             active={hoverActive}
             onClick={() => {
               activateBrowserWallet();
+
               playClickAudio();
             }}
           >
@@ -457,54 +571,66 @@ const UserProfile = () => {
       </NavUserWalletContainer>
 
       <NavUserStats>
-        <NavUserPfpContainer>
-          {!account && (
-            <NavUserPfp
-              active={!!account}
-              onMouseEnter={() => {
-                setHoverActive(true);
-                playHoverAudio();
-              }}
-              onMouseLeave={() => setHoverActive(false)}
-              onClick={() => {
-                activateBrowserWallet();
-                playClickAudio();
-              }}
-              pfp={baseaiko}
-              // src={baseaiko}
-            />
-          )}
-          {account && (
-            <NavUserPfp
-              active={!account}
-              onClick={() => {
-                if (hasAikos) {
-                  dispatch(setShowingNfts(true));
-                } else {
+        <NavUserPfpOverall>
+          <NavUserPfpContainer>
+            {!account && (
+              <NavUserPfp
+                active={!!account}
+                onMouseEnter={() => {
+                  setHoverActive(true);
+                  playHoverAudio();
+                }}
+                onMouseLeave={() => setHoverActive(false)}
+                onClick={() => {
+                  activateBrowserWallet();
+
                   playClickAudio();
-                }
-              }}
-              pfp={nftPfp}
-              // src={nftPfp}
-              onError={(e) => {
-                const target = e.target as HTMLImageElement;
-                target.src = baseaiko;
-              }}
-              onMouseEnter={() => {
-                setPfpHoverActive(true);
-              }}
-              onMouseLeave={() => {
-                setPfpHoverActive(false);
-              }}
-            >
-              <Overlay active={pfpHoverActive} />
-              <OverlayContainer active={pfpHoverActive}>
-                <OverlayCheck src={check} active={pfpHoverActive} />
-                <OverlayText active={pfpHoverActive} />
-              </OverlayContainer>
-            </NavUserPfp>
-          )}
-        </NavUserPfpContainer>
+                }}
+                pfp={baseaiko}
+                // src={baseaiko}
+              />
+            )}
+            {account && (
+              <NavUserPfp
+                active={!account}
+                onClick={() => {
+                  if (hasAikos) {
+                    dispatch(setShowingNfts(true));
+                    playClickAudio();
+                  } else {
+                    playClickAudio();
+                  }
+                }}
+                pfp={nftPfp}
+                // src={nftPfp}
+                onError={(e) => {
+                  const target = e.target as HTMLImageElement;
+                  target.src = baseaiko;
+                }}
+                onMouseEnter={() => {
+                  setPfpHoverActive(true);
+                  playHoverAudio();
+                }}
+                onMouseLeave={() => {
+                  setPfpHoverActive(false);
+                }}
+              >
+                <Overlay active={pfpHoverActive} />
+                <OverlayContainer active={pfpHoverActive}>
+                  <OverlayCheck src={check} active={pfpHoverActive} />
+                  <OverlayText active={pfpHoverActive} />
+                </OverlayContainer>
+              </NavUserPfp>
+            )}
+          </NavUserPfpContainer>
+          <MuteContainer>
+            <MuteButton
+              muted={muteAudio}
+              src={muteAudio === false ? mute : unmute}
+              onClick={() => dispatch(setMuteAudio(!muteAudio))}
+            />
+          </MuteContainer>
+        </NavUserPfpOverall>
 
         <MeeposCollected>
           {account && <StampsCollectedText>0</StampsCollectedText>}

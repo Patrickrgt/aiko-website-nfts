@@ -15,6 +15,8 @@ import {
   selectGlobalNft,
   selectGlobalAccount,
   setHasAikos,
+  selectMuteAudio,
+  setMuteAudio,
 } from "../../state/uiSlice";
 
 import { useBalanceOf, getAikoHoldings } from "../../contracts/views";
@@ -27,6 +29,9 @@ import pin from "../../assets/userpanel/pin.png";
 import print from "../../assets/userpanel/print.png";
 
 import cursorhover from "../../assets/userpanel/cursorhover.png";
+
+import soundHoverMedium from "../../assets/userpanel/Market_SFX_-_BUTTON_HOVER_-_LARGE.wav";
+import soundClickMedium from "../../assets/userpanel/Market_SFX_-_BUTTON_PRESS_-_LARGE.wav";
 
 const slideForward = keyframes`
    0% { height: 5%; opacity: 1; width: 5%; clip-path: var(--notched-md);}
@@ -77,6 +82,11 @@ const apparent = keyframes`
    100% {  background-color: rgba(0,0,0,0);}
 `;
 
+const backdrop = keyframes`
+   0% {  backdrop-filter: blur(8px); opacity: 0  }
+   100% {  opacity: 1;}
+`;
+
 const StyledPopup = styled.div`
   position: fixed;
   display: flex;
@@ -102,6 +112,17 @@ const Background = styled.button`
   transition: opacity 0.3s;
   opacity: ${(props: Props) => (props.show ? 1 : 0)};
   cursor: url(${cursorhover}), auto;
+  backdrop-filter: blur(4px);
+  animation: ${(props: Props) =>
+    props.show
+      ? css`
+          ${backdrop} 0.6s ease-in-out forwards
+        `
+      : css`
+          ${apparent} 0.6s ease-out forwards
+        `};
+  animation-play-state: ${(props: Props) =>
+    props.show ? "running" : "paused"};
 `;
 
 const AikoFullContainer = styled.div`
@@ -287,6 +308,7 @@ const PaginationLeft = styled.button`
   transform: rotate(180deg);
   background-color: ${(props: NftProps) =>
     props.active ? "#a9afb8" : "#ffd362;"};
+  width: 50px;
 `;
 
 const PaginationRight = styled.button`
@@ -298,6 +320,7 @@ const PaginationRight = styled.button`
   cursor: url(${cursorhover}), auto;
   background-color: ${(props: NftProps) =>
     props.active ? "#a9afb8" : "#ffd362;"};
+  width: 50px;
 `;
 
 const PaginationPage = styled.h1`
@@ -327,14 +350,18 @@ const StampRewards = ({ show }: Props) => {
   const [playAnimation, setPlayAnimation] = useState(false);
 
   const account = useSelector(selectGlobalAccount);
+  const mute = useSelector(selectMuteAudio);
 
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
 
+  const audioHoverMedium = useRef<HTMLAudioElement>(null);
+  const audioClickMedium = useRef<HTMLAudioElement>(null);
+
   useMemo(() => {
-    if (account !== undefined) {
+    if (account !== "") {
       fetchNFTs();
     }
   }, [account]);
@@ -352,7 +379,7 @@ const StampRewards = ({ show }: Props) => {
 
   async function fetchNFTs() {
     try {
-      const aikoList = await getAikoHoldings();
+      const aikoList = await getAikoHoldings(account);
       if (
         Array.isArray(aikoList) &&
         aikoList.every((item) => typeof item === "string") &&
@@ -366,17 +393,37 @@ const StampRewards = ({ show }: Props) => {
     }
   }
 
+  const playHoverAudio = () => {
+    if (audioHoverMedium.current && showing === true && mute) {
+      audioHoverMedium.current.currentTime = 0;
+      audioHoverMedium.current.play();
+    }
+  };
+
+  const playClickAudio = () => {
+    if (audioClickMedium.current && mute) {
+      audioClickMedium.current.currentTime = 0;
+      audioClickMedium.current.play();
+    }
+  };
+
   const showing = useSelector(selectShowingNfts);
   const dispatch = useDispatch();
 
   const [stampsHeld, setStampsHeld] = useState(0);
-  const stamps = useBalanceOf();
+  // const stamps = useBalanceOf(account);
 
   const pageLength = Math.ceil(aikoList.length / itemsPerPage);
 
   return (
     // Refractor background blur because using visiblity which affects performance...
     <StyledPopup show={showing}>
+      <audio ref={audioHoverMedium} src={soundHoverMedium}>
+        <track kind="captions" />
+      </audio>
+      <audio ref={audioClickMedium} src={soundClickMedium}>
+        <track kind="captions" />
+      </audio>
       <Background
         show={showing}
         onClick={() => dispatch(setShowingNfts(false))}
@@ -391,17 +438,19 @@ const StampRewards = ({ show }: Props) => {
 
             <StampContainer play={playAnimation} show={showing}>
               <PaginationLeft
+                onMouseEnter={() => {
+                  playHoverAudio();
+                }}
                 onClick={() => {
                   if (!playAnimation) {
+                    playClickAudio();
                     setCurrentPage(currentPage - 1);
                     handleAnimationClick();
                   }
                 }}
                 disabled={currentPage === 1}
                 active={currentPage === 1}
-              >
-                ▶
-              </PaginationLeft>
+              />
               <RewardContainer>
                 <StampRewardContainer show={showing}>
                   {currList.map((aiko, id) => (
@@ -411,17 +460,19 @@ const StampRewards = ({ show }: Props) => {
               </RewardContainer>
 
               <PaginationRight
+                onMouseEnter={() => {
+                  playHoverAudio();
+                }}
                 onClick={() => {
                   if (!playAnimation) {
+                    playClickAudio();
                     setCurrentPage(currentPage + 1);
                     handleAnimationClick();
                   }
                 }}
                 disabled={endIndex >= aikoList.length}
                 active={endIndex >= aikoList.length}
-              >
-                ▶
-              </PaginationRight>
+              />
             </StampContainer>
             <PaginationPage>
               {currentPage} / {pageLength}

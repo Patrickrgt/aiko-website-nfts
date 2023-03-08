@@ -3,7 +3,11 @@ import { useDispatch, useSelector } from "react-redux";
 
 import styled from "styled-components";
 
-import { selectAnimationEnd } from "../../state/uiSlice";
+import {
+  selectAnimationEnd,
+  selectMuteAudio,
+  setMuteAudio,
+} from "../../state/uiSlice";
 
 import check from "../../assets/placeholders/check.png";
 import star from "../../assets/placeholders/star.png";
@@ -166,19 +170,20 @@ interface Props {
 const StampReward = ({ stampReward }: Props) => {
   const [hoverActive, setHoverActive] = useState(false);
   const animationEnd = useSelector(selectAnimationEnd);
+  const mute = useSelector(selectMuteAudio);
 
   const audioHoverTab = useRef<HTMLAudioElement>(null);
   const audioClickTab = useRef<HTMLAudioElement>(null);
 
   const playHoverAudio = () => {
-    if (audioHoverTab.current && animationEnd) {
+    if (audioHoverTab.current && animationEnd && mute) {
       audioHoverTab.current.currentTime = 0;
       audioHoverTab.current.play();
     }
   };
 
   const playClickAudio = () => {
-    if (audioClickTab.current) {
+    if (audioClickTab.current && mute) {
       audioClickTab.current.currentTime = 0;
       audioClickTab.current.play();
     }

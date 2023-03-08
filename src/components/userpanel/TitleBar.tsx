@@ -1,8 +1,14 @@
 import React, { ReactNode, useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled, { css, keyframes } from "styled-components";
+
 import DecorVertical from "./DecorVertical";
-import { selectShowingRewards, setShowingRewards } from "../../state/uiSlice";
+import {
+  selectShowingRewards,
+  setShowingRewards,
+  selectMuteAudio,
+  setMuteAudio,
+} from "../../state/uiSlice";
 
 import soundHoverSmall from "../../assets/userpanel/Market_SFX_-_BUTTON_HOVER_-_SMALL.wav";
 import soundClickSmall from "../../assets/userpanel/Market_SFX_-_BUTTON_PRESS_-_DISABLED.wav";
@@ -192,18 +198,20 @@ const TitleBar = () => {
   const showing = useSelector(selectShowingRewards);
   const dispatch = useDispatch();
 
+  const mute = useSelector(selectMuteAudio);
+
   const audioHoverSmall = useRef<HTMLAudioElement>(null);
   const audioClickSmall = useRef<HTMLAudioElement>(null);
 
   const playHoverAudio = () => {
-    if (audioHoverSmall.current) {
+    if (audioHoverSmall.current && mute) {
       audioHoverSmall.current.currentTime = 0;
       audioHoverSmall.current.play();
     }
   };
 
   const playClickAudio = () => {
-    if (audioClickSmall.current) {
+    if (audioClickSmall.current && mute) {
       audioClickSmall.current.currentTime = 0;
       audioClickSmall.current.play();
     }

@@ -1,18 +1,20 @@
 import { ReactNode, useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled, { css, keyframes } from "styled-components";
-import { useEthers } from "@usedapp/core";
+import { utils, BigNumber } from "ethers";
+import { useContractCall, useCall, useEthers } from "@usedapp/core";
+import { Contract } from "@ethersproject/contracts";
+import abiStamps from "../../contracts/aikostamps.json";
+
 import {
   selectShowingRewards,
   setShowingRewards,
   selectShowingStamp,
   setShowingStamp,
 } from "../../state/uiSlice";
+
 import star from "../../assets/placeholders/star.png";
 import arrow from "../../assets/userpanel/arrow.png";
-import { useBalanceOf } from "../../contracts/views";
-
-// import { useBalanceOf } from "../../contracts/views";
 
 import holder from "../../assets/userpanel/holder.png";
 import holder1 from "../../assets/userpanel/holder1.png";
@@ -42,6 +44,10 @@ import ButtonBlue from "./ButtonBlue";
 
 import soundHoverTab from "../../assets/userpanel/Market_SFX_-_TAB_HOVER.wav";
 import soundClickSmall from "../../assets/userpanel/Market_SFX_-_BUTTON_PRESS_-_DISABLED.wav";
+
+const CONTRACT_ADDR = "0x7f60e977a7b9677be1795efe5ad5516866ab69a6";
+const Interface = new utils.Interface(abiStamps);
+const ContractInstance = new Contract(CONTRACT_ADDR, Interface);
 
 export const stampIndividual: IndividualStampType[] = [
   {
@@ -292,7 +298,7 @@ const moveInBack = keyframes`
 const JumboContainer = styled.div`
   display: flex;
   position: relative;
-  top: 5rem;
+  top: 7rem;
   transition: all ease;
 `;
 
@@ -594,7 +600,28 @@ const JumboStampSystem = () => {
   }
 
   const { account } = useEthers();
-  const stamps = useBalanceOf();
+
+  function getStamps(): number[] | undefined {
+    const ids = Array.from({ length: 12 }, (_, i) => i + 1);
+    const { value, error } =
+      useCall(
+        {
+          contract: ContractInstance,
+          method: "balanceOfBatch",
+          args: [ids.map((_) => account), ids],
+        },
+        {
+          chainId: 137,
+        }
+      ) ?? {};
+    if (error) {
+      console.error(error.message);
+      return undefined;
+    }
+    return value?.[0].map((result: BigNumber) => Number(result));
+  }
+
+  const stamps = getStamps();
 
   useEffect(() => {
     if (stamps) {
