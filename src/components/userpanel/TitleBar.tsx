@@ -194,7 +194,12 @@ interface StampRewardProps {
   show: boolean;
 }
 
-const TitleBar = () => {
+interface Props {
+  title: string;
+  x: boolean;
+}
+
+const TitleBar = ({ x, title }: Props) => {
   const showing = useSelector(selectShowingRewards);
   const dispatch = useDispatch();
 
@@ -228,19 +233,21 @@ const TitleBar = () => {
       <Stripes show={showing} />
       <DecorContainer>
         <DecorVertical width={3} />
-        <StampRewardsText show={showing}> STAMP REWARDS</StampRewardsText>
+        <StampRewardsText show={showing}>{title}</StampRewardsText>
       </DecorContainer>
 
       <CloseTabShadow>
-        <CloseTab
-          onMouseEnter={() => playHoverAudio()}
-          onClick={() => {
-            dispatch(setShowingRewards(false));
-            playClickAudio();
-          }}
-        >
-          x
-        </CloseTab>
+        {x && (
+          <CloseTab
+            onMouseEnter={() => playHoverAudio()}
+            onClick={() => {
+              dispatch(setShowingRewards(false));
+              playClickAudio();
+            }}
+          >
+            x
+          </CloseTab>
+        )}
       </CloseTabShadow>
     </StampRewardsTab>
   );

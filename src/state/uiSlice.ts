@@ -29,7 +29,7 @@ const initialState: UiState = {
   showingNav: false,
   showingStamp: false,
   showingNfts: false,
-  muteAudio: false,
+  muteAudio: true,
   animationEnd: true,
   globalNft:
     "https://aikovirtual.mypinata.cloud/ipfs/QmZ2qm2nPdc7p6sATD1QKL4keShffYtFmaS66bFJde2GbR",

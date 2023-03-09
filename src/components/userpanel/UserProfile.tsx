@@ -76,6 +76,9 @@ const NavUserContainer = styled.div`
   flex-direction: row;
   position: absolute;
   top: 0;
+  @media only screen and (max-width: 1180px) {
+    display: none;
+  }
 `;
 
 const NavUserWalletContainer = styled.div`
@@ -391,15 +394,34 @@ const MuteButton = styled.img`
   }
 `;
 
+const HoverText = styled.div`
+  white-space: nowrap;
+  z-index: 2;
+  position: absolute;
+  color: #2a2a2a;
+  padding: 1rem;
+  background-color: #ffcb5a;
+  font-size: 1.5rem;
+  opacity: ${(props: NavProps) => (props.visible ? 1 : 0)};
+  transition: opacity 0.25s ease;
+  clip-path: var(--notched-sm);
+  display: ${(props: NavProps) => (props.visible ? "static" : "none")};
+`;
+
 interface NavProps {
   active?: boolean;
   ens?: boolean;
   account?: any;
   pfp?: string;
   muted?: boolean;
+  visible?: any;
 }
 
 const UserProfile = () => {
+  const [top, setTop] = useState(0);
+  const [left, setLeft] = useState(0);
+  const [visible, setVisible] = useState(false);
+
   const [hoverActive, setHoverActive] = useState(false);
   const [pfpHoverActive, setPfpHoverActive] = useState(false);
   const nftPfp = useSelector(selectGlobalNft);
@@ -416,53 +438,40 @@ const UserProfile = () => {
   const audioHoverTab = useRef<HTMLAudioElement>(null);
   const audioClickTab = useRef<HTMLAudioElement>(null);
 
-  // const [getAccount, setAccount] = useState("");
+  const handleClick = (event: any) => {
+    setLeft(event.clientX - 490);
+    setTop(event.clientY - 40);
+    setVisible(true);
+    console.log(event.clientX + 50, event.clientY);
+  };
 
-  // useMemo(() => {
-  //   if (account && account.length > 0) {
-  //     setAccount(account);
-  //   }
-  // }, [account, stampsHeld, getAccount, activateBrowserWallet]);
+  useEffect(() => {
+    let timeoutId: any;
+    if (visible) {
+      timeoutId = setTimeout(() => setVisible(false), 3000);
+      window.addEventListener("mousemove", handleMouseMove);
+    }
+    return () => {
+      clearTimeout(timeoutId);
+      window.removeEventListener("mousemove", handleMouseMove);
+    };
+  }, [visible]);
 
-  // useMemo(() => {
-  //   try {
-  //     const stampsNums = stamps
-  //       ? stamps.reduce((total, current) => total + current, 0)
-  //       : 0;
-  //     dispatch(setStampsHeld(stampsNums));
-  //     setStampsNum(stampsNums);
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // }, [account]);
+  const handleMouseMove = (event: any) => {
+    const mouse_x = event.clientX - 540;
+    const mouse_y = event.clientY - 40;
+    const window_width = window.innerWidth;
+    const window_height = window.innerHeight;
+    const is_on_right_edge = mouse_x > window_width - 320;
 
-  // function getStamps(): number[] | undefined {
-  //   const ids = Array.from({ length: 12 }, (_, i) => i + 1);
-  //   const { value, error } =
-  //     useCall(
-  //       {
-  //         contract: ContractInstance,
-  //         method: "balanceOfBatch",
-  //         args: [ids.map((_) => account), ids],
-  //       },
-  //       {
-  //         chainId: 137,
-  //       }
-  //     ) ?? {};
-  //   if (error) {
-  //     console.error(error.message, "getStamps");
-  //     return undefined;
-  //   }
-  //   console.log(value);
-  //   const stamps = value?.[0].map((result: BigNumber) => Number(result));
-  //   const stampsNums = stamps.reduce(
-  //     (total: number, current: number) => total + current,
-  //     0
-  //   );
-  //   dispatch(setStampsHeld(stampsNums));
-  //   setStampsNum(stampsNum);
-  //   return [1];
-  // }
+    if (is_on_right_edge) {
+      setLeft(mouse_x - 650);
+      setTop(mouse_y);
+    } else {
+      setLeft(mouse_x + 50);
+      setTop(mouse_y);
+    }
+  };
 
   const stamps = useBalanceOf();
 
@@ -479,18 +488,6 @@ const UserProfile = () => {
       console.log(err, "UserProfile");
     }
   }, [stamps]);
-
-  function handleStamps() {
-    // const stamps =
-    // console.log(stamps);
-    // if (stamps) {
-    //   const stampsNums = stamps
-    //     ? stamps.reduce((total, current) => total + current, 0)
-    //     : 0;
-    //   dispatch(setStampsHeld(stampsNums));
-    //   setStampsNum(stampsNum);
-    // }
-  }
 
   const playHoverAudio = () => {
     if (audioHoverTab.current && muteAudio) {
@@ -520,6 +517,10 @@ const UserProfile = () => {
       <audio ref={audioClickTab} src={soundClickTab}>
         <track kind="captions" />
       </audio>
+      <HoverText visible={visible} style={{ top, left }}>
+        Looks like you don't own an Aiko!
+      </HoverText>
+
       <NavUserWalletContainer>
         {ens ? (
           <NavUsernameContainer active={!!ens}>
@@ -593,11 +594,12 @@ const UserProfile = () => {
             {account && (
               <NavUserPfp
                 active={!account}
-                onClick={() => {
+                onClick={(e) => {
                   if (hasAikos) {
                     dispatch(setShowingNfts(true));
                     playClickAudio();
                   } else {
+                    handleClick(e);
                     playClickAudio();
                   }
                 }}
