@@ -235,9 +235,8 @@ const TitleBar = ({ x, title }: Props) => {
         <DecorVertical width={3} />
         <StampRewardsText show={showing}>{title}</StampRewardsText>
       </DecorContainer>
-
-      <CloseTabShadow>
-        {x && (
+      {!x && (
+        <CloseTabShadow>
           <CloseTab
             onMouseEnter={() => playHoverAudio()}
             onClick={() => {
@@ -247,8 +246,8 @@ const TitleBar = ({ x, title }: Props) => {
           >
             x
           </CloseTab>
-        )}
-      </CloseTabShadow>
+        </CloseTabShadow>
+      )}
     </StampRewardsTab>
   );
 };

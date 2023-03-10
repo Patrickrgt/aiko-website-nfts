@@ -298,7 +298,7 @@ const StampRewards = ({ show }: Props) => {
 
             <StampBorder>
               {/* Title Bar with close button */}
-              <TitleBar x={false} title="TEST" />
+              <TitleBar x={false} title="STAMP REWARDS" />
               {/* Contains everything below Stamp Rewards Title Bar */}
 
               <StampContainer show={showing}>

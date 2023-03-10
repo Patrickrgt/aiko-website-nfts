@@ -19,7 +19,7 @@ const StyledHomePage = styled.div`
 
 const DesktopView = styled.div`
   display: flex;
-  @media only screen and (max-width: 1180px) {
+  @media only screen and (max-width: 1000px) {
     display: none;
   }
 `;

@@ -36,7 +36,7 @@ import cursorhover from "../../assets/userpanel/cursorhover.png";
 // linked (bool) - really only for the last reward so that the span does not show
 
 const StyledPopup = styled.div`
-  @media only screen and (min-width: 1180px) {
+  @media only screen and (min-width: 1000px) {
     display: none;
   }
   position: fixed;
