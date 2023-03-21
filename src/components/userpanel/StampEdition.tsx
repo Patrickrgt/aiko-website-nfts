@@ -53,6 +53,10 @@ const StampContainer = styled.div`
   transition: background-color 0.4s;
   padding: 0.5rem;
   clip-path: var(--notched-md);
+  &:hover {
+    background-color: ${(props: JumboStampSystemProps) =>
+      props.active ? "#FCC453" : ""};
+  }
 `;
 
 const StampImgContainer = styled.div`
@@ -136,6 +140,8 @@ const StampCollected = styled.div`
   padding: 0.75rem 1rem;
   display: flex;
   justify-content: space-evenly;
+  background-color: ${(props: JumboStampSystemProps) =>
+    props.hover ? "#fee390" : ""};
 `;
 
 const StampCollectedContainer = styled.div``;
@@ -148,12 +154,18 @@ const StampCollectedText = styled.p`
       : "-2px 2px 0 #7A7A7A, 2px 2px 0 #7A7A7A, 2px -2px 0 #7A7A7A, -2px -2px 0 #7A7A7A"};
   color: white;
   text-transform: uppercase;
+  text-shadow: ${(props: JumboStampSystemProps) =>
+    props.hover
+      ? "-2px 2px 0 #E6A34E, 2px 2px 0 #E6A34E, 2px -2px 0 #E6A34E, -2px -2px 0 #E6A34E"
+      : ""};
+  transition: text-shadow ease 0.3s;
 `;
 
 interface JumboStampSystemProps {
   active?: boolean;
   visible?: boolean;
   numberId?: number;
+  hover?: boolean;
 }
 
 interface Props {
@@ -163,6 +175,7 @@ interface Props {
 }
 
 const StampEdition = ({ visible, numberId, edition }: Props) => {
+  const [hover, setHover] = useState(false);
   const [stampActive, setActive] = useState(false);
 
   const mute = useSelector(selectMuteAudio);
@@ -203,18 +216,31 @@ const StampEdition = ({ visible, numberId, edition }: Props) => {
       </audio>
       <StampShadow>
         <StampContainer active={edition.collected}>
-          <StampImgContainer active={edition.collected}>
+          <StampImgContainer
+            active={edition.collected}
+            onMouseEnter={() => setHover(true)}
+            onMouseLeave={() => setHover(false)}
+          >
             {!edition.collected && <StampOverlay active={stampActive} />}
 
             <StampImg active={stampActive} src={edition.image} />
           </StampImgContainer>
-          <StampContentContainer>
+          <StampContentContainer
+            onMouseEnter={() => setHover(true)}
+            onMouseLeave={() => setHover(false)}
+          >
             <StampGradient active={edition.collected} />
             <StampTitle active={edition.collected}>{edition.name}</StampTitle>
-            <StampCollected active={edition.collected}>
+            <StampCollected
+              hover={hover && edition.collected}
+              active={edition.collected}
+            >
               <StampCollectedContainer>
                 {edition.collected && (
-                  <StampCollectedText active={edition.collected}>
+                  <StampCollectedText
+                    hover={hover && edition.collected}
+                    active={edition.collected}
+                  >
                     Collected
                   </StampCollectedText>
                 )}
