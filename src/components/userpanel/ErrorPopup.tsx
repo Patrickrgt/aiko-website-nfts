@@ -1,32 +1,8 @@
-import { ReactNode, useEffect, useState, useMemo } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import styled, { css, keyframes } from "styled-components";
-import {
-  selectShowingRewards,
-  selectGlobalAccount,
-  setShowingRewards,
-  setAnimationEnd,
-  selectStampsHeld,
-  selectMuteAudio,
-  setMuteAudio,
-} from "../../state/uiSlice";
+import styled from "styled-components";
 
-import { useBalanceOf } from "../../contracts/views";
-
-import ButtonBlue from "./ButtonBlue";
-import DecorHorizontal from "./DecorHorizontal";
-import DecorVertical from "./DecorVertical";
-import StampReward, { StampRewardType } from "./StampReward";
 import TitleBar from "./TitleBar";
-import StampRedeem from "./StampRedeem";
-import StampWarning from "./StampWarning";
 
 import computer from "../../assets/userpanel/aikocomputer.png";
-import honorary from "../../assets/userpanel/honorary.png";
-import necklace from "../../assets/userpanel/necklace.png";
-import pin from "../../assets/userpanel/pin.png";
-import print from "../../assets/userpanel/print.png";
-
 import cursorhover from "../../assets/userpanel/cursorhover.png";
 
 // Takes image (str) in the future change to fetching from assets folder
@@ -148,21 +124,7 @@ const ComputerText = styled.h2`
     -1px 1px 0 #000, 1px 1px 0 #000;
 `;
 
-interface StampRewardProps {
-  show: boolean;
-}
-
-interface Props {
-  show?: boolean;
-}
-
-const StampRewards = ({ show }: Props) => {
-  const showing = useSelector(selectShowingRewards);
-  const account = useSelector(selectGlobalAccount);
-  const stamps = useSelector(selectStampsHeld);
-
-  const dispatch = useDispatch();
-
+const StampRewards = () => {
   return (
     // Refractor background blur because using visiblity which affects performance...
     <StyledPopup>

@@ -1,21 +1,13 @@
-import { ReactNode, useEffect, useState, useMemo } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled, { css, keyframes } from "styled-components";
 import {
   selectShowingRewards,
-  selectGlobalAccount,
   setShowingRewards,
   setAnimationEnd,
   selectStampsHeld,
-  selectMuteAudio,
-  setMuteAudio,
 } from "../../state/uiSlice";
 
-import { useBalanceOf } from "../../contracts/views";
-
-import ButtonBlue from "./ButtonBlue";
-import DecorHorizontal from "./DecorHorizontal";
-import DecorVertical from "./DecorVertical";
 import StampReward, { StampRewardType } from "./StampReward";
 import TitleBar from "./TitleBar";
 import StampRedeem from "./StampRedeem";
@@ -257,14 +249,11 @@ interface Props {
   show?: boolean;
 }
 
-const StampRewards = ({ show }: Props) => {
+const StampRewards = () => {
   const showing = useSelector(selectShowingRewards);
-  const account = useSelector(selectGlobalAccount);
   const stamps = useSelector(selectStampsHeld);
 
   const dispatch = useDispatch();
-
-  const [rewards, setRewards] = useState(stampRewards);
 
   const rewardsObj = stampRewards;
 

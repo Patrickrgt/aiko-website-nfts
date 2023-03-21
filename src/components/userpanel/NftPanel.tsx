@@ -1,32 +1,17 @@
-import {
-  ReactNode,
-  useEffect,
-  useState,
-  useMemo,
-  useCallback,
-  useRef,
-} from "react";
+import { useEffect, useState, useMemo, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled, { css, keyframes } from "styled-components";
 import {
   selectShowingNfts,
   setShowingNfts,
-  setGlobalNft,
-  selectGlobalNft,
   selectGlobalAccount,
   setHasAikos,
   selectMuteAudio,
-  setMuteAudio,
 } from "../../state/uiSlice";
 
-import { useBalanceOf, getAikoHoldings } from "../../contracts/views";
+import { getAikoHoldings } from "../../contracts/views";
 
 import Nfts from "./Nfts";
-
-import honorary from "../../assets/userpanel/honorary.png";
-import necklace from "../../assets/userpanel/necklace.png";
-import pin from "../../assets/userpanel/pin.png";
-import print from "../../assets/userpanel/print.png";
 
 import cursorhover from "../../assets/userpanel/cursorhover.png";
 
@@ -48,12 +33,6 @@ const slideForwardPfp = keyframes`
    100% {  transform: scale(1); }
 `;
 
-const slideDown = keyframes`
-   0% { transform:  translate(0, 300px);}
-   25% { transform: translate(0px, 0px);}
-   100% {  transform: translate(0px, 300px);}
-`;
-
 const slideBack = keyframes`
    0% { height: 100%;  opacity: 1 }
    100% { height: 1px; opacity: 0}
@@ -68,12 +47,6 @@ const appear = keyframes`
 const disappear = keyframes`
    50% { opacity: 1; visibility: 1 }
    100% {  opacity: 0; visibility: 0}
-`;
-
-const transparent = keyframes`
-   0% {  background-color: rgba(0,0,0,0); }
-   90% { background-color: rgba(0,0,0,0); }
-   100% {  background-color: #393939;}
 `;
 
 const apparent = keyframes`
@@ -213,10 +186,6 @@ const StampOverlay = styled.div`
   }
 `;
 
-const WarningRedeemRow = styled.div`
-  display: flex;
-`;
-
 const RewardContainer = styled.div`
   white-space: nowrap;
   display: flex;
@@ -226,26 +195,6 @@ const RewardContainer = styled.div`
   background-color: #edeef5;
   clip-path: var(--notched-md);
   position: relative;
-`;
-
-const Overlay = styled.div`
-  &:before {
-    content: "";
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    background-color: #ffd362;
-    transform: translate(300px, 300px);
-    transition: transform 0.3s ease-in-out;
-    animation: ${(props: NftProps) =>
-      props.play
-        ? css`
-            ${slideDown} .6s cubic-bezier(.75,-0.25,.25,1.25) forwards
-          `
-        : "none"};
-  }
 `;
 
 const StampRewardContainer = styled.div`
@@ -264,38 +213,6 @@ const StampRewardContainer = styled.div`
         `};
   animation-play-state: ${(props: NftProps) =>
     props.show ? "running" : "paused"};
-`;
-
-const AikoShadow = styled.div`
-  padding: 0.5rem 0.25rem 1rem 0.25rem;
-  background-color: #363636;
-  clip-path: var(--notched-md);
-  margin: 0.5rem;
-  position: relative;
-`;
-
-const AikoBorder = styled.div`
-  background-color: ${(props: NftProps) => (props.active ? "#ffffff;" : "")};
-  padding: 0.5rem 0.25rem 1rem 0.25rem;
-  clip-path: var(--notched-md);
-`;
-
-const Aiko = styled.img`
-  max-width: 125px;
-  max-height: 125px;
-  position: relative;
-  clip-path: var(--notched-md);
-
-  &:after {
-    content: "";
-    display: block;
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    border: 10px solid red;
-  }
 `;
 
 const PaginationLeft = styled.button`
@@ -343,10 +260,9 @@ interface Props {
   show?: boolean;
 }
 
-const StampRewards = ({ show }: Props) => {
+const StampRewards = () => {
   const [aikoList, setAikoList] = useState([""]);
   const [currList, setCurrList] = useState([""]);
-  const [active, setActive] = useState(false);
   const [playAnimation, setPlayAnimation] = useState(false);
 
   const account = useSelector(selectGlobalAccount);
@@ -410,7 +326,6 @@ const StampRewards = ({ show }: Props) => {
   const showing = useSelector(selectShowingNfts);
   const dispatch = useDispatch();
 
-  const [stampsHeld, setStampsHeld] = useState(0);
   // const stamps = useBalanceOf(account);
 
   const pageLength = Math.ceil(aikoList.length / itemsPerPage);
@@ -454,7 +369,7 @@ const StampRewards = ({ show }: Props) => {
               <RewardContainer>
                 <StampRewardContainer show={showing}>
                   {currList.map((aiko, id) => (
-                    <Nfts play={playAnimation} aiko={aiko} />
+                    <Nfts key={id} play={playAnimation} aiko={aiko} />
                   ))}
                 </StampRewardContainer>
               </RewardContainer>

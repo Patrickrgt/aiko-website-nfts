@@ -1,4 +1,4 @@
-import React, { ReactNode, useEffect, useState, useRef } from "react";
+import React, { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled, { css, keyframes } from "styled-components";
 
@@ -7,7 +7,6 @@ import {
   selectShowingRewards,
   setShowingRewards,
   selectMuteAudio,
-  setMuteAudio,
 } from "../../state/uiSlice";
 
 import soundHoverSmall from "../../assets/userpanel/Market_SFX_-_BUTTON_HOVER_-_SMALL.wav";

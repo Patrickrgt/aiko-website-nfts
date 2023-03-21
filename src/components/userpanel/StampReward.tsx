@@ -1,13 +1,9 @@
-import { ReactNode, useEffect, useState, useRef } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useState, useRef } from "react";
+import { useSelector } from "react-redux";
 
 import styled from "styled-components";
 
-import {
-  selectAnimationEnd,
-  selectMuteAudio,
-  setMuteAudio,
-} from "../../state/uiSlice";
+import { selectAnimationEnd, selectMuteAudio } from "../../state/uiSlice";
 
 import check from "../../assets/placeholders/check.png";
 import star from "../../assets/placeholders/star.png";
@@ -100,10 +96,6 @@ const StampLink = styled.div`
   display: inline-block;
   z-index: 0;
 `;
-
-interface StampBorderProps {
-  collected: boolean;
-}
 
 const RewardName = styled.p`
   font-size: 1.75rem;

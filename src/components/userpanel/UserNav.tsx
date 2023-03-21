@@ -1,21 +1,15 @@
-import { ReactNode, useEffect, useState } from "react";
-import styled, { css, keyframes } from "styled-components";
-import { useDispatch, useSelector } from "react-redux";
-import { useEthers, useLookupAddress } from "@usedapp/core";
+import { useEffect, useState } from "react";
+import styled, { keyframes } from "styled-components";
 
-import JumboStampSystem from "./JumboStampSystem";
 import UserProfile from "./UserProfile";
 
 import UserNavIcon, { NavIconType } from "./UserNavIcon";
-import UserNavSocial, { SocialIconType } from "./UserNavSocial";
-import { selectShowingNav, setShowingNav } from "../../state/uiSlice";
 
 import logo from "../../assets/userpanel/logo.png";
 import map from "../../assets/userpanel/buttonmap.png";
 import lobby from "../../assets/userpanel/buttonlobby.png";
 import lore from "../../assets/userpanel/buttonlore.png";
 import news from "../../assets/userpanel/buttonnews.png";
-import cursorhover from "../../assets/userpanel/cursorhover.png";
 
 const navIcons: NavIconType[] = [
   {
@@ -210,7 +204,6 @@ const UserNav = () => {
     const mouse_x = event.clientX;
     const mouse_y = event.clientY;
     const window_width = window.innerWidth;
-    const window_height = window.innerHeight;
     const is_on_right_edge = mouse_x > window_width - 320;
 
     if (is_on_right_edge) {

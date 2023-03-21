@@ -1,15 +1,8 @@
-import { ReactNode, useEffect, useState, useRef } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useState, useRef } from "react";
+import { useSelector } from "react-redux";
 import styled, { css, keyframes } from "styled-components";
-import {
-  selectShowingRewards,
-  setShowingRewards,
-  selectMuteAudio,
-  setMuteAudio,
-} from "../../state/uiSlice";
-import star from "../../assets/placeholders/star.png";
+import { selectMuteAudio } from "../../state/uiSlice";
 import cursorhover from "../../assets/userpanel/cursorhover.png";
-import explorer1 from "../../assets/userpanel/explorer1.png";
 
 import soundHoverTab from "../../assets/userpanel/Market_SFX_-_TAB_HOVER.wav";
 import soundClickTab from "../../assets/userpanel/Market_SFX_-_TAB_PRESS.wav";

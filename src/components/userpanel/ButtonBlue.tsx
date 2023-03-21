@@ -1,13 +1,9 @@
-import { ReactNode, useEffect, useState, useRef } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useState, useRef } from "react";
+import { useSelector } from "react-redux";
 
 import styled from "styled-components";
 
-import {
-  selectAnimationEnd,
-  selectMuteAudio,
-  setMuteAudio,
-} from "../../state/uiSlice";
+import { selectMuteAudio } from "../../state/uiSlice";
 
 import cursorhover from "../../assets/userpanel/cursorhover.png";
 
@@ -91,7 +87,6 @@ interface Props {
 
 const ButtonBlue = ({ content, close, small, symbol }: Props) => {
   const [hoverActive, setHoverActive] = useState(false);
-  const animationEnd = useSelector(selectAnimationEnd);
   const mute = useSelector(selectMuteAudio);
 
   const audioHoverMedium = useRef<HTMLAudioElement>(null);

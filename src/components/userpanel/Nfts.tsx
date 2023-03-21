@@ -1,19 +1,13 @@
-import { ReactNode, useEffect, useState, useRef } from "react";
+import { useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled, { css, keyframes } from "styled-components";
 import {
   selectShowingNfts,
-  setShowingNfts,
   setGlobalNft,
   selectGlobalNft,
-  selectGlobalAccount,
   selectMuteAudio,
-  setMuteAudio,
 } from "../../state/uiSlice";
 
-import { useBalanceOf, getAikoHoldings } from "../../contracts/views";
-
-import cursorhover from "../../assets/userpanel/cursorhover.png";
 import check from "../../assets/placeholders/check.png";
 
 import soundHoverMedium from "../../assets/userpanel/Market_SFX_-_TAB_HOVER.wav";
@@ -161,7 +155,6 @@ interface Props {
 }
 
 const Nfts = ({ aiko, play }: Props) => {
-  const [aikoList, setAikoList] = useState([""]);
   const [active, setActive] = useState(false);
 
   const showing = useSelector(selectShowingNfts);
@@ -169,11 +162,6 @@ const Nfts = ({ aiko, play }: Props) => {
   const mute = useSelector(selectMuteAudio);
 
   const dispatch = useDispatch();
-
-  const [stampsHeld, setStampsHeld] = useState(0);
-
-  const account = useSelector(selectGlobalAccount);
-  // const stamps = useBalanceOf(account);
 
   const audioHoverMedium = useRef<HTMLAudioElement>(null);
   const audioClickMedium = useRef<HTMLAudioElement>(null);

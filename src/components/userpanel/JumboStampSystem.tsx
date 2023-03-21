@@ -1,19 +1,13 @@
-import { ReactNode, useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled, { css, keyframes } from "styled-components";
 import { utils, BigNumber } from "ethers";
-import { useContractCall, useCall, useEthers } from "@usedapp/core";
+import { useCall, useEthers } from "@usedapp/core";
 import { Contract } from "@ethersproject/contracts";
 import abiStamps from "../../contracts/aikostamps.json";
 
-import {
-  selectShowingRewards,
-  setShowingRewards,
-  selectShowingStamp,
-  setShowingStamp,
-} from "../../state/uiSlice";
+import { selectShowingStamp, setShowingRewards } from "../../state/uiSlice";
 
-import star from "../../assets/placeholders/star.png";
 import arrow from "../../assets/userpanel/arrow.png";
 
 import holder from "../../assets/userpanel/holder.png";
@@ -41,9 +35,6 @@ import cursorhover from "../../assets/userpanel/cursorhover.png";
 import JumboStamp, { StampType } from "./JumboStamp";
 import StampIndividual, { IndividualStampType } from "./StampIndividual";
 import ButtonBlue from "./ButtonBlue";
-
-import soundHoverTab from "../../assets/userpanel/Market_SFX_-_TAB_HOVER.wav";
-import soundClickSmall from "../../assets/userpanel/Market_SFX_-_BUTTON_PRESS_-_DISABLED.wav";
 
 const CONTRACT_ADDR = "0x7f60e977a7b9677be1795efe5ad5516866ab69a6";
 const Interface = new utils.Interface(abiStamps);
@@ -172,47 +163,11 @@ export const stampIndividual: IndividualStampType[] = [
   },
 ];
 
-const slideForward = keyframes`
-   0% { width: 80%;  }
-   100% { width: 50%; }
-`;
-
-const slideBack = keyframes`
-   0% { width: 50%;  }
-   100% { width: 80%; }
-`;
-
-const fullForwardO = keyframes`
-      0% { width: 10%;  }
-   100% { width: 100%;}
-`;
-
-const fullBackO = keyframes`
-   0% { width: 100%;  }
-   100% { width: 10%;}
-`;
-
-const fullForwardY = keyframes`
-      0% { width: 10%;  }
-   100% { width: 100%;}
-`;
-
-const fullBackY = keyframes`
-   0% { width: 100%;  }
-   100% { width: 10%;}
-`;
-
 const changeView = keyframes`
    0% { transition: all ease; opacity: 1;  height: 100%;}
    10% { transition: all ease; opacity: 0;  height: 100%;}
    25% {  position: absolute; top: 0; left: 0; opacity: 0; height: 1px; }
    100% { position: absolute; top: 0; left: 0; opacity: 0; }
-`;
-
-const changeViewBack = keyframes`
-   0% { transition: all ease;  height: 1px;}
-   50% {  position: static; height: 100%;}
-   100% { position: static; height: 100%;}
 `;
 
 const heightChange = keyframes`
@@ -240,20 +195,6 @@ const widthChangeBack = keyframes`
    0% { opacity: 0; transition: all ease; width: 1%;}
    30% { opacity: 0; transition: all ease; width: 1%;}
    45% { opacity: 1; width: 100%;}
-   100% { width: 100%; }
-`;
-
-const widthChange2 = keyframes`
-   0% { transition: all ease; width: 100%;}
-   75% {   width: 100%; }
-   85% {   width: 10%; }
-   100% { width: 100%; }
-`;
-
-const widthChangeBack2 = keyframes`
-   0% { transition: all ease; width: 10%;}
-   70% { transition: all ease; width: 10%;}
-   75% { width: 100%;}
    100% { width: 100%; }
 `;
 
@@ -532,40 +473,6 @@ const RewardsDate = styled.span`
   letter-spacing: -1px;
 `;
 
-const IndividualStampTab = styled.div`
-  background-color: blue;
-  clip-path: var(--notched-md-tp);
-  width: 100%;
-  z-index: 2;
-`;
-
-const StampTabRow = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
-const StampTitle = styled.h1`
-  font-size: 4rem;
-  font-weight: 400;
-  color: white;
-  margin-left: 4rem;
-  text-shadow: -3px 3px 0 #000, 2px 2px 0 #000, 2px -2px 0 #000,
-    -2px -2px 0 #000;
-  text-transform: uppercase;
-  flex: 1;
-`;
-
-const ButtonContainer = styled.div`
-  display: flex;
-  flex: 1;
-  justify-content: flex-end;
-  margin-right: 1rem;
-`;
-
-const IndividualStampContainer = styled.div`
-  background-color: grey;
-`;
-
 const MainContainer = styled.div`
   /* display: none; */
   animation: ${(props: JumboStampSystemProps) =>
@@ -592,12 +499,6 @@ const JumboStampSystem = () => {
   const showing = useSelector(selectShowingStamp);
 
   const [hoverActive, setHoverActive] = useState(false);
-  const [showLanding, setLanding] = useState(true);
-  const [visible, setVisible] = useState(true);
-
-  function handleShow() {
-    setVisible(!visible);
-  }
 
   const { account } = useEthers();
 
@@ -608,7 +509,7 @@ const JumboStampSystem = () => {
         {
           contract: ContractInstance,
           method: "balanceOfBatch",
-          args: [ids.map((_) => account), ids],
+          args: [ids.map(() => account), ids],
         },
         {
           chainId: 137,
@@ -625,11 +526,7 @@ const JumboStampSystem = () => {
 
   useEffect(() => {
     if (stamps) {
-      let k = 0;
       for (let i = 0; i < Math.floor(stamps.length / 3); i++) {
-        if (i > 0) {
-          k = i * 3;
-        }
         stampIndividual[i].edition[0].collected = Boolean(stamps[i]);
         stampIndividual[i].edition[1].collected = Boolean(stamps[i + 4]);
         stampIndividual[i].edition[2].collected = Boolean(stamps[i + 8]);

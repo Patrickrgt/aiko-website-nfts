@@ -1,12 +1,9 @@
-import { ReactNode, useEffect, useState, useMemo, useRef } from "react";
+import { useEffect, useState, useRef } from "react";
 import styled from "styled-components";
 
 import { useDispatch, useSelector } from "react-redux";
 
-import { useEthers, useLookupAddress, useCall } from "@usedapp/core";
-import { utils, constants, BigNumber, Contract as CTR } from "ethers";
-import { Contract } from "@ethersproject/contracts";
-import abiStamps from "../../contracts/aikostamps.json";
+import { useEthers, useLookupAddress } from "@usedapp/core";
 
 import { useBalanceOf } from "../../contracts/views";
 
@@ -27,7 +24,6 @@ import UserNavSocial, { SocialIconType } from "./UserNavSocial";
 
 import JumboStampSystem from "./JumboStampSystem";
 
-import logo from "../../assets/userpanel/logo.png";
 import meepocoin from "../../assets/userpanel/meepocoin.png";
 import mute from "../../assets/userpanel/mute.png";
 import unmute from "../../assets/userpanel/unmute.png";
@@ -43,10 +39,6 @@ import cursorhover from "../../assets/userpanel/cursorhover.png";
 
 import soundHoverTab from "../../assets/userpanel/Market_SFX_-_TAB_HOVER.wav";
 import soundClickTab from "../../assets/userpanel/Market_SFX_-_TAB_PRESS.wav";
-
-const CONTRACT_ADDR = "0x7f60e977a7b9677be1795efe5ad5516866ab69a6";
-const Interface = new utils.Interface(abiStamps);
-const ContractInstance = new Contract(CONTRACT_ADDR, Interface);
 
 const socialIcons: SocialIconType[] = [
   {
@@ -106,15 +98,6 @@ const NavUsernameContainer = styled.div`
   transition: all ease 0.3s;
 `;
 
-const PreNavUsername = styled.div`
-  font-size: 2.5rem;
-  color: white;
-  text-shadow: -2px 2px 0 #000, 1px 1px 0 #000, 1px -1px 0 #000,
-    -1px -1px 0 #000;
-  opacity: ${(props: NavProps) => (props.active ? "1" : "0")};
-  transition: all ease 0.3s;
-`;
-
 const PostNavUsername = styled.span`
   font-size: 2.5rem;
   color: white;
@@ -162,12 +145,6 @@ const MeeposCollected = styled.div`
   justify-content: space-around;
   margin-top: 1rem;
   padding: 1rem 1rem 0.25rem 1rem;
-`;
-
-const MeeposCollectedText = styled.p`
-  font-size: 3rem;
-  color: white;
-  flex: 1 0;
 `;
 
 const MeeposCollectedStar = styled.img`
@@ -226,30 +203,6 @@ const DecorHorizontalDots3 = styled.span`
   background-color: #b2bcc3;
 `;
 
-const NavUserPfpOverlay = styled.div`
-  cursor: url(${cursorhover}), auto;
-  clip-path: var(--notched-md);
-  /* background-color: #e31414; */
-  padding: 0.15rem 0.15rem 0.15rem 0.15rem;
-  transition: all ease 0.25s;
-  position: relative;
-  &:hover {
-    background-color: ${(props: NavProps) =>
-      props.active ? "rgba(255, 208, 0, 1)" : ""};
-  }
-
-  &:hover:after {
-    content: "";
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    background-color: rgba(255, 208, 0, 0.1);
-    transition: all 0.3s ease-in-out;
-  }
-`;
-
 const NavUserPfpContainer = styled.div`
   margin-top: 2rem;
 
@@ -300,18 +253,6 @@ const NavUserStats = styled.div`
 const NavUserSocialsContainer = styled.div`
   display: flex;
   flex-direction: column;
-`;
-
-const NavUserSocialShadow = styled.div`
-  clip-path: var(--notched-sm);
-  background-color: #393939;
-  width: fit-content;
-  padding: 0.25rem 0.25rem 0.5rem 0.25rem;
-`;
-
-const NavUserSocial = styled.img`
-  width: fit-content;
-  clip-path: var(--notched-sm);
 `;
 
 const OverlayContainer = styled.div`
@@ -461,7 +402,6 @@ const UserProfile = () => {
     const mouse_x = event.clientX - 540;
     const mouse_y = event.clientY - 40;
     const window_width = window.innerWidth;
-    const window_height = window.innerHeight;
     const is_on_right_edge = mouse_x > window_width - 320;
 
     if (is_on_right_edge) {

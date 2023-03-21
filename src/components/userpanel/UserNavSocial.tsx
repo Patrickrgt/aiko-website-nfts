@@ -1,8 +1,8 @@
-import { ReactNode, useEffect, useState, useRef } from "react";
+import { useRef } from "react";
 import styled from "styled-components";
 
-import { useDispatch, useSelector } from "react-redux";
-import { selectMuteAudio, setMuteAudio } from "../../state/uiSlice";
+import { useSelector } from "react-redux";
+import { selectMuteAudio } from "../../state/uiSlice";
 
 import soundHoverSmall from "../../assets/userpanel/Market_SFX_-_BUTTON_HOVER_-_SMALL.wav";
 import soundClickSmall from "../../assets/userpanel/Market_SFX_-_BUTTON_PRESS_-_SMALL.wav";
@@ -48,16 +48,11 @@ const NavUserSocial = styled.img`
   filter: brightness(0) invert(1);
 `;
 
-interface SocialProps {
-  active?: boolean;
-}
-
 interface Props {
   socialIcon: SocialIconType;
 }
 
 const UserNavSocial = ({ socialIcon }: Props) => {
-  const [navActive, setActive] = useState(false);
   const audioHoverSmall = useRef<HTMLAudioElement>(null);
   const audioClickSmall = useRef<HTMLAudioElement>(null);
 

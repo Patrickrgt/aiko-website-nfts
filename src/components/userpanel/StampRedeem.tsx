@@ -1,4 +1,3 @@
-import { ReactNode, useEffect, useState } from "react";
 import styled from "styled-components";
 import ButtonBlue from "./ButtonBlue";
 import DecorHorizontal from "./DecorHorizontal";
@@ -31,14 +30,6 @@ const ShippingPrice = styled.h1`
   color: #ead182;
   text-shadow: -2px 2px 0 #000, 2px 2px 0 #000, 2px -2px 0 #000,
     -2px -2px 0 #000;
-`;
-
-const RedeemButtonContainer = styled.div`
-  padding: 3px 3px 8px 3px;
-  background-color: #393939;
-  width: 90%;
-  margin: auto;
-  clip-path: var(--notched-sm);
 `;
 
 const StampRedeem = () => {

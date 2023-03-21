@@ -1,17 +1,13 @@
-import { ReactNode, useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import styled, { css, keyframes } from "styled-components";
+import styled from "styled-components";
 import {
-  selectShowingRewards,
-  setShowingRewards,
   selectShowingStamp,
   setShowingStamp,
   selectMuteAudio,
-  setMuteAudio,
 } from "../../state/uiSlice";
 import star from "../../assets/placeholders/star.png";
 import cursorhover from "../../assets/userpanel/cursorhover.png";
-import { stampIndividual } from "./JumboStampSystem";
 
 import soundHoverLarge from "../../assets/userpanel/Market_SFX_-_BUTTON_HOVER_-_LARGE.wav";
 import soundClickLarge from "../../assets/userpanel/Market_SFX_-_BUTTON_PRESS_-_LARGE.wav";
@@ -26,20 +22,6 @@ export interface StampType {
   tier3?: boolean;
   visible: boolean;
 }
-
-const fadeOut = keyframes`
-   0% { transition: all ease; opacity: 1;}
-   75% {  opacity: 1; }
-   85% {   opacity: 0; }
-   100% { opacity: 1; }
-`;
-
-const fadeIn = keyframes`
-   0% { transition: all ease;opacity: 0;}
-   70% { transition: all ease; opacity: 0;}
-   75% { opacity: 1;}
-   100% { opacity: 1; }
-`;
 
 const Stamp = styled.button`
   display: flex;
@@ -157,7 +139,7 @@ const JumboStamp = ({ stamp, show }: Props) => {
   const mute = useSelector(selectMuteAudio);
   const [stampActive, setActive] = useState(false);
 
-  const [change, setChange] = useState(false);
+  const [change] = useState(false);
   const [count, setCount] = useState(0);
 
   const audioHoverLarge = useRef<HTMLAudioElement>(null);

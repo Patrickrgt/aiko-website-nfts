@@ -1,14 +1,8 @@
-import { ReactNode, useEffect, useState, useRef } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useRef } from "react";
+import { useSelector } from "react-redux";
 import styled, { css, keyframes } from "styled-components";
-import {
-  selectShowingRewards,
-  setShowingRewards,
-  selectMuteAudio,
-  setMuteAudio,
-} from "../../state/uiSlice";
+import { selectMuteAudio } from "../../state/uiSlice";
 import star from "../../assets/placeholders/star.png";
-import explorer from "../../assets/userpanel/explorer.png";
 
 import cursorhover from "../../assets/userpanel/cursorhover.png";
 
@@ -164,9 +158,6 @@ interface Props {
 }
 
 const StampEditionJumbo = ({ visible, editionJumbo }: Props) => {
-  const [stampActive, setActive] = useState(false);
-  const [hoverActive, setHover] = useState(false);
-
   const mute = useSelector(selectMuteAudio);
 
   const audioHoverLarge = useRef<HTMLAudioElement>(null);
@@ -190,11 +181,7 @@ const StampEditionJumbo = ({ visible, editionJumbo }: Props) => {
     <Stamp
       visible={visible}
       onMouseEnter={() => {
-        setActive(true);
         playHoverAudio();
-      }}
-      onMouseLeave={() => {
-        setActive(false);
       }}
       onClick={() => playClickAudio()}
     >

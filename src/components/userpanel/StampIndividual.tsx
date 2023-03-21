@@ -1,24 +1,9 @@
-import React, { ReactNode, useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React from "react";
+import { useDispatch } from "react-redux";
 import styled, { css, keyframes } from "styled-components";
-import { useEthers } from "@usedapp/core";
-import {
-  selectShowingRewards,
-  setShowingRewards,
-  selectShowingStamp,
-  setShowingStamp,
-} from "../../state/uiSlice";
-import star from "../../assets/placeholders/star.png";
-import arrow from "../../assets/userpanel/arrow.png";
+import { setShowingRewards, setShowingStamp } from "../../state/uiSlice";
 
-import holder from "../../assets/userpanel/holder.png";
-import creator from "../../assets/userpanel/creator.png";
-import supporter from "../../assets/userpanel/supporter.png";
-import cursorhover from "../../assets/userpanel/cursorhover.png";
 import explorer from "../../assets/userpanel/explorer.png";
-import explorer1 from "../../assets/userpanel/explorer1.png";
-import explorer2 from "../../assets/userpanel/explorer2.png";
-import explorer3 from "../../assets/userpanel/explorer3.png";
 
 import ButtonBlue from "./ButtonBlue";
 import DecorVertical from "./DecorVertical";
@@ -68,24 +53,6 @@ const editionJumbo: EditionJumboType[] = [
   },
 ];
 
-const edition: EditionType[] = [
-  {
-    image: "",
-    name: "",
-    collected: false,
-  },
-  {
-    image: "",
-    name: "",
-    collected: false,
-  },
-  {
-    image: "",
-    name: "",
-    collected: false,
-  },
-];
-
 const fadeUp = keyframes`
    0% { transition: all ease; opacity: 0; transform: translateY(100px);}
    40% { transition: all ease; opacity: 0; transform: translateY(100px);}
@@ -103,11 +70,6 @@ const slideForward = keyframes`
    100% { height: 100%; width: 100%; visibility: 1}
 `;
 
-const slideBack = keyframes`
-   0% { height: 100%; width: 100%; visibility: 1 }
-   100% { height: 10%; width: 10%; visibility: 0}
-`;
-
 const appear = keyframes`
    0% { transition: all ease; position: absolute; opacity: 0; }
    25% {   opacity: 1; position: static; display:block;}
@@ -118,23 +80,6 @@ const slideRight = keyframes`
    0% {opacity: 0;}
    40% {   width: 10%;  }
    100% { width: 100%;   }
-`;
-
-const fadeIn = keyframes`
-   0% { transform: translateY(-10px);}
-   70% {  transform: translateY(-10px);  }
-   100% { transform: translateY(0);    }
-`;
-
-const typing = keyframes`
-  0% { width: 0; }
-  100% { width: 100%; }
-`;
-
-const blinkcaret = keyframes`
-  0% { border-color: transparent; }
-  50% { border-color: orange; }
-  100% { border-color: transparent; }
 `;
 
 const Container = styled.div`
@@ -361,8 +306,6 @@ interface Props {
 
 const StampIndividual = ({ stampIndividual }: Props) => {
   const dispatch = useDispatch();
-  const [hoverActive, setHoverActive] = useState(false);
-  const [visible, setVisible] = useState(false);
 
   return (
     <Container show={stampIndividual.visible}>

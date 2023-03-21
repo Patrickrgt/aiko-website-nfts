@@ -1,10 +1,10 @@
-import { ReactNode, useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef } from "react";
 import styled from "styled-components";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 import cursorhover from "../../assets/userpanel/cursorhover.png";
 
-import { selectMuteAudio, setMuteAudio } from "../../state/uiSlice";
+import { selectMuteAudio } from "../../state/uiSlice";
 
 import soundHoverSmall from "../../assets/userpanel/Market_SFX_-_BUTTON_HOVER_-_SMALL.wav";
 import soundClickSmall from "../../assets/userpanel/Market_SFX_-_BUTTON_PRESS_-_DISABLED.wav";
@@ -42,15 +42,6 @@ const NavTitleContainer = styled.div`
   position: absolute;
   top: 5.5rem;
   display: flex;
-`;
-
-const HoverText = styled.div`
-  z-index: 2;
-  position: absolute;
-  top: 0;
-  left: 0;
-  color: green;
-  opacity: ${(props: NavProps) => (props.visible ? 1 : 0)};
 `;
 
 const NavTitleShadow = styled.div`
