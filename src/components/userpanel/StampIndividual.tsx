@@ -116,7 +116,7 @@ const StampTabRow = styled.div`
 `;
 
 const StampTitle = styled.h1`
-  font-size: 4rem;
+  font-size: 3.85vh;
   font-weight: 400;
   color: white;
   margin-left: 0.5rem;
@@ -255,7 +255,7 @@ const StampEditionRow = styled.div`
 const TextContainer = styled.div`
   clip-path: var(--notched-md);
   background-color: white;
-  width: 625px;
+  width: 73.5vh;
   margin: auto;
 
   &after: {
@@ -279,7 +279,7 @@ const StampText = styled.p`
   font-style: normal;
   background-color: white;
   position: relative;
-  font-size: 2.25rem;
+  font-size: 2.375vh;
   letter-spacing: 0;
   padding: 1.5rem 1.5rem;
   clip-path: var(--notched-md);

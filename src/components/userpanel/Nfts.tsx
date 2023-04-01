@@ -41,10 +41,10 @@ const AikoShadow = styled.div`
 
 const Aiko = styled.div`
   flex-wrap: nowrap;
-  max-width: 150px;
-  max-height: 150px;
-  min-width: 150px;
-  min-height: 150px;
+  /* max-width: 150px;
+  max-height: 150px; */
+  min-width: 15.5vh;
+  min-height: 15.5vh;
   position: relative;
   clip-path: var(--notched-md);
   transition: filter 0.2s;
@@ -57,7 +57,7 @@ const Aiko = styled.div`
       : "none"};
   animation-play-state: ${(props: NftProps) =>
     props.show ? "running" : "paused"};
-  background-size: 150px 150px;
+  background-size: 15.5vh 15.5vh;
   background-blend-mode: color;
 `;
 
@@ -79,7 +79,7 @@ const TransitionOverlay = styled.div`
         : "none"};
     background: url("https://aikovirtual.mypinata.cloud/ipfs/QmZ2qm2nPdc7p6sATD1QKL4keShffYtFmaS66bFJde2GbR"),
       #676d7e;
-    background-size: 150px 150px;
+    background-size: 15.5vh 15.5vh;
     transition: all 0.3s linear;
     filter: grayscale(90%);
   }
@@ -119,7 +119,7 @@ const OverlayCheck = styled.img`
   transform: ${(props: NftProps) =>
     props.selected ? "translate(0, 0)" : "translate(0, 40px)"};
   transition: all 0.2s cubic-bezier(1, 0, 0, 1);
-  width: 50px;
+  width: 5.25vh;
   margin-bottom: 6px;
   filter: invert(1) drop-shadow(1px 1px 0 black) drop-shadow(-1px 1px 0 black)
     drop-shadow(1px -1px 0 black) drop-shadow(-1px -1px 0 black);
@@ -133,7 +133,7 @@ const OverlayText = styled.div`
   transition: all 0.2s cubic-bezier(1, 0, 0, 1);
   &:before {
     content: "In Use";
-    font-size: 2.25rem;
+    font-size: 2.1vh;
     text-shadow: -3px -3px 0 #000, 0 -3px 0 #000, 3px -3px 0 #000, 3px 0 0 #000,
       3px 3px 0 #000, 0 3px 0 #000, -3px 3px 0 #000, -3px 0 0 #000;
     color: white;

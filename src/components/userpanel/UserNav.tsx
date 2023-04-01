@@ -6,6 +6,9 @@ import UserProfile from "./UserProfile";
 import UserNavIcon, { NavIconType } from "./UserNavIcon";
 
 import logo from "../../assets/userpanel/logo.png";
+import logo2 from "../../assets/userpanel/logo2.png";
+import logo3 from "../../assets/userpanel/logo3.png";
+
 import map from "../../assets/userpanel/buttonmap.png";
 import lobby from "../../assets/userpanel/buttonlobby.png";
 import lore from "../../assets/userpanel/buttonlore.png";
@@ -132,8 +135,8 @@ const Stripes = styled.div`
 
 const NavLogo = styled.img`
   position: relative;
-  padding-left: 2rem;
-  margin-right: 2rem;
+  padding-left: 2vh;
+  margin-right: 2vh;
   top: 2rem;
   width: 12%;
   animation: ${rotate} 10s infinite;
@@ -145,9 +148,9 @@ const NavIconContainer = styled.div`
   position: absolute;
   justify-content: space-between;
   background-color: #729abf;
-  width: 32rem;
+  width: 34vh;
   height: fit-content;
-  top: 2.5rem;
+  top: 2.5vh;
   border-radius: 2rem;
 `;
 
@@ -164,7 +167,7 @@ const HoverText = styled.div`
   color: #393939;
   padding: 1rem;
   background-color: #ffffff;
-  font-size: 1.5rem;
+  font-size: 1.5vh;
   opacity: ${(props: NavProps) => (props.visible ? 1 : 0)};
   transition: opacity 0.25s ease;
   clip-path: var(--notched-sm);
@@ -228,7 +231,7 @@ const UserNav = () => {
         </NavBackgroundDecor>
       </NavBackground>
 
-      <NavLogo src={logo} />
+      <NavLogo src={logo2} />
 
       <NavIconContainer onClick={handleClick}>
         {navIcons.map((navIcon: NavIconType, id: number) => (

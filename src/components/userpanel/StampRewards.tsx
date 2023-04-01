@@ -150,7 +150,7 @@ const StampShadowBorder = styled.div`
   transition: all ease 0.25s;
   transform: scale(${(props: Props) => (props.show ? 1 : 0)});
   width: fit-content;
-  padding: 0.5rem 0.5rem 3rem 0.5rem;
+  padding: 0.5vh 0.5vh 3vh 0.5vh;
   background-color: #393939;
   clip-path: var(--notched-md);
 
@@ -223,10 +223,9 @@ const RewardContainer = styled.div`
 `;
 
 const StampRewardContainer = styled.div`
-  padding: 3rem 3rem;
-  margin-bottom: 2rem;
+  padding: 3vh 3vh;
+  margin-bottom: 2vh;
   display: flex;
-  width: fit-content;
   height: 100%;
   justify-content: center;
   animation: ${(props: StampRewardProps) =>

@@ -65,10 +65,8 @@ const StampImgContainer = styled.div`
     props.active ? "" : "saturate(30%)"};
   opacity: ${(props: JumboStampSystemProps) => (props.active ? "1" : "0.70")};
   clip-path: var(--notched-md-tp);
-  width: 175px;
-  max-width: 175px;
-  width: auto;
-  height: 225px;
+  width: 21vh;
+  height: 26.5vh;
   transition: all ease 0.3s;
 `;
 
@@ -100,7 +98,7 @@ const StampImg = styled.img`
   display: block;
   margin-left: auto;
   margin-right: auto;
-  width: 100%;
+  width: 20.75vh;
   transform: scale(1.1) translateY(1rem);
 `;
 
@@ -122,7 +120,7 @@ const StampGradient = styled.div`
 `;
 
 const StampTitle = styled.p`
-  font-size: 2rem;
+  font-size: 1.925vh;
   color: white;
   background-color: ${(props: JumboStampSystemProps) =>
     props.active ? "#414141" : "#909295"};

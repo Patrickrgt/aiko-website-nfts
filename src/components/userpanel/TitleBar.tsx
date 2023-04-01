@@ -152,11 +152,11 @@ const DecorContainer = styled.div`
 `;
 
 const StampRewardsText = styled.p`
-  font-size: 3rem;
+  font-size: 2.8vh;
   font-weight: 800;
   color: white;
-  margin-left: 0.5rem;
-
+  margin-left: 0.5vh;
+  padding-top: 0.5vh;
   animation: ${(props: StampRewardProps) =>
     props.show
       ? css`
@@ -171,20 +171,20 @@ const StampRewardsText = styled.p`
 
 const CloseTab = styled.button`
   color: white;
-  font-size: 2.5rem;
-  text-shadow: -1px 1px 0 #000, 1px 1px 0 #000, 1px -1px 0 #000,
-    -1px -1px 0 #000;
+  font-size: 2.3vh;
+  text-shadow: -0.15vh 0.15vh 0 #000, 0.15vh 0.15vh 0 #000,
+    0.15vh -0.15vh 0 #000, -0.15vh -0.15vh 0 #000;
   background-image: linear-gradient(to bottom, #fdbe7c, #e55f69);
   cursor: url(${cursorhover}), auto;
-  width: 4rem;
+  width: 3.75vh;
   clip-path: var(--notched-xsm);
   border: none;
   font-family: arial, serif;
-  padding-bottom: 0.25rem;
+  padding-bottom: 0.25vh;
 `;
 
 const CloseTabShadow = styled.div`
-  padding: 0.25rem;
+  padding: 0.2vh;
   background-color: #393939;
   clip-path: var(--notched-xsm);
 `;

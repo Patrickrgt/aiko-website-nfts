@@ -4,7 +4,7 @@ const WarningContainer = styled.div`
   display: flex;
   flex-direction: column;
   flex: 1 1 0%;
-  padding-right: 2rem;
+  padding-right: 2vh;
   justify-content: flex-end;
 `;
 
@@ -17,9 +17,9 @@ const WarningHeaderContainer = styled.div`
 const WarningHeader = styled.h2`
   width: fit-content;
   background-color: #b3b5c5;
-  padding: 1.5rem 2rem 0 2rem;
+  padding: 1.5vh 2vh 0 2vh;
   margin: 0;
-  font-size: 2.5rem;
+  font-size: 2.325vh;
   clip-path: var(--notched-tp);
 `;
 
@@ -29,15 +29,15 @@ const WarningTextContainer = styled.div`
 `;
 
 const WarningText = styled.p`
-  padding: 1rem 2rem 3rem 2rem;
+  padding: 1vh 2vh 3vh 2vh;
   border-radius: 0 15px 0 0;
   font-family: video, serif;
   color: #6e6e70;
   font-weight: 400;
-  font-size: 2.15rem; /* 18px */
+  font-size: 2vh; /* 18px */
   line-height: 120%;
   letter-spacing: 0.25px;
-  width: 700px;
+  width: 78.65vh;
 `;
 
 const StampWarning = () => {
@@ -48,10 +48,10 @@ const StampWarning = () => {
       </WarningHeaderContainer>
       <WarningTextContainer>
         <WarningText>
-          Redeem function will start on 23/01/2023. Don't forget it, to claim
-          your rewards you will need to pay a shipping fee in ETH, the price
-          decreases based on the number of stamps you've collected, going from
-          30 USD to 0 USD.
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut qui fuga
+          deserunt accusantium sapiente omnis adipisci illo laboriosam, neque
+          aperiam, sed corrupti atque, recusandae ad doloribus quam optio
+          cumque. Nam.
         </WarningText>
       </WarningTextContainer>
     </WarningContainer>

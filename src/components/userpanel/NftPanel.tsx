@@ -136,7 +136,7 @@ const StampContainer = styled.div`
   font-family: video, serif;
   clip-path: var(--notched-md);
   transition: all 0.5s ease-in-out;
-  max-width: 1050px;
+  max-width: 110vh;
   height: 100%;
   animation: ${(props: NftProps) =>
     props.play
@@ -241,8 +241,8 @@ const PaginationRight = styled.button`
 `;
 
 const PaginationPage = styled.h1`
-  margin-top: 1.25rem;
-  font-size: 2.25rem;
+  margin-top: 1.15vh;
+  font-size: 2.1vh;
   text-shadow: -3px -3px 0 #000, 0 -3px 0 #000, 3px -3px 0 #000, 3px 0 0 #000,
     3px 3px 0 #000, 0 3px 0 #000, -3px 3px 0 #000, -3px 0 0 #000;
   color: white;

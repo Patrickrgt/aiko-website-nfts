@@ -40,15 +40,15 @@ const NavIconBackground = styled.div`
 const NavTitleContainer = styled.div`
   z-index: 1;
   position: absolute;
-  top: 5.5rem;
+  top: 5.35vh;
   display: flex;
 `;
 
 const NavTitleShadow = styled.div`
   transition: all ease 0.3s;
-  margin-top: 1.5rem;
+  margin-top: 1.5vh;
   background-color: #393939;
-  padding: 0.2rem 0.2rem 0.5rem 0.2rem;
+  padding: 0.2vh 0.2vh 0.5vh 0.2vh;
   clip-path: var(--notched-sm);
   transform: ${(props: NavProps) =>
     props.active ? "translate(0, 0px)" : "translate(0, -10px)"};
@@ -60,8 +60,8 @@ const NavIcon = styled.img`
   filter: ${(props: NavProps) =>
     props.active ? "brightness(0) invert(1)" : ""};
   transition: filter 0.6s;
-  width: 6rem;
-  height: 6rem;
+  width: 6.5vh;
+  height: 6.5vh;
   clip-path: var(--notched-sm);
   cursor: url(${cursorhover}), auto;
   opacity: 0.5;
@@ -70,17 +70,17 @@ const NavIcon = styled.img`
 const NavTitleDiv = styled.div`
   background-color: #e9eaec;
   margin: auto;
-  font-size: 2rem;
+  font-size: 1.95vh;
   font-weight: 300;
-  padding: 0.75rem 0.5rem 0.25rem 0.5rem;
+  padding: 0.75vh 0.5vh 0.25vh 0.5vh;
   clip-path: var(--notched-sm);
 `;
 
 const NavTitle = styled.p`
   text-transform: uppercase;
-  font-size: 1.5rem;
+  font-size: 1.45vh;
   font-weight: 300;
-  padding: 0 1rem 0 1rem;
+  padding: 0 1vh 0 1vh;
 `;
 
 interface NavProps {

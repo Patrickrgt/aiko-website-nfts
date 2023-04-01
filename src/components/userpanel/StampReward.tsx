@@ -29,7 +29,7 @@ const StampOuter = styled.div`
 
 const StampShadow = styled.div`
   background-color: #393939;
-  padding: 4px 4px 12px 4px;
+  padding: 0.4vh 0.4vh 1.2vh 0.4vh;
   clip-path: var(--notched);
 `;
 
@@ -71,37 +71,37 @@ const StampOverlay = styled.div`
 const RewardContainer = styled.div`
   display: flex;
   align-items: flex-start;
-  min-height: 250px;
-  max-height: 250px;
+  /* min-height: 250px; */
+  /* max-height: 250px; */
 `;
 
 const Reward = styled.img`
   margin-bottom: auto;
-  width: auto;
   display: block;
+  height: 25.8vh;
   clip-path: var(--notched);
 `;
 
 const StampLink = styled.div`
-  width: 2.75rem;
-  height: 1.75rem;
+  width: 2.55vh;
+  height: 1.7vh;
   background-color: ${(props: StampButtonProps) =>
     props.collected ? "#74d0ff" : "#CECECE"};
-  border-top: 0.25rem solid white;
-  border-bottom: 0.25rem solid white;
+  border-top: 0.25vh solid white;
+  border-bottom: 0.25vh solid white;
   box-shadow: 0px 0px 0px 4px #393939, 0px 4px 0px 0px #393939;
   position: relative;
   left: 0;
-  top: 115px;
+  top: 12vh;
   display: inline-block;
   z-index: 0;
 `;
 
 const RewardName = styled.p`
-  font-size: 1.75rem;
+  font-size: 1.625vh;
   color: white;
   position: relative;
-  bottom: 6rem;
+  bottom: 5.525vh;
   color: ${(props: StampButtonProps) => (props.active ? "black" : "white")};
   transition: color 0.3s linear;
   cursor: url(${cursorhover}), auto;
@@ -117,19 +117,20 @@ const RewardRequirement = styled.button`
   position: relative;
   display: inherit;
   width: fit-content;
-  height: 5.5rem;
-  border-radius: 0.5rem;
+  height: 5.2vh;
+  border-radius: 0.5vh;
   border: 3px solid #393939;
   border-bottom: 12px solid #393939;
   margin: auto;
   display: flex;
   justify-content: center;
+  align-items: center;
   right: 0;
   left: 0;
   bottom: 0;
-  padding: 0.65rem 1.5rem 0.25rem 1.5rem;
+  padding: 0.65vh 1.5vh 0.25vh 1.5vh;
   position: absolute;
-  font-size: 2.75rem;
+  font-size: 2.55vh;
   font-weight: 300;
   background-color: ${(props: StampButtonProps) =>
     props.collected ? "#74d0ff" : "#CECECE"};
@@ -137,8 +138,8 @@ const RewardRequirement = styled.button`
 
 const Star = styled.img`
   display: inline-block;
-  width: 25px;
-  height: 25px;
+  width: 2.6vh;
+  height: 2.6vh;
   position: relative;
   bottom: 2px;
   left: 2px;
@@ -146,8 +147,8 @@ const Star = styled.img`
 
 const Check = styled.img`
   display: inline-block;
-  width: 25px;
-  height: 25px;
+  width: 2.6vh;
+  height: 2.6vh;
 `;
 
 interface StampButtonProps {

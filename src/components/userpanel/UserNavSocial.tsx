@@ -16,7 +16,7 @@ export interface SocialIconType {
 }
 
 const NavUserSocialShadow = styled.div`
-  margin-top: 1rem;
+  margin-top: 1vh;
   clip-path: var(--notched-sm);
   background-color: #393939;
   width: fit-content;
@@ -28,8 +28,8 @@ const NavLink = styled.a`
   background-color: #b2bcc3;
   clip-path: var(--notched-sm);
   display: flex;
-  width: 50px;
-  height: 50px;
+  width: 5.35vh;
+  height: 5.35vh;
   :hover {
     background-color: #619ee2;
   }
@@ -43,8 +43,8 @@ const NavUserContainer = styled.div`
 `;
 
 const NavUserSocial = styled.img`
-  max-width: 36px;
-  max-height: 36px;
+  max-width: 4vh;
+  max-height: 4vh;
   filter: brightness(0) invert(1);
 `;
 

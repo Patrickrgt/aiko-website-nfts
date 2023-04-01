@@ -49,23 +49,23 @@ export const useTotalSupply = (): number => {
   return Number(value.toString());
 };
 
-export function useBalanceOf(): number[] | undefined {
-  const { account } = useEthers();
-  const ids = Array.from({ length: 12 }, (_, i) => i + 1);
-  const { value, error } =
-    useCall(
-      {
-        contract: ContractInstance,
-        method: "balanceOfBatch",
-        args: [ids.map((_) => account), ids],
-      },
-      {
-        chainId: 137,
-      }
-    ) ?? {};
-  if (error) {
-    console.error(error.message);
-    return undefined;
-  }
-  return value?.[0].map((result: BigNumber) => Number(result));
-}
+// export function useBalanceOf(): number[] | undefined {
+//   const { account } = useEthers();
+//   const ids = Array.from({ length: 12 }, (_, i) => i + 1);
+//   const { value, error } =
+//     useCall(
+//       {
+//         contract: ContractInstance,
+//         method: "balanceOfBatch",
+//         args: [ids.map((_) => account), ids],
+//       },
+//       {
+//         chainId: 137,
+//       }
+//     ) ?? {};
+//   if (error) {
+//     console.error(error.message);
+//     return undefined;
+//   }
+//   return value?.[0].map((result: BigNumber) => Number(result));
+// }

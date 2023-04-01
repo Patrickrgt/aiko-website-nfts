@@ -2,10 +2,10 @@ import { useEffect, useState, useRef } from "react";
 import styled from "styled-components";
 
 import { useDispatch, useSelector } from "react-redux";
-
-import { useEthers, useLookupAddress } from "@usedapp/core";
-
-import { useBalanceOf } from "../../contracts/views";
+import { utils, BigNumber } from "ethers";
+import { useCall, useEthers, useLookupAddress } from "@usedapp/core";
+import { Contract } from "@ethersproject/contracts";
+import abiStamps from "../../contracts/aikostamps.json";
 
 import {
   setShowingNfts,
@@ -39,6 +39,10 @@ import cursorhover from "../../assets/userpanel/cursorhover.png";
 
 import soundHoverTab from "../../assets/userpanel/Market_SFX_-_TAB_HOVER.wav";
 import soundClickTab from "../../assets/userpanel/Market_SFX_-_TAB_PRESS.wav";
+
+const CONTRACT_ADDR = "0x7f60e977a7b9677be1795efe5ad5516866ab69a6";
+const Interface = new utils.Interface(abiStamps);
+const ContractInstance = new Contract(CONTRACT_ADDR, Interface);
 
 const socialIcons: SocialIconType[] = [
   {
@@ -76,21 +80,21 @@ const NavUserContainer = styled.div`
 const NavUserWalletContainer = styled.div`
   display: flex;
   flex-direction: column;
-  margin-right: 2rem;
+  margin-right: 2vh;
   /* background-color: black; */
   align-items: flex-end;
 `;
 
 const NavUsernameContainer = styled.div`
   position: relative;
-  top: 3rem;
-  right: 2rem;
+  top: 3vh;
+  right: 2vh;
   background-color: #8ca3e7;
   clip-path: var(--notched-sm);
-  padding: 1rem 3rem 1rem 1rem;
+  padding: 1vh 3vh 1vh 1vh;
   text-align: left;
   width: fit-content;
-  height: 4rem;
+  height: 4vh;
   overflow: visible;
   margin-left: auto;
   z-index: 1;
@@ -99,7 +103,7 @@ const NavUsernameContainer = styled.div`
 `;
 
 const PostNavUsername = styled.span`
-  font-size: 2.5rem;
+  font-size: 2.4vh;
   color: white;
   text-shadow: -2px 2px 0 #000, 1px 1px 0 #000, 1px -1px 0 #000,
     -1px -1px 0 #000;
@@ -111,30 +115,33 @@ const PreNavWallet = styled.button`
   cursor: url(${cursorhover}), auto;
   background-color: #fff4cb;
   clip-path: var(--notched-sm);
-  padding: 4rem 4rem 1rem 2rem;
+  padding: 4vh 4vh 1vh 2vh;
   transform: ${(props: NavProps) =>
     props.active ? "translate(10%, 0px)" : "translate(60%, 0)"};
   transition: all ease 0.3s;
+  height: 7.5vh;
 `;
 
 const PreNavWalletText = styled.p`
   transition: all ease 0.3s;
-  font-size: 2rem;
+  font-size: 2vh;
   opacity: ${(props: NavProps) => (props.active ? "1" : "0")};
 `;
 
 const PostNavWallet = styled.button`
+  width: fit-content;
   cursor: url(${cursorhover}), auto;
   background-color: #fff4cb;
   clip-path: var(--notched-sm);
-  padding: 4rem 4rem 1rem 2rem;
+  padding: 4vh 4vh 1vh 2vh;
   transform: translate(10%, 0px);
   transition: all ease 0.3s;
+  height: 7.5vh;
 `;
 
 const PostNavWalletText = styled.p`
   transition: all ease 0.3s;
-  font-size: 2rem;
+  font-size: 1.95vh;
 `;
 
 const MeeposCollected = styled.div`
@@ -143,14 +150,15 @@ const MeeposCollected = styled.div`
   display: flex;
   background-color: #619ee2;
   justify-content: space-around;
-  margin-top: 1rem;
-  padding: 1rem 1rem 0.25rem 1rem;
+  margin-top: 1vh;
+  padding: 1vh 1vh 0.25vh 1vh;
+  height: 4.35vh;
 `;
 
 const MeeposCollectedStar = styled.img`
   position: relative;
   bottom: 0.5rem;
-  width: 25px;
+  height: 100%;
 `;
 
 const StampsCollected = styled.div`
@@ -159,12 +167,13 @@ const StampsCollected = styled.div`
   display: flex;
   background-color: #ffcb5a;
   justify-content: space-around;
-  margin-top: 1rem;
-  padding: 1rem 1rem 0.25rem 1rem;
+  margin-top: 1vh;
+  padding: 1vh 1vh 0.25vh 1vh;
+  height: 4.35vh;
 `;
 
 const StampsCollectedText = styled.p`
-  font-size: 3rem;
+  font-size: 2.95vh;
   color: white;
   flex: 1 0;
 `;
@@ -172,44 +181,43 @@ const StampsCollectedText = styled.p`
 const StampsCollectedStar = styled.img`
   position: relative;
   bottom: 0.5rem;
-  width: 25px;
+  height: 3vh;
 `;
 
 const DecorHorizontalContainer = styled.div`
   display: flex;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
+  margin-top: 1vh;
+  margin-bottom: 1vh;
 `;
 
 const DecorHorizontalDots = styled.span`
-  width: 1.5rem;
-  height: 1.5rem;
+  width: 1.5vh;
+  height: 1.5vh;
   border-radius: 30px;
   margin-right: 1rem;
   background-color: #b2bcc3;
 `;
 
 const DecorHorizontalDots2 = styled.span`
-  width: 1.5rem;
-  height: 1.5rem;
+  width: 1.5vh;
+  height: 1.5vh;
   border-radius: 30px;
   margin-right: 1rem;
   background-color: #b2bcc3;
 `;
 const DecorHorizontalDots3 = styled.span`
   width: 100%;
-  height: 1.5rem;
+  height: 1.5vh;
   border-radius: 30px;
   background-color: #b2bcc3;
 `;
 
 const NavUserPfpContainer = styled.div`
-  margin-top: 2rem;
-
+  margin-top: 2vh;
   cursor: url(${cursorhover}), auto;
   clip-path: var(--notched-md);
   background-color: #393939;
-  padding: 0.25rem 0.25rem 1.25rem 0.25rem;
+  padding: 0.25vh 0.25vh 1.25vh 0.25vh;
   transition: all ease 0.3s;
   position: relative;
 `;
@@ -222,7 +230,7 @@ const Overlay = styled.div`
     right: 0;
     bottom: 0;
     left: 0;
-    background-color: rgba(229, 255, 0, 0.5);
+    background-color: rgba(230, 163, 78, 0.75);
     transition: all 0.3s linear;
     opacity: ${(props: NavProps) => (props.active ? 1 : 0)};
     transition: 0.3s ease-in-out;
@@ -231,17 +239,25 @@ const Overlay = styled.div`
 
 const NavUserPfp = styled.div`
   filter: opacity(90%);
-  filter: hue-rotate(10deg);
   clip-path: var(--notched-md);
   background-image: url(${(props) => props.pfp});
-  width: 150px;
-  height: 150px;
-  background-size: 150px 150px;
+  background-position: center center;
+  background-repeat: no-repeat;
+  width: 15vh;
+  height: 15vh;
+  background-size: 15vh;
+
   transition: all cubic-bezier(0.16, -0.05, 0.83, 1.06) 0.3s;
 
   &:hover {
     border: ${(props: NavProps) =>
       props.active ? "2px solid white" : "2px solid transprent"};
+  }
+
+  @media only screen and (max-height: 1000px) {
+    width: 17.5vh;
+    height: 17.5vh;
+    background-size: 17.5vh;
   }
 `;
 
@@ -265,8 +281,8 @@ const OverlayContainer = styled.div`
   right: 0;
   bottom: 0;
   left: 0;
-  filter: drop-shadow(1px 1px 3px #f1e64f) drop-shadow(-1px 1px 3px #f1e64f)
-    drop-shadow(1px -1px 3px #f1e64f) drop-shadow(-1px -1px 3px #f1e64f);
+  filter: drop-shadow(1px 1px 3px #e6a34e) drop-shadow(-1px 1px 3px #e6a34e)
+    drop-shadow(1px -1px 3px #e6a34e) drop-shadow(-1px -1px 3px #e6a34e);
   opacity: ${(props: NavProps) => (props.active ? 1 : 0)};
   transition: 0.3s ease-in-out;
   opacity: ${(props: NavProps) => (props.active ? 1 : 0)};
@@ -277,13 +293,10 @@ const OverlayContainer = styled.div`
 const OverlayCheck = styled.img`
   transform: translate(0, 40px);
   transition: all 0.2s cubic-bezier(1, 0, 0, 1);
-  width: 50px;
-  width: 50px;
+  height: 4.15vh;
   margin-bottom: 6px;
   filter: invert(1) drop-shadow(1px 1px 0 black) drop-shadow(-1px 1px 0 black)
     drop-shadow(1px -1px 0 black) drop-shadow(-1px -1px 0 black);
-  opacity: ${(props: NavProps) => (props.active ? 1 : 0)};
-  opacity: ${(props: NavProps) => (props.active ? 1 : 0)};
   transition: 0.3s ease-in-out;
   opacity: ${(props: NavProps) => (props.active ? 1 : 0)};
   transform: ${(props: NavProps) =>
@@ -298,7 +311,7 @@ const OverlayText = styled.div`
     props.active ? "translate(0, 0)" : "translate(0, 40px)"};
   &:before {
     content: "Change NFT";
-    font-size: 2.25rem;
+    font-size: 2.15vh;
     text-shadow: -3px -3px 0 #000, 0 -3px 0 #000, 3px -3px 0 #000, 3px 0 0 #000,
       3px 3px 0 #000, 0 3px 0 #000, -3px 3px 0 #000, -3px 0 0 #000;
     color: white;
@@ -317,21 +330,28 @@ const MuteContainer = styled.div`
   clip-path: var(--notched-xsm);
   bottom: 0;
   position: absolute;
-  margin-left: -55px;
-  margin-bottom: 30px;
+  margin-left: -6.5vh;
+  margin-bottom: 2.75vh;
   cursor: url(${cursorhover}), auto;
+  @media only screen and (max-height: 1000px) {
+    margin-bottom: 3.5vh;
+  }
 `;
 
 const MuteButton = styled.img`
   clip-path: var(--notched-xsm);
-  width: 35px;
-  height: 35px;
+  width: 3vh;
+  height: 3vh;
   padding: 0.75rem;
   transition: all 0.3s ease;
   background-color: ${(props: NavProps) =>
     props.muted ? "#fcea9e" : "#b2bcc3"};
   &:hover {
     opacity: 0.5;
+  }
+  @media only screen and (max-height: 1000px) {
+    width: 4vh;
+    height: 4vh;
   }
 `;
 
@@ -340,9 +360,9 @@ const HoverText = styled.div`
   z-index: 2;
   position: absolute;
   color: #2a2a2a;
-  padding: 1rem;
+  padding: 1vh;
   background-color: #ffcb5a;
-  font-size: 1.5rem;
+  font-size: 1.5vh;
   opacity: ${(props: NavProps) => (props.visible ? 1 : 0)};
   transition: opacity 0.25s ease;
   clip-path: var(--notched-sm);
@@ -413,7 +433,27 @@ const UserProfile = () => {
     }
   };
 
-  const stamps = useBalanceOf();
+  function getStamps(): number[] | undefined {
+    const ids = Array.from({ length: 12 }, (_, i) => i + 1);
+    const { value, error } =
+      useCall(
+        {
+          contract: ContractInstance,
+          method: "balanceOfBatch",
+          args: [ids.map(() => account), ids],
+        },
+        {
+          chainId: 137,
+        }
+      ) ?? {};
+    if (error) {
+      console.error(error.message);
+      return undefined;
+    }
+    return value?.[0].map((result: BigNumber) => Number(result));
+  }
+
+  const stamps = getStamps();
 
   useEffect(() => {
     try {

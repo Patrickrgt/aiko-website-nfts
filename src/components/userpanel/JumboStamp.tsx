@@ -58,10 +58,9 @@ const StampImgContainer = styled.div`
     props.active ? "" : "saturate(30%)"};
   opacity: ${(props: JumboStampSystemProps) => (props.active ? "1" : "0.70")};
   clip-path: var(--notched-md-tp);
-  width: 200px;
-  max-width: 200px;
-  width: auto;
-  height: 275px;
+  width: 23.5vh;
+  max-width: 23.5vh;
+  height: 32.5vh;
   transition: all ease 0.3s;
 `;
 
@@ -70,6 +69,7 @@ const StampImg = styled.img`
     props.active ? "" : "saturate(50%)"};
   transform: scale(0.9) translateX(-3.75rem) translateY(-3rem);
   transition: all ease 0.3s;
+  height: 48vh;
 `;
 
 const StampContentContainer = styled.div`
@@ -90,7 +90,7 @@ const StampGradient = styled.div`
 `;
 
 const StampTitle = styled.p`
-  font-size: 2rem;
+  font-size: 1.925vh;
   color: white;
   background-color: ${(props: JumboStampSystemProps) =>
     props.active ? "#414141" : "#909295"};
@@ -117,8 +117,8 @@ const StampCollected = styled.div`
 const StampCollectedContainer = styled.div``;
 
 const StampCollectedStar = styled.img`
-  width: 3rem;
-  height: 3rem;
+  width: 3.25vh;
+  height: 3.25vh;
   margin: 0 0.25rem;
   filter: ${(props: JumboStampSystemProps) =>
     props.active ? "" : "grayscale(1)"};

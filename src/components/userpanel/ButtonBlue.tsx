@@ -41,11 +41,10 @@ const ButtonInner = styled.div`
 const Button = styled.button`
   line-height: 1;
   text-transform: uppercase;
-  width: 100%;
   margin: auto;
   position: relative;
   font-family: video, serif;
-  font-size: ${(props: ButtonProps) => (props.small ? "3.25rem" : "4rem")};
+  font-size: ${(props: ButtonProps) => (props.small ? "3.15vh" : "3.95vh")};
   clip-path: var(--notched-sm);
   font-weight: 800;
   color: white;

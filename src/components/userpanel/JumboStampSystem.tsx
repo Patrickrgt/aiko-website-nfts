@@ -245,7 +245,7 @@ const JumboContainer = styled.div`
 
 const JumboShadow = styled.div`
   background-color: #393939;
-  padding: 0.5rem 0.5rem 3rem 0.5rem;
+  padding: 0.5vh 0.5vh 3vh 0.5vh;
   clip-path: var(--notched-md);
   transition: all ease;
   animation: ${(props: JumboStampSystemProps) =>
@@ -260,7 +260,8 @@ const JumboShadow = styled.div`
 
 const JumboInnerBorder = styled.div`
   background-color: #cfd2da;
-  padding: 2rem 1.5rem;
+  padding: 2vh 1.5vh;
+  width: 100%;
   clip-path: var(--notched-md);
   transition: all ease;
   animation: ${(props: JumboStampSystemProps) =>
@@ -278,7 +279,7 @@ const JumboInnerBorder = styled.div`
 const JumboTabsContainer = styled.div`
   z-index: 1;
   position: absolute;
-  top: -2.5rem;
+  top: -2.5vh;
   left: 6rem;
   display: flex;
 `;
@@ -292,14 +293,14 @@ const JumboTab = styled.button`
       ? "-1px 1px 0 #000, 1px 1px 0 #000, 1px -1px 0 #000, -1px -1px 0 #000"
       : ""};
   width: fit-content;
-  padding: 1.5rem 3rem;
+  padding: 1.35vh 2.75vh;
   clip-path: var(--notched-tp);
 `;
 
 const Tab = styled.p`
   color: ${(props: JumboStampSystemProps) =>
     props.active ? "white" : "#686868"};
-  font-size: 2rem;
+  font-size: 2.3vh;
 `;
 
 const JumboInnerContainer = styled.div`
@@ -333,7 +334,7 @@ const SeasonTab = styled.div`
 const SeasonText = styled.p`
   z-index: 100;
   color: white;
-  font-size: 2rem;
+  font-size: 2.3vh;
   white-space: nowrap;
   z-index: 6;
 `;
@@ -365,10 +366,11 @@ const RewardsContainer = styled.div`
   background-color: #cad7e3;
   clip-path: var(--notched-md);
   position: relative;
+  height: 14.75vh;
 `;
 
 const ArrowDecorationDiv = styled.div`
-  height: 100%;
+  height: 16.25vh;
   transition: transform ease 1.25s;
   width: 100%;
   position: absolute;
@@ -441,6 +443,7 @@ const ArrowDecoration = styled.img`
 
 const RewardsHeaderContainer = styled.div`
   background-color: #8397cf;
+  height: 4.05vh;
   clip-path: var(--notched-sm-tp);
   display: flex;
   justify-content: flex-end;
@@ -458,7 +461,7 @@ const RewardsButtonInner = styled.div`
 `;
 
 const RewardsHeader = styled.p`
-  font-size: 2.25rem;
+  font-size: 2.15vh;
   color: white;
   text-overflow: clip;
   white-space: nowrap;
