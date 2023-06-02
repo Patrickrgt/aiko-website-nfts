@@ -1,8 +1,8 @@
 import { Suspense } from "react";
 import styled from "styled-components";
 import { Outlet } from "react-router-dom";
-import { Config, DAppProvider, Mainnet, Rinkeby, Polygon } from "@usedapp/core";
-import { ethers, getDefaultProvider } from "ethers";
+import { Config, DAppProvider, Mainnet, Polygon } from "@usedapp/core";
+import { ethers } from "ethers";
 
 import Error from "./components/Error";
 import LoadingScreen from "./components/LoadingScreen";

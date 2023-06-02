@@ -1,6 +1,6 @@
 import { useEthers } from "@usedapp/core";
 import { useDispatch } from "react-redux";
-import { clearError, ErrorButtonType, setError } from "../../state/errorSlice";
+import { ErrorButtonType, setError } from "../../state/errorSlice";
 import { ETH_GLOBALS, RINKEBY_GLOBALS, MATIC_GLOBALS } from "../globals";
 
 const useGlobals = () => {
