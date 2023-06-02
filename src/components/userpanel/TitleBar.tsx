@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled, { css, keyframes } from "styled-components";
 
@@ -176,11 +176,24 @@ const CloseTab = styled.button`
     0.15vh -0.15vh 0 #000, -0.15vh -0.15vh 0 #000;
   background-image: linear-gradient(to bottom, #fdbe7c, #e55f69);
   cursor: url(${cursorhover}), auto;
-  width: 3.75vh;
+  width: 4vh;
   clip-path: var(--notched-xsm);
   border: none;
   font-family: arial, serif;
-  padding-bottom: 0.25vh;
+  padding-bottom: 0.5vh;
+  transition: all ease 0.3s;
+  &:before {
+    position: absolute;
+    content: "";
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-image: linear-gradient(to bottom, #f38a65, #ffca62);
+    z-index: -1;
+    transition: opacity 0.25s linear;
+    opacity: ${(props: StampRewardProps) => (props.active ? "1" : "0")};
+  }
 `;
 
 const CloseTabShadow = styled.div`
@@ -190,7 +203,8 @@ const CloseTabShadow = styled.div`
 `;
 
 interface StampRewardProps {
-  show: boolean;
+  show?: boolean;
+  active?: boolean;
 }
 
 interface Props {
@@ -206,6 +220,8 @@ const TitleBar = ({ x, title }: Props) => {
 
   const audioHoverSmall = useRef<HTMLAudioElement>(null);
   const audioClickSmall = useRef<HTMLAudioElement>(null);
+
+  const [hoverActive, setHoverActive] = useState(false);
 
   const playHoverAudio = () => {
     if (audioHoverSmall.current && mute) {
@@ -237,7 +253,12 @@ const TitleBar = ({ x, title }: Props) => {
       {!x && (
         <CloseTabShadow>
           <CloseTab
-            onMouseEnter={() => playHoverAudio()}
+            active={hoverActive}
+            onMouseEnter={() => {
+              setHoverActive(true);
+              playHoverAudio();
+            }}
+            onMouseLeave={() => setHoverActive(false)}
             onClick={() => {
               dispatch(setShowingRewards(false));
               playClickAudio();

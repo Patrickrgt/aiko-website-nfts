@@ -305,7 +305,7 @@ const StampRewards = () => {
         dispatch(setHasAikos(true));
       }
     } catch (error) {
-      console.log(error);
+      return;
     }
   }
 

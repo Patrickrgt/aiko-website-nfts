@@ -24,7 +24,6 @@ import UserNavSocial, { SocialIconType } from "./UserNavSocial";
 
 import JumboStampSystem from "./JumboStampSystem";
 
-import meepocoin from "../../assets/userpanel/meepocoin.png";
 import mute from "../../assets/userpanel/mute.png";
 import unmute from "../../assets/userpanel/unmute.png";
 import star from "../../assets/userpanel/stampstar.png";
@@ -142,23 +141,6 @@ const PostNavWallet = styled.button`
 const PostNavWalletText = styled.p`
   transition: all ease 0.3s;
   font-size: 1.95vh;
-`;
-
-const MeeposCollected = styled.div`
-  clip-path: var(--notched-sm);
-  width: 100%;
-  display: flex;
-  background-color: #619ee2;
-  justify-content: space-around;
-  margin-top: 1vh;
-  padding: 1vh 1vh 0.25vh 1vh;
-  height: 4.35vh;
-`;
-
-const MeeposCollectedStar = styled.img`
-  position: relative;
-  bottom: 0.5rem;
-  height: 100%;
 `;
 
 const StampsCollected = styled.div`
@@ -403,7 +385,6 @@ const UserProfile = () => {
     setLeft(event.clientX - 490);
     setTop(event.clientY - 40);
     setVisible(true);
-    console.log(event.clientX + 50, event.clientY);
   };
 
   useEffect(() => {
@@ -418,14 +399,23 @@ const UserProfile = () => {
     };
   }, [visible]);
 
+  const calculatePercentageMinusNumber = (
+    total: number,
+    percentage: number,
+    minusNumber: number
+  ) => {
+    const percentageValue = total * (percentage / 100);
+    return percentageValue - minusNumber;
+  };
+
   const handleMouseMove = (event: any) => {
     const mouse_x = event.clientX - 540;
     const mouse_y = event.clientY - 40;
     const window_width = window.innerWidth;
-    const is_on_right_edge = mouse_x > window_width - 320;
+    const is_on_right_edge = mouse_x > window_width - 700;
 
     if (is_on_right_edge) {
-      setLeft(mouse_x - 650);
+      setLeft(calculatePercentageMinusNumber(100, 90, mouse_x));
       setTop(mouse_y);
     } else {
       setLeft(mouse_x + 50);
@@ -447,7 +437,6 @@ const UserProfile = () => {
         }
       ) ?? {};
     if (error) {
-      console.error(error.message);
       return undefined;
     }
     return value?.[0].map((result: BigNumber) => Number(result));
@@ -465,7 +454,7 @@ const UserProfile = () => {
         setStampsNum(stampsNum);
       }
     } catch (err) {
-      console.log(err, "UserProfile");
+      return;
     }
   }, [stamps]);
 
@@ -614,18 +603,12 @@ const UserProfile = () => {
           </MuteContainer>
         </NavUserPfpOverall>
 
-        <MeeposCollected>
-          {account && <StampsCollectedText>0</StampsCollectedText>}
-          <MeeposCollectedStar src={meepocoin} />
-        </MeeposCollected>
-
-        <StampsCollected>
-          {account && (
+        {account && (
+          <StampsCollected>
             <StampsCollectedText>{`${stampsHeld}/12`}</StampsCollectedText>
-          )}
-
-          <StampsCollectedStar src={star} />
-        </StampsCollected>
+            <StampsCollectedStar src={star} />
+          </StampsCollected>
+        )}
 
         <DecorHorizontalContainer>
           <DecorHorizontalDots />

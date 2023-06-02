@@ -40,7 +40,7 @@ const StampRedeem = () => {
       </ShippingText>
       <ButtonBlue
         close={() => {
-          console.log("Redeem");
+          return;
         }}
         content="REDEEM"
       />

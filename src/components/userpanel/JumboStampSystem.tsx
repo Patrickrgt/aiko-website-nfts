@@ -519,7 +519,6 @@ const JumboStampSystem = () => {
         }
       ) ?? {};
     if (error) {
-      console.error(error.message);
       return undefined;
     }
     return value?.[0].map((result: BigNumber) => Number(result));

@@ -5,9 +5,7 @@ import UserProfile from "./UserProfile";
 
 import UserNavIcon, { NavIconType } from "./UserNavIcon";
 
-import logo from "../../assets/userpanel/logo.png";
 import logo2 from "../../assets/userpanel/logo2.png";
-import logo3 from "../../assets/userpanel/logo3.png";
 
 import map from "../../assets/userpanel/buttonmap.png";
 import lobby from "../../assets/userpanel/buttonlobby.png";
@@ -136,6 +134,7 @@ const Stripes = styled.div`
 const NavLogo = styled.img`
   position: relative;
   padding-left: 2vh;
+  margin-left: 1vh;
   margin-right: 2vh;
   top: 2rem;
   width: 12%;
