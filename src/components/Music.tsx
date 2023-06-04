@@ -4,6 +4,7 @@ import play from "../assets/svgs/music-play.svg";
 import pause from "../assets/svgs/music-pause.svg";
 import next from "../assets/svgs/music-next.svg";
 import frog from "../assets/illustrations/frog.svg";
+import { useTick } from "../app/hooks/use-tick";
 import AikoFade from "./AikoFade";
 
 const StyledMusic = styled.div`
@@ -163,6 +164,7 @@ interface Props {
 }
 
 const Music = ({ atBottom }: Props) => {
+  const tick = useTick();
   const [active, setActive] = useState(false);
 
   audio.volume = 0.65;
