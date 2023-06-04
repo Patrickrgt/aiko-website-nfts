@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useState, useRef } from "react";
 import styled from "styled-components";
 import HoverAudio from "./HoverAudio";
 
@@ -30,10 +30,7 @@ const ButtonInner = styled.div`
     background-color: #f38a65;
     z-index: -1;
     transition: opacity 0.25s linear;
-    opacity: 0;
-  }
-  &:hover:before {
-    opacity: 1;
+    opacity: ${(props: ButtonProps) => (props.active ? "1" : "0")};
   }
 `;
 
@@ -66,11 +63,7 @@ const Button = styled.button`
     background-image: linear-gradient(to bottom, #f38a65, #ffca62);
     z-index: -1;
     transition: opacity 0.25s linear;
-    /* opacity: ${(props: ButtonProps) => (props.active ? "1" : "0")}; */
-    opacity: 0;
-  }
-  &:hover:before {
-    opacity: 1;
+    opacity: ${(props: ButtonProps) => (props.active ? "1" : "0")};
   }
 `;
 
@@ -88,16 +81,22 @@ interface Props {
 }
 
 const ButtonBlue = ({ content, close, small, symbol }: Props) => {
+  const [hoverActive, setHoverActive] = useState(false);
   const buttonRef = useRef<HTMLButtonElement>(null);
 
   return (
     <ButtonShadow>
-      <ButtonInner>
+      <ButtonInner active={hoverActive}>
         <HoverAudio hoverSound={soundHoverMedium} clickSound={soundClickMedium}>
           <Button
             ref={buttonRef}
+            active={hoverActive}
             small={small}
             symbol={symbol}
+            onMouseEnter={() => {
+              setHoverActive(true);
+            }}
+            onMouseLeave={() => setHoverActive(false)}
             onClick={() => {
               close();
             }}

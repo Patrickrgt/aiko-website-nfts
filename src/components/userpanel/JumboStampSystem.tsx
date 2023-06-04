@@ -588,8 +588,8 @@ const JumboStampSystem = () => {
                   onMouseLeave={() => setHoverActive(false)}
                 >
                   <RewardsHeader>
-                    Redeem rewards only will be available on
-                    <RewardsDate>XX/XX/XXXX</RewardsDate>
+                    Redemption will be made available around
+                    <RewardsDate>28/06/2023</RewardsDate>
                   </RewardsHeader>
                 </RewardsHeaderContainer>
                 <RewardsButtonContainer

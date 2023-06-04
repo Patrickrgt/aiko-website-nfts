@@ -48,10 +48,11 @@ const StampWarning = () => {
       </WarningHeaderContainer>
       <WarningTextContainer>
         <WarningText>
-          Clicking on redeem will redirect you to one of our Shopify pages once
-          the redeem functionality is live. Be aware that you will have to pay a
-          shipping fee upon checkout. Rewards are free with coupon provided
-          given that you have enough stamps for a reward.
+          Once the redemption functionality is live, clicking on 'Redeem' will
+          direct you to one of our dedicated Shopify pages. Please note that a
+          shipping fee will be applied upon checkout. However, rewards can be
+          obtained for free with the provided coupon, as long as you have
+          collected enough stamps for your chosen reward.
         </WarningText>
       </WarningTextContainer>
     </WarningContainer>
