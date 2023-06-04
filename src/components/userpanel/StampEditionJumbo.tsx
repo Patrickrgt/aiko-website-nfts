@@ -192,7 +192,6 @@ const StampEditionJumbo = ({ visible, editionJumbo }: Props) => {
                 onMouseLeave={() => {
                   setHover(false);
                 }}
-                onClick={() => console.log(hover)}
                 active={editionJumbo.tier1}
                 src={editionJumbo.image}
               />

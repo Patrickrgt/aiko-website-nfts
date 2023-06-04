@@ -217,21 +217,6 @@ const UserNav = () => {
     }
   };
 
-  // const handleMouseMove = (event: any) => {
-  //   const mouse_x = event.clientX;
-  //   const mouse_y = event.clientY;
-  //   const window_width = window.innerWidth;
-  //   const is_on_right_edge = mouse_x > window_width - 320;
-
-  //   if (is_on_right_edge) {
-  //     setLeft(mouse_x - 250);
-  //     setTop(mouse_y);
-  //   } else {
-  //     setLeft(mouse_x + 50);
-  //     setTop(mouse_y);
-  //   }
-  // };
-
   return (
     <NavContainer>
       <HoverText visible={visible} style={{ top: pos.top, left: pos.left }}>

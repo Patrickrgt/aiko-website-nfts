@@ -466,7 +466,6 @@ const UserProfile = () => {
                 activateBrowserWallet();
               }}
             >
-              {/* 0x1205...2aF4D */}
               <PreNavWalletText active={hoverActive}>
                 Connect Wallet
               </PreNavWalletText>
@@ -502,7 +501,6 @@ const UserProfile = () => {
                     activateBrowserWallet();
                   }}
                   pfp={baseaiko}
-                  // src={baseaiko}
                 />
               </HoverAudio>
             )}
@@ -518,7 +516,6 @@ const UserProfile = () => {
                     }
                   }}
                   pfp={nftPfp}
-                  // src={nftPfp}
                   onError={(e) => {
                     const target = e.target as HTMLImageElement;
                     target.src = baseaiko;
