@@ -1,13 +1,10 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled, { css, keyframes } from "styled-components";
+import HoverAudio from "./HoverAudio";
 
 import DecorVertical from "./DecorVertical";
-import {
-  selectShowingRewards,
-  setShowingRewards,
-  selectMuteAudio,
-} from "../../state/uiSlice";
+import { selectShowingRewards, setShowingRewards } from "../../state/uiSlice";
 
 import soundHoverSmall from "../../assets/userpanel/Market_SFX_-_BUTTON_HOVER_-_SMALL.wav";
 import soundClickSmall from "../../assets/userpanel/Market_SFX_-_BUTTON_PRESS_-_DISABLED.wav";
@@ -216,35 +213,10 @@ const TitleBar = ({ x, title }: Props) => {
   const showing = useSelector(selectShowingRewards);
   const dispatch = useDispatch();
 
-  const mute = useSelector(selectMuteAudio);
-
-  const audioHoverSmall = useRef<HTMLAudioElement>(null);
-  const audioClickSmall = useRef<HTMLAudioElement>(null);
-
   const [hoverActive, setHoverActive] = useState(false);
-
-  const playHoverAudio = () => {
-    if (audioHoverSmall.current && mute) {
-      audioHoverSmall.current.currentTime = 0;
-      audioHoverSmall.current.play();
-    }
-  };
-
-  const playClickAudio = () => {
-    if (audioClickSmall.current && mute) {
-      audioClickSmall.current.currentTime = 0;
-      audioClickSmall.current.play();
-    }
-  };
 
   return (
     <StampRewardsTab show={showing}>
-      <audio ref={audioHoverSmall} src={soundHoverSmall}>
-        <track kind="captions" />
-      </audio>
-      <audio ref={audioClickSmall} src={soundClickSmall}>
-        <track kind="captions" />
-      </audio>
       <Stripes show={showing} />
       <DecorContainer>
         <DecorVertical width={3} />
@@ -252,20 +224,20 @@ const TitleBar = ({ x, title }: Props) => {
       </DecorContainer>
       {!x && (
         <CloseTabShadow>
-          <CloseTab
-            active={hoverActive}
-            onMouseEnter={() => {
-              setHoverActive(true);
-              playHoverAudio();
-            }}
-            onMouseLeave={() => setHoverActive(false)}
-            onClick={() => {
-              dispatch(setShowingRewards(false));
-              playClickAudio();
-            }}
-          >
-            x
-          </CloseTab>
+          <HoverAudio hoverSound={soundHoverSmall} clickSound={soundClickSmall}>
+            <CloseTab
+              active={hoverActive}
+              onMouseEnter={() => {
+                setHoverActive(true);
+              }}
+              onMouseLeave={() => setHoverActive(false)}
+              onClick={() => {
+                dispatch(setShowingRewards(false));
+              }}
+            >
+              x
+            </CloseTab>
+          </HoverAudio>
         </CloseTabShadow>
       )}
     </StampRewardsTab>

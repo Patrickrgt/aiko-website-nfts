@@ -1,4 +1,4 @@
-import { useEffect, useState, useMemo, useRef } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled, { css, keyframes } from "styled-components";
 import {
@@ -6,9 +6,8 @@ import {
   setShowingNfts,
   selectGlobalAccount,
   setHasAikos,
-  selectMuteAudio,
 } from "../../state/uiSlice";
-
+import HoverAudio from "./HoverAudio";
 import { getAikoHoldings } from "../../contracts/views";
 
 import Nfts from "./Nfts";
@@ -226,6 +225,7 @@ const PaginationLeft = styled.button`
   background-color: ${(props: NftProps) =>
     props.active ? "#a9afb8" : "#ffd362;"};
   width: 50px;
+  height: 100%;
 `;
 
 const PaginationRight = styled.button`
@@ -238,6 +238,7 @@ const PaginationRight = styled.button`
   background-color: ${(props: NftProps) =>
     props.active ? "#a9afb8" : "#ffd362;"};
   width: 50px;
+  height: 100%;
 `;
 
 const PaginationPage = styled.h1`
@@ -266,15 +267,11 @@ const StampRewards = () => {
   const [playAnimation, setPlayAnimation] = useState(false);
 
   const account = useSelector(selectGlobalAccount);
-  const mute = useSelector(selectMuteAudio);
 
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
-
-  const audioHoverMedium = useRef<HTMLAudioElement>(null);
-  const audioClickMedium = useRef<HTMLAudioElement>(null);
 
   useMemo(() => {
     if (account !== "") {
@@ -309,20 +306,6 @@ const StampRewards = () => {
     }
   }
 
-  const playHoverAudio = () => {
-    if (audioHoverMedium.current && showing === true && mute) {
-      audioHoverMedium.current.currentTime = 0;
-      audioHoverMedium.current.play();
-    }
-  };
-
-  const playClickAudio = () => {
-    if (audioClickMedium.current && mute) {
-      audioClickMedium.current.currentTime = 0;
-      audioClickMedium.current.play();
-    }
-  };
-
   const showing = useSelector(selectShowingNfts);
   const dispatch = useDispatch();
 
@@ -333,12 +316,6 @@ const StampRewards = () => {
   return (
     // Refractor background blur because using visiblity which affects performance...
     <StyledPopup show={showing}>
-      <audio ref={audioHoverMedium} src={soundHoverMedium}>
-        <track kind="captions" />
-      </audio>
-      <audio ref={audioClickMedium} src={soundClickMedium}>
-        <track kind="captions" />
-      </audio>
       <Background
         show={showing}
         onClick={() => dispatch(setShowingNfts(false))}
@@ -352,20 +329,21 @@ const StampRewards = () => {
             {/* Contains everything below Stamp Rewards Title Bar */}
 
             <StampContainer play={playAnimation} show={showing}>
-              <PaginationLeft
-                onMouseEnter={() => {
-                  playHoverAudio();
-                }}
-                onClick={() => {
-                  if (!playAnimation) {
-                    playClickAudio();
-                    setCurrentPage(currentPage - 1);
-                    handleAnimationClick();
-                  }
-                }}
-                disabled={currentPage === 1}
-                active={currentPage === 1}
-              />
+              <HoverAudio
+                hoverSound={soundHoverMedium}
+                clickSound={soundClickMedium}
+              >
+                <PaginationLeft
+                  onClick={() => {
+                    if (!playAnimation) {
+                      setCurrentPage(currentPage - 1);
+                      handleAnimationClick();
+                    }
+                  }}
+                  disabled={currentPage === 1}
+                  active={currentPage === 1}
+                />
+              </HoverAudio>
               <RewardContainer>
                 <StampRewardContainer show={showing}>
                   {currList.map((aiko, id) => (
@@ -374,20 +352,21 @@ const StampRewards = () => {
                 </StampRewardContainer>
               </RewardContainer>
 
-              <PaginationRight
-                onMouseEnter={() => {
-                  playHoverAudio();
-                }}
-                onClick={() => {
-                  if (!playAnimation) {
-                    playClickAudio();
-                    setCurrentPage(currentPage + 1);
-                    handleAnimationClick();
-                  }
-                }}
-                disabled={endIndex >= aikoList.length}
-                active={endIndex >= aikoList.length}
-              />
+              <HoverAudio
+                hoverSound={soundHoverMedium}
+                clickSound={soundClickMedium}
+              >
+                <PaginationRight
+                  onClick={() => {
+                    if (!playAnimation) {
+                      setCurrentPage(currentPage + 1);
+                      handleAnimationClick();
+                    }
+                  }}
+                  disabled={endIndex >= aikoList.length}
+                  active={endIndex >= aikoList.length}
+                />
+              </HoverAudio>
             </StampContainer>
             <PaginationPage>
               {currentPage} / {pageLength}

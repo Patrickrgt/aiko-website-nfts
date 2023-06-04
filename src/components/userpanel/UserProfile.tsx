@@ -1,11 +1,18 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 
 import { useDispatch, useSelector } from "react-redux";
-import { utils, BigNumber } from "ethers";
-import { useCall, useEthers, useLookupAddress } from "@usedapp/core";
-import { Contract } from "@ethersproject/contracts";
-import abiStamps from "../../contracts/aikostamps.json";
+import { useEthers, useLookupAddress } from "@usedapp/core";
+import { useStamps } from "../../contracts/functions";
+
+import HoverAudio from "./HoverAudio";
+
+import {
+  openseaLink,
+  twitterLink,
+  webLink,
+  mediumLink,
+} from "../../app/globals";
 
 import {
   setShowingNfts,
@@ -39,30 +46,26 @@ import cursorhover from "../../assets/userpanel/cursorhover.png";
 import soundHoverTab from "../../assets/userpanel/Market_SFX_-_TAB_HOVER.wav";
 import soundClickTab from "../../assets/userpanel/Market_SFX_-_TAB_PRESS.wav";
 
-const CONTRACT_ADDR = "0x7f60e977a7b9677be1795efe5ad5516866ab69a6";
-const Interface = new utils.Interface(abiStamps);
-const ContractInstance = new Contract(CONTRACT_ADDR, Interface);
-
 const socialIcons: SocialIconType[] = [
   {
     image: twitter,
     name: "Twitter",
-    link: "https://twitter.com/aikovirtual",
+    link: twitterLink,
   },
   {
     image: opensea,
     name: "OpenSea",
-    link: "https://opensea.io/collection/aikovirtual",
+    link: openseaLink,
   },
   {
     image: home,
     name: "Homepage",
-    link: "https://aikovirtual.com/",
+    link: webLink,
   },
   {
     image: medium,
     name: "Medium",
-    link: "https://medium.com/@aikovirtual",
+    link: mediumLink,
   },
 ];
 
@@ -361,8 +364,10 @@ interface NavProps {
 }
 
 const UserProfile = () => {
-  const [top, setTop] = useState(0);
-  const [left, setLeft] = useState(0);
+  const [pos, setPos] = useState<{ left: number; top: number }>({
+    left: 0,
+    top: 0,
+  });
   const [visible, setVisible] = useState(false);
 
   const [hoverActive, setHoverActive] = useState(false);
@@ -376,14 +381,10 @@ const UserProfile = () => {
   const { ens } = useLookupAddress(account);
   const dispatch = useDispatch();
 
-  const [stampsHeld, setStampsNum] = useState(0);
-
-  const audioHoverTab = useRef<HTMLAudioElement>(null);
-  const audioClickTab = useRef<HTMLAudioElement>(null);
+  const { library: provider } = useEthers();
 
   const handleClick = (event: any) => {
-    setLeft(event.clientX - 490);
-    setTop(event.clientY - 40);
+    setPos({ left: event.clientX - 600, top: event.clientY - 50 });
     setVisible(true);
   };
 
@@ -399,78 +400,31 @@ const UserProfile = () => {
     };
   }, [visible]);
 
-  const calculatePercentageMinusNumber = (
-    total: number,
-    percentage: number,
-    minusNumber: number
-  ) => {
-    const percentageValue = total * (percentage / 100);
-    return percentageValue - minusNumber;
-  };
-
   const handleMouseMove = (event: any) => {
-    const mouse_x = event.clientX - 540;
-    const mouse_y = event.clientY - 40;
+    const mouse_x = event.clientX;
+    const mouse_y = event.clientY;
     const window_width = window.innerWidth;
-    const is_on_right_edge = mouse_x > window_width - 700;
+    const is_on_right_edge = mouse_x > window_width - 50;
 
     if (is_on_right_edge) {
-      setLeft(calculatePercentageMinusNumber(100, 90, mouse_x));
-      setTop(mouse_y);
+      setPos({ left: mouse_x - 600, top: mouse_y - 50 });
     } else {
-      setLeft(mouse_x + 50);
-      setTop(mouse_y);
+      setPos({ left: mouse_x - 600, top: mouse_y - 50 });
     }
   };
 
-  function getStamps(): number[] | undefined {
-    const ids = Array.from({ length: 12 }, (_, i) => i + 1);
-    const { value, error } =
-      useCall(
-        {
-          contract: ContractInstance,
-          method: "balanceOfBatch",
-          args: [ids.map(() => account), ids],
-        },
-        {
-          chainId: 137,
-        }
-      ) ?? {};
-    if (error) {
-      return undefined;
-    }
-    return value?.[0].map((result: BigNumber) => Number(result));
-  }
-
-  const stamps = getStamps();
+  const stamps = useStamps(provider, 137);
 
   useEffect(() => {
     try {
-      if (stamps) {
-        const stampsNums = stamps
-          ? stamps.reduce((total, current) => total + current, 0)
-          : 0;
-        dispatch(setStampsHeld(stampsNums));
-        setStampsNum(stampsNum);
-      }
+      const stampsNums = stamps
+        ? stamps.reduce((total: number, current: number) => total + current, 0)
+        : 0;
+      dispatch(setStampsHeld(stampsNums));
     } catch (err) {
       return;
     }
-  }, [stamps]);
-
-  const playHoverAudio = () => {
-    if (audioHoverTab.current && muteAudio) {
-      audioHoverTab.current.currentTime = 0;
-      audioHoverTab.current.play();
-    }
-  };
-
-  const playClickAudio = () => {
-    if (audioClickTab.current && muteAudio) {
-      audioClickTab.current.currentTime = 0;
-      audioClickTab.current.play();
-    }
-  };
+  }, [stamps, account]);
 
   useEffect(() => {
     if (account) {
@@ -480,13 +434,7 @@ const UserProfile = () => {
 
   return (
     <NavUserContainer>
-      <audio ref={audioHoverTab} src={soundHoverTab}>
-        <track kind="captions" />
-      </audio>
-      <audio ref={audioClickTab} src={soundClickTab}>
-        <track kind="captions" />
-      </audio>
-      <HoverText visible={visible} style={{ top, left }}>
+      <HoverText visible={visible} style={{ top: pos.top, left: pos.left }}>
         Looks like you don't own an Aiko!
       </HoverText>
 
@@ -507,24 +455,23 @@ const UserProfile = () => {
         )}
 
         {!account && (
-          <PreNavWallet
-            onMouseEnter={() => {
-              setHoverActive(true);
-              playHoverAudio();
-            }}
-            onMouseLeave={() => setHoverActive(false)}
-            active={hoverActive}
-            onClick={() => {
-              activateBrowserWallet();
-
-              playClickAudio();
-            }}
-          >
-            {/* 0x1205...2aF4D */}
-            <PreNavWalletText active={hoverActive}>
-              Connect Wallet
-            </PreNavWalletText>
-          </PreNavWallet>
+          <HoverAudio hoverSound={soundHoverTab} clickSound={soundClickTab}>
+            <PreNavWallet
+              onMouseEnter={() => {
+                setHoverActive(true);
+              }}
+              onMouseLeave={() => setHoverActive(false)}
+              active={hoverActive}
+              onClick={() => {
+                activateBrowserWallet();
+              }}
+            >
+              {/* 0x1205...2aF4D */}
+              <PreNavWalletText active={hoverActive}>
+                Connect Wallet
+              </PreNavWalletText>
+            </PreNavWallet>
+          </HoverAudio>
         )}
 
         {account && (
@@ -544,54 +491,52 @@ const UserProfile = () => {
         <NavUserPfpOverall>
           <NavUserPfpContainer>
             {!account && (
-              <NavUserPfp
-                active={!!account}
-                onMouseEnter={() => {
-                  setHoverActive(true);
-                  playHoverAudio();
-                }}
-                onMouseLeave={() => setHoverActive(false)}
-                onClick={() => {
-                  activateBrowserWallet();
-
-                  playClickAudio();
-                }}
-                pfp={baseaiko}
-                // src={baseaiko}
-              />
+              <HoverAudio hoverSound={soundHoverTab} clickSound={soundClickTab}>
+                <NavUserPfp
+                  active={!!account}
+                  onMouseEnter={() => {
+                    setHoverActive(true);
+                  }}
+                  onMouseLeave={() => setHoverActive(false)}
+                  onClick={() => {
+                    activateBrowserWallet();
+                  }}
+                  pfp={baseaiko}
+                  // src={baseaiko}
+                />
+              </HoverAudio>
             )}
             {account && (
-              <NavUserPfp
-                active={!account}
-                onClick={(e) => {
-                  if (hasAikos) {
-                    dispatch(setShowingNfts(true));
-                    playClickAudio();
-                  } else {
-                    handleClick(e);
-                    playClickAudio();
-                  }
-                }}
-                pfp={nftPfp}
-                // src={nftPfp}
-                onError={(e) => {
-                  const target = e.target as HTMLImageElement;
-                  target.src = baseaiko;
-                }}
-                onMouseEnter={() => {
-                  setPfpHoverActive(true);
-                  playHoverAudio();
-                }}
-                onMouseLeave={() => {
-                  setPfpHoverActive(false);
-                }}
-              >
-                <Overlay active={pfpHoverActive} />
-                <OverlayContainer active={pfpHoverActive}>
-                  <OverlayCheck src={check} active={pfpHoverActive} />
-                  <OverlayText active={pfpHoverActive} />
-                </OverlayContainer>
-              </NavUserPfp>
+              <HoverAudio hoverSound={soundHoverTab} clickSound={soundClickTab}>
+                <NavUserPfp
+                  active={!account}
+                  onClick={(e) => {
+                    if (hasAikos) {
+                      dispatch(setShowingNfts(true));
+                    } else {
+                      handleClick(e);
+                    }
+                  }}
+                  pfp={nftPfp}
+                  // src={nftPfp}
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    target.src = baseaiko;
+                  }}
+                  onMouseEnter={() => {
+                    setPfpHoverActive(true);
+                  }}
+                  onMouseLeave={() => {
+                    setPfpHoverActive(false);
+                  }}
+                >
+                  <Overlay active={pfpHoverActive} />
+                  <OverlayContainer active={pfpHoverActive}>
+                    <OverlayCheck src={check} active={pfpHoverActive} />
+                    <OverlayText active={pfpHoverActive} />
+                  </OverlayContainer>
+                </NavUserPfp>
+              </HoverAudio>
             )}
           </NavUserPfpContainer>
           <MuteContainer>
@@ -605,7 +550,7 @@ const UserProfile = () => {
 
         {account && (
           <StampsCollected>
-            <StampsCollectedText>{`${stampsHeld}/12`}</StampsCollectedText>
+            <StampsCollectedText>{`${stampsNum}/12`}</StampsCollectedText>
             <StampsCollectedStar src={star} />
           </StampsCollected>
         )}

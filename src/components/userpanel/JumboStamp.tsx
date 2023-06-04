@@ -1,11 +1,8 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-import {
-  selectShowingStamp,
-  setShowingStamp,
-  selectMuteAudio,
-} from "../../state/uiSlice";
+import { selectShowingStamp, setShowingStamp } from "../../state/uiSlice";
+import HoverAudio from "./HoverAudio";
 import star from "../../assets/placeholders/star.png";
 import cursorhover from "../../assets/userpanel/cursorhover.png";
 
@@ -39,7 +36,6 @@ const StampShadow = styled.div`
   background-color: ${(props: JumboStampSystemProps) =>
     props.active ? "#494a4b" : ""};
   transition: background-color 0.2s;
-  /* background-color: #494a4b; */
   padding: 0.35rem 0.215rem 1rem 0.25rem;
   clip-path: var(--notched-md);
 `;
@@ -136,28 +132,10 @@ interface Props {
 const JumboStamp = ({ stamp, show }: Props) => {
   const dispatch = useDispatch();
   const showing = useSelector(selectShowingStamp);
-  const mute = useSelector(selectMuteAudio);
   const [stampActive, setActive] = useState(false);
 
   const [change] = useState(false);
   const [count, setCount] = useState(0);
-
-  const audioHoverLarge = useRef<HTMLAudioElement>(null);
-  const audioClickLarge = useRef<HTMLAudioElement>(null);
-
-  const playHoverAudio = () => {
-    if (audioHoverLarge.current && showing === false && mute) {
-      audioHoverLarge.current.currentTime = 0;
-      audioHoverLarge.current.play();
-    }
-  };
-
-  const playClickAudio = () => {
-    if (audioClickLarge.current && mute) {
-      audioClickLarge.current.currentTime = 0;
-      audioClickLarge.current.play();
-    }
-  };
 
   useEffect(() => {
     setCount(count + 1);
@@ -166,48 +144,41 @@ const JumboStamp = ({ stamp, show }: Props) => {
   }, [change]);
 
   return (
-    <Stamp
-      key={count}
-      onMouseEnter={() => {
-        setActive(true);
-        playHoverAudio();
-      }}
-      onMouseLeave={() => setActive(false)}
-      onClick={() => {
-        if (!showing) {
-          playClickAudio();
-          dispatch(setShowingStamp(true));
-          show();
-        }
-      }}
-      active={showing}
-    >
-      <audio ref={audioHoverLarge} src={soundHoverLarge}>
-        <track kind="captions" />
-      </audio>
-      <audio ref={audioClickLarge} src={soundClickLarge}>
-        <track kind="captions" />
-      </audio>
-
-      <StampShadow active={stampActive}>
-        <StampContainer active={stampActive}>
-          <StampImgContainer active={stampActive}>
-            <StampImg active={stampActive} src={stamp.image} />
-          </StampImgContainer>
-          <StampContentContainer>
-            <StampGradient active={stampActive} />
-            <StampTitle active={stampActive}>{stamp.name}</StampTitle>
-            <StampCollected active={stampActive}>
-              <StampCollectedContainer>
-                <StampCollectedStar active={stamp.tier1} src={star} />
-                <StampCollectedStar active={stamp.tier2} src={star} />
-                <StampCollectedStar active={stamp.tier3} src={star} />
-              </StampCollectedContainer>
-            </StampCollected>
-          </StampContentContainer>
-        </StampContainer>
-      </StampShadow>
-    </Stamp>
+    <HoverAudio hoverSound={soundHoverLarge} clickSound={soundClickLarge}>
+      <Stamp
+        key={count}
+        onMouseEnter={() => {
+          setActive(true);
+        }}
+        onMouseLeave={() => setActive(false)}
+        onClick={() => {
+          if (!showing) {
+            dispatch(setShowingStamp(true));
+            show();
+          }
+        }}
+        active={showing}
+      >
+        <StampShadow active={stampActive}>
+          <StampContainer active={stampActive}>
+            <StampImgContainer active={stampActive}>
+              <StampImg active={stampActive} src={stamp.image} />
+            </StampImgContainer>
+            <StampContentContainer>
+              <StampGradient active={stampActive} />
+              <StampTitle active={stampActive}>{stamp.name}</StampTitle>
+              <StampCollected active={stampActive}>
+                <StampCollectedContainer>
+                  <StampCollectedStar active={stamp.tier1} src={star} />
+                  <StampCollectedStar active={stamp.tier2} src={star} />
+                  <StampCollectedStar active={stamp.tier3} src={star} />
+                </StampCollectedContainer>
+              </StampCollected>
+            </StampContentContainer>
+          </StampContainer>
+        </StampShadow>
+      </Stamp>
+    </HoverAudio>
   );
 };
 

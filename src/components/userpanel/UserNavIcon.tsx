@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
+import HoverAudio from "./HoverAudio";
 
 import cursorhover from "../../assets/userpanel/cursorhover.png";
 
@@ -98,7 +99,7 @@ interface Props {
 const UserNavIcon = ({ navIcon }: Props) => {
   const [navActive, setActive] = useState(false);
 
-  const mute = useSelector(selectMuteAudio);
+  const soundActive = useSelector(selectMuteAudio);
 
   const [top, setTop] = useState(0);
   const [left, setLeft] = useState(0);
@@ -108,14 +109,14 @@ const UserNavIcon = ({ navIcon }: Props) => {
   const audioClickSmall = useRef<HTMLAudioElement>(null);
 
   const playHoverAudio = () => {
-    if (audioHoverSmall.current && mute) {
+    if (audioHoverSmall.current && soundActive) {
       audioHoverSmall.current.currentTime = 0;
       audioHoverSmall.current.play();
     }
   };
 
   const playClickAudio = () => {
-    if (audioClickSmall.current && mute) {
+    if (audioClickSmall.current && soundActive) {
       audioClickSmall.current.currentTime = 0;
       audioClickSmall.current.play();
     }
@@ -161,25 +162,27 @@ const UserNavIcon = ({ navIcon }: Props) => {
         </NavTitleShadow>
       </NavTitleContainer>
       <NavIconShadow>
-        <NavIconBackground
-          active={navActive}
-          color={navIcon.color}
-          onMouseEnter={() => {
-            setActive(true);
-            playHoverAudio();
-          }}
-          onMouseLeave={() => setActive(false)}
-        >
-          <NavIcon
+        <HoverAudio hoverSound={soundHoverSmall} clickSound={soundClickSmall}>
+          <NavIconBackground
             active={navActive}
-            src={navIcon.image}
-            onMouseEnter={() => setActive(true)}
+            color={navIcon.color}
+            onMouseEnter={() => {
+              setActive(true);
+              playHoverAudio();
+            }}
             onMouseLeave={() => setActive(false)}
-            onClick={handleClick}
-            top={top}
-            left={left}
-          />
-        </NavIconBackground>
+          >
+            <NavIcon
+              active={navActive}
+              src={navIcon.image}
+              onMouseEnter={() => setActive(true)}
+              onMouseLeave={() => setActive(false)}
+              onClick={handleClick}
+              top={top}
+              left={left}
+            />
+          </NavIconBackground>
+        </HoverAudio>
       </NavIconShadow>
     </IconContainer>
   );

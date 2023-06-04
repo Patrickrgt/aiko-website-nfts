@@ -1,9 +1,8 @@
-import { useState, useRef } from "react";
-import { useSelector } from "react-redux";
+import { useState } from "react";
 
 import styled from "styled-components";
 
-import { selectAnimationEnd, selectMuteAudio } from "../../state/uiSlice";
+import HoverAudio from "./HoverAudio";
 
 import check from "../../assets/placeholders/check.png";
 import star from "../../assets/placeholders/star.png";
@@ -162,25 +161,6 @@ interface Props {
 
 const StampReward = ({ stampReward }: Props) => {
   const [hoverActive, setHoverActive] = useState(false);
-  const animationEnd = useSelector(selectAnimationEnd);
-  const mute = useSelector(selectMuteAudio);
-
-  const audioHoverTab = useRef<HTMLAudioElement>(null);
-  const audioClickTab = useRef<HTMLAudioElement>(null);
-
-  const playHoverAudio = () => {
-    if (audioHoverTab.current && animationEnd && mute) {
-      audioHoverTab.current.currentTime = 0;
-      audioHoverTab.current.play();
-    }
-  };
-
-  const playClickAudio = () => {
-    if (audioClickTab.current && mute) {
-      audioClickTab.current.currentTime = 0;
-      audioClickTab.current.play();
-    }
-  };
 
   return (
     <>
@@ -190,28 +170,22 @@ const StampReward = ({ stampReward }: Props) => {
         ""
       )}
       <StampOuter>
-        <audio ref={audioHoverTab} src={soundHoverTab}>
-          <track kind="captions" />
-        </audio>
-        <audio ref={audioClickTab} src={soundClickTab}>
-          <track kind="captions" />
-        </audio>
         <StampShadow>
           <StampInnerBorder collected={stampReward.collected}>
-            <StampOverlay
-              active={hoverActive}
-              onMouseEnter={() => {
-                setHoverActive(true);
-                playHoverAudio();
-              }}
-              onMouseLeave={() => setHoverActive(false)}
-              onClick={() => playClickAudio()}
-              collected={stampReward.collected}
-            >
-              <RewardContainer>
-                <Reward src={stampReward.image} alt={stampReward.name} />
-              </RewardContainer>
-            </StampOverlay>
+            <HoverAudio hoverSound={soundHoverTab} clickSound={soundClickTab}>
+              <StampOverlay
+                active={hoverActive}
+                onMouseEnter={() => {
+                  setHoverActive(true);
+                }}
+                onMouseLeave={() => setHoverActive(false)}
+                collected={stampReward.collected}
+              >
+                <RewardContainer>
+                  <Reward src={stampReward.image} alt={stampReward.name} />
+                </RewardContainer>
+              </StampOverlay>
+            </HoverAudio>
           </StampInnerBorder>
         </StampShadow>
 
@@ -233,15 +207,16 @@ const StampReward = ({ stampReward }: Props) => {
           </RewardRequirement>
         ) : (
           <RewardRequirementContainer>
-            <RewardRequirement
-              onMouseEnter={() => setHoverActive(true)}
-              onMouseLeave={() => setHoverActive(false)}
-              onClick={() => playClickAudio()}
-              collected={stampReward.collected}
-            >
-              {stampReward.required}
-              <Star src={star} alt="star" />
-            </RewardRequirement>
+            <HoverAudio hoverSound={soundHoverTab} clickSound={soundClickTab}>
+              <RewardRequirement
+                onMouseEnter={() => setHoverActive(true)}
+                onMouseLeave={() => setHoverActive(false)}
+                collected={stampReward.collected}
+              >
+                {stampReward.required}
+                <Star src={star} alt="star" />
+              </RewardRequirement>
+            </HoverAudio>
           </RewardRequirementContainer>
         )}
       </StampOuter>

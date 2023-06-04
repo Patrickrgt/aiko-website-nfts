@@ -1,12 +1,12 @@
-import { useState, useRef } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled, { css, keyframes } from "styled-components";
 import {
   selectShowingNfts,
   setGlobalNft,
   selectGlobalNft,
-  selectMuteAudio,
 } from "../../state/uiSlice";
+import HoverAudio from "./HoverAudio";
 
 import check from "../../assets/placeholders/check.png";
 
@@ -159,59 +159,35 @@ const Nfts = ({ aiko, play }: Props) => {
 
   const showing = useSelector(selectShowingNfts);
   const nftPfp = useSelector(selectGlobalNft);
-  const mute = useSelector(selectMuteAudio);
 
   const dispatch = useDispatch();
 
-  const audioHoverMedium = useRef<HTMLAudioElement>(null);
-  const audioClickMedium = useRef<HTMLAudioElement>(null);
-
-  const playHoverAudio = () => {
-    if (audioHoverMedium.current && showing === true && mute) {
-      audioHoverMedium.current.currentTime = 0;
-      audioHoverMedium.current.play();
-    }
-  };
-
-  const playClickAudio = () => {
-    if (audioClickMedium.current && mute) {
-      audioClickMedium.current.currentTime = 0;
-      audioClickMedium.current.play();
-    }
-  };
-
   return (
     <AikoShadow active={active} selected={nftPfp === aiko}>
-      <Aiko
-        show={showing}
-        selected={nftPfp === aiko}
-        pfp={aiko}
-        active={active}
-        onMouseLeave={() => setActive(false)}
-        onMouseEnter={() => {
-          playHoverAudio();
-          setActive(true);
-        }}
-        onClick={() => {
-          if (aiko) {
-            playClickAudio();
-            dispatch(setGlobalNft(aiko));
-          }
-        }}
-      >
-        <audio ref={audioHoverMedium} src={soundHoverMedium}>
-          <track kind="captions" />
-        </audio>
-        <audio ref={audioClickMedium} src={soundClickMedium}>
-          <track kind="captions" />
-        </audio>
-        <TransitionOverlay play={play} />
-        <Overlay selected={nftPfp === aiko} />
-        <OverlayContainer>
-          <OverlayCheck src={check} selected={nftPfp === aiko} />
-          <OverlayText selected={nftPfp === aiko} />
-        </OverlayContainer>
-      </Aiko>
+      <HoverAudio hoverSound={soundHoverMedium} clickSound={soundClickMedium}>
+        <Aiko
+          show={showing}
+          selected={nftPfp === aiko}
+          pfp={aiko}
+          active={active}
+          onMouseLeave={() => setActive(false)}
+          onMouseEnter={() => {
+            setActive(true);
+          }}
+          onClick={() => {
+            if (aiko) {
+              dispatch(setGlobalNft(aiko));
+            }
+          }}
+        >
+          <TransitionOverlay play={play} />
+          <Overlay selected={nftPfp === aiko} />
+          <OverlayContainer>
+            <OverlayCheck src={check} selected={nftPfp === aiko} />
+            <OverlayText selected={nftPfp === aiko} />
+          </OverlayContainer>
+        </Aiko>
+      </HoverAudio>
     </AikoShadow>
   );
 };

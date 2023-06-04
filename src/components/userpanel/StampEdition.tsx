@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import styled, { css, keyframes } from "styled-components";
 import { selectMuteAudio } from "../../state/uiSlice";
 import cursorhover from "../../assets/userpanel/cursorhover.png";
+import HoverAudio from "./HoverAudio";
 
 import soundHoverTab from "../../assets/userpanel/Market_SFX_-_TAB_HOVER.wav";
 import soundClickTab from "../../assets/userpanel/Market_SFX_-_TAB_PRESS.wav";
@@ -176,83 +177,79 @@ const StampEdition = ({ visible, numberId, edition }: Props) => {
   const [hover, setHover] = useState(false);
   const [stampActive, setActive] = useState(false);
 
-  const mute = useSelector(selectMuteAudio);
+  const soundActive = useSelector(selectMuteAudio);
 
   const audioHoverTab = useRef<HTMLAudioElement>(null);
   const audioClickTab = useRef<HTMLAudioElement>(null);
 
   const playHoverAudio = () => {
-    if (audioHoverTab.current && mute) {
+    if (audioHoverTab.current && soundActive) {
       audioHoverTab.current.currentTime = 0;
       audioHoverTab.current.play();
     }
   };
 
   const playClickAudio = () => {
-    if (audioClickTab.current && mute) {
+    if (audioClickTab.current && soundActive) {
       audioClickTab.current.currentTime = 0;
       audioClickTab.current.play();
     }
   };
 
   return (
-    <Stamp
-      numberId={numberId}
-      visible={visible}
-      onMouseEnter={() => {
-        setActive(true);
-        playHoverAudio();
-      }}
-      onMouseLeave={() => setActive(false)}
-      onClick={() => playClickAudio()}
-    >
-      <audio ref={audioHoverTab} src={soundHoverTab}>
-        <track kind="captions" />
-      </audio>
-      <audio ref={audioClickTab} src={soundClickTab}>
-        <track kind="captions" />
-      </audio>
-      <StampShadow>
-        <StampContainer active={edition.collected}>
-          <StampImgContainer
-            active={edition.collected}
-            onMouseEnter={() => setHover(true)}
-            onMouseLeave={() => setHover(false)}
-          >
-            {!edition.collected && <StampOverlay active={stampActive} />}
-
-            <StampImg active={stampActive} src={edition.image} />
-          </StampImgContainer>
-          <StampContentContainer
-            onMouseEnter={() => setHover(true)}
-            onMouseLeave={() => setHover(false)}
-          >
-            <StampGradient active={edition.collected} />
-            <StampTitle active={edition.collected}>{edition.name}</StampTitle>
-            <StampCollected
-              hover={hover && edition.collected}
+    <HoverAudio hoverSound={soundHoverTab} clickSound={soundClickTab}>
+      <Stamp
+        numberId={numberId}
+        visible={visible}
+        onMouseEnter={() => {
+          setActive(true);
+          playHoverAudio();
+        }}
+        onMouseLeave={() => setActive(false)}
+        onClick={() => playClickAudio()}
+      >
+        <StampShadow>
+          <StampContainer active={edition.collected}>
+            <StampImgContainer
               active={edition.collected}
+              onMouseEnter={() => setHover(true)}
+              onMouseLeave={() => setHover(false)}
             >
-              <StampCollectedContainer>
-                {edition.collected && (
-                  <StampCollectedText
-                    hover={hover && edition.collected}
-                    active={edition.collected}
-                  >
-                    Collected
-                  </StampCollectedText>
-                )}
-                {!edition.collected && (
-                  <StampCollectedText active={edition.collected}>
-                    Locked
-                  </StampCollectedText>
-                )}
-              </StampCollectedContainer>
-            </StampCollected>
-          </StampContentContainer>
-        </StampContainer>
-      </StampShadow>
-    </Stamp>
+              {!edition.collected && <StampOverlay active={stampActive} />}
+
+              <StampImg active={stampActive} src={edition.image} />
+            </StampImgContainer>
+            <StampContentContainer
+              onMouseEnter={() => setHover(true)}
+              onMouseLeave={() => setHover(false)}
+            >
+              <StampGradient active={edition.collected} />
+              <StampTitle active={edition.collected}>{edition.name}</StampTitle>
+              <StampCollected
+                hover={hover && edition.collected}
+                active={edition.collected}
+              >
+                <StampCollectedContainer>
+                  {edition.collected && (
+                    <StampCollectedText
+                      hover={hover && edition.collected}
+                      active={edition.collected}
+                    >
+                      Collected
+                    </StampCollectedText>
+                  )}
+                  {!edition.collected && (
+                    <StampCollectedText active={edition.collected}>
+                      Locked
+                    </StampCollectedText>
+                  )}
+                </StampCollectedContainer>
+              </StampCollected>
+            </StampContentContainer>
+          </StampContainer>
+        </StampShadow>
+      </Stamp>
+    </HoverAudio>
   );
 };
 

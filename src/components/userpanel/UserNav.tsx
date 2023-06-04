@@ -180,13 +180,15 @@ interface NavProps {
 }
 
 const UserNav = () => {
-  const [top, setTop] = useState(0);
-  const [left, setLeft] = useState(0);
+  const [pos, setPos] = useState<{ left: number; top: number }>({
+    left: 0,
+    top: 0,
+  });
+
   const [visible, setVisible] = useState(false);
 
   const handleClick = (event: any) => {
-    setLeft(event.clientX + 50);
-    setTop(event.clientY);
+    setPos({ left: event.clientX + 50, top: event.clientY });
     setVisible(true);
   };
 
@@ -209,17 +211,30 @@ const UserNav = () => {
     const is_on_right_edge = mouse_x > window_width - 320;
 
     if (is_on_right_edge) {
-      setLeft(mouse_x - 250);
-      setTop(mouse_y);
+      setPos({ left: mouse_x - 250, top: mouse_y });
     } else {
-      setLeft(mouse_x + 50);
-      setTop(mouse_y);
+      setPos({ left: mouse_x + 50, top: mouse_y });
     }
   };
 
+  // const handleMouseMove = (event: any) => {
+  //   const mouse_x = event.clientX;
+  //   const mouse_y = event.clientY;
+  //   const window_width = window.innerWidth;
+  //   const is_on_right_edge = mouse_x > window_width - 320;
+
+  //   if (is_on_right_edge) {
+  //     setLeft(mouse_x - 250);
+  //     setTop(mouse_y);
+  //   } else {
+  //     setLeft(mouse_x + 50);
+  //     setTop(mouse_y);
+  //   }
+  // };
+
   return (
     <NavContainer>
-      <HoverText visible={visible} style={{ top, left }}>
+      <HoverText visible={visible} style={{ top: pos.top, left: pos.left }}>
         Currently a Work in Progress!
       </HoverText>
 

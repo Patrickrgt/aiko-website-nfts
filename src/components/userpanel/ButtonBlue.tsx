@@ -1,9 +1,6 @@
-import { useState, useRef } from "react";
-import { useSelector } from "react-redux";
-
+import { useRef } from "react";
 import styled from "styled-components";
-
-import { selectMuteAudio } from "../../state/uiSlice";
+import HoverAudio from "./HoverAudio";
 
 import cursorhover from "../../assets/userpanel/cursorhover.png";
 
@@ -14,7 +11,6 @@ const ButtonShadow = styled.div`
   padding: 3px 3px 12px 3px;
   background-color: #393939;
   width: fit-content;
-  /* margin: auto; */
   clip-path: var(--notched-sm);
 `;
 
@@ -34,7 +30,10 @@ const ButtonInner = styled.div`
     background-color: #f38a65;
     z-index: -1;
     transition: opacity 0.25s linear;
-    opacity: ${(props: ButtonProps) => (props.active ? "1" : "0")};
+    opacity: 0;
+  }
+  &:hover:before {
+    opacity: 1;
   }
 `;
 
@@ -67,7 +66,11 @@ const Button = styled.button`
     background-image: linear-gradient(to bottom, #f38a65, #ffca62);
     z-index: -1;
     transition: opacity 0.25s linear;
-    opacity: ${(props: ButtonProps) => (props.active ? "1" : "0")};
+    /* opacity: ${(props: ButtonProps) => (props.active ? "1" : "0")}; */
+    opacity: 0;
+  }
+  &:hover:before {
+    opacity: 1;
   }
 `;
 
@@ -85,54 +88,23 @@ interface Props {
 }
 
 const ButtonBlue = ({ content, close, small, symbol }: Props) => {
-  const [hoverActive, setHoverActive] = useState(false);
-  const mute = useSelector(selectMuteAudio);
-
-  const audioHoverMedium = useRef<HTMLAudioElement>(null);
-  const audioClickMedium = useRef<HTMLAudioElement>(null);
-
   const buttonRef = useRef<HTMLButtonElement>(null);
-
-  const playHoverAudio = () => {
-    if (audioHoverMedium.current && mute) {
-      audioHoverMedium.current.currentTime = 0;
-      audioHoverMedium.current.play();
-    }
-  };
-
-  const playClickAudio = () => {
-    if (audioClickMedium.current && mute) {
-      audioClickMedium.current.currentTime = 0;
-      audioClickMedium.current.play();
-    }
-  };
 
   return (
     <ButtonShadow>
-      <audio ref={audioHoverMedium} src={soundHoverMedium}>
-        <track kind="captions" />
-      </audio>
-      <audio ref={audioClickMedium} src={soundClickMedium}>
-        <track kind="captions" />
-      </audio>
-      <ButtonInner active={hoverActive}>
-        <Button
-          ref={buttonRef}
-          active={hoverActive}
-          small={small}
-          symbol={symbol}
-          onMouseEnter={() => {
-            setHoverActive(true);
-            playHoverAudio();
-          }}
-          onMouseLeave={() => setHoverActive(false)}
-          onClick={() => {
-            playClickAudio();
-            close();
-          }}
-        >
-          {content}
-        </Button>
+      <ButtonInner>
+        <HoverAudio hoverSound={soundHoverMedium} clickSound={soundClickMedium}>
+          <Button
+            ref={buttonRef}
+            small={small}
+            symbol={symbol}
+            onClick={() => {
+              close();
+            }}
+          >
+            {content}
+          </Button>
+        </HoverAudio>
       </ButtonInner>
     </ButtonShadow>
   );

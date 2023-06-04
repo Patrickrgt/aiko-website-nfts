@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import styled, { css, keyframes } from "styled-components";
 import { selectMuteAudio } from "../../state/uiSlice";
 import star from "../../assets/placeholders/star.png";
+import HoverAudio from "./HoverAudio";
 
 import cursorhover from "../../assets/userpanel/cursorhover.png";
 
@@ -153,80 +154,76 @@ interface Props {
 
 const StampEditionJumbo = ({ visible, editionJumbo }: Props) => {
   const [hover, setHover] = useState(false);
-  const mute = useSelector(selectMuteAudio);
+  const soundActive = useSelector(selectMuteAudio);
 
   const audioHoverLarge = useRef<HTMLAudioElement>(null);
   const audioClickLarge = useRef<HTMLAudioElement>(null);
 
   const playHoverAudio = () => {
-    if (audioHoverLarge.current && mute) {
+    if (audioHoverLarge.current && soundActive) {
       audioHoverLarge.current.currentTime = 0;
       audioHoverLarge.current.play();
     }
   };
 
   const playClickAudio = () => {
-    if (audioClickLarge.current && mute) {
+    if (audioClickLarge.current && soundActive) {
       audioClickLarge.current.currentTime = 0;
       audioClickLarge.current.play();
     }
   };
 
   return (
-    <Stamp
-      visible={visible}
-      onMouseEnter={() => {
-        playHoverAudio();
-      }}
-      onClick={() => playClickAudio()}
-    >
-      <audio ref={audioHoverLarge} src={soundHoverLarge}>
-        <track kind="captions" />
-      </audio>
-      <audio ref={audioClickLarge} src={soundClickLarge}>
-        <track kind="captions" />
-      </audio>
-      <StampShadow active={editionJumbo.tier1}>
-        <StampContainer active={editionJumbo.tier1}>
-          <StampImgContainer active={editionJumbo.tier1}>
-            <StampImg
+    <HoverAudio hoverSound={soundHoverLarge} clickSound={soundClickLarge}>
+      <Stamp
+        visible={visible}
+        onMouseEnter={() => {
+          playHoverAudio();
+        }}
+        onClick={() => playClickAudio()}
+      >
+        <StampShadow active={editionJumbo.tier1}>
+          <StampContainer active={editionJumbo.tier1}>
+            <StampImgContainer active={editionJumbo.tier1}>
+              <StampImg
+                onMouseEnter={() => {
+                  setHover(true);
+                }}
+                onMouseLeave={() => {
+                  setHover(false);
+                }}
+                onClick={() => console.log(hover)}
+                active={editionJumbo.tier1}
+                src={editionJumbo.image}
+              />
+            </StampImgContainer>
+            <StampContentContainer
               onMouseEnter={() => {
                 setHover(true);
               }}
               onMouseLeave={() => {
                 setHover(false);
               }}
-              onClick={() => console.log(hover)}
-              active={editionJumbo.tier1}
-              src={editionJumbo.image}
-            />
-          </StampImgContainer>
-          <StampContentContainer
-            onMouseEnter={() => {
-              setHover(true);
-            }}
-            onMouseLeave={() => {
-              setHover(false);
-            }}
-          >
-            <StampGradient active={editionJumbo.tier1} />
-            <StampTitle active={editionJumbo.tier1}>
-              {editionJumbo.character}
-            </StampTitle>
-            <StampCollected
-              hover={hover && editionJumbo.tier1}
-              active={editionJumbo.tier1}
             >
-              <StampCollectedContainer>
-                <StampCollectedStar active={editionJumbo.tier1} src={star} />
-                <StampCollectedStar active={editionJumbo.tier2} src={star} />
-                <StampCollectedStar active={editionJumbo.tier3} src={star} />
-              </StampCollectedContainer>
-            </StampCollected>
-          </StampContentContainer>
-        </StampContainer>
-      </StampShadow>
-    </Stamp>
+              <StampGradient active={editionJumbo.tier1} />
+              <StampTitle active={editionJumbo.tier1}>
+                {editionJumbo.character}
+              </StampTitle>
+              <StampCollected
+                hover={hover && editionJumbo.tier1}
+                active={editionJumbo.tier1}
+              >
+                <StampCollectedContainer>
+                  <StampCollectedStar active={editionJumbo.tier1} src={star} />
+                  <StampCollectedStar active={editionJumbo.tier2} src={star} />
+                  <StampCollectedStar active={editionJumbo.tier3} src={star} />
+                </StampCollectedContainer>
+              </StampCollected>
+            </StampContentContainer>
+          </StampContainer>
+        </StampShadow>
+      </Stamp>
+    </HoverAudio>
   );
 };
 

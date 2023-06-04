@@ -48,10 +48,10 @@ const StampWarning = () => {
       </WarningHeaderContainer>
       <WarningTextContainer>
         <WarningText>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut qui fuga
-          deserunt accusantium sapiente omnis adipisci illo laboriosam, neque
-          aperiam, sed corrupti atque, recusandae ad doloribus quam optio
-          cumque. Nam.
+          Clicking on redeem will redirect you to one of our Shopify pages once
+          the redeem functionality is live. Be aware that you will have to pay a
+          shipping fee upon checkout. Rewards are free with coupon provided
+          given that you have enough stamps for a reward.
         </WarningText>
       </WarningTextContainer>
     </WarningContainer>

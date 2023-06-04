@@ -1,10 +1,8 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled, { css, keyframes } from "styled-components";
-import { utils, BigNumber } from "ethers";
-import { useCall, useEthers } from "@usedapp/core";
-import { Contract } from "@ethersproject/contracts";
-import abiStamps from "../../contracts/aikostamps.json";
+import { useEthers } from "@usedapp/core";
+import { useStamps } from "../../contracts/functions";
 
 import { selectShowingStamp, setShowingRewards } from "../../state/uiSlice";
 
@@ -36,9 +34,9 @@ import JumboStamp, { StampType } from "./JumboStamp";
 import StampIndividual, { IndividualStampType } from "./StampIndividual";
 import ButtonBlue from "./ButtonBlue";
 
-const CONTRACT_ADDR = "0x7f60e977a7b9677be1795efe5ad5516866ab69a6";
-const Interface = new utils.Interface(abiStamps);
-const ContractInstance = new Contract(CONTRACT_ADDR, Interface);
+// const CONTRACT_ADDR = "0x7f60e977a7b9677be1795efe5ad5516866ab69a6";
+// const Interface = new utils.Interface(abiStamps);
+// const ContractInstance = new Contract(CONTRACT_ADDR, Interface);
 
 export const stampIndividual: IndividualStampType[] = [
   {
@@ -498,45 +496,33 @@ interface JumboStampSystemProps {
 }
 
 const JumboStampSystem = () => {
+  const { library: provider } = useEthers();
   const dispatch = useDispatch();
   const showing = useSelector(selectShowingStamp);
 
   const [hoverActive, setHoverActive] = useState(false);
 
-  const { account } = useEthers();
+  const stamps = useStamps(provider, 137);
 
-  function getStamps(): number[] | undefined {
-    const ids = Array.from({ length: 12 }, (_, i) => i + 1);
-    const { value, error } =
-      useCall(
-        {
-          contract: ContractInstance,
-          method: "balanceOfBatch",
-          args: [ids.map(() => account), ids],
-        },
-        {
-          chainId: 137,
-        }
-      ) ?? {};
-    if (error) {
-      return undefined;
+  const updateStampIndividual = (
+    stamps: number[],
+    stampIndividual: IndividualStampType[]
+  ) => {
+    const iterations = Math.floor(stamps.length / 3);
+    for (let i = 0; i < iterations; i++) {
+      stampIndividual[i].edition[0].collected = Boolean(stamps[i]);
+      stampIndividual[i].edition[1].collected = Boolean(stamps[i + 4]);
+      stampIndividual[i].edition[2].collected = Boolean(stamps[i + 8]);
+
+      stampIndividual[i].tier1 = Boolean(stamps[i]);
+      stampIndividual[i].tier2 = Boolean(stamps[i + 4]);
+      stampIndividual[i].tier3 = Boolean(stamps[i + 8]);
     }
-    return value?.[0].map((result: BigNumber) => Number(result));
-  }
-
-  const stamps = getStamps();
+  };
 
   useEffect(() => {
     if (stamps) {
-      for (let i = 0; i < Math.floor(stamps.length / 3); i++) {
-        stampIndividual[i].edition[0].collected = Boolean(stamps[i]);
-        stampIndividual[i].edition[1].collected = Boolean(stamps[i + 4]);
-        stampIndividual[i].edition[2].collected = Boolean(stamps[i + 8]);
-
-        stampIndividual[i].tier1 = Boolean(stamps[i]);
-        stampIndividual[i].tier2 = Boolean(stamps[i + 4]);
-        stampIndividual[i].tier3 = Boolean(stamps[i + 8]);
-      }
+      updateStampIndividual(stamps, stampIndividual);
     }
   }, [stamps]);
 
