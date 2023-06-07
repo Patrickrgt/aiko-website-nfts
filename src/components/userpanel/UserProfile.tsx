@@ -34,7 +34,10 @@ import JumboStampSystem from "./JumboStampSystem";
 
 import mute from "../../assets/userpanel/mute.png";
 import unmute from "../../assets/userpanel/unmute.png";
-import star from "../../assets/userpanel/stampstar.png";
+// import star from "../../assets/userpanel/stampstar.png";
+
+import star from "../../assets/svgs/aikostarcrystal.svg";
+
 import baseaiko from "../../assets/userpanel/aikopfp.gif";
 
 import opensea from "../../assets/svgs/opensea.svg";

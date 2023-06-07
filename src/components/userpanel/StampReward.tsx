@@ -5,7 +5,7 @@ import styled from "styled-components";
 import HoverAudio from "./HoverAudio";
 
 import check from "../../assets/placeholders/check.png";
-import star from "../../assets/placeholders/star.png";
+import star from "../../assets/svgs/aikostarcrystal.svg";
 
 import cursorhover from "../../assets/userpanel/cursorhover.png";
 

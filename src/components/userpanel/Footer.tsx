@@ -19,6 +19,7 @@ const FooterText = styled.h1`
     font-size: 1.5vh;
   }
   color: #828891;
+  font-weight: 400;
   font-size: 1vh;
   text-align: right;
   padding-right: 1vh;

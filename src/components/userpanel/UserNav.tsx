@@ -5,7 +5,7 @@ import UserProfile from "./UserProfile";
 
 import UserNavIcon, { NavIconType } from "./UserNavIcon";
 
-import logo2 from "../../assets/userpanel/logo2.png";
+import logo2 from "../../assets/svgs/aikomeepologo.svg";
 
 import map from "../../assets/userpanel/buttonmap.png";
 import lobby from "../../assets/userpanel/buttonlobby.png";
