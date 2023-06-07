@@ -589,7 +589,7 @@ const JumboStampSystem = () => {
                 >
                   <RewardsHeader>
                     Redemption will be made available early July
-                    <RewardsDate>05/07/2023</RewardsDate>
+                    <RewardsDate>06/05/2023</RewardsDate>
                   </RewardsHeader>
                 </RewardsHeaderContainer>
                 <RewardsButtonContainer
