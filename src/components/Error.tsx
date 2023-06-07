@@ -1,6 +1,6 @@
 const Error = () => {
   return (
-    <div>meow</div>
+    <div />
     // <Popup
     //   show
     //   header={error.header}

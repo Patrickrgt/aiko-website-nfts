@@ -3,6 +3,7 @@ import UserNav from "../../components/userpanel/UserNav";
 import StampRewards from "../../components/userpanel/StampRewards";
 import NftPanel from "../../components/userpanel/NftPanel";
 import ErrorPopup from "../../components/userpanel/ErrorPopup";
+import Footer from "../../components/userpanel/Footer";
 
 import cursor from "../../assets/userpanel/cursor.png";
 
@@ -23,6 +24,7 @@ const UserLanding = () => {
       <UserNav />
       <StampRewards />
       <NftPanel />
+      <Footer />
     </StyledHomePage>
   );
 };

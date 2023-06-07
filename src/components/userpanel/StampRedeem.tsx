@@ -1,6 +1,8 @@
 import styled from "styled-components";
+import { useState } from "react";
 import ButtonBlue from "./ButtonBlue";
 import DecorHorizontal from "./DecorHorizontal";
+import Countdown from "./Countdown";
 
 const RedeemContainer = styled.div`
   display: flex;
@@ -23,22 +25,18 @@ const ShippingText = styled.span`
     -2px -2px 0 #000;
 `;
 
-const ShippingPrice = styled.h1`
-  margin: 0;
-  font-size: 2.5rem;
-  font-weight: 800;
-  color: #ead182;
-  text-shadow: -2px 2px 0 #000, 2px 2px 0 #000, 2px -2px 0 #000,
-    -2px -2px 0 #000;
-`;
-
 const StampRedeem = () => {
+  const [disabled] = useState(true);
+
   return (
     <RedeemContainer>
       <ShippingText>
-        SHIPPING FEE: &nbsp; <ShippingPrice>ETA</ShippingPrice>
+        {/* SHIPPING FEE: &nbsp;{" "} */}
+        {/* Countdown to StampRedeem Functionality, used as placeholder */}
+        <Countdown />
       </ShippingText>
       <ButtonBlue
+        disabled={disabled}
         close={() => {
           return;
         }}

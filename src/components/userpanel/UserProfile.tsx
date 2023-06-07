@@ -12,6 +12,7 @@ import {
   twitterLink,
   webLink,
   mediumLink,
+  discordLink,
 } from "../../app/globals";
 
 import {
@@ -40,6 +41,7 @@ import opensea from "../../assets/svgs/opensea.svg";
 import twitter from "../../assets/svgs/twitter.svg";
 import home from "../../assets/userpanel/homewebsiteicon.png";
 import medium from "../../assets/svgs/medium.svg";
+import discord from "../../assets/svgs/discord.svg";
 
 import cursorhover from "../../assets/userpanel/cursorhover.png";
 
@@ -66,6 +68,11 @@ const socialIcons: SocialIconType[] = [
     image: medium,
     name: "Medium",
     link: mediumLink,
+  },
+  {
+    image: discord,
+    name: "Discord",
+    link: discordLink,
   },
 ];
 
