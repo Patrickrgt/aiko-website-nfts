@@ -1,7 +1,7 @@
 import { useEthers } from "@usedapp/core";
 import { useDispatch } from "react-redux";
-import { clearError, ErrorButtonType, setError } from "../../state/errorSlice";
-import { ETH_GLOBALS, RINKEBY_GLOBALS } from "../globals";
+import { ErrorButtonType, setError } from "../../state/errorSlice";
+import { ETH_GLOBALS, RINKEBY_GLOBALS, MATIC_GLOBALS } from "../globals";
 
 const useGlobals = () => {
   const dispatch = useDispatch();
@@ -13,6 +13,9 @@ const useGlobals = () => {
   if (chainId === 1) {
     return ETH_GLOBALS;
   }
+  if (chainId === 137) {
+    return MATIC_GLOBALS;
+  }
   if (!chainId) {
     return ETH_GLOBALS;
   }
@@ -20,7 +23,7 @@ const useGlobals = () => {
   dispatch(
     setError({
       header: "Unsupported Network",
-      subHeader: "Only Rinkey and Mainnet are supported",
+      subHeader: "Only Rinkeby, Polygon and Mainnet are supported",
       button: ErrorButtonType.SWITCH_TO_MAINNET,
     })
   );

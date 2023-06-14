@@ -6,6 +6,7 @@
     "@reduxjs/toolkit": "^1.8.2",
     "@usedapp/core": "^1.0.14",
     "@web3-react/walletconnect-connector": "^6.2.10",
+    "alchemy-sdk": "^2.2.5",
     "ethers": "^5.6.9",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

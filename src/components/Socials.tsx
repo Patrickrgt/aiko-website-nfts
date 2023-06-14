@@ -3,7 +3,7 @@ import Social from "./Social";
 import twitter from "../assets/svgs/twitter.svg";
 import discord from "../assets/svgs/discord.svg";
 import opensea from "../assets/svgs/opensea.svg";
-import { OPENSEA } from "../app/globals";
+import { openseaLink, discordLink, twitterLink } from "../app/globals";
 
 interface SocialType {
   icon: string;
@@ -13,15 +13,15 @@ interface SocialType {
 const socials: SocialType[] = [
   {
     icon: opensea,
-    link: OPENSEA,
+    link: openseaLink,
   },
   {
     icon: discord,
-    link: "https://discord.gg/g6V5SxQFV8",
+    link: discordLink,
   },
   {
     icon: twitter,
-    link: "https://twitter.com/aikovirtual",
+    link: twitterLink,
   },
 ];
 

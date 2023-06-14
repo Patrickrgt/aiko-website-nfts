@@ -1,16 +1,6 @@
-import { useDispatch, useSelector } from "react-redux";
-import { changeNetwork } from "../app/lib/web3";
-import { clearError, ErrorButtonType, selectError } from "../state/errorSlice";
-import Popup from "./Popup";
-
 const Error = () => {
-  const dispatch = useDispatch();
-  const error = useSelector(selectError);
-
-  if (!error) return null;
-
   return (
-    <div>meow</div>
+    <div />
     // <Popup
     //   show
     //   header={error.header}

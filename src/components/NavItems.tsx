@@ -3,7 +3,6 @@ import { Link } from "react-scroll";
 import { useState } from "react";
 
 import AikoFade from "./AikoFade";
-import MintButton from "./MintButton";
 
 interface NavItem {
   name: string;

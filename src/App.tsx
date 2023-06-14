@@ -1,8 +1,8 @@
 import { Suspense } from "react";
 import styled from "styled-components";
 import { Outlet } from "react-router-dom";
-import { Config, DAppProvider, Mainnet, Rinkeby } from "@usedapp/core";
-import { getDefaultProvider } from "ethers";
+import { Config, DAppProvider, Mainnet, Polygon } from "@usedapp/core";
+import { ethers } from "ethers";
 
 import Error from "./components/Error";
 import LoadingScreen from "./components/LoadingScreen";
@@ -20,8 +20,12 @@ const StyledApp = styled.div`
 const config: Config = {
   autoConnect: false,
   readOnlyUrls: {
-    [Mainnet.chainId]: getDefaultProvider("mainnet"),
-    [Rinkeby.chainId]: getDefaultProvider("rinkeby"),
+    [Mainnet.chainId]: new ethers.providers.JsonRpcProvider(
+      "https://eth-mainnet.g.alchemy.com/v2/8iVRJ1Rswjzp0S3ySwiWOaS0jtoZ4uRg"
+    ),
+    [Polygon.chainId]: new ethers.providers.JsonRpcProvider(
+      "https://polygon-rpc.com/"
+    ),
   },
 
   bufferGasLimitPercentage: 20,

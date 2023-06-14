@@ -164,6 +164,7 @@ interface Props {
 }
 
 const Music = ({ atBottom }: Props) => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const tick = useTick();
   const [active, setActive] = useState(false);
 

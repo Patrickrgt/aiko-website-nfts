@@ -1,4 +1,8 @@
-export const OPENSEA = "https://opensea.io/collection/aikovirtual";
+export const openseaLink = "https://opensea.io/collection/aikovirtual";
+export const twitterLink = "https://twitter.com/aikovirtual";
+export const webLink = "https://aikovirtual.com/";
+export const mediumLink = "https://medium.com/@aikovirtual";
+export const discordLink = "https://discord.gg/aikovirtual";
 
 interface GlobalsType {
   AIKO: string;
@@ -10,4 +14,8 @@ export const ETH_GLOBALS: GlobalsType = {
 
 export const RINKEBY_GLOBALS: GlobalsType = {
   AIKO: "0xD010802fAbE29FEd5EA340306e1F92fF46A7Ad21",
+};
+
+export const MATIC_GLOBALS: GlobalsType = {
+  AIKO: "0xfe5550880d897347bfaef537e8455904efbb2e5e",
 };
