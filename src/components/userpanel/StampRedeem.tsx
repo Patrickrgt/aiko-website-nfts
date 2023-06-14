@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { useState } from "react";
 import ButtonBlue from "./ButtonBlue";
 import DecorHorizontal from "./DecorHorizontal";
-import Countdown from "./Countdown";
+// import Countdown from "./Countdown";
 
 const RedeemContainer = styled.div`
   display: flex;
@@ -18,7 +18,7 @@ const ShippingText = styled.span`
   justify-content: center;
   align-items: center;
   display: flex;
-  font-size: 1.425vh;
+  font-size: 2vh;
   font-weight: 800;
   color: white;
   text-shadow: -2px 2px 0 #000, 2px 2px 0 #000, 2px -2px 0 #000,
@@ -31,9 +31,9 @@ const StampRedeem = () => {
   return (
     <RedeemContainer>
       <ShippingText>
-        {/* SHIPPING FEE: &nbsp;{" "} */}
+        EARLY JULY
         {/* Countdown to StampRedeem Functionality, used as placeholder */}
-        <Countdown />
+        {/* <Countdown /> */}
       </ShippingText>
       <ButtonBlue
         disabled={disabled}

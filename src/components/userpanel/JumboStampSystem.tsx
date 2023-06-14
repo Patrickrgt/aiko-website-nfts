@@ -446,6 +446,7 @@ const RewardsHeaderContainer = styled.div`
   display: flex;
   justify-content: flex-end;
   padding: 1rem;
+  padding-right: 3rem;
 `;
 
 const RewardsButtonContainer = styled.div`
@@ -467,12 +468,12 @@ const RewardsHeader = styled.p`
   font-weight: 300;
 `;
 
-const RewardsDate = styled.span`
-  padding: 0rem 1rem 0rem 1rem;
-  font-size: 2.25rem;
-  color: #e0ce83;
-  letter-spacing: -1px;
-`;
+// const RewardsDate = styled.span`
+//   padding: 0rem 1rem 0rem 1rem;
+//   font-size: 2.25rem;
+//   color: #e0ce83;
+//   letter-spacing: -1px;
+// `;
 
 const MainContainer = styled.div`
   /* display: none; */
@@ -589,7 +590,7 @@ const JumboStampSystem = () => {
                 >
                   <RewardsHeader>
                     Redemption will be made available early July
-                    <RewardsDate>07/05/2023</RewardsDate>
+                    {/* <RewardsDate>07/05/2023</RewardsDate> */}
                   </RewardsHeader>
                 </RewardsHeaderContainer>
                 <RewardsButtonContainer
