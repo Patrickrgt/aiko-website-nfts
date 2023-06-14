@@ -2,7 +2,7 @@ import { useState, useRef } from "react";
 import { useSelector } from "react-redux";
 import styled, { css, keyframes } from "styled-components";
 import { selectMuteAudio } from "../../state/uiSlice";
-import cursorhover from "../../assets/userpanel/cursorhover.png";
+import cursorhover from "../../assets/svgs/cursorhover.svg";
 import HoverAudio from "./HoverAudio";
 
 import soundHoverTab from "../../assets/userpanel/Market_SFX_-_TAB_HOVER.wav";

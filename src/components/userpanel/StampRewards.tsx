@@ -18,7 +18,7 @@ import necklace from "../../assets/userpanel/necklace.png";
 import pin from "../../assets/userpanel/pin.png";
 import print from "../../assets/userpanel/print.png";
 
-import cursorhover from "../../assets/userpanel/cursorhover.png";
+import cursorhover from "../../assets/svgs/cursorhover.svg";
 
 // Takes image (str) in the future change to fetching from assets folder
 // name (str) - name of reward

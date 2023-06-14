@@ -7,10 +7,10 @@ import UserNavIcon, { NavIconType } from "./UserNavIcon";
 
 import logo2 from "../../assets/svgs/aikomeepologo.svg";
 
-import map from "../../assets/userpanel/buttonmap.png";
-import lobby from "../../assets/userpanel/buttonlobby.png";
-import lore from "../../assets/userpanel/buttonlore.png";
-import news from "../../assets/userpanel/buttonnews.png";
+import map from "../../assets/svgs/map.svg";
+import lobby from "../../assets/svgs/lobby.svg";
+import lore from "../../assets/svgs/lore.svg";
+import news from "../../assets/svgs/news.svg";
 
 const navIcons: NavIconType[] = [
   {

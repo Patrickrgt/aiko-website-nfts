@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { useSelector } from "react-redux";
 import HoverAudio from "./HoverAudio";
 
-import cursorhover from "../../assets/userpanel/cursorhover.png";
+import cursorhover from "../../assets/svgs/cursorhover.svg";
 
 import { selectMuteAudio } from "../../state/uiSlice";
 
@@ -63,6 +63,7 @@ const NavIcon = styled.img`
   transition: filter 0.6s;
   width: 6.5vh;
   height: 6.5vh;
+  padding: 0.8vh;
   clip-path: var(--notched-sm);
   cursor: url(${cursorhover}), auto;
   opacity: 0.5;

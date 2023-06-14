@@ -12,7 +12,7 @@ import { getAikoHoldings } from "../../contracts/views";
 
 import Nfts from "./Nfts";
 
-import cursorhover from "../../assets/userpanel/cursorhover.png";
+import cursorhover from "../../assets/svgs/cursorhover.svg";
 
 import soundHoverMedium from "../../assets/userpanel/Market_SFX_-_BUTTON_HOVER_-_LARGE.wav";
 import soundClickMedium from "../../assets/userpanel/Market_SFX_-_BUTTON_PRESS_-_LARGE.wav";

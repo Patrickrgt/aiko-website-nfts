@@ -7,7 +7,7 @@ import HoverAudio from "./HoverAudio";
 import check from "../../assets/placeholders/check.png";
 import star from "../../assets/svgs/aikostarcrystal.svg";
 
-import cursorhover from "../../assets/userpanel/cursorhover.png";
+import cursorhover from "../../assets/svgs/cursorhover.svg";
 
 import soundHoverTab from "../../assets/userpanel/Market_SFX_-_TAB_HOVER.wav";
 import soundClickTab from "../../assets/userpanel/Market_SFX_-_TAB_PRESS.wav";

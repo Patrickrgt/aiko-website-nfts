@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { selectShowingStamp, setShowingStamp } from "../../state/uiSlice";
 import HoverAudio from "./HoverAudio";
 import star from "../../assets/svgs/aikostarcrystal.svg";
-import cursorhover from "../../assets/userpanel/cursorhover.png";
+import cursorhover from "../../assets/svgs/cursorhover.svg";
 
 import soundHoverLarge from "../../assets/userpanel/Market_SFX_-_BUTTON_HOVER_-_LARGE.wav";
 import soundClickLarge from "../../assets/userpanel/Market_SFX_-_BUTTON_PRESS_-_LARGE.wav";

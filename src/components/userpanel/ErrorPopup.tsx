@@ -3,7 +3,7 @@ import styled from "styled-components";
 import TitleBar from "./TitleBar";
 
 import computer from "../../assets/userpanel/aikocomputer.png";
-import cursorhover from "../../assets/userpanel/cursorhover.png";
+import cursorhover from "../../assets/svgs/cursorhover.svg";
 
 // Takes image (str) in the future change to fetching from assets folder
 // name (str) - name of reward

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import aiko from "../../assets/userpanel/aiko-small.png";
+import aiko from "../../assets/svgs/aikofooter.svg";
 
 const FooterDiv = styled.div`
   position: absolute;

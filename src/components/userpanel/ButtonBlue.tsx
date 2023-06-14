@@ -2,7 +2,7 @@ import { useState, useRef } from "react";
 import styled from "styled-components";
 import HoverAudio from "./HoverAudio";
 
-import cursorhover from "../../assets/userpanel/cursorhover.png";
+import cursorhover from "../../assets/svgs/cursorhover.svg";
 
 import soundHoverMedium from "../../assets/userpanel/Market_SFX_-_BUTTON_HOVER_-_MEDIUM.wav";
 import soundClickMedium from "../../assets/userpanel/Market_SFX_-_BUTTON_PRESS_-_MEDIUM.wav";

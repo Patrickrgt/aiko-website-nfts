@@ -5,7 +5,7 @@ import { selectMuteAudio } from "../../state/uiSlice";
 import star from "../../assets/svgs/aikostarcrystal.svg";
 import HoverAudio from "./HoverAudio";
 
-import cursorhover from "../../assets/userpanel/cursorhover.png";
+import cursorhover from "../../assets/svgs/cursorhover.svg";
 
 import soundHoverLarge from "../../assets/userpanel/Market_SFX_-_BUTTON_HOVER_-_LARGE.wav";
 import soundClickLarge from "../../assets/userpanel/Market_SFX_-_BUTTON_PRESS_-_LARGE.wav";

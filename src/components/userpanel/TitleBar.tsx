@@ -9,7 +9,7 @@ import { selectShowingRewards, setShowingRewards } from "../../state/uiSlice";
 import soundHoverSmall from "../../assets/userpanel/Market_SFX_-_BUTTON_HOVER_-_SMALL.wav";
 import soundClickSmall from "../../assets/userpanel/Market_SFX_-_BUTTON_PRESS_-_DISABLED.wav";
 
-import cursorhover from "../../assets/userpanel/cursorhover.png";
+import cursorhover from "../../assets/svgs/cursorhover.svg";
 
 const slideForward = keyframes`
    0% { height: 10%; width: 10%; visibility: 0 }

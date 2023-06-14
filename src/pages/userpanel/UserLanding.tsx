@@ -5,7 +5,7 @@ import NftPanel from "../../components/userpanel/NftPanel";
 import ErrorPopup from "../../components/userpanel/ErrorPopup";
 import Footer from "../../components/userpanel/Footer";
 
-import cursor from "../../assets/userpanel/cursor.png";
+import cursor from "../../assets/svgs/cursornormal.svg";
 
 const StyledHomePage = styled.div`
   width: 100%;

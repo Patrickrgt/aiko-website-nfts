@@ -6,7 +6,7 @@ import { useStamps } from "../../contracts/functions";
 
 import { selectShowingStamp, setShowingRewards } from "../../state/uiSlice";
 
-import arrow from "../../assets/userpanel/arrow.png";
+import arrow from "../../assets/svgs/arrowspanel.svg";
 
 import holder from "../../assets/userpanel/holder.png";
 import holder1 from "../../assets/userpanel/holder1.png";
@@ -28,7 +28,7 @@ import supporter1 from "../../assets/userpanel/supporter1.png";
 import supporter2 from "../../assets/userpanel/supporter2.png";
 import supporter3 from "../../assets/userpanel/supporter3.png";
 
-import cursorhover from "../../assets/userpanel/cursorhover.png";
+import cursorhover from "../../assets/svgs/cursorhover.svg";
 
 import JumboStamp, { StampType } from "./JumboStamp";
 import StampIndividual, { IndividualStampType } from "./StampIndividual";

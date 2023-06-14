@@ -42,11 +42,11 @@ import baseaiko from "../../assets/userpanel/aikopfp.gif";
 
 import opensea from "../../assets/svgs/opensea.svg";
 import twitter from "../../assets/svgs/twitter.svg";
-import home from "../../assets/userpanel/homewebsiteicon.png";
+import home from "../../assets/svgs/home.svg";
 import medium from "../../assets/svgs/medium.svg";
 import discord from "../../assets/svgs/discord.svg";
 
-import cursorhover from "../../assets/userpanel/cursorhover.png";
+import cursorhover from "../../assets/svgs/cursorhover.svg";
 
 import soundHoverTab from "../../assets/userpanel/Market_SFX_-_TAB_HOVER.wav";
 import soundClickTab from "../../assets/userpanel/Market_SFX_-_TAB_PRESS.wav";
