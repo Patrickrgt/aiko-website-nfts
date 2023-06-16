@@ -4,10 +4,14 @@
   "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.2",
+    "@shopify/shopify-api": "^7.3.1",
     "@usedapp/core": "^1.0.14",
     "@web3-react/walletconnect-connector": "^6.2.10",
     "alchemy-sdk": "^2.2.5",
+    "crypto-js": "^4.1.1",
     "ethers": "^5.6.9",
+    "graphql": "^16.6.0",
+    "graphql-request": "^6.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-redux": "^8.0.2",
@@ -40,6 +44,7 @@
     ]
   },
   "devDependencies": {
+    "@types/crypto-js": "^4.1.1",
     "@types/node": "^18.0.0",
     "@types/react": "^18.0.14",
     "@types/react-dom": "^18.0.5",
