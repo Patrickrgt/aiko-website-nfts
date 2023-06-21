@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { useState } from "react";
 import ButtonBlue from "./ButtonBlue";
 import DecorHorizontal from "./DecorHorizontal";
-// import Countdown from "./Countdown";
+import Countdown from "./Countdown";
 
 const RedeemContainer = styled.div`
   display: flex;
@@ -31,9 +31,9 @@ const StampRedeem = () => {
   return (
     <RedeemContainer>
       <ShippingText>
-        EARLY JULY
+        {/* EARLY JULY */}
         {/* Countdown to StampRedeem Functionality, used as placeholder */}
-        {/* <Countdown /> */}
+        <Countdown />
       </ShippingText>
       <ButtonBlue
         disabled={disabled}
