@@ -163,7 +163,6 @@ const InventoryView = styled.div`
   padding-left: 0.25vh;
   padding-right: 0.25vh;
   border: 0.25vh solid black;
-  background-color: #f2f1f1;
   margin-top: 0.45vh;
   margin-left: 0.45vh;
 `;
