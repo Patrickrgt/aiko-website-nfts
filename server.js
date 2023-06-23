@@ -54,6 +54,59 @@ app.get("/get-discounts", async (req, res) => {
   }
 });
 
+app.get("/get-stock/:inventory_item_id", async (req, res) => {
+  const inventoryItemId = req.params.inventory_item_id;
+  try {
+    const response = await fetch(
+      `https://${shopifyStore}.myshopify.com/admin/api/2023-01/inventory_levels.json?inventory_item_ids=${inventoryItemId}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "X-Shopify-Access-Token": apiAdminKey,
+        },
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    res.status(200).json(data);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+app.get("/get-discount/:id", async (req, res) => {
+  try {
+    const discountId = req.params.id;
+
+    const response = await fetch(
+      `https://${shopifyStore}.myshopify.com/admin/api/2022-04/price_rules/${discountId}/discount_codes.json`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "X-Shopify-Access-Token": apiAdminKey,
+        },
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    res.status(200).json(data);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
 app.post("/generate-discount", async (req, res) => {
   try {
     const { basicCodeDiscount } = req.body;
