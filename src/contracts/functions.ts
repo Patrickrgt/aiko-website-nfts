@@ -36,7 +36,7 @@ export const useStamps = (
         if (!provider || !account) return;
 
         const correctProvider = new ethers.providers.JsonRpcProvider(
-          "https://polygon.llamarpc.com"
+          "https://polygon-mainnet.g.alchemy.com/v2/3UDAJ-dKtgB2PZHnFpfpGxz1xPM1WzI9"
         );
 
         const contract = new ethers.Contract(
