@@ -1,4 +1,3 @@
-// import dotenv from "dotenv";
 import React, { useState, useEffect } from "react";
 // import { BigNumber } from "ethers";
 import { useSelector } from "react-redux";
@@ -38,9 +37,9 @@ const ShippingText = styled.span`
 const StampRedeem = () => {
   const walletAddress = useSelector(selectGlobalAccount);
 
-  // const ShopifyKey = process.env.SHOPIFY_API_PASSWORD;
   const url = "https://djdqhstqa-1e5c099867295609acf8.myshopify.dev/";
-
+  const aikoAPI = process.env.REACT_APP_EXPRESS_SERVER_URL;
+  console.log(aikoAPI);
   // const [title, setTitle] = useState("");
   const [disabled, setDisabled] = useState(false);
   const [encryptedObject, setEncryptedObject] = useState("");
@@ -96,7 +95,7 @@ const StampRedeem = () => {
 
   const fetchDiscount = async (existsId: number) => {
     try {
-      const response = await fetch(`/get-discount/${existsId}`);
+      const response = await fetch(`${aikoAPI}/get-discount/${existsId}`);
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
@@ -131,7 +130,7 @@ const StampRedeem = () => {
 
   async function postDiscount() {
     try {
-      const response = await fetch("/get-discounts");
+      const response = await fetch(`${aikoAPI}/get-discounts`);
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
@@ -198,7 +197,7 @@ const StampRedeem = () => {
           usageLimit: 1,
         };
 
-        const response = await fetch("/generate-discount", {
+        const response = await fetch(`${aikoAPI}/generate-discount`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
