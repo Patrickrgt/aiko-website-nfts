@@ -65,7 +65,10 @@ const Button = styled.button`
     right: 0;
     bottom: 0;
     left: 0;
-    background-image: linear-gradient(to bottom, #f38a65, #ffca62);
+    background-image: ${(props: ButtonProps) =>
+      props.disabled
+        ? "linear-gradient(to bottom, #D3D3D3, #A9A9A9)"
+        : "linear-gradient(to bottom, #f38a65, #ffca62)"};
     z-index: -1;
     transition: opacity 0.25s linear;
     opacity: ${(props: ButtonProps) => (props.active ? "1" : "0")};

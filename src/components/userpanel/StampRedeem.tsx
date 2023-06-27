@@ -14,24 +14,6 @@ interface DecryptedObjectShape {
   wallet: number;
 }
 
-interface BasicCodeDiscount {
-  title: string;
-  code: string;
-  startsAt: string;
-  endsAt: string;
-  customerSelection: { all: boolean };
-  customerGets: {
-    value: { percentage: number };
-    items: {
-      products: {
-        productsToAdd: string[];
-      };
-    };
-  };
-  appliesOncePerCustomer: boolean;
-  usageLimit: number;
-}
-
 const RedeemContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -53,15 +35,6 @@ const ShippingText = styled.span`
     -2px -2px 0 #000;
 `;
 
-const ShippingPrice = styled.h1`
-  margin: 0;
-  font-size: 2.5rem;
-  font-weight: 800;
-  color: #ead182;
-  text-shadow: -2px 2px 0 #000, 2px 2px 0 #000, 2px -2px 0 #000,
-    -2px -2px 0 #000;
-`;
-
 const StampRedeem = () => {
   const walletAddress = useSelector(selectGlobalAccount);
 
@@ -69,39 +42,8 @@ const StampRedeem = () => {
   const url = "http://localhost:3000/";
 
   // const [title, setTitle] = useState("");
-  const [code, setCode] = useState("");
-  const [result, setResult] = useState("");
-  const [shortWallet, setShortWallet] = useState("");
-  const [addProducts, setAddProducts] = useState([""]);
   const [disabled, setDisabled] = useState(false);
-  const [shortCoupon, setShortCoupon] = useState("");
-
   const [encryptedObject, setEncryptedObject] = useState("");
-
-  const [decryptedObject, setDecryptedObject] = useState<DecryptedObjectShape>({
-    rewards: 0,
-    wallet: 0,
-  });
-
-  // const [basicCodeDiscount, setBasicCodeDiscount] = useState<BasicCodeDiscount>(
-  //   {
-  //     title: "",
-  //     code: "",
-  //     startsAt: "",
-  //     endsAt: "",
-  //     customerSelection: { all: false },
-  //     customerGets: {
-  //       value: { percentage: 0 },
-  //       items: {
-  //         products: {
-  //           productsToAdd: [""],
-  //         },
-  //       },
-  //     },
-  //     appliesOncePerCustomer: false,
-  //     usageLimit: 0,
-  //   }
-  // );
 
   const [key] = useState("aikoaikoaiko");
 
@@ -172,30 +114,11 @@ const StampRedeem = () => {
   };
 
   useEffect(() => {
-    if (walletAddress) {
-      const firstFive = walletAddress.slice(0, 5);
-      const lastFive = walletAddress.slice(-5);
-      setShortWallet(`${firstFive}...${lastFive}`);
-    }
-  }, [walletAddress]);
-
-  // useEffect(() => {
-  //   if (code) {
-  //     window.open(`${url}?coupon=${code}`, "_blank");
-  //   }
-  // }, [code]);
-
-  useEffect(() => {
     if (encryptedObject) {
       console.log("Encrypted object:", encryptedObject);
-
-      // Set basicCodeDiscount with the decrypted object
-      // setCode(encryptedObject);
-      // setCode(encryptedObject);
       window.open(`${url}?coupon=${encryptedObject}`, "_blank");
       const object = decrypt(encryptedObject, key);
       if (isValidDecryptedObject(object)) {
-        setDecryptedObject(object);
         console.log("Decrypted object:", object);
       } else {
         console.error(
@@ -234,7 +157,6 @@ const StampRedeem = () => {
           walletAddress
         );
         const couponCode = generateRandomCouponCode(10);
-        setShortCoupon(couponCode);
         const object = {
           rewards: stampsHeld >= 9 ? 3 : stampsHeld >= 6 ? 2 : 1,
           wallet: couponCode,
@@ -276,8 +198,6 @@ const StampRedeem = () => {
           usageLimit: 1,
         };
 
-        console.log(basicCodeDiscount);
-
         const response = await fetch("/generate-discount", {
           method: "POST",
           headers: {
@@ -286,115 +206,18 @@ const StampRedeem = () => {
           body: JSON.stringify({ basicCodeDiscount }),
         });
 
-        const data = await response.json();
-
         if (response.ok) {
           console.log("Successfully generated");
-        } else {
-          setResult(`Error: ${data.errors[0].message}`);
         }
       }
     } catch (error) {
-      setResult(`Error: ${(error as Error).message}`);
       console.error("Error:", error);
     }
   }
 
-  // useEffect(() => {
-  //   const postDiscount = async () => {
-  //     try {
-  //       fetch("/get-discounts")
-  //         .then((response) => {
-  //           if (!response.ok) {
-  //             throw new Error(`HTTP error! status: ${response.status}`);
-  //           }
-  //           return response.json();
-  //         })
-  //         .then(async (data) => {
-  //           const discounts = data.price_rules;
-  //           const discountData = data;
-  //           const exists = discounts.find(
-  //             (discount: any) => discount.title === walletAddress
-  //           );
-
-  //           if (exists) {
-  //             console.log(
-  //               "Discount exists. Will not generate new discount:",
-  //               exists.id
-  //             );
-  //             fetchDiscount(exists.id);
-  //           } else {
-  //             console.log(
-  //               "No discount found with the title. Generating new discount:",
-  //               walletAddress
-  //             );
-  //             const response = await fetch("/generate-discount", {
-  //               method: "POST",
-  //               headers: {
-  //                 "Content-Type": "application/json",
-  //               },
-  //               body: JSON.stringify({ basicCodeDiscount }),
-  //             });
-
-  //             const data = await response.json();
-
-  //             if (response.ok) {
-  //               const discountCode =
-  //                 data.discountCode.codeDiscount.codes.nodes[0].code;
-  //               setResult(`Discount code created: ${discountCode}`);
-  //               setCode(discountCode);
-  //               const object = {
-  //                 rewards: stampsHeld >= 9 ? 3 : stampsHeld >= 6 ? 2 : 1,
-  //                 wallet: code,
-  //               };
-  //               setEncryptedObject(encrypt(object, key));
-  //             } else {
-  //               setResult(`Error: ${data.errors[0].message}`);
-  //             }
-  //           }
-  //         })
-  //         .catch((error) => {
-  //           console.error("Error:", error);
-  //         });
-  //     } catch (error) {
-  //       setResult(`Error: ${(error as Error).message}`);
-  //     }
-  //   };
-  //   console.log(basicCodeDiscount);
-  //   postDiscount();
-  // }, [addProducts]);
-
   const handleButtonClick = async () => {
     if (stampsHeld >= 3) {
-      // await setAddProducts([
-      //   "gid://shopify/Product/8312585650467",
-      //   "gid://shopify/Product/8312587583779",
-      //   "gid://shopify/Product/8312588566819",
-      // ]);
       await postDiscount();
-      // const object = {
-      //   rewards: 3,
-      //   wallet: code,
-      // };
-      // await setEncryptedObject(encrypt(object, key));
-      // } else if (stampsHeld >= 6) {
-      // const object = {
-      //   rewards: 2,
-      //   wallet: code,
-      // };
-      // await setAddProducts([
-      //   "gid://shopify/Product/8312585650467",
-      //   "gid://shopify/Product/8312587583779",
-      // ]);
-      // console.log("HIIIIIIIIIIIII");
-      // await setEncryptedObject(encrypt(object, key));
-      // } else if (stampsHeld >= 3) {
-      // const object = {
-      //   rewards: 1,
-      //   wallet: code,
-      // };
-      // await setAddProducts(["gid://shopify/Product/8312585650467"]);
-      // await setEncryptedObject(encrypt(object, key));
     } else {
       setDisabled(true);
     }
