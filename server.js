@@ -21,8 +21,7 @@ const { restResources } = require("@shopify/shopify-api/rest/admin/2022-07");
 const app = express();
 app.use(
   cors({
-    origin:
-      "https://aiko-fc483--pr41-feature-stamp-redeem-d3fxasrx.web.app/userpanel",
+    origin: "https://aiko-fc483--pr41-feature-stamp-redeem-d3fxasrx.web.app",
   })
 );
 app.use(express.json());
