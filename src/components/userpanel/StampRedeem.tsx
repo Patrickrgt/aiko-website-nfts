@@ -227,6 +227,8 @@ const StampRedeem = () => {
     <RedeemContainer>
       <ShippingText>
         {/* SHIPPING FEE: &nbsp; <ShippingPrice>ETA</ShippingPrice> */}
+        {/* EARLY JULY */}
+        {/* Countdown to StampRedeem Functionality, used as placeholder */}
         <Countdown />
       </ShippingText>
       <ButtonBlue

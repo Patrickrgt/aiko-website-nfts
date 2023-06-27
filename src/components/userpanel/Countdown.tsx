@@ -22,7 +22,7 @@ const CountdownTimer = () => {
 
   const calculateTimeLeft = (): TimeLeft => {
     const now = new Date();
-    const targetDate = new Date(Date.UTC(2023, 6, 5) + 4 * 60 * 60 * 1000);
+    const targetDate = new Date(Date.UTC(2023, 6, 6) + 1 * 60 * 60 * 1000); // Changed to July 6th, 1AM
     const difference = targetDate.getTime() - now.getTime();
 
     let timeLeft: TimeLeft = {};
