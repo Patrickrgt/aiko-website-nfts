@@ -39,8 +39,6 @@ const StampRedeem = () => {
 
   const url = "https://djdqhstqa-1e5c099867295609acf8.myshopify.dev/";
   const aikoAPI = process.env.REACT_APP_EXPRESS_SERVER_URL;
-  console.log(aikoAPI);
-  // const [title, setTitle] = useState("");
   const [disabled, setDisabled] = useState(false);
   const [encryptedObject, setEncryptedObject] = useState("");
 

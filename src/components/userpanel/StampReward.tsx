@@ -186,11 +186,12 @@ interface Props {
 const StampReward = ({ stampReward }: Props) => {
   const [hoverActive, setHoverActive] = useState(false);
   const [inventory, setInventory] = useState(0);
+  const aikoAPI = process.env.REACT_APP_EXPRESS_SERVER_URL;
 
   useEffect(() => {
     const fetchStock = async () => {
       try {
-        const response = await fetch(`/get-stock/${stampReward.pid}`);
+        const response = await fetch(`${aikoAPI}/get-stock/${stampReward.pid}`);
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
