@@ -589,7 +589,7 @@ const JumboStampSystem = () => {
                   onMouseLeave={() => setHoverActive(false)}
                 >
                   <RewardsHeader>
-                    Redemption will be made available early July
+                    Redemption will be made starting July 5th
                     {/* <RewardsDate>07/05/2023</RewardsDate> */}
                   </RewardsHeader>
                 </RewardsHeaderContainer>
