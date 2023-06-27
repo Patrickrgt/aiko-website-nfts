@@ -39,7 +39,7 @@ const StampRedeem = () => {
   const walletAddress = useSelector(selectGlobalAccount);
 
   // const ShopifyKey = process.env.SHOPIFY_API_PASSWORD;
-  const url = "http://localhost:3000/";
+  const url = "https://djdqhstqa-1e5c099867295609acf8.myshopify.dev/";
 
   // const [title, setTitle] = useState("");
   const [disabled, setDisabled] = useState(false);

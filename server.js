@@ -2,6 +2,7 @@ const express = require("express");
 const fetch = require("node-fetch");
 const { request } = require("graphql-request");
 const dotenv = require("dotenv");
+const cors = require("cors");
 dotenv.config();
 
 require("@shopify/shopify-api/adapters/node");
@@ -18,6 +19,12 @@ const { restResources } = require("@shopify/shopify-api/rest/admin/2022-07");
 // const Shopify = require("shopify-api-node");
 
 const app = express();
+app.use(
+  cors({
+    origin:
+      "https://aiko-fc483--pr41-feature-stamp-redeem-d3fxasrx.web.app/userpanel",
+  })
+);
 app.use(express.json());
 const { Auth, Route } = ShopifyApi;
 
