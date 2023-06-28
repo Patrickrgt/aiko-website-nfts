@@ -6,7 +6,7 @@ import * as CryptoJS from "crypto-js";
 import { selectGlobalAccount, selectStampsHeld } from "../../state/uiSlice";
 import ButtonBlue from "./ButtonBlue";
 import DecorHorizontal from "./DecorHorizontal";
-import Countdown from "./Countdown";
+// import Countdown from "./Countdown";
 
 interface DecryptedObjectShape {
   rewards: number;
@@ -30,6 +30,15 @@ const ShippingText = styled.span`
   font-size: 2.425vh;
   font-weight: 800;
   color: white;
+  text-shadow: -2px 2px 0 #000, 2px 2px 0 #000, 2px -2px 0 #000,
+    -2px -2px 0 #000;
+`;
+
+const ShippingHighlight = styled.span`
+  margin: 0;
+  font-size: 3rem;
+  font-weight: 800;
+  color: #ead182;
   text-shadow: -2px 2px 0 #000, 2px 2px 0 #000, 2px -2px 0 #000,
     -2px -2px 0 #000;
 `;
@@ -223,10 +232,10 @@ const StampRedeem = () => {
   return (
     <RedeemContainer>
       <ShippingText>
-        {/* SHIPPING FEE: &nbsp; <ShippingPrice>ETA</ShippingPrice> */}
+        <ShippingHighlight> Redeem NOW</ShippingHighlight>
         {/* EARLY JULY */}
         {/* Countdown to StampRedeem Functionality, used as placeholder */}
-        <Countdown />
+        {/* <Countdown /> */}
       </ShippingText>
       <ButtonBlue
         disabled={disabled}
