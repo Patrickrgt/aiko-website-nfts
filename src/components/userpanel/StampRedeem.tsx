@@ -1,17 +1,15 @@
 import React, { useState, useEffect } from "react";
-// import { BigNumber } from "ethers";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
-import * as CryptoJS from "crypto-js";
 import { selectGlobalAccount, selectStampsHeld } from "../../state/uiSlice";
 import ButtonBlue from "./ButtonBlue";
 import DecorHorizontal from "./DecorHorizontal";
-// import Countdown from "./Countdown";
-
-interface DecryptedObjectShape {
-  rewards: number;
-  wallet: number;
-}
+import {
+  encrypt,
+  decrypt,
+  isValidDecryptedObject,
+  generateRandomCouponCode,
+} from "../../contracts/functions";
 
 const RedeemContainer = styled.div`
   display: flex;
@@ -54,51 +52,6 @@ const StampRedeem = () => {
   const [key] = useState("aikoaikoaiko");
 
   const stampsHeld = useSelector(selectStampsHeld);
-
-  function toBase64Url(base64: string): string {
-    return base64.replace("+", "-").replace("/", "_").replace(/=+$/, "");
-  }
-
-  function fromBase64Url(base64url: string): string {
-    base64url = base64url.replace("-", "+").replace("_", "/");
-    while (base64url.length % 4) {
-      base64url += "=";
-    }
-    return base64url;
-  }
-
-  function encrypt(object: object, key: string): string {
-    const objectString: string = JSON.stringify(object);
-    const ciphertext = CryptoJS.AES.encrypt(objectString, key);
-    return toBase64Url(ciphertext.toString());
-  }
-
-  function decrypt(ciphertext: string, key: string): DecryptedObjectShape {
-    const bytes = CryptoJS.AES.decrypt(fromBase64Url(ciphertext), key);
-    const decryptedData: string = bytes.toString(CryptoJS.enc.Utf8);
-    return JSON.parse(decryptedData);
-  }
-
-  function isValidDecryptedObject(object: any): object is DecryptedObjectShape {
-    return (
-      object &&
-      typeof object === "object" &&
-      "rewards" in object &&
-      "wallet" in object
-    );
-  }
-
-  function generateRandomCouponCode(length: number) {
-    const characters =
-      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-    let result = "";
-    for (let i = 0; i < length; i++) {
-      result += characters.charAt(
-        Math.floor(Math.random() * characters.length)
-      );
-    }
-    return result;
-  }
 
   const fetchDiscount = async (existsId: number) => {
     try {
