@@ -44,7 +44,7 @@ const ShippingHighlight = styled.span`
 const StampRedeem = () => {
   const walletAddress = useSelector(selectGlobalAccount);
 
-  const url = "https://djdqhstqa-1e5c099867295609acf8.myshopify.dev/";
+  const url = process.env.REACT_APP_STORE_URL;
   const aikoAPI = process.env.REACT_APP_EXPRESS_SERVER_URL;
   const [disabled, setDisabled] = useState(false);
   const [encryptedObject, setEncryptedObject] = useState("");

@@ -22,6 +22,7 @@ const app = express();
 app.use(
   cors({
     origin: [
+      "https://aikoredeem.com/",
       "https://aiko-fc483--pr41-feature-stamp-redeem-d3fxasrx.web.app",
       "http://localhost:3000",
       "http://localhost:3001",
