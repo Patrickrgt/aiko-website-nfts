@@ -4,12 +4,7 @@ import styled from "styled-components";
 import { selectGlobalAccount, selectStampsHeld } from "../../state/uiSlice";
 import ButtonBlue from "./ButtonBlue";
 import DecorHorizontal from "./DecorHorizontal";
-import {
-  encrypt,
-  decrypt,
-  isValidDecryptedObject,
-  generateRandomCouponCode,
-} from "../../contracts/functions";
+import { postDiscount } from "../../contracts/functions";
 
 const RedeemContainer = styled.div`
   display: flex;
@@ -53,130 +48,21 @@ const StampRedeem = () => {
 
   const stampsHeld = useSelector(selectStampsHeld);
 
-  const fetchDiscount = async (existsId: number) => {
-    try {
-      const response = await fetch(`${aikoAPI}/get-discount/${existsId}`);
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-      const data = await response.json();
-      // setCode(data.discount_codes[0].code);
-      console.log(data.discount_codes[0].code);
-      const object = {
-        rewards: stampsHeld >= 9 ? 3 : stampsHeld >= 6 ? 2 : 1,
-        wallet: data.discount_codes[0].code,
-      };
-      setEncryptedObject(encrypt(object, key));
-    } catch (error) {
-      console.error("Error:", error);
-    }
-  };
-
   useEffect(() => {
     if (encryptedObject) {
-      console.log("Encrypted object:", encryptedObject);
       window.open(`${url}?coupon=${encryptedObject}`, "_blank");
-      const object = decrypt(encryptedObject, key);
-      if (isValidDecryptedObject(object)) {
-        console.log("Decrypted object:", object);
-      } else {
-        console.error(
-          "Decrypted object does not have the expected shape:",
-          object
-        );
-      }
     }
   }, [encryptedObject, key]);
 
-  async function postDiscount() {
-    try {
-      const response = await fetch(`${aikoAPI}/get-discounts`);
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-
-      const data = await response.json();
-      const discounts = data.price_rules;
-
-      console.log(discounts);
-
-      const exists = discounts.find(
-        (discount: any) => discount.title === walletAddress
-      );
-
-      if (exists) {
-        console.log(
-          "Discount exists. Will not generate new discount:",
-          exists.id
-        );
-        fetchDiscount(exists.id);
-      } else {
-        console.log(
-          "No discount found with the title. Generating new discount:",
-          walletAddress
-        );
-        const couponCode = generateRandomCouponCode(10);
-        const object = {
-          rewards: stampsHeld >= 9 ? 3 : stampsHeld >= 6 ? 2 : 1,
-          wallet: couponCode,
-        };
-        setEncryptedObject(encrypt(object, key));
-
-        let products: string[] = [];
-
-        if (stampsHeld >= 9) {
-          products = [
-            "gid://shopify/Product/8312585650467",
-            "gid://shopify/Product/8312587583779",
-            "gid://shopify/Product/8312588566819",
-          ];
-        } else if (stampsHeld >= 6) {
-          products = [
-            "gid://shopify/Product/8312585650467",
-            "gid://shopify/Product/8312587583779",
-          ];
-        } else if (stampsHeld >= 3) {
-          products = ["gid://shopify/Product/8312585650467"];
-        }
-
-        const basicCodeDiscount = {
-          title: `${walletAddress}`,
-          code: `${couponCode}`,
-          startsAt: "2022-06-21T00:00:00Z",
-          endsAt: "2023-09-21T00:00:00Z",
-          customerSelection: { all: true },
-          customerGets: {
-            value: { percentage: 1 },
-            items: {
-              products: {
-                productsToAdd: products,
-              },
-            },
-          },
-          appliesOncePerCustomer: false,
-          usageLimit: 1,
-        };
-
-        const response = await fetch(`${aikoAPI}/generate-discount`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ basicCodeDiscount }),
-        });
-
-        if (response.ok) {
-          console.log("Successfully generated");
-        }
-      }
-    } catch (error) {
-      console.error("Error:", error);
-    }
-  }
-
   const handleButtonClick = async () => {
     if (stampsHeld >= 3) {
-      await postDiscount();
+      const encryptedObject = await postDiscount(
+        aikoAPI ?? "",
+        walletAddress,
+        stampsHeld,
+        key
+      );
+      setEncryptedObject(encryptedObject);
     } else {
       setDisabled(true);
     }
@@ -186,15 +72,11 @@ const StampRedeem = () => {
     <RedeemContainer>
       <ShippingText>
         <ShippingHighlight> Redeem NOW</ShippingHighlight>
-        {/* EARLY JULY */}
-        {/* Countdown to StampRedeem Functionality, used as placeholder */}
-        {/* <Countdown /> */}
       </ShippingText>
       <ButtonBlue
         disabled={disabled}
         close={() => {
           handleButtonClick();
-          console.log("euhuh");
         }}
         content="REDEEM"
       />
