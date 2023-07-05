@@ -7,7 +7,7 @@ import chase from "../../assets/team-members/chase.jpg";
 import crystal from "../../assets/team-members/crystal.jpg";
 import garrid from "../../assets/team-members/garrid.jpg";
 import shvrkboy from "../../assets/team-members/sharkboy.jpg";
-import kyo from "../../assets/team-members/kyo.jpg";
+// import kyo from "../../assets/team-members/kyo.jpg";
 import matarelli from "../../assets/team-members/matarelli.jpg";
 import vinne from "../../assets/team-members/vinne.jpg";
 import kiwi from "../../assets/team-members/kiwi.jpg";
@@ -19,12 +19,12 @@ const teamMembers: TeamMemberType[] = [
     role: "Artist & Co founder",
     twitter: "https://twitter.com/vinneart",
   },
-  {
-    image: kyo,
-    name: "Kyo",
-    role: "Design & Co founder",
-    twitter: "https://twitter.com/dyinginkyoto",
-  },
+  // {
+  //   image: kyo,
+  //   name: "Kyo",
+  //   role: "Design & Co founder",
+  //   twitter: "https://twitter.com/dyinginkyoto",
+  // },
   {
     image: garrid,
     name: "Garrid",

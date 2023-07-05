@@ -14,6 +14,7 @@ export interface TeamMemberType {
 const Container = styled.div`
   position: relative;
   display: flex;
+
   flex-direction: column;
   background: transparent;
   padding: 3px;

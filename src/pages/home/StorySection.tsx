@@ -141,8 +141,8 @@ const StorySection = () => {
                   "Cyber Cute", an aesthetic that blends future tech with anime
                   vibes to create a unique look with broad appeal and an even
                   broader vision. Vinne is the artistic mastermind behind our
-                  visual direction while Kyo is our resident fashion and design
-                  ronin.
+                  visual direction while Matarelli, Garrid and Shvrkboy are our
+                  resident fashion and design ronins.
                 </Paragraph>
                 <Paragraph>
                   Our goal is simple: create a premium concept straddling the
