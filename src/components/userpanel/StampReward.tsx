@@ -152,27 +152,27 @@ const Check = styled.img`
   height: 2.6vh;
 `;
 
-const InventoryView = styled.div`
-  position: absolute;
-  z-index: 100;
-  display: flex;
-  justify-content: center;
-  padding-top: 0.45vh;
-  border-radius: 0.5rem;
-  width: fit-content;
-  padding-left: 0.25vh;
-  padding-right: 0.25vh;
-  border: 0.25vh solid black;
-  background-color: #f2f1f1;
-  margin-top: 0.45vh;
-  margin-left: 0.45vh;
-`;
+// const InventoryView = styled.div`
+//   position: absolute;
+//   z-index: 100;
+//   display: flex;
+//   justify-content: center;
+//   padding-top: 0.45vh;
+//   border-radius: 0.5rem;
+//   width: fit-content;
+//   padding-left: 0.25vh;
+//   padding-right: 0.25vh;
+//   border: 0.25vh solid black;
+//   background-color: #f2f1f1;
+//   margin-top: 0.45vh;
+//   margin-left: 0.45vh;
+// `;
 
-const InventoryText = styled.h1`
-  font-size: 2vh;
-  font-weight: 400;
-  color: #424242;
-`;
+// const InventoryText = styled.h1`
+//   font-size: 2vh;
+//   font-weight: 400;
+//   color: #424242;
+// `;
 
 interface StampButtonProps {
   collected: boolean;
@@ -185,7 +185,7 @@ interface Props {
 
 const StampReward = ({ stampReward }: Props) => {
   const [hoverActive, setHoverActive] = useState(false);
-  const [inventory, setInventory] = useState(0);
+  // const [inventory, setInventory] = useState(0);
   const aikoAPI = process.env.REACT_APP_EXPRESS_SERVER_URL;
 
   useEffect(() => {
@@ -196,8 +196,8 @@ const StampReward = ({ stampReward }: Props) => {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
 
-        const data = await response.json();
-        setInventory(data.inventory_levels[0].available);
+        // const data = await response.json();
+        // setInventory(data.inventory_levels[0].available);
       } catch (error) {
         console.error("Error:", error);
       }
@@ -216,7 +216,7 @@ const StampReward = ({ stampReward }: Props) => {
       <StampOuter>
         <StampShadow>
           <StampInnerBorder collected={stampReward.collected}>
-            {stampReward.name !== "Honorary Aiko" ? (
+            {/* {stampReward.name !== "Honorary Aiko" ? (
               <InventoryView>
                 <InventoryText>
                   {inventory}/{stampReward.stock}
@@ -224,7 +224,7 @@ const StampReward = ({ stampReward }: Props) => {
               </InventoryView>
             ) : (
               ""
-            )}
+            )} */}
             <HoverAudio hoverSound={soundHoverTab} clickSound={soundClickTab}>
               <StampOverlay
                 active={hoverActive}
