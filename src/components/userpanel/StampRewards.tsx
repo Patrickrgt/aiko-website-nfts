@@ -25,24 +25,34 @@ import cursorhover from "../../assets/svgs/cursorhover.svg";
 // collected (bool) - if yes changes to check and blue borders on reward and blue span link/connector
 // required (number/int) - affects the number of stars required on the reward
 // linked (bool) - really only for the last reward so that the span does not show
+
+// 47081029632291 Aiko Print
+// 47081033957667 Inochi no ki Pin
+// 47081035890979 Season Necklace
 const stampRewards: StampRewardType[] = [
   {
     image: print,
     name: "A3 Season Print",
     collected: false,
     required: 3,
+    pid: 47081029632291,
+    stock: 120,
   },
   {
     image: pin,
     name: "Inochi no Ki Pin",
     collected: false,
     required: 6,
+    pid: 47081033957667,
+    stock: 50,
   },
   {
     image: necklace,
     name: "Season Necklace",
     collected: false,
     required: 9,
+    pid: 47081035890979,
+    stock: 35,
   },
   {
     image: honorary,
@@ -249,6 +259,10 @@ interface Props {
 }
 
 const StampRewards = () => {
+  // 47081029632291 Aiko Print
+  // 47081033957667 Inochi no ki Pin
+  // 47081035890979 Season Necklace
+
   const showing = useSelector(selectShowingRewards);
   const stamps = useSelector(selectStampsHeld);
 

@@ -10,7 +10,7 @@ import abi from "./aiko.json";
 
 // Alchemy settings
 const settings = {
-  apiKey: "8iVRJ1Rswjzp0S3ySwiWOaS0jtoZ4uRg", // Replace with your Alchemy API Key.
+  apiKey: "Uuo69wNY1cTopwOdBcdEQRbX_CwIxAGq", // Replace with your Alchemy API Key.
   network: Network.ETH_MAINNET, // Replace with your network.
 };
 const alchemy = new Alchemy(settings);

@@ -26,12 +26,11 @@ import a20 from "../../assets/gallery/20.jpg";
 import a21 from "../../assets/gallery/21.jpg";
 import crystal from "../../assets/team-members/crystal.jpg";
 import garrid from "../../assets/team-members/garrid.jpg";
-import kyo from "../../assets/team-members/kyo.jpg";
+// import kyo from "../../assets/team-members/kyo.jpg";
 import matarelli from "../../assets/team-members/matarelli.jpg";
 
 const aikos: string[] = [
   a8,
-  kyo,
   garrid,
   garrid,
   matarelli,
