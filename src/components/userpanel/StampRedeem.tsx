@@ -1,10 +1,13 @@
-import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import React, {
+  useState,
+  // , useEffect
+} from "react";
+// import { useSelector } from "react-redux";
 import styled from "styled-components";
-import { selectGlobalAccount, selectStampsHeld } from "../../state/uiSlice";
+// import { selectGlobalAccount, selectStampsHeld } from "../../state/uiSlice";
 import ButtonBlue from "./ButtonBlue";
 import DecorHorizontal from "./DecorHorizontal";
-import { postDiscount } from "../../contracts/functions";
+// import { postDiscount } from "../../contracts/functions";
 
 const RedeemContainer = styled.div`
   display: flex;
@@ -37,41 +40,42 @@ const ShippingHighlight = styled.span`
 `;
 
 const StampRedeem = () => {
-  const walletAddress = useSelector(selectGlobalAccount);
+  // const walletAddress = useSelector(selectGlobalAccount);
 
-  const url = process.env.REACT_APP_STORE_URL;
-  const aikoAPI = process.env.REACT_APP_EXPRESS_SERVER_URL;
+  // const url = process.env.REACT_APP_STORE_URL;
+  // const aikoAPI = process.env.REACT_APP_EXPRESS_SERVER_URL;
   const [disabled, setDisabled] = useState(false);
-  const [encryptedObject, setEncryptedObject] = useState("");
+  // const [encryptedObject, setEncryptedObject] = useState("");
 
-  const [key] = useState("aikoaikoaiko");
+  // const [key] = useState("aikoaikoaiko");
 
-  const stampsHeld = useSelector(selectStampsHeld);
+  // const stampsHeld = useSelector(selectStampsHeld);
 
-  useEffect(() => {
-    if (encryptedObject) {
-      window.open(`${url}?coupon=${encryptedObject}`, "_blank");
-    }
-  }, [encryptedObject, key]);
+  // useEffect(() => {
+  //   if (encryptedObject) {
+  //     window.open(`${url}?coupon=${encryptedObject}`, "_blank");
+  //   }
+  // }, [encryptedObject, key]);
 
   const handleButtonClick = async () => {
-    if (stampsHeld >= 3) {
-      const encryptedObject = await postDiscount(
-        aikoAPI ?? "",
-        walletAddress,
-        stampsHeld,
-        key
-      );
-      setEncryptedObject(encryptedObject);
-    } else {
-      setDisabled(true);
-    }
+    setDisabled(true);
+    // if (stampsHeld >= 3) {
+    //   const encryptedObject = await postDiscount(
+    //     aikoAPI ?? "",
+    //     walletAddress,
+    //     stampsHeld,
+    //     key
+    //   );
+    //   setEncryptedObject(encryptedObject);
+    // } else {
+    //   setDisabled(true);
+    // }
   };
 
   return (
     <RedeemContainer>
       <ShippingText>
-        <ShippingHighlight> Redeem NOW</ShippingHighlight>
+        <ShippingHighlight>CLOSED</ShippingHighlight>
       </ShippingText>
       <ButtonBlue
         disabled={disabled}
