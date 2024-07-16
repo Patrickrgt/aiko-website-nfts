@@ -2,7 +2,7 @@ export const openseaLink = "https://opensea.io/collection/aikovirtual";
 export const twitterLink = "https://twitter.com/aikovirtual";
 export const webLink = "https://aikovirtual.com/";
 export const mediumLink = "https://medium.com/@aikovirtual";
-export const discordLink = "https://discord.gg/aikovirtual";
+export const discordLink = "https://discord.gg/Rkkbf4j9mj";
 
 interface GlobalsType {
   AIKO: string;
