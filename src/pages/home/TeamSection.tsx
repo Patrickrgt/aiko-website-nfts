@@ -3,8 +3,8 @@ import Header from "../../components/Header";
 import Section from "../../components/Section";
 import TeamMember, { TeamMemberType } from "./TeamMember";
 
-import chase from "../../assets/team-members/chase.jpg";
-import crystal from "../../assets/team-members/crystal.jpg";
+// import chase from "../../assets/team-members/chase.jpg";
+// import crystal from "../../assets/team-members/crystal.jpg";
 import garrid from "../../assets/team-members/garrid.jpg";
 import shvrkboy from "../../assets/team-members/sharkboy.jpg";
 // import kyo from "../../assets/team-members/kyo.jpg";
@@ -37,16 +37,16 @@ const teamMembers: TeamMemberType[] = [
     role: "Community Director",
     twitter: "https://twitter.com/yourboyez",
   },
-  {
-    image: crystal,
-    name: "Crystal",
-    role: "Artist",
-    twitter: "https://twitter.com/chromedcrystals",
-  },
+  // {
+  //   image: crystal,
+  //   name: "Crystal",
+  //   role: "Artist",
+  //   twitter: "https://twitter.com/chromedcrystals",
+  // },
   {
     image: shvrkboy,
     name: "Shvrkboy",
-    role: "Community Manager",
+    role: "Developer",
     twitter: "https://twitter.com/0xignorance",
   },
   {
@@ -55,12 +55,12 @@ const teamMembers: TeamMemberType[] = [
     role: "Technical Advisory",
     twitter: "https://twitter.com/0xKiwi_",
   },
-  {
-    image: chase,
-    name: "Chase",
-    role: "Developer",
-    twitter: "https://twitter.com/chase_manning_",
-  },
+  // {
+  //   image: chase,
+  //   name: "Chase",
+  //   role: "Developer",
+  //   twitter: "https://twitter.com/chase_manning_",
+  // },
 ];
 
 const Content = styled.div`
@@ -93,7 +93,7 @@ const TeamMembers = styled.div`
 
   width: 66%;
   max-width: 125rem;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   grid-row-gap: 1.1rem;
   grid-column-gap: 2.1rem;
   @media only screen and (max-width: 600px) {
@@ -111,7 +111,6 @@ const TeamMembersBackground = styled.div`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background: white;
   height: 100%;
   width: 75%;
 `;

@@ -22,10 +22,10 @@ const navItems: NavItem[] = [
     name: "about us",
     component: "story-scroll",
   },
-  {
-    name: "virtualmap",
-    component: "roadmap-scroll",
-  },
+  // {
+  //   name: "virtualmap",
+  //   component: "roadmap-scroll",
+  // },
   {
     name: "team",
     component: "team-scroll",

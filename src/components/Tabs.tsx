@@ -2,35 +2,35 @@ import { useDispatch } from "react-redux";
 import styled from "styled-components";
 
 import { setShowingInfo, setShowingStory } from "../state/uiSlice";
-import lock from "../assets/svgs/lock.svg";
+// import lock from "../assets/svgs/lock.svg";
 
-const LockedContainer = styled.div`
-  position: relative;
+// const LockedContainer = styled.div`
+//   position: relative;
 
-  :hover {
-    img:first-child {
-      transform: translate(-50%, -40%);
-    }
-    img:nth-child(3) {
-      opacity: 0;
-    }
-  }
+//   :hover {
+//     img:first-child {
+//       transform: translate(-50%, -40%);
+//     }
+//     img:nth-child(3) {
+//       opacity: 0;
+//     }
+//   }
 
-  @media only screen and (max-width: 600px) {
-    display: none;
-  }
-`;
+//   @media only screen and (max-width: 600px) {
+//     display: none;
+//   }
+// `;
 
-const Lock = styled.img`
-  height: 60%;
-  position: absolute;
-  bottom: 95%;
-  left: 50%;
-  z-index: 1;
+// const Lock = styled.img`
+//   height: 60%;
+//   position: absolute;
+//   bottom: 95%;
+//   left: 50%;
+//   z-index: 1;
 
-  transition: 0.3s all;
-  transform: translate(-50%, 100%);
-`;
+//   transition: 0.3s all;
+//   transform: translate(-50%, 100%);
+// `;
 
 const StyledTabs = styled.div`
   display: flex;
@@ -137,13 +137,13 @@ const Tabs = () => {
         story
         <Dot />
       </Tab>
-      <LockedContainer>
+      {/* <LockedContainer>
         <Lock src={lock} alt="Lock" />
         <Tab locked color="#FFDF6C" onClick={() => console.log("Disabled")}>
           archives
           <Dot />
         </Tab>
-      </LockedContainer>
+      </LockedContainer> */}
     </StyledTabs>
   );
 };

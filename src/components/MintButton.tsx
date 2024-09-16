@@ -8,7 +8,7 @@ const ButtonArea = styled.div`
   padding: 0.7rem;
 `;
 
-const Countdown = styled.div`
+const Userpanel = styled.a`
   font-size: 3.7vh;
   font-weight: 500;
   color: white;
@@ -21,7 +21,7 @@ const MintButton = () => {
   return (
     <Hexify>
       <ButtonArea>
-        <Countdown>A:\Sold Out</Countdown>
+        <Userpanel href="/userpanel">A:\User Panel</Userpanel>
       </ButtonArea>
     </Hexify>
   );

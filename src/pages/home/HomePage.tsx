@@ -3,7 +3,7 @@ import Footer from "../../components/Footer";
 import Socials from "../../components/Socials";
 import GallerySection from "./GallerySection";
 import HeroSection from "./HeroSection";
-import RoadmapSection from "./RoadmapSection";
+// import RoadmapSection from "./RoadmapSection";
 import StorySection from "./StorySection";
 import TeamSection from "./TeamSection";
 
@@ -23,7 +23,7 @@ const HomePage = () => {
       <HeroSection />
       <GallerySection />
       <StorySection />
-      <RoadmapSection />
+      {/* <RoadmapSection /> */}
       <TeamSection />
       <Footer />
     </StyledHomePage>
