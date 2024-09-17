@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import useWindowPosition from "../app/hooks/use-window-position";
 
-import certified from "../assets/svgs/certified.svg";
+// import certified from "../assets/svgs/certified.svg";
 // import etherscan from "../assets/svgs/etherscan.svg";
 // import etherscanWhite from "../assets/svgs/etherscan-white.svg";
 // import meepo from "../assets/svgs/meepo.svg";
@@ -107,9 +107,9 @@ const DecalInner = styled.div`
   align-items: center;
 `;
 
-const Certified = styled.img`
-  height: 100%;
-`;
+// const Certified = styled.img`
+//   height: 100%;
+// `;
 
 // const Links = styled.div`
 //   display: flex;
@@ -202,7 +202,7 @@ const Footer = () => {
   return (
     <>
       <StyledFooter ref={footerRef}>
-        <Certified src={certified} alt="Aiko Certified" />
+        {/* <Certified src={certified} alt="Aiko Certified" /> */}
         {/* <Links>
           {links
             .filter((link: LinkType) => link.url)
