@@ -15,6 +15,9 @@ const Userpanel = styled.a`
   margin: 0 1.327vh;
   display: flex;
   align-items: center;
+  @media only screen and (max-width: 600px) {
+    font-size: 2.7vh;
+  }
 `;
 
 const MintButton = () => {

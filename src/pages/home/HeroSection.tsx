@@ -65,7 +65,11 @@ const MintButtonContainer = styled.div`
   height: 27%;
 
   @media only screen and (max-width: 600px) {
-    display: none;
+    display: block;
+    width: 42.5%;
+    height: 12%;
+    z-index: 10;
+    top: 56%;
   }
 `;
 
