@@ -17,7 +17,7 @@ const teamMembers: TeamMemberType[] = [
   {
     image: vinne,
     name: "Vinne",
-    role: "Artist & Co founder",
+    role: "Artist & Founder",
     twitter: "https://twitter.com/vinneart",
   },
   {
